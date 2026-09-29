@@ -20,6 +20,10 @@
 
 ## 2. 바디 트리
 
+![G1 바디 트리 (우리 로봇 기준 변경 색 구분)](img/g1_tree.png)
+
+재현: `python scripts/g1_tree_diagram.py <mujoco_menagerie 경로> img` (graphviz 필요, 없으면 .dot만 생성)
+
 ```
 world
 └─ pelvis  [floating_base_joint(free)]  3.813 kg   ← site imu_in_pelvis
