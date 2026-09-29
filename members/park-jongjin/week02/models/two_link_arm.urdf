@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!-- week02 수요일 실습: 2링크 팔 URDF (손으로 작성)
+     - 두 관절 모두 y축 revolute(피치) → 수직 평면에서 중력의 영향을 받음
+     - 링크는 x축 방향으로 뻗은 원통. 원통 기본축(z)을 rpy="0 1.5708 0"로 x축에 맞춤
+     - 관성: 속이 찬 원통, 원통 자체 좌표계 기준
+         Ixx = Iyy = m(3r^2 + L^2)/12,  Izz = m r^2 / 2
+       link1: m=1.0, r=0.03, L=0.30 → Ixx=Iyy=0.0077250, Izz=0.00045
+       link2: m=0.6, r=0.025, L=0.25 → Ixx=Iyy=0.0032188, Izz=0.0001875
+     단위: m, kg, rad (URDF 규약) -->
+<robot name="two_link_arm">
+
+  <!-- 고정 베이스: 부모 joint가 없는 루트 링크 → MuJoCo에서는 world에 고정된 바디 -->
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0 0 0.05"/>
+      <mass value="2.0"/>
+      <inertia ixx="0.0029167" iyy="0.0029167" izz="0.0025" ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0.05"/>
+      <geometry><cylinder radius="0.05" length="0.10"/></geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.05"/>
+      <geometry><cylinder radius="0.05" length="0.10"/></geometry>
+    </collision>
+  </link>
+
+  <link name="link1">
+    <inertial>
+      <origin xyz="0.15 0 0" rpy="0 1.5708 0"/>
+      <mass value="1.0"/>
+      <inertia ixx="0.007725" iyy="0.007725" izz="0.00045" ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.15 0 0" rpy="0 1.5708 0"/>
+      <geometry><cylinder radius="0.03" length="0.30"/></geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.15 0 0" rpy="0 1.5708 0"/>
+      <geometry><cylinder radius="0.03" length="0.30"/></geometry>
+    </collision>
+  </link>
+
+  <link name="link2">
+    <inertial>
+      <origin xyz="0.125 0 0" rpy="0 1.5708 0"/>
+      <mass value="0.6"/>
+      <inertia ixx="0.0032188" iyy="0.0032188" izz="0.0001875" ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.125 0 0" rpy="0 1.5708 0"/>
+      <geometry><cylinder radius="0.025" length="0.25"/></geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.125 0 0" rpy="0 1.5708 0"/>
+      <geometry><cylinder radius="0.025" length="0.25"/></geometry>
+    </collision>
+  </link>
+
+  <!-- 말단(툴) 프레임: fixed joint로만 붙은 질량 없는 링크 -->
+  <link name="tool0"/>
+
+  <!-- joint origin: 부모 링크 좌표계에서 본 자식 링크 좌표계의 위치·자세
+       joint axis : 자식 링크(=joint) 좌표계 기준 회전축 -->
+  <joint name="shoulder" type="revolute">
+    <parent link="base_link"/>
+    <child link="link1"/>
+    <origin xyz="0 0 0.10" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.5708" upper="1.5708" effort="40" velocity="3.0"/>
+    <dynamics damping="0.05" friction="0.0"/>
+  </joint>
+
+  <joint name="elbow" type="revolute">
+    <parent link="link1"/>
+    <child link="link2"/>
+    <origin xyz="0.30 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-2.3562" upper="2.3562" effort="20" velocity="3.0"/>
+    <dynamics damping="0.05" friction="0.0"/>
+  </joint>
+
+  <joint name="tool_joint" type="fixed">
+    <parent link="link2"/>
+    <child link="tool0"/>
+    <origin xyz="0.25 0 0"/>
+  </joint>
+</robot>

@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" font-family="Noto Sans CJK KR, Malgun Gothic, Apple SD Gothic Neo, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#444"/></marker>
+    <style>
+      .box{stroke-width:2;rx:10}
+      .t{font-size:17px;font-weight:700;fill:#111}
+      .s{font-size:13px;fill:#333}
+      .c{font-size:12px;fill:#7a4b00}
+      .l{stroke:#444;stroke-width:2;fill:none;marker-end:url(#a)}
+      .fb{stroke:#b03030;stroke-width:2;fill:none;stroke-dasharray:6 5;marker-end:url(#a)}
+    </style>
+  </defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="600" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="#111">B1 모델 파이프라인: CAD → URDF → USD (Isaac Sim) / MJCF (MuJoCo)</text>
+
+  <!-- CAD -->
+  <rect x="30" y="200" width="200" height="150" class="box" fill="#fdecea" stroke="#c0392b"/>
+  <text x="130" y="228" text-anchor="middle" class="t">CAD (TEAM A)</text>
+  <text x="130" y="254" text-anchor="middle" class="s">STEP 조립품</text>
+  <text x="130" y="274" text-anchor="middle" class="s">링크별 메시 (m, 링크 원점)</text>
+  <text x="130" y="294" text-anchor="middle" class="s">질량·COM·관성 CSV</text>
+  <text x="130" y="314" text-anchor="middle" class="s">관절 배치·범위·토크</text>
+  <text x="130" y="338" text-anchor="middle" class="c">A1 설계 · A2 구동기 · A4 실측</text>
+
+  <!-- URDF -->
+  <rect x="310" y="190" width="230" height="170" class="box" fill="#eaf2fb" stroke="#2e6db4"/>
+  <text x="425" y="218" text-anchor="middle" class="t">URDF (B1, 기준 모델)</text>
+  <text x="425" y="244" text-anchor="middle" class="s">link: inertial / visual / collision</text>
+  <text x="425" y="264" text-anchor="middle" class="s">joint: origin(부모 기준)·axis</text>
+  <text x="425" y="284" text-anchor="middle" class="s">limit: rad · Nm · rad/s</text>
+  <text x="425" y="304" text-anchor="middle" class="s">센서 프레임 = fixed 링크</text>
+  <text x="425" y="330" text-anchor="middle" class="c">Git 태그로 버전 관리 (SSOT)</text>
+  <text x="425" y="348" text-anchor="middle" class="c">검증: 질량 합계 · FK · 중력 토크</text>
+
+  <!-- USD branch -->
+  <rect x="630" y="70" width="250" height="170" class="box" fill="#eaf7ee" stroke="#2c8a4b"/>
+  <text x="755" y="98" text-anchor="middle" class="t">USD (Isaac Sim 5.1)</text>
+  <text x="755" y="124" text-anchor="middle" class="s">URDF Importer</text>
+  <text x="755" y="144" text-anchor="middle" class="s">RigidBody · Mass · Collision</text>
+  <text x="755" y="164" text-anchor="middle" class="s">RevoluteJoint (각도 = degree)</text>
+  <text x="755" y="184" text-anchor="middle" class="s">DriveAPI · ArticulationRoot</text>
+  <text x="755" y="210" text-anchor="middle" class="c">임포트 체크리스트 적용</text>
+  <text x="755" y="228" text-anchor="middle" class="c">(base 고정·fixed joint·collider·drive)</text>
+
+  <rect x="960" y="85" width="210" height="140" class="box" fill="#f3f3f3" stroke="#555"/>
+  <text x="1065" y="113" text-anchor="middle" class="t">Isaac Lab 2.3.2</text>
+  <text x="1065" y="139" text-anchor="middle" class="s">ArticulationCfg</text>
+  <text x="1065" y="159" text-anchor="middle" class="s">ActuatorCfg (명시적 모델)</text>
+  <text x="1065" y="179" text-anchor="middle" class="s">SensorCfg · 학습 환경</text>
+  <text x="1065" y="205" text-anchor="middle" class="c">GPU · 병렬 환경</text>
+
+  <!-- MJCF branch -->
+  <rect x="630" y="320" width="250" height="170" class="box" fill="#fff6e5" stroke="#c98a00"/>
+  <text x="755" y="348" text-anchor="middle" class="t">MJCF (MuJoCo 3.x)</text>
+  <text x="755" y="374" text-anchor="middle" class="s">URDF 직접 로드 / MJCF로 저장</text>
+  <text x="755" y="394" text-anchor="middle" class="s">body 트리 · joint(body 기준)</text>
+  <text x="755" y="414" text-anchor="middle" class="s">actuator(motor/position) · option</text>
+  <text x="755" y="434" text-anchor="middle" class="s">fusestatic=false 로 센서 프레임 보존</text>
+  <text x="755" y="460" text-anchor="middle" class="c">관성 누락 시 밀도 1000 추정 → 주의</text>
+  <text x="755" y="478" text-anchor="middle" class="c">GPU 없이 CPU 검증</text>
+
+  <rect x="960" y="335" width="210" height="140" class="box" fill="#f3f3f3" stroke="#555"/>
+  <text x="1065" y="363" text-anchor="middle" class="t">MuJoCo 검증</text>
+  <text x="1065" y="389" text-anchor="middle" class="s">형상·관절 범위 확인</text>
+  <text x="1065" y="409" text-anchor="middle" class="s">중력 토크·낙하 거동</text>
+  <text x="1065" y="429" text-anchor="middle" class="s">제어기 사전 시험</text>
+  <text x="1065" y="455" text-anchor="middle" class="c">Windows 노트북 가능</text>
+
+  <!-- arrows -->
+  <path d="M230,275 L306,275" class="l"/>
+  <text x="268" y="265" text-anchor="middle" class="c">ICD v0</text>
+  <path d="M540,250 C590,250 590,155 626,155" class="l"/>
+  <path d="M540,300 C590,300 590,405 626,405" class="l"/>
+  <path d="M880,155 L956,155" class="l"/>
+  <path d="M880,405 L956,405" class="l"/>
+  <!-- feedback -->
+  <path d="M1065,475 L1065,530 L425,530 L425,364" class="fb"/>
+  <text x="745" y="522" text-anchor="middle" font-size="13" fill="#b03030">실측 질량·관성·마찰(A4) → URDF 갱신 → 두 시뮬레이터 재생성</text>
+</svg>

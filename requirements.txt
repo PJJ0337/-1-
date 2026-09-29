@@ -1,0 +1,6 @@
+# B1 GPU 없는 실습 환경 (Windows/Linux, Python 3.10+) — 2026-09-29 검증 버전
+mujoco==3.14.0
+usd-core==26.8
+yourdfpy==0.0.60
+numpy
+pillow

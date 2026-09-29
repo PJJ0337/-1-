@@ -28,6 +28,7 @@ B1 서브팀은 **모델링 · 시뮬레이션**(URDF/MJCF/USD 모델 구축, Is
 .
 ├── README.md                  ← 이 문서 (저장소 개요 · 주차 인덱스)
 ├── CONTRIBUTING.md            ← 기여 로그 · 커밋 · 태그 규칙
+├── requirements.txt           ← GPU 없는 실습 환경 (mujoco · usd-core · yourdfpy)
 ├── templates/
 │   └── contribution_log.md    ← 주차별 기여 로그 양식
 ├── tools/
@@ -53,7 +54,7 @@ B1 서브팀은 **모델링 · 시뮬레이션**(URDF/MJCF/USD 모델 구축, Is
 |---|---|---|---|---|---|
 | 1주 | – | – | [log](members/park-jongjin/week01/log.md) | – | 저장소 개설 전 (노션을 기여 로그로 인정) |
 | 2주 | **SRR (×2)** | [`week02`](../../tree/week02) | [log](members/park-jongjin/week02/log.md) | – | 저장소 개설 · 노션 정리본 md 이전 |
-| 3주 | – | `week03` (예정) | [log](members/park-jongjin/week03/log.md) | – | USD · Isaac Sim 개념 · 변환 파이프라인 |
+| 3주 | – | `week03` (예정) | [log](members/park-jongjin/week03/log.md) | – | USD · Isaac Sim 개념 · 임포트 체크리스트 |
 | 6주 | **PDR (×2)** | | | | |
 | 12주 | **CDR (×2)** | | | | |
 | 16주 | **모듈검증 (×2)** | | | | |

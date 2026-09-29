@@ -7,7 +7,7 @@
 | `models/urdf/` | URDF 모델 | 2링크 팔(2주차) → 우리 로봇 URDF |
 | `models/mjcf/` | MuJoCo MJCF 모델 | 2링크 팔 MJCF(2주차) |
 | `models/usd/` | Isaac Sim용 USD | 2링크 팔 USD(3주차) |
-| `docs/icd/` | 인터페이스 문서(ICD) — A팀 ↔ B1 모델 데이터 규약 | ICD v0 요청 항목 초안(SRR): CAD 포맷, 질량 · 관성 형식, 관절 좌표계 규약, 링크 이름 규칙 |
-| `docs/procedures/` | 절차서 | URDF 임포트 체크리스트(3주차), Isaac Sim/Lab 설치 절차 |
+| `docs/icd/` | 인터페이스 문서(ICD) — A팀 ↔ B1 모델 데이터 규약 | [ICD v0 요청 초안](docs/icd/icd-v0-request-draft.md) (week02) |
+| `docs/procedures/` | 절차서 | [URDF 임포트 체크리스트 v0](docs/procedures/urdf-import-checklist.md) (week03), Isaac Sim/Lab 설치 절차 |
 
 파이프라인: CAD(A팀) → URDF → USD(Isaac Sim) / MJCF(MuJoCo)

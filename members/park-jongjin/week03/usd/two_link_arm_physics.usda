@@ -1,0 +1,112 @@
+#usda 1.0
+(
+    defaultPrim = "two_link_arm"
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    subLayers = [
+        @./two_link_arm_geom.usda@
+    ]
+    upAxis = "Z"
+)
+
+over "two_link_arm"
+{
+    over "base_link" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0.05)
+        float3 physics:diagonalInertia = (0.0029166667, 0.0029166667, 0.0025)
+        float physics:mass = 2
+        quatf physics:principalAxes = (1, 0, 0, 0)
+
+        over "geom" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+        }
+
+        over "link1" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+        )
+        {
+            point3f physics:centerOfMass = (0.15, 0, 0)
+            float3 physics:diagonalInertia = (0.00045, 0.007725, 0.007725)
+            float physics:mass = 1
+            quatf physics:principalAxes = (1, 0, 0, 0)
+
+            over "geom" (
+                prepend apiSchemas = ["PhysicsCollisionAPI"]
+            )
+            {
+            }
+
+            over "link2" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+            )
+            {
+                point3f physics:centerOfMass = (0.125, 0, 0)
+                float3 physics:diagonalInertia = (0.0001875, 0.00321875, 0.00321875)
+                float physics:mass = 0.6
+                quatf physics:principalAxes = (1, 0, 0, 0)
+
+                over "geom" (
+                    prepend apiSchemas = ["PhysicsCollisionAPI"]
+                )
+                {
+                }
+            }
+        }
+    }
+
+    def Scope "joints"
+    {
+        def PhysicsFixedJoint "root_joint" (
+            prepend apiSchemas = ["PhysicsArticulationRootAPI"]
+        )
+        {
+            rel physics:body1 = </two_link_arm/base_link>
+        }
+
+        def PhysicsRevoluteJoint "shoulder" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular"]
+        )
+        {
+            float drive:angular:physics:damping = 1
+            float drive:angular:physics:maxForce = 40
+            float drive:angular:physics:stiffness = 10
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            uniform token physics:axis = "Y"
+            rel physics:body0 = </two_link_arm/base_link>
+            rel physics:body1 = </two_link_arm/base_link/link1>
+            point3f physics:localPos0 = (0, 0, 0.1)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (1, 0, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+            float physics:lowerLimit = -90.00021
+            float physics:upperLimit = 90.00021
+        }
+
+        def PhysicsRevoluteJoint "elbow" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular"]
+        )
+        {
+            float drive:angular:physics:damping = 1
+            float drive:angular:physics:maxForce = 20
+            float drive:angular:physics:stiffness = 10
+            float drive:angular:physics:targetPosition = 0
+            uniform token drive:angular:physics:type = "force"
+            uniform token physics:axis = "Y"
+            rel physics:body0 = </two_link_arm/base_link/link1>
+            rel physics:body1 = </two_link_arm/base_link/link1/link2>
+            point3f physics:localPos0 = (0.3, 0, 0)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (1, 0, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+            float physics:lowerLimit = -135.00032
+            float physics:upperLimit = 135.00032
+        }
+    }
+}
+

@@ -1,0 +1,62 @@
+#usda 1.0
+(
+    defaultPrim = "two_link_arm"
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "two_link_arm"
+{
+    def Xform "base_link"
+    {
+        def Cylinder "geom"
+        {
+            uniform token axis = "Z"
+            double height = 0.1
+            color3f[] primvars:displayColor = [(0.3, 0.3, 0.3)]
+            double radius = 0.05
+            double3 xformOp:translate = (0, 0, 0.05)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Xform "link1"
+        {
+            double3 xformOp:translate = (0, 0, 0.1)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+
+            def Cylinder "geom"
+            {
+                uniform token axis = "X"
+                double height = 0.3
+                color3f[] primvars:displayColor = [(0.8, 0.4, 0.1)]
+                double radius = 0.03
+                double3 xformOp:translate = (0.15, 0, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+            }
+
+            def Xform "link2"
+            {
+                double3 xformOp:translate = (0.3, 0, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate"]
+
+                def Cylinder "geom"
+                {
+                    uniform token axis = "X"
+                    double height = 0.25
+                    color3f[] primvars:displayColor = [(0.2, 0.6, 0.8)]
+                    double radius = 0.025
+                    double3 xformOp:translate = (0.125, 0, 0)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+                }
+
+                def Xform "tool0"
+                {
+                    double3 xformOp:translate = (0.25, 0, 0)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+                }
+            }
+        }
+    }
+}
+
