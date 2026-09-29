@@ -20,10 +20,11 @@
       <origin xyz="0 0 0.05"/>
       <geometry><cylinder radius="0.05" length="0.10"/></geometry>
     </visual>
-    <collision>
-      <origin xyz="0 0 0.05"/>
-      <geometry><cylinder radius="0.05" length="0.10"/></geometry>
-    </collision>
+    <!-- base_link collision 제거 (2026-09-29 뷰어 확인):
+         어깨 관절이 베이스 원통 바로 위(z=0.10)에 있어 link1(반지름 0.03) 아랫면이 베이스 윗면과 겹침.
+         MuJoCo는 월드에 고정된 부모(base_link)와 자식(link1) 사이 접촉을 걸러내지 않아
+         어깨가 수평에서 떨어지지 않았음 (shoulder ≈ 0°, elbow ≈ 90°에서 정지).
+         고정 베이스라 바닥 충돌이 필요 없고, 인접 링크 충돌은 보통 끄므로(Isaac Sim Self-Collision 기본 off) collision을 뺌 -->
   </link>
 
   <link name="link1">

@@ -54,6 +54,7 @@
 | 질량 · 관성 | URDF 값과 일치 (link1 1.0 kg, Ixx 0.007725) |
 | 수평 자세 중력 토크 | 해석해 shoulder 3.9731 Nm, elbow 0.7358 Nm = MuJoCo `qfrc_bias` 크기와 일치 (부호 반대: bias는 좌변 항) |
 | tool0 위치 | (0.55, 0, 0.10) = 0.30 + 0.25, 베이스 높이 0.10 ✔ |
+| 뷰어로 열기(본인 노트북) | 처음엔 베이스-link1 충돌로 어깨가 수평에서 멈춤 → base_link collision 제거 후 하한 +90°까지 낙하 (week02 로그 4절) |
 
 → **fixed joint로만 붙은 링크(툴 · 센서 프레임)는 MuJoCo 기본 로드에서 사라진다.** Isaac Sim의 merge fixed joints와 같은 문제 → 3주차 임포트 체크리스트 항목.
 

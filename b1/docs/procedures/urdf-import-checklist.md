@@ -17,6 +17,7 @@
 | A4 | 모든 revolute에 `<limit lower upper effort velocity>` | effort = 구동기 최대 토크 | Isaac Lab ActuatorCfg `effort_limit` 기본값 출처가 사라짐 |
 | A5 | 메시 경로: `package://` 대신 URDF 기준 **상대 경로** | 다른 PC에서 임포트 시험 | 메시 누락 |
 | A6 | 센서 · 툴 프레임은 **fixed joint로 붙은 전용 링크** (`imu_base_link` 등) | ICD 4절 이름 규칙 | Isaac Lab SensorCfg · FrameTransformer가 prim path로 지정 불가 |
+| A6-2 | 인접 링크(부모-자식)의 collision 형상이 관절 근처에서 겹치지 않음 | 영점 자세 + 관절 범위 양 끝에서 접촉 수 확인 | MuJoCo는 월드 고정 부모-자식 접촉을 거르지 않아 관절이 막힘 (2링크 실험: 어깨가 수평에서 정지). Isaac은 Self-Collision off면 영향 없어 **두 시뮬 결과가 달라짐** |
 | A7 | 폐루프 없음 (트리) | URDF는 루프 표현 불가 | Articulation은 링크당 inbound joint 1개, 루프는 끊어야 함 |
 | A8 | MuJoCo로 먼저 로드해 사전 검증: 총질량, FK(말단 위치), 수평 자세 중력 토크 | `urdf_check.py` 방식 (2링크: 해석해 3.9731 Nm = MuJoCo) | 오류를 Isaac Sim(GPU)까지 가서 발견 |
 
