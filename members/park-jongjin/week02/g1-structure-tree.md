@@ -79,4 +79,4 @@ world
 | 12 | 시뮬 설정 | timestep 0.002 | 관절 루프 1 kHz에 맞춰 0.001 s 검토, integrator implicitfast 유지 | B2 · B3 합의 | 낮음 |
 | 13 | 이름 규칙 | `{side}_{부위}_{운동}` | 그대로 채택 → ICD에 명시 | – | 높음 |
 
-→ 1 · 2 · 4 · 5 · 6 · 13 이 ICD 요청 항목과 직결 → [b1/docs/icd/icd-v0-request-draft.md](../../../../b1/docs/icd/icd-v0-request-draft.md)
+→ 1 · 2 · 4 · 5 · 6 · 13 이 ICD 요청 항목과 직결 → [b1/docs/icd/icd-v0-request-draft.md](../../../b1/docs/icd/icd-v0-request-draft.md)
