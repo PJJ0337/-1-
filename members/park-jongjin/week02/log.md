@@ -23,7 +23,7 @@
 | 4 | Git 저장소 개인 폴더 생성, 노션 정리본을 md로 옮겨 `week02` 태그로 첫 기여 로그 업로드 | 저장소 구조·규칙 수립([README](../../../README.md), [CONTRIBUTING](../../../CONTRIBUTING.md), [템플릿](../../../templates/contribution_log.md), [new_week.sh](../../../tools/new_week.sh)). 노션 페이지 12건(설치 · 데모 · Core Concepts 9항목)을 md 3건으로 이전, 원문 링크·원작성자 표기 | 100 % | [notes/isaac-lab/](../notes/isaac-lab/), 태그 `week02` |
 | 5 | (커리큘럼 개별 과제) G1 MJCF 전체 구조 트리 + 우리 로봇(6-DOF 팔 2 + 홀로노믹 베이스) 맞춤 변경 목록 | G1 바디 트리 · 요약 수치 · 팔 관절 표 작성, 변경 항목 13개 목록화 (루트 · 하체 · 팔 7→6-DOF · 액추에이터 · 센서 등) | 100 % (재현 확인 전) | [g1-structure-tree.md](g1-structure-tree.md), [scripts/g1_inspect.py](scripts/g1_inspect.py), [img/g1_body_tree.txt](img/g1_body_tree.txt), [img/g1_arm_joints.md](img/g1_arm_joints.md), [img/g1_default_vs_moved.png](img/g1_default_vs_moved.png) |
 | 6 | (SRR 기여) A팀 요청 항목 초안: CAD 포맷, 질량·관성 제공 형식, 관절 좌표계 규약, 링크 이름 규칙 | ICD v0 요청 초안 7개 절 (+ 구동기 사양 · 센서 위치 · 변경 관리) | 100 % (대학원생 검토 전) | [b1/docs/icd/icd-v0-request-draft.md](../../../b1/docs/icd/icd-v0-request-draft.md) |
-| 7 | (공통 월~목) MuJoCo 설치 · G1 조작, MJCF 구조, 2링크 URDF 작성, MuJoCo로 열어 검증 | 2링크 URDF 손으로 작성 → MuJoCo 로드 성공, 질량 · FK · 중력 토크 해석해와 일치, fixed 링크 소실(fusestatic) 발견 | 100 % (재현 확인 전) | [models/two_link_arm.urdf](models/two_link_arm.urdf), [scripts/urdf_check.py](scripts/urdf_check.py), [img/two_link_arm_mujoco.png](img/two_link_arm_mujoco.png), [notes/mujoco-urdf/01-mjcf-urdf-basics.md](../notes/mujoco-urdf/01-mjcf-urdf-basics.md) |
+| 7 | (공통 월~목) MuJoCo 설치 · G1 조작, MJCF 구조, 2링크 URDF 작성, MuJoCo로 열어 검증 | **본인 Windows 노트북에서 MuJoCo 뷰어로 G1 실행 · Control 슬라이더로 팔 관절 조작(2026-09-29)**. 2링크 URDF 손으로 작성 → MuJoCo 로드 성공, 질량 · FK · 중력 토크 해석해와 일치, fixed 링크 소실(fusestatic) 발견 | 100 % (분석 스크립트 재현 확인 전) | [img/20260929_g1_viewer_default.png](img/20260929_g1_viewer_default.png), [img/20260929_g1_viewer_arm_moved.png](img/20260929_g1_viewer_arm_moved.png), [models/two_link_arm.urdf](models/two_link_arm.urdf), [scripts/urdf_check.py](scripts/urdf_check.py), [img/two_link_arm_mujoco.png](img/two_link_arm_mujoco.png), [notes/mujoco-urdf/01-mjcf-urdf-basics.md](../notes/mujoco-urdf/01-mjcf-urdf-basics.md) |
 
 ## 2. 핵심 수치 · 근거 (구술 대비)
 
@@ -54,6 +54,7 @@ python scripts/oral_experiments.py                              # 구술 Q1 · Q
 
 - MuJoCo는 URDF를 읽을 때 fixed joint로만 붙은 링크(base_link · tool0)를 부모에 합친다(`fusestatic` 기본 true) → 센서 · 툴 프레임이 사라짐. URDF에 `<mujoco><compiler fusestatic="false"/></mujoco>` 를 넣어 보존. Isaac Sim merge fixed joints와 같은 문제라 3주차 체크리스트 항목으로 연결.
 - `<inertial>` 누락 시 MuJoCo가 오류 없이 밀도 1000으로 추정 → A팀 관성 데이터 누락을 모델에서 알아채기 어려움 → ICD에 "관성 누락 금지 · 출력 좌표계 표기" 추가.
+- 뷰어에서 실행 중(Run) `left_shoulder_pitch` 목표를 −3.09 rad(하한 근처)까지, `left_elbow` 0.209 rad로 주자 **G1이 뒤로 넘어짐**([사진](img/20260929_g1_viewer_arm_moved.png)). G1은 pelvis가 freejoint(떠 있는 베이스)이고 액추에이터는 관절 목표각만 유지하는 position(kp 500)이라 균형 제어가 없음 → 팔을 크게 휘두르면 무게중심 이동을 보상하지 못함. 우리 로봇은 베이스가 바닥에 있지만 기획서 리스크 「상체 하중에 의한 전도 모멘트」와 같은 문제 → 모델 검증 시 팔 자세별 무게중심 확인 필요.
 - G1 팔은 7-DOF라 우리 6-DOF와 구성이 다름 → 어느 손목 축을 뺄지 설계안 확인 필요(ICD 확인 항목).
 
 ## 5. 막힌 점 · 요청
