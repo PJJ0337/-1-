@@ -12,7 +12,7 @@
 | 주차 | 게이트 | 태그 | 로그 | 주요 산출물 | 보고서 |
 |---|---|---|---|---|---|
 | 1 | – | – | [week01/log.md](week01/log.md) | [notes/isaac-lab/](notes/isaac-lab/) (노션 원본 이전) | [1주차 보고서](reports/) |
-| 2 | SRR ×2 | `week02` | [week02/log.md](week02/log.md) | 저장소 개설 · 노션 이전, [G1 구조 트리 · 변경 목록](week02/g1-structure-tree.md), [2링크 URDF](week02/models/two_link_arm.urdf), [ICD v0 요청 초안](../../b1/docs/icd/icd-v0-request-draft.md) | |
+| 2 | SRR ×2 | `week02` | [week02/log.md](week02/log.md) | 저장소 개설 · 노션 이전, [G1 구조 트리 · 변경 목록](week02/g1-structure-tree.md), [2링크 URDF](week02/models/two_link_arm.urdf), [ICD v0 요청 초안](../../b1/docs/icd/icd-v0-request-draft.md) | [2주차 보고서](reports/학부생_주간활동보고서_2주차_박종진_22212289_20261001.docx) |
 | 3 | – | `week03` 예정 (선행 작성본) | [week03/log.md](week03/log.md) | [2링크 USD](week03/usd/), [임포트 체크리스트](../../b1/docs/procedures/urdf-import-checklist.md), [파이프라인 그림](week03/img/pipeline.png) | |
 
 ## 학습 정리 (notes)

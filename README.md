@@ -53,7 +53,7 @@ B1 서브팀은 **모델링 · 시뮬레이션**(URDF/MJCF/USD 모델 구축, Is
 | 주차 | 게이트 | 태그 | 박종진 | 함태훈 | 비고 |
 |---|---|---|---|---|---|
 | 1주 | – | – | [log](members/park-jongjin/week01/log.md) | – | 저장소 개설 전 (노션을 기여 로그로 인정) |
-| 2주 | **SRR (×2)** | `week02` (10/1 제출) | [log](members/park-jongjin/week02/log.md) | – | 저장소 개설 · MuJoCo · G1 분석 · 2링크 URDF · ICD v0 요청 초안 |
+| 2주 | **SRR (×2)** | [`week02`](../../tree/week02) (10/1 제출) | [log](members/park-jongjin/week02/log.md) | – | 저장소 개설 · MuJoCo · G1 분석 · 2링크 URDF · ICD v0 요청 초안 |
 | 3주 | – | `week03` (예정) | [log](members/park-jongjin/week03/log.md) | – | USD · Isaac Sim 개념 · 임포트 체크리스트 (선행 작성본) |
 | 6주 | **PDR (×2)** | | | | |
 | 12주 | **CDR (×2)** | | | | |
