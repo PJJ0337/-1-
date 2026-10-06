@@ -14,6 +14,8 @@
 import os, io, re
 import numpy as np
 import mujoco
+import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from mjio import load_model, load_spec, read_text   # Windows 한글 경로 대응
 
 HERE = os.path.dirname(os.path.abspath(__file__)); W3 = os.path.dirname(HERE)
 URDF = os.path.join(W3, "..", "week02", "models", "two_link_arm.urdf")
@@ -61,7 +63,7 @@ p("     joint 없이 용접된 body 들은 한 body 로 취급' → base_link �
 
 # ---------------- E3 ----------------
 p("\nE3) fusestatic on/off (2주차 URDF 원본)")
-m_on = mujoco.MjModel.from_xml_path(URDF)
+m_on = load_model(URDF)
 m_off = mujoco.MjModel.from_xml_string(with_ext(urdf_txt, '<mujoco><compiler fusestatic="false"/></mujoco>'))
 for tag, m in [("on (URDF 기본)", m_on), ("off", m_off)]:
     d = mujoco.MjData(m); mujoco.mj_forward(m, d)
@@ -95,7 +97,7 @@ def build(base_mode):
     base.add_geom(name="plate", type=mujoco.mjtGeom.mjGEOM_BOX, size=[PLATE[0]/2, PLATE[1]/2, PLATE[2]/2], mass=3.7, rgba=[.75, .75, .8, 1])
     base.add_geom(name="chassis", type=mujoco.mjtGeom.mjGEOM_BOX, size=[0.25, 0.20, 0.13], pos=[0, 0, -0.14], mass=20, rgba=[.3, .3, .35, 1])
     for side, y in [("left_", 0.18), ("right_", -0.18)]:
-        arm_spec = mujoco.MjSpec.from_file(os.path.join(MJ, "two_link_arm.xml"))   # 한 번 붙이면 원본 spec 에서 빠지므로 팔마다 새로 읽음
+        arm_spec = load_spec(os.path.join(MJ, "two_link_arm.xml"))   # 한 번 붙이면 원본 spec 에서 빠지므로 팔마다 새로 읽음
         fr = base.add_frame(pos=[0.15, y, PLATE[2]/2])
         fr.attach_body(arm_spec.body("base_link"), side, "")
     if base_mode == "holonomic":

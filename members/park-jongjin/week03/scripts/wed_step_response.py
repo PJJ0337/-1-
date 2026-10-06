@@ -17,6 +17,8 @@
 import os, io, csv
 import numpy as np
 import mujoco
+import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from mjio import load_model   # Windows 한글 경로 대응
 import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 
 HERE = os.path.dirname(os.path.abspath(__file__)); W3 = os.path.dirname(HERE)
@@ -27,7 +29,7 @@ out = io.StringIO()
 def p(*a): print(*a); print(*a, file=out)
 
 def run(kp=50.0, kv=1.0, arm=0.0):
-    m = mujoco.MjModel.from_xml_path(XML)
+    m = load_model(XML)
     for a in range(m.nu):
         m.actuator_gainprm[a, 0] = kp; m.actuator_biasprm[a, 1] = -kp; m.actuator_biasprm[a, 2] = -kv
     m.dof_armature[:] = arm

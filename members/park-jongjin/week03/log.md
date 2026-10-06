@@ -45,8 +45,9 @@ pip install mujoco matplotlib          # MuJoCo 3.15.0에서 확인
 python members/park-jongjin/week03/scripts/tue_urdf_to_mjcf.py         # 마지막 줄 "결과: 일치"
 python members/park-jongjin/week03/scripts/wed_step_response.py
 python members/park-jongjin/week03/scripts/thu_loading_experiments.py
-python -m mujoco.viewer --mjcf=members/park-jongjin/week03/mjcf/scene.xml
-python -m mujoco.viewer --mjcf=members/park-jongjin/week03/mjcf/holonomic_base_two_arms.xml
+python members/park-jongjin/week03/scripts/view.py scene                     # 경로에 한글이 없으면 python -m mujoco.viewer --mjcf=... 도 가능
+python members/park-jongjin/week03/scripts/view.py scene_position
+python members/park-jongjin/week03/scripts/view.py holonomic_base_two_arms
 ```
 
 캡처(img/20261006_two_link_mjcf_scene.png, 20261006_holonomic_base_two_arms.png)는 오프스크린 렌더(MUJOCO_GL=osmesa)로 생성.
@@ -55,6 +56,7 @@ python -m mujoco.viewer --mjcf=members/park-jongjin/week03/mjcf/holonomic_base_t
 
 - **2주차 "어깨가 수평에서 안 떨어짐" 원인을 문서 근거로 확정**: MuJoCo 충돌 필터 예외(부모가 world 또는 world에 용접된 body면 부모-자식 접촉을 거르지 않음, Computation › Collision selection 필터 3). fusestatic과는 무관 — on/off 모두 접촉 2개 → `<exclude body1="base_link" body2="link1"/>`로 해결(fusestatic=false여야 이름 참조 가능).
 - URDF의 joint `velocity` 한계는 MuJoCo로 옮겨지지 않음 → 체크리스트 A5에 기록, 제어기 · 액추에이터 쪽에서 별도 처리 필요.
+- **Windows 노트북 재현 중 발견**: 경로에 한글('바탕 화면', '캡스톤 디자인')이 있으면 MuJoCo가 파일을 못 엶(`ParseXML: Error opening file`, Linux는 정상) → [scripts/mjio.py](scripts/mjio.py): Python이 UTF-8로 읽어 문자열 + assets(include 파일)로 전달, 저장은 ASCII 임시 경로 경유. 뷰어는 [scripts/view.py](scripts/view.py). 우리 로봇 메시(STL) 로딩에도 같은 문제가 생길 수 있음 → 4주차 체크리스트 항목 후보
 - MuJoCo 3.15에서 `mj_fullM` 인자 순서 변경((m, d, dst)) → 스크립트에서 두 버전 모두 처리.
 - mjSpec `attach_body`는 원본 spec에서 body를 옮김 → 팔마다 spec을 새로 읽어야 함.
 

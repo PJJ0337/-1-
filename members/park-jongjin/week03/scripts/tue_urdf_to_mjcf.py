@@ -12,6 +12,8 @@
 import os, sys, io
 import numpy as np
 import mujoco
+import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from mjio import load_model, save_last_xml   # Windows 한글 경로 대응
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 W3 = os.path.dirname(HERE)
@@ -36,9 +38,9 @@ p(f"MuJoCo {mujoco.__version__}")
 p("=" * 70)
 # ---------- 1. URDF 기본 로딩 → MJCF 저장 ----------
 p("1) URDF 기본 로딩 (URDF 기본값: fusestatic=true, discardvisual=true)")
-m_urdf = mujoco.MjModel.from_xml_path(URDF)
+m_urdf = load_model(URDF)
 f1 = os.path.join(MJCF_DIR, "two_link_from_urdf.xml")
-mujoco.mj_saveLastXML(f1, m_urdf)
+save_last_xml(f1, m_urdf)
 summary("URDF 기본", m_urdf)
 p(f"   → 저장: mjcf/{os.path.basename(f1)}")
 
@@ -49,7 +51,7 @@ ext = '<mujoco><compiler fusestatic="false" discardvisual="false"/></mujoco>'
 txt2 = txt.replace('<robot name="two_link_arm">', '<robot name="two_link_arm">\n  ' + ext, 1)
 m_nf = mujoco.MjModel.from_xml_string(txt2)
 f2 = os.path.join(MJCF_DIR, "two_link_from_urdf_nofuse.xml")
-mujoco.mj_saveLastXML(f2, m_nf)
+save_last_xml(f2, m_nf)
 summary("fusestatic=false", m_nf)
 p(f"   → 저장: mjcf/{os.path.basename(f2)}")
 lost = set(names(m_nf, mujoco.mjtObj.mjOBJ_BODY, m_nf.nbody)) - set(names(m_urdf, mujoco.mjtObj.mjOBJ_BODY, m_urdf.nbody))
@@ -58,7 +60,7 @@ p(f"   geom 수: 기본 {m_urdf.ngeom} vs discardvisual=false {m_nf.ngeom} (URDF
 
 # ---------- 3. 손으로 정리한 MJCF (scene.xml → include two_link_arm.xml) ----------
 p("\n3) 손으로 정리한 MJCF: mjcf/scene.xml (include two_link_arm.xml, default class 3개)")
-m_h = mujoco.MjModel.from_xml_path(os.path.join(MJCF_DIR, "scene.xml"))
+m_h = load_model(os.path.join(MJCF_DIR, "scene.xml"))
 summary("hand MJCF", m_h)
 
 def full_inertia(m, b):
@@ -105,7 +107,7 @@ p(f"   URDF 모델 option: timestep {m_urdf.opt.timestep}, integrator {mujoco.mj
 p(f"   hand 모델 option: timestep {m_h.opt.timestep}, integrator {mujoco.mjtIntegrator(m_h.opt.integrator).name}")
 tu = run(m_urdf)
 # 공정 비교: hand 모델을 URDF와 같은 integrator로도 실행
-m_h_euler = mujoco.MjModel.from_xml_path(os.path.join(MJCF_DIR, "scene.xml")); m_h_euler.opt.integrator = m_urdf.opt.integrator
+m_h_euler = load_model(os.path.join(MJCF_DIR, "scene.xml")); m_h_euler.opt.integrator = m_urdf.opt.integrator
 th = run(m_h); the = run(m_h_euler)
 d_same = np.max(np.abs(tu[:, 1:] - the[:, 1:])); d_diff = np.max(np.abs(tu[:, 1:] - th[:, 1:]))
 p(f"   같은 integrator 일 때 최대 |Δq| = {d_same:.2e} rad")
