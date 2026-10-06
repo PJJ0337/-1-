@@ -62,6 +62,14 @@ python members/park-jongjin/week03/scripts/view.py holonomic_base_two_arms
 
 results/ 의 txt · csv 는 노트북 실행본(3.14.0)으로 덮어씀.
 
+뷰어 직접 조작 캡처 (`scripts/view.py`, 같은 노트북):
+
+| 장면 | 관찰 값 | 캡처 |
+|---|---|---|
+| scene — Pause 후 Reset(q=0, 수평) | 액추에이터 없음 → Run 하면 낙하 | [20261006_viewer_1_scene_q0_paused.png](img/repro/20261006_viewer_1_scene_q0_paused.png), […_released.png](img/repro/20261006_viewer_1_scene_released.png) |
+| scene_position — Control shoulder_pos −0.503 | Joint shoulder −0.43 → **처짐 0.073 rad** (스크립트 0.0724, 이론 τg/kp 0.070), elbow 0.0135 | [20261006_viewer_2_position_sag.png](img/repro/20261006_viewer_2_position_sag.png) |
+| holonomic_base_two_arms — yaw_vel로 회전 후 base_x_vel 0.05 | base_yaw 1.47 rad(84°), base_x 0.148 m, base_y ≈ 0 → 회전과 무관하게 world x로 이동(로봇 기준 옆걸음) | [20261006_viewer_3_holonomic_sideways.png](img/repro/20261006_viewer_3_holonomic_sideways.png) |
+
 ## 4. 발견한 문제 · 해결
 
 - **2주차 "어깨가 수평에서 안 떨어짐" 원인을 문서 근거로 확정**: MuJoCo 충돌 필터 예외(부모가 world 또는 world에 용접된 body면 부모-자식 접촉을 거르지 않음, Computation › Collision selection 필터 3). fusestatic과는 무관 — on/off 모두 접촉 발생 (3.14: 1개, 3.15: 2개 — 원통-원통 충돌 계산이 버전별로 다름) → `<exclude body1="base_link" body2="link1"/>`로 해결(fusestatic=false여야 이름 참조 가능).
