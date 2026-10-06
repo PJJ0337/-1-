@@ -1,0 +1,51 @@
+MuJoCo 3.15.0
+======================================================================
+1) URDF 기본 로딩 (URDF 기본값: fusestatic=true, discardvisual=true)
+[URDF 기본] nbody=3 njnt=2 ngeom=2 nsite=0
+   bodies: ['world', 'link1', 'link2']
+   joints: ['shoulder', 'elbow']
+   총질량(world 제외) = 1.6000 kg
+   → 저장: mjcf/two_link_from_urdf.xml
+
+2) URDF 안에 <mujoco><compiler fusestatic="false" discardvisual="false"/></mujoco> 추가
+[fusestatic=false] nbody=5 njnt=2 ngeom=5 nsite=0
+   bodies: ['world', 'base_link', 'link1', 'link2', 'tool0']
+   joints: ['shoulder', 'elbow']
+   총질량(world 제외) = 3.6000 kg
+   → 저장: mjcf/two_link_from_urdf_nofuse.xml
+   fusestatic=true 일 때 사라진 body: ['base_link', 'tool0']
+   geom 수: 기본 2 vs discardvisual=false 5 (URDF visual 3개가 기본 로딩에서 버려짐)
+
+3) 손으로 정리한 MJCF: mjcf/scene.xml (include two_link_arm.xml, default class 3개)
+[hand MJCF] nbody=4 njnt=2 ngeom=6 nsite=1
+   bodies: ['world', 'base_link', 'link1', 'link2']
+   joints: ['shoulder', 'elbow']
+   총질량(world 제외) = 3.6000 kg
+
+4) 링크별 비교 (URDF 로딩 결과 vs 손으로 작성한 MJCF) — body 좌표계 기준
+body       항목                                    URDF→MuJoCo                          hand MJCF  최대오차
+link1      mass                                            1                                  1  0.0e+00
+link1      pos(부모기준)                                 0 0 0.1                            0 0 0.1  0.0e+00
+link1      COM ipos                                 0.15 0 0                           0.15 0 0  0.0e+00
+link1      I diag(body)            0.00045 0.007725 0.007725          0.00045 0.007725 0.007725  9.8e-14
+link2      mass                                          0.6                                0.6  0.0e+00
+link2      pos(부모기준)                                 0.3 0 0                            0.3 0 0  0.0e+00
+link2      COM ipos                                0.125 0 0                          0.125 0 0  0.0e+00
+link2      I diag(body)        0.0001875 0.0032188 0.0032188      0.0001875 0.0032188 0.0032188  4.1e-14
+shoulder   axis [0. 1. 0.] vs [0. 1. 0.] | range [-1.5708  1.5708] vs [-1.5708  1.5708] | damping 0.05 vs 0.05
+elbow      axis [0. 1. 0.] vs [0. 1. 0.] | range [-2.3562  2.3562] vs [-2.3562  2.3562] | damping 0.05 vs 0.05
+
+5) 수평 자세(q=0) 중력 토크 qfrc_bias  [2주차 해석해: shoulder 3.9731, elbow 0.7358 Nm]
+   URDF : shoulder -3.9731 Nm, elbow -0.7358 Nm
+   hand : shoulder -3.9731 Nm, elbow -0.7358 Nm
+
+6) 수평 자세에서 놓은 뒤 2.0 s 자유 낙하 (timestep 두 모델 모두 0.002 s, integrator 차이 주의)
+   URDF 모델 option: timestep 0.002, integrator mjINT_EULER
+   hand 모델 option: timestep 0.002, integrator mjINT_IMPLICITFAST
+   같은 integrator 일 때 최대 |Δq| = 1.24e-14 rad
+   integrator 다를 때(Euler vs implicitfast) 최대 |Δq| = 1.24e-14 rad
+   최종 자세 URDF: shoulder 1.5660, elbow 0.0339 rad
+   최종 자세 hand: shoulder 1.5660, elbow 0.0339 rad
+   → 그래프: img/20261006_urdf_vs_mjcf_drop.png
+
+결과: 일치 (구조 · 물성 · 동역학)

@@ -1,0 +1,49 @@
+<!-- week03 화요일: 2링크 팔 MJCF (팔 파일)
+     - week02/models/two_link_arm.urdf 와 같은 로봇을 default class로 정리해 손으로 다시 작성
+     - scene.xml 이 <include> 로 이 파일을 불러온다 (바닥 · 조명 · option 은 scene 쪽)
+     - 수치 근거: URDF 주석의 원통 관성식, MuJoCo가 URDF에서 변환한 결과(results/tue_compare.txt)와 비교 검증
+     단위: m, kg, rad -->
+<mujoco model="two_link_arm">
+  <compiler angle="radian" autolimits="true"/>
+
+  <default>
+    <!-- 모든 팔 관절 공통: y축 피치 hinge, URDF <dynamics damping="0.05"> -->
+    <default class="arm_joint">
+      <joint type="hinge" axis="0 1 0" damping="0.05"/>
+    </default>
+    <!-- visual: 충돌 없음(contype=conaffinity=0), 질량 계산에서 제외(density 0), 그룹 2 -->
+    <default class="visual">
+      <geom contype="0" conaffinity="0" group="2" density="0" rgba="0.6 0.6 0.7 1"/>
+    </default>
+    <!-- collision: 그룹 3, 화면에서는 기본 숨김 -->
+    <default class="collision">
+      <geom group="3" rgba="0.9 0.4 0.3 0.4"/>
+    </default>
+    <!-- 링크 원통: x축으로 뻗도록 fromto 사용 (URDF의 rpy="0 1.5708 0" 회전과 같은 결과) -->
+  </default>
+
+  <worldbody>
+    <!-- base_link: freejoint 없음 → world에 고정 (URDF 루트 링크와 동일) -->
+    <body name="base_link">
+      <inertial pos="0 0 0.05" mass="2.0" diaginertia="0.0029167 0.0029167 0.0025"/>
+      <geom class="visual" type="cylinder" size="0.05 0.05" pos="0 0 0.05"/>
+
+      <body name="link1" pos="0 0 0.10">
+        <joint name="shoulder" class="arm_joint" range="-1.5708 1.5708"/>
+        <!-- 원통 축이 x 방향 → 주관성 (Iyy, Iyy, Izz)가 아니라 (Izz_cyl, Ixx_cyl, Ixx_cyl) -->
+        <inertial pos="0.15 0 0" mass="1.0" diaginertia="0.00045 0.007725 0.007725"/>
+        <geom class="visual"    type="cylinder" size="0.03" fromto="0 0 0 0.30 0 0"/>
+        <geom class="collision" type="cylinder" size="0.03" fromto="0 0 0 0.30 0 0"/>
+
+        <body name="link2" pos="0.30 0 0">
+          <joint name="elbow" class="arm_joint" range="-2.3562 2.3562"/>
+          <inertial pos="0.125 0 0" mass="0.6" diaginertia="0.0001875 0.0032188 0.0032188"/>
+          <geom class="visual"    type="cylinder" size="0.025" fromto="0 0 0 0.25 0 0"/>
+          <geom class="collision" type="cylinder" size="0.025" fromto="0 0 0 0.25 0 0"/>
+          <!-- tool0: URDF는 fixed joint + 빈 링크, MJCF는 site 하나로 충분 (fusestatic 영향 없음) -->
+          <site name="tool0" pos="0.25 0 0" size="0.01"/>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+</mujoco>

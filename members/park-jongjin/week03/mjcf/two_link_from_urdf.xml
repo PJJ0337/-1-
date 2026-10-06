@@ -1,0 +1,16 @@
+<mujoco model="two_link_arm">
+  <compiler angle="radian"/>
+
+  <worldbody>
+    <body name="link1" pos="0 0 0.1">
+      <inertial pos="0.15 0 0" quat="0.499999 0.500001 0.500001 0.499999" mass="1" diaginertia="0.007725 0.007725 0.00045"/>
+      <joint name="shoulder" range="-1.5708 1.5708" actuatorfrcrange="-40 40" damping="0.05" axis="0 1 0"/>
+      <geom size="0.03 0.15" pos="0.15 0 0" quat="0.707105 0 0.707108 0" type="cylinder"/>
+      <body name="link2" pos="0.3 0 0">
+        <inertial pos="0.125 0 0" quat="0.499999 0.500001 0.500001 0.499999" mass="0.6" diaginertia="0.0032188 0.0032188 0.0001875"/>
+        <joint name="elbow" range="-2.3562 2.3562" actuatorfrcrange="-20 20" damping="0.05" axis="0 1 0"/>
+        <geom size="0.025 0.125" pos="0.125 0 0" quat="0.707105 0 0.707108 0" type="cylinder"/>
+      </body>
+    </body>
+  </worldbody>
+</mujoco>
