@@ -2,65 +2,68 @@
 
 | 항목 | 내용 |
 |---|---|
-| 주차 | 제 3 주차 |
+| 주차 | 제 3 주차 (10/5 ~ 10/8, 10/9 한글날로 제출 목요일) |
 | 게이트 | 해당 없음 |
-| 제출일 | YYYY-MM-DD |
-| 저장소 태그 | `week03` (제출 시 부여) |
-| 주간 보고서 | reports/ |
+| 제출일 | 2026-10-08 (마감) |
+| 저장소 태그 | `week03` |
+| 주간 보고서 | [reports/학부생_주간활동보고서_3주차_박종진_22212289_20261008.docx](../reports/) |
+| 커리큘럼 | 김이겸, Notion 「B1 2·3·4주차 학습 커리큘럼」 3주차 — **10/6 변경본**: USD · Isaac Sim 실습은 실습 PC 배정 주로 미루고 MuJoCo 심화(MJCF 구성 · 구동 · URDF 로딩)로 대체 |
 
 ## 1. 계획 대비 수행
 
-B1 3주차 커리큘럼(USD 개념 + Isaac Sim 개념 + 변환 파이프라인) 기준.
+> 실습 · 스크립트 · 문서 작성에 Claude(AI) 보조 사용. 실행은 MuJoCo 3.15.0, 수치는 모두 아래 스크립트 출력(results/)에서 가져옴.
 
-> **선행 학습본** — 2주차 중(2026-09-29)에 미리 작성, 3주차(다음 주)에 커리큘럼 요일별로 본인이 다시 확인하며 완료율 확정. 스크립트 · 초안 작성에 Claude(AI) 보조 사용. 5번(팀 연계)은 함태훈 대응표가 나와야 진행 가능.
-
-| No. | 계획 | 실제 수행 | 완료율 | 산출물 (파일 경로) |
+| No. | 계획 (커리큘럼) | 실제 수행 | 완료율 | 산출물 |
 |---|---|---|---|---|
-| 1 | usd-core로 큐브 1개 .usda 생성 → 텍스트로 구조 확인 (Stage · Prim · Attribute · Layer) | Z-up · metersPerUnit=1 · defaultPrim 지정, 텍스트 구조 확인 | 100 % | [usd/cube.usda](usd/cube.usda), [scripts/make_cube_usda.py](scripts/make_cube_usda.py) |
-| 2 | 2링크 팔을 Xform 계층으로 USD 표현 → RevoluteJoint 2개 + Drive 속성 추가 | geom 레이어(Xform 계층) + 물리 레이어(sublayer + over: RigidBody · Mass · Collision · RevoluteJoint 2 · DriveAPI · ArticulationRoot) + scene(reference). URDF와 자동 비교 **전 항목 통과** | 100 % | [usd/](usd/), [scripts/make_two_link_usd.py](scripts/make_two_link_usd.py), [scripts/check_usd_vs_urdf.py](scripts/check_usd_vs_urdf.py) |
-| 3 | **(개별)** URDF 임포트 체크리스트 초안 — 옵션별 결과 + 문서 근거 | 임포트 전 8 · 옵션 12 · 임포트 후 9개 항목, 옵션마다 5.1 문서/실험 근거 | 100 % (초안) | [b1/docs/procedures/urdf-import-checklist.md](../../../b1/docs/procedures/urdf-import-checklist.md) |
-| 4 | CAD → URDF → USD / MJCF 파이프라인 그림 1장 | SVG + PNG | 100 % | [img/pipeline.png](img/pipeline.png), [img/pipeline.svg](img/pipeline.svg) |
-| 5 | **(팀 연계)** 함태훈 URDF ↔ USD 대응표 검토 → 체크리스트 반영 | 대기 | 0 % | |
+| 0 | (월, 변경 전) USD 실습 | 큐브 .usda, 2링크 USD(geom/physics 레이어 · scene reference), URDF 자동 비교 전 항목 통과 → **보고서 부록 A** | 100 % | [usd/](usd/), [scripts/make_two_link_usd.py](scripts/make_two_link_usd.py), [scripts/check_usd_vs_urdf.py](scripts/check_usd_vs_urdf.py) |
+| 1 | (화) MJCF 구성 심화 · URDF → MJCF 저장 · include/default 정리 | 2주차 URDF → `mj_saveLastXML`, 팔/scene 분리 + default class 3개. 변환본과 질량 · 관성 · 관절 · damping 일치, 중력토크 3.9731/0.7358 Nm, 궤적 차 1.2e-14 rad | 100 % | [mjcf/two_link_arm.xml](mjcf/two_link_arm.xml), [mjcf/scene.xml](mjcf/scene.xml), [mjcf/two_link_from_urdf.xml](mjcf/two_link_from_urdf.xml), [scripts/tue_urdf_to_mjcf.py](scripts/tue_urdf_to_mjcf.py), [results/tue_compare.txt](results/tue_compare.txt) |
+| 2 | (수) position 액추에이터 + kp · kv · armature 계단 응답 3종 | 오버슈트 시뮬/이론 2~4 %p 이내, kp 100 포화, 정상상태 오차 ≈ τg/kp | 100 % | [mjcf/scene_position.xml](mjcf/scene_position.xml), [scripts/wed_step_response.py](scripts/wed_step_response.py), [img/20261006_step_all.png](img/20261006_step_all.png), [results/wed_step_metrics.csv](results/wed_step_metrics.csv) |
+| 3 | **(개별)** MuJoCo 로딩 체크리스트 초안 (compiler 옵션 · 베이스 · 자기 충돌 · 액추에이터, 문서 근거) | A~F절, 항목별 MuJoCo 문서 링크 + 실험 E1~E6 | 100 % (초안) | [b1/docs/procedures/mujoco-urdf-loading-checklist.md](../../../b1/docs/procedures/mujoco-urdf-loading-checklist.md), [scripts/thu_loading_experiments.py](scripts/thu_loading_experiments.py), [results/thu_experiments.txt](results/thu_experiments.txt) |
+| 4 | (목) CAD → URDF → MJCF 파이프라인 그림 | SVG + PNG | 100 % | [img/pipeline_mujoco.png](img/pipeline_mujoco.png) |
+| 5 | **(팀 연계)** 함태훈 URDF ↔ MJCF 대응표 검토 → 체크리스트 G절 | 대응표 대기 | 0 % | |
 
 ## 2. 핵심 수치 · 근거 (구술 대비)
 
 | 수치 / 사실 | 값 | 근거 |
 |---|---|---|
-| USD Physics 각도 단위 | degree (URDF rad) → ±1.5708 rad = ±90° | [USD Physics](https://openusd.org/release/api/usd_physics_page_front.html), check_usd_vs_urdf.py |
-| 기본 밀도 / 우선순위 | 1000 kg/m³, 명시 mass > density | USD Physics |
-| Drive 식 | stiffness·(target − p) + damping·(targetVel − v) | USD Physics |
-| 임포터 게인 (Natural Frequency) | Kp = m·ωn², Kd = 2·m·ζ·ωn | [Isaac Sim 5.1 URDF Importer](https://docs.isaacsim.omniverse.nvidia.com/5.1.0/importer_exporter/ext_isaacsim_asset_importer_urdf.html) |
-| Drive Type 기본 | Acceleration (관성 정규화) / Force | 동 |
-| merge fixed joints | 5.1 최신 임포터에서 제거, Isaac Lab은 importer 2.4.31 고정 | [Isaac Lab PR #4000](https://github.com/isaac-sim/IsaacLab/pull/4000) |
-| 2링크 USD 검증 | 총질량 3.6 kg, tool0 (0.55, 0, 0.10), 관절 프레임 일치 | check_usd_vs_urdf.py |
+| URDF/MJCF 기본값이 다른 compiler 속성 | angle(URDF 항상 radian, MJCF degree), fusestatic · discardvisual(URDF true), strippath | [Modeling › URDF extensions](https://mujoco.readthedocs.io/en/stable/modeling.html#curdf) |
+| fusestatic=true 결과 | body 5 → 3 (base_link · tool0 소실), 중력토크 동일 3.9731 Nm | thu E3, [compiler-fusestatic](https://mujoco.readthedocs.io/en/stable/XMLreference.html#compiler-fusestatic) |
+| 부모-자식 충돌 필터 예외 | 부모가 world(용접 포함)면 제외 안 함 → 접촉 2개, exclude 후 0개 | thu E2, [coSelection](https://mujoco.readthedocs.io/en/stable/computation/index.html#coselection) |
+| URDF 변환 | effort → actuatorfrcrange, velocity 버려짐, planar → slide·slide·hinge, floating → free | tue, thu E1 |
+| angle 생략 함정 | range 1.5708 → ±1.5708° = ±0.0274 rad | thu E4 |
+| 베이스 nq/nv (양팔 4관절) | 고정 4/4, free 11/10, 평면 3-DOF 7/7 | thu E5 |
+| 평면 베이스 명령 좌표계 | yaw 90° 후 base_x 0.3 m/s → world x 0.25 m (옆걸음) | thu E5, [results/thu_holonomic.csv](results/thu_holonomic.csv) |
+| 2차계 근사 | ωn = √(kp/M), ζ = (kv+b)/(2√(kp·M)), M(q=−0.5) = 0.142 kg·m² | wed |
+| 오버슈트 시뮬/이론 | kp 20 · 50 · 100: 34.7/35.7, 51.2/53.2, 60.7/64.3 % | wed |
+| armature 0 → 0.15 | M 0.142 → 0.292, ωn 18.8 → 13.1 rad/s, 정착 1.1 → 2.1 s | wed, [body-joint-armature](https://mujoco.readthedocs.io/en/stable/XMLreference.html#body-joint-armature) |
+| 정상상태 오차 | kp 50: 0.072 rad (이론 τg/kp 0.070) | wed |
 
 ## 3. 재현 방법
 
 ```bash
-cd members/park-jongjin/week03
-python scripts/make_cube_usda.py usd
-python scripts/make_two_link_usd.py usd
-python scripts/check_usd_vs_urdf.py      # 마지막 줄 "결과: 모두 통과"
+pip install mujoco matplotlib          # MuJoCo 3.15.0에서 확인
+python members/park-jongjin/week03/scripts/tue_urdf_to_mjcf.py         # 마지막 줄 "결과: 일치"
+python members/park-jongjin/week03/scripts/wed_step_response.py
+python members/park-jongjin/week03/scripts/thu_loading_experiments.py
+python -m mujoco.viewer --mjcf=members/park-jongjin/week03/mjcf/scene.xml
+python -m mujoco.viewer --mjcf=members/park-jongjin/week03/mjcf/holonomic_base_two_arms.xml
 ```
+
+캡처(img/20261006_two_link_mjcf_scene.png, 20261006_holonomic_base_two_arms.png)는 오프스크린 렌더(MUJOCO_GL=osmesa)로 생성.
 
 ## 4. 발견한 문제 · 해결
 
-- 커리큘럼의 "merge fixed joints 옵션"은 **Isaac Sim 5.1 최신 URDF 임포터에서 제거**됨 (Isaac Lab PR #4000). Isaac Lab `UrdfConverterCfg.merge_fixed_joints` 는 importer 2.4.31 고정으로 유지 → 우리 체크리스트는 "사용하지 않음 + 센서 프레임 링크 보존"으로 정리.
-- URDF `limit`(rad)을 USD로 옮길 때 degree 변환 누락이 가장 쉬운 실수 → 자동 비교 스크립트로 검출.
+- **2주차 "어깨가 수평에서 안 떨어짐"의 원인 확정**: 2주차엔 fusestatic 영향으로 추정했으나, 실제로는 MuJoCo 충돌 필터 예외(부모가 world 또는 world에 용접된 body면 부모-자식 접촉을 거르지 않음). fusestatic on/off 모두 접촉 2개 → `<exclude body1="base_link" body2="link1"/>`로 해결(fusestatic=false여야 이름 참조 가능).
+- URDF의 joint `velocity` 한계는 MuJoCo로 옮겨지지 않음 → 체크리스트 A5에 기록, 제어기 · 액추에이터 쪽에서 별도 처리 필요.
+- MuJoCo 3.15에서 `mj_fullM` 인자 순서 변경((m, d, dst)) → 스크립트에서 두 버전 모두 처리.
+- mjSpec `attach_body`는 원본 spec에서 body를 옮김 → 팔마다 spec을 새로 읽어야 함.
 
 ## 5. 막힌 점 · 요청
 
-- Isaac Sim 실제 임포트 결과(링크 계층 · fixed joint 처리 · planar joint 지원)는 실습 PC 필요 → 4주차 확인 항목으로 체크리스트에 남김.
+- armature · forcerange 실제 값에 BOM 구동기 사양(정격 · 피크 토크, 감속비, 로터 관성) 필요 → 보고서 3절로 요청 (2026-10-06)
+- 함태훈 URDF ↔ MJCF 대응표 대기 → 체크리스트 G절
 
 ## 6. 구술 질문 준비 (커리큘럼 지정)
 
-- Q1. Isaac Sim에서 Articulation Root 위치가 왜 중요한가?
-  - 답변 요지: 고정/부유 베이스를 결정(고정: 월드-베이스 fixed joint 또는 조상, 부유: 루트 링크 또는 조상)하고, 축소 좌표의 기준이 되며(자세·속도는 루트에만 설정), 중첩이 불가하다. 잘못 두면 articulation이 쪼개지거나 관절이 축소 좌표로 풀리지 않는다. → [상세](../notes/usd-isaac/01-usd-basics.md#q1-isaac-sim에서-articulation-root-위치가-왜-중요한가)
-- Q2. merge fixed joints 옵션을 켜면 무엇이 사라지는가?
-  - 답변 요지: fixed joint로 붙은 자식 링크 prim과 그 좌표계(툴 · 센서 장착 프레임), fixed joint 자체. 질량 · 관성은 부모에 합산돼 물리는 같지만 이름으로 참조 불가 → Isaac Lab 센서 · FrameTransformer 지정 실패. MuJoCo fusestatic 실험에서 body 5 → 3. 5.1 최신 임포터는 이 옵션 제거. → [상세](../notes/usd-isaac/01-usd-basics.md#q2-merge-fixed-joints-옵션을-켜면-무엇이-사라지는가)
-
-## 7. 다음 주 계획
-
-1. (환경 확보 시) 3주차 URDF · USD를 Isaac Sim에 임포트해 Articulation 확인
-2. 함태훈 URDF ↔ USD 대응표 검토 → 임포트 체크리스트 v1
-3. 실제 임포트 결과로 체크리스트 「확인 필요」 4건 확정
+- Q1. 베이스를 고정할 때와 freejoint로 둘 때의 차이, 홀로노믹 베이스는 MJCF에서 어떻게 표현하는가? → [notes/mujoco-urdf/02-mujoco-advanced.md](../notes/mujoco-urdf/02-mujoco-advanced.md#q1-베이스를-고정할-때와-freejoint로-둘-때의-차이-홀로노믹-베이스는-mjcf에서-어떻게-표현하는가)
+- Q2. fusestatic을 켜면 무엇이 사라지고, 언제 꺼야 하는가? → [동 Q2](../notes/mujoco-urdf/02-mujoco-advanced.md#q2-fusestatic을-켜면-무엇이-사라지고-언제-꺼야-하는가)

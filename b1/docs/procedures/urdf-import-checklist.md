@@ -2,7 +2,7 @@
 
 | 항목 | 내용 |
 |---|---|
-| 상태 | **초안** (week03, 박종진) — 함태훈 URDF ↔ USD 대응표 검토 반영 전 · 실제 Isaac Sim 임포트(4주차) 전 |
+| 상태 | **보류 — 실습 PC 배정 후 사용** (10/6 커리큘럼 변경, 현재는 [mujoco-urdf-loading-checklist.md](mujoco-urdf-loading-checklist.md)). **초안** (week03, 박종진) — 함태훈 URDF ↔ USD 대응표 검토 반영 전 · 실제 Isaac Sim 임포트(4주차) 전 |
 | 대상 | Isaac Sim 5.1 URDF Importer (`isaacsim.asset.importer.urdf`), Isaac Lab 2.3.2 `UrdfConverterCfg` |
 | 근거 문서 | [Isaac Sim 5.1 URDF Importer](https://docs.isaacsim.omniverse.nvidia.com/5.1.0/importer_exporter/ext_isaacsim_asset_importer_urdf.html) · [Omniverse URDF Importer 옵션](https://docs.omniverse.nvidia.com/kit/docs/omniverse-urdf-importer/latest/index.html) · [Isaac Lab urdf_converter](https://isaac-sim.github.io/IsaacLab/main/_modules/isaaclab/sim/converters/urdf_converter.html) · [Isaac Lab PR #4000](https://github.com/isaac-sim/IsaacLab/pull/4000) · [OpenUSD Physics](https://openusd.org/release/api/usd_physics_page_front.html) · [Omni Physics Articulations](https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/dev_guide/rigid_bodies_articulations/articulations.html) |
 | 실험 근거 | [week02/scripts/urdf_check.py](../../../members/park-jongjin/week02/scripts/urdf_check.py), [oral_experiments.py](../../../members/park-jongjin/week02/scripts/oral_experiments.py), [week03/scripts/check_usd_vs_urdf.py](../../../members/park-jongjin/week03/scripts/check_usd_vs_urdf.py) |
