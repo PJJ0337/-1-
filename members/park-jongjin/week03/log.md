@@ -53,7 +53,7 @@ python -m mujoco.viewer --mjcf=members/park-jongjin/week03/mjcf/holonomic_base_t
 
 ## 4. 발견한 문제 · 해결
 
-- **2주차 "어깨가 수평에서 안 떨어짐"의 원인 확정**: 2주차엔 fusestatic 영향으로 추정했으나, 실제로는 MuJoCo 충돌 필터 예외(부모가 world 또는 world에 용접된 body면 부모-자식 접촉을 거르지 않음). fusestatic on/off 모두 접촉 2개 → `<exclude body1="base_link" body2="link1"/>`로 해결(fusestatic=false여야 이름 참조 가능).
+- **2주차 "어깨가 수평에서 안 떨어짐" 원인을 문서 근거로 확정**: MuJoCo 충돌 필터 예외(부모가 world 또는 world에 용접된 body면 부모-자식 접촉을 거르지 않음, Computation › Collision selection 필터 3). fusestatic과는 무관 — on/off 모두 접촉 2개 → `<exclude body1="base_link" body2="link1"/>`로 해결(fusestatic=false여야 이름 참조 가능).
 - URDF의 joint `velocity` 한계는 MuJoCo로 옮겨지지 않음 → 체크리스트 A5에 기록, 제어기 · 액추에이터 쪽에서 별도 처리 필요.
 - MuJoCo 3.15에서 `mj_fullM` 인자 순서 변경((m, d, dst)) → 스크립트에서 두 버전 모두 처리.
 - mjSpec `attach_body`는 원본 spec에서 body를 옮김 → 팔마다 spec을 새로 읽어야 함.
