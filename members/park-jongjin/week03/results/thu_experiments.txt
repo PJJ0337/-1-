@@ -1,4 +1,4 @@
-MuJoCo 3.15.0
+MuJoCo 3.14.0
 
 E1) URDF joint type → MuJoCo
    revolute   → [('j', 'hinge')]  nq=1 nv=1 limited=[True]
@@ -8,8 +8,8 @@ E1) URDF joint type → MuJoCo
    floating   → [('j', 'free')]  nq=7 nv=6 limited=[False]
 
 E2) 자기 충돌: base_link collision 복원(원통 r0.05 h0.10, 어깨 z=0.10 바로 아래) 후 q=0에서 1 s 놓기
-   URDF 기본(fusestatic=true): base→world 로 합쳐짐                : 초기 접촉 2개, 1 s 후 shoulder -0.014 rad
-   fusestatic=false: base_link 는 world 에 용접된 정적 body         : 초기 접촉 2개, 1 s 후 shoulder -0.014 rad
+   URDF 기본(fusestatic=true): base→world 로 합쳐짐                : 초기 접촉 1개, 1 s 후 shoulder -0.014 rad
+   fusestatic=false: base_link 는 world 에 용접된 정적 body         : 초기 접촉 1개, 1 s 후 shoulder -0.014 rad
    + <contact><exclude body1="base_link" body2="link1"/>     : 초기 접촉 0개, 1 s 후 shoulder +1.575 rad
    → 원인: MuJoCo 문서(Computation > Collision > Selection, 필터 3) '부모-자식 body 접촉은 제외, 단 부모가 world 이면 제외 안 함.
      joint 없이 용접된 body 들은 한 body 로 취급' → base_link 는 world 와 용접 = world 취급이라 link1 과의 접촉이 남는다.

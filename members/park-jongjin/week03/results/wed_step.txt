@@ -1,4 +1,4 @@
-MuJoCo 3.15.0 | 계단: 어깨 0.0 → -0.5 rad at t=0.5s | forcerange ±40 Nm
+MuJoCo 3.14.0 | 계단: 어깨 0.0 → -0.5 rad at t=0.5s | forcerange ±40 Nm
 
 (A) kp 변화 (kv=1, armature=0)
 case               M_eff     ωn      ζ | rise[s]  OS[%]  OS_th ts2%[s]  ess[rad]   ess_th  |f|max

@@ -28,7 +28,7 @@
 |---|---|---|
 | URDF/MJCF 기본값이 다른 compiler 속성 | angle(URDF 항상 radian, MJCF degree), fusestatic · discardvisual(URDF true), strippath | [Modeling › URDF extensions](https://mujoco.readthedocs.io/en/stable/modeling.html#curdf) |
 | fusestatic=true 결과 | body 5 → 3 (base_link · tool0 소실), 중력토크 동일 3.9731 Nm | thu E3, [compiler-fusestatic](https://mujoco.readthedocs.io/en/stable/XMLreference.html#compiler-fusestatic) |
-| 부모-자식 충돌 필터 예외 | 부모가 world(용접 포함)면 제외 안 함 → 접촉 2개, exclude 후 0개 | thu E2, [coSelection](https://mujoco.readthedocs.io/en/stable/computation/index.html#coselection) |
+| 부모-자식 충돌 필터 예외 | 부모가 world(용접 포함)면 제외 안 함 → 접촉 1~2개(버전별), exclude 후 0개 | thu E2, [coSelection](https://mujoco.readthedocs.io/en/stable/computation/index.html#coselection) |
 | URDF 변환 | effort → actuatorfrcrange, velocity 버려짐, planar → slide·slide·hinge, floating → free | tue, thu E1 |
 | angle 생략 함정 | range 1.5708 → ±1.5708° = ±0.0274 rad | thu E4 |
 | 베이스 nq/nv (양팔 4관절) | 고정 4/4, free 11/10, 평면 3-DOF 7/7 | thu E5 |
@@ -52,9 +52,19 @@ python members/park-jongjin/week03/scripts/view.py holonomic_base_two_arms
 
 캡처(img/20261006_two_link_mjcf_scene.png, 20261006_holonomic_base_two_arms.png)는 오프스크린 렌더(MUJOCO_GL=osmesa)로 생성.
 
+### 본인 노트북 재현 (2026-10-06, Windows · Python 3.12 · MuJoCo 3.14.0)
+
+| 스크립트 | 결과 | 캡처 |
+|---|---|---|
+| tue_urdf_to_mjcf.py | "결과: 일치", 중력토크 3.9731/0.7358 Nm, 궤적 차 1.23e-14 rad — 클라우드(3.15.0)와 동일 | [img/repro/20261006_repro_1_tue.png](img/repro/20261006_repro_1_tue.png) |
+| wed_step_response.py | 표 3개 전 수치 동일 (kp 50: OS 51.2 / 이론 53.2 %) | [img/repro/20261006_repro_2_wed.png](img/repro/20261006_repro_2_wed.png) |
+| thu_loading_experiments.py | E1 · E3 · E4 · E5 동일. **E2 초기 접촉 수만 다름: 3.14 = 1개, 3.15 = 2개** (결론 동일: 접촉 발생 → exclude 후 0개, shoulder +1.575 rad) | [img/repro/20261006_repro_3_thu.png](img/repro/20261006_repro_3_thu.png) |
+
+results/ 의 txt · csv 는 노트북 실행본(3.14.0)으로 덮어씀.
+
 ## 4. 발견한 문제 · 해결
 
-- **2주차 "어깨가 수평에서 안 떨어짐" 원인을 문서 근거로 확정**: MuJoCo 충돌 필터 예외(부모가 world 또는 world에 용접된 body면 부모-자식 접촉을 거르지 않음, Computation › Collision selection 필터 3). fusestatic과는 무관 — on/off 모두 접촉 2개 → `<exclude body1="base_link" body2="link1"/>`로 해결(fusestatic=false여야 이름 참조 가능).
+- **2주차 "어깨가 수평에서 안 떨어짐" 원인을 문서 근거로 확정**: MuJoCo 충돌 필터 예외(부모가 world 또는 world에 용접된 body면 부모-자식 접촉을 거르지 않음, Computation › Collision selection 필터 3). fusestatic과는 무관 — on/off 모두 접촉 발생 (3.14: 1개, 3.15: 2개 — 원통-원통 충돌 계산이 버전별로 다름) → `<exclude body1="base_link" body2="link1"/>`로 해결(fusestatic=false여야 이름 참조 가능).
 - URDF의 joint `velocity` 한계는 MuJoCo로 옮겨지지 않음 → 체크리스트 A5에 기록, 제어기 · 액추에이터 쪽에서 별도 처리 필요.
 - **Windows 노트북 재현 중 발견**: 경로에 한글('바탕 화면', '캡스톤 디자인')이 있으면 MuJoCo가 파일을 못 엶(`ParseXML: Error opening file`, Linux는 정상) → [scripts/mjio.py](scripts/mjio.py): Python이 UTF-8로 읽어 문자열 + assets(include 파일)로 전달, 저장은 ASCII 임시 경로 경유. 뷰어는 [scripts/view.py](scripts/view.py). 우리 로봇 메시(STL) 로딩에도 같은 문제가 생길 수 있음 → 4주차 체크리스트 항목 후보
 - MuJoCo 3.15에서 `mj_fullM` 인자 순서 변경((m, d, dst)) → 스크립트에서 두 버전 모두 처리.

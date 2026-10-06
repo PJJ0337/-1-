@@ -1,4 +1,4 @@
-MuJoCo 3.15.0
+MuJoCo 3.14.0
 ======================================================================
 1) URDF 기본 로딩 (URDF 기본값: fusestatic=true, discardvisual=true)
 [URDF 기본] nbody=3 njnt=2 ngeom=2 nsite=0
@@ -42,10 +42,10 @@ elbow      axis [0. 1. 0.] vs [0. 1. 0.] | range [-2.3562  2.3562] vs [-2.3562  
 6) 수평 자세에서 놓은 뒤 2.0 s 자유 낙하 (timestep 두 모델 모두 0.002 s, integrator 차이 주의)
    URDF 모델 option: timestep 0.002, integrator mjINT_EULER
    hand 모델 option: timestep 0.002, integrator mjINT_IMPLICITFAST
-   같은 integrator 일 때 최대 |Δq| = 1.24e-14 rad
-   integrator 다를 때(Euler vs implicitfast) 최대 |Δq| = 1.24e-14 rad
+   같은 integrator 일 때 최대 |Δq| = 1.23e-14 rad
+   integrator 다를 때(Euler vs implicitfast) 최대 |Δq| = 1.23e-14 rad
    최종 자세 URDF: shoulder 1.5660, elbow 0.0339 rad
    최종 자세 hand: shoulder 1.5660, elbow 0.0339 rad
-   → 그래프: img/20261006_urdf_vs_mjcf_drop.png
+   (matplotlib 없음 — 그래프 생략)
 
 결과: 일치 (구조 · 물성 · 동역학)

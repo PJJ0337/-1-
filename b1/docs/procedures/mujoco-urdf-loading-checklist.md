@@ -69,7 +69,7 @@
 
 | No. | 점검 | 방법 | 근거 · 실험 |
 |---|---|---|---|
-| D1 | 부모-자식 body 접촉은 **기본 제외**, 단 **부모가 world(또는 world에 용접된 body)면 제외 안 됨** | 고정 베이스 로봇에서 base ↔ 첫 링크 충돌 확인 | Collision selection 필터 3: "cannot belong to a parent and a child body, unless the parent is the world body … bodies welded together … treated as a single body" ([coSelection](https://mujoco.readthedocs.io/en/stable/computation/index.html#coselection)). 2주차 "어깨가 수평에서 안 떨어짐"의 원인 — fusestatic 끄든 켜든 접촉 2개 그대로 (thu E2) |
+| D1 | 부모-자식 body 접촉은 **기본 제외**, 단 **부모가 world(또는 world에 용접된 body)면 제외 안 됨** | 고정 베이스 로봇에서 base ↔ 첫 링크 충돌 확인 | Collision selection 필터 3: "cannot belong to a parent and a child body, unless the parent is the world body … bodies welded together … treated as a single body" ([coSelection](https://mujoco.readthedocs.io/en/stable/computation/index.html#coselection)). 2주차 "어깨가 수평에서 안 떨어짐"의 원인 — fusestatic 끄든 켜든 접촉 발생 (3.14: 1개, 3.15: 2개 — 원통-원통 충돌 계산이 버전별로 다름) (thu E2) |
 | D2 | 해결: scene MJCF에 `<contact><exclude body1="base_link" body2="link1"/></contact>` | body 이름이 남아 있어야 함 → **B1 fusestatic=false 필요** | exclude 후 접촉 0개, 어깨 +1.575 rad까지 정상 낙하 (thu E2). [contact-exclude](https://mujoco.readthedocs.io/en/stable/XMLreference.html#contact-exclude) |
 | D3 | 팔-몸통, 왼팔-오른팔처럼 **부모-자식이 아닌** 쌍은 기본 충돌함 | 필요 없는 쌍만 exclude, 넓게 끄려면 `contype`/`conaffinity` 비트 | `(contype1 & conaffinity2) || (contype2 & conaffinity1)` (coSelection 필터 4) |
 | D4 | visual geom은 `contype=conaffinity=0` | default class `visual`로 일괄 | [two_link_arm.xml](../../../members/park-jongjin/week03/mjcf/two_link_arm.xml) |
