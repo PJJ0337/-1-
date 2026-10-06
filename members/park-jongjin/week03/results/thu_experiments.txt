@@ -1,0 +1,35 @@
+MuJoCo 3.15.0
+
+E1) URDF joint type → MuJoCo
+   revolute   → [('j', 'hinge')]  nq=1 nv=1 limited=[True]
+   continuous → [('j', 'hinge')]  nq=1 nv=1 limited=[False]
+   prismatic  → [('j', 'slide')]  nq=1 nv=1 limited=[True]
+   planar     → [('j_TX', 'slide'), ('j_TY', 'slide'), ('j_RZ', 'hinge')]  nq=3 nv=3 limited=[False, False, False]
+   floating   → [('j', 'free')]  nq=7 nv=6 limited=[False]
+
+E2) 자기 충돌: base_link collision 복원(원통 r0.05 h0.10, 어깨 z=0.10 바로 아래) 후 q=0에서 1 s 놓기
+   URDF 기본(fusestatic=true): base→world 로 합쳐짐                : 초기 접촉 2개, 1 s 후 shoulder -0.014 rad
+   fusestatic=false: base_link 는 world 에 용접된 정적 body         : 초기 접촉 2개, 1 s 후 shoulder -0.014 rad
+   + <contact><exclude body1="base_link" body2="link1"/>     : 초기 접촉 0개, 1 s 후 shoulder +1.575 rad
+   → 원인: MuJoCo 문서(Computation > Collision > Selection, 필터 3) '부모-자식 body 접촉은 제외, 단 부모가 world 이면 제외 안 함.
+     joint 없이 용접된 body 들은 한 body 로 취급' → base_link 는 world 와 용접 = world 취급이라 link1 과의 접촉이 남는다.
+
+E3) fusestatic on/off (2주차 URDF 원본)
+   on (URDF 기본)  : nbody=3 ['world', 'link1', 'link2']  중력토크 q=0: -3.9731, -0.7358 Nm
+   off           : nbody=5 ['world', 'base_link', 'link1', 'link2', 'tool0']  중력토크 q=0: -3.9731, -0.7358 Nm
+   → 동역학 동일, tool0 · base_link 이름이 사라짐 → 이후 MJCF 에서 site · sensor · exclude · attach 대상으로 쓸 수 없음
+
+E4) MJCF compiler angle 기본값 = degree (URDF 는 radian)
+   angle=radian 명시 : shoulder range = [-1.5708  1.5708] rad
+   angle 생략(degree): shoulder range = [-0.02741563  0.02741563] rad  (= ±1.5708°)
+
+E5/E6) 베이스 표현 3종 + mjSpec attach 로 팔 2개 조립
+   fixed     : nq= 4 nv= 4 nu= 4  joints=['left_shoulder', 'left_elbow', 'right_shoulder', 'right_elbow']
+   free      : nq=11 nv=10 nu= 4  joints=['base_free', 'left_shoulder', 'left_elbow', 'right_shoulder'] ...
+   holonomic : nq= 7 nv= 7 nu= 7  joints=['base_x', 'base_y', 'base_yaw', 'left_shoulder'] ...
+   → 저장: mjcf/holonomic_base_two_arms.xml (mjSpec.to_xml)
+   팔 prefix 확인: ['left_base_link', 'left_link1', 'left_link2', 'right_base_link', 'right_link1', 'right_link2']
+   명령: 0–1 s yaw 속도 π/2 rad/s, 1–2 s 'base_x' 속도 0.3 m/s
+   결과: yaw = 89.7°, 위치 x = 0.253 m, y = 0.000 m
+   → slide 축은 world 고정: 로봇이 90° 돌아 있어도 base_x 명령은 world x(로봇 기준 오른쪽 옆)로 이동
+     body 기준 명령은 [vx_w, vy_w] = R(yaw)·[vx_b, vy_b] 로 바꿔 넣어야 함 (예: yaw 90°에서 전진 0.3 → base_y +0.3)

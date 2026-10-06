@@ -1,0 +1,90 @@
+<mujoco model="MuJoCo Model">
+  <compiler angle="radian"/>
+
+  <option integrator="implicitfast"/>
+
+  <default>
+    <default class="left_main">
+      <default class="left_arm_joint">
+        <joint damping="0.05" axis="0 1 0"/>
+      </default>
+      <default class="left_visual">
+        <geom contype="0" conaffinity="0" group="2" rgba="0.6 0.6 0.7 1" density="0"/>
+      </default>
+      <default class="left_collision">
+        <geom group="3" rgba="0.9 0.4 0.3 0.4"/>
+      </default>
+    </default>
+    <default class="right_main">
+      <default class="right_arm_joint">
+        <joint damping="0.05" axis="0 1 0"/>
+      </default>
+      <default class="right_visual">
+        <geom contype="0" conaffinity="0" group="2" rgba="0.6 0.6 0.7 1" density="0"/>
+      </default>
+      <default class="right_collision">
+        <geom group="3" rgba="0.9 0.4 0.3 0.4"/>
+      </default>
+    </default>
+  </default>
+
+  <worldbody>
+    <geom name="floor" size="3 3 0.05" type="plane"/>
+    <light pos="0 -1 2.5" dir="0 0.371391 -0.928477"/>
+    <body name="base" pos="0 0 0.3">
+      <joint name="base_x" type="slide" damping="1" axis="1 0 0"/>
+      <joint name="base_y" type="slide" damping="1" axis="0 1 0"/>
+      <joint name="base_yaw" damping="1"/>
+      <geom name="plate" size="0.2875 0.236 0.006" type="box" rgba="0.75 0.75 0.8 1" mass="3.7"/>
+      <geom name="chassis" size="0.25 0.2 0.13" pos="0 0 -0.14" type="box" rgba="0.3 0.3 0.35 1" mass="20"/>
+      <frame pos="0.15 0.18 0.006">
+        <body name="left_base_link">
+          <inertial pos="0 0 0.05" mass="2" diaginertia="0.0029167 0.0029167 0.0025"/>
+          <geom class="left_visual" size="0.05 0.05" pos="0 0 0.05" type="cylinder"/>
+          <body name="left_link1" pos="0 0 0.1">
+            <inertial pos="0.15 0 0" mass="1" diaginertia="0.00045 0.007725 0.007725"/>
+            <joint name="left_shoulder" class="left_arm_joint" range="-1.5708 1.5708"/>
+            <geom class="left_visual" size="0.03 0.15" pos="0.15 0 0" quat="0.707107 0 -0.707107 0" type="cylinder"/>
+            <geom class="left_collision" size="0.03 0.15" pos="0.15 0 0" quat="0.707107 0 -0.707107 0" type="cylinder"/>
+            <body name="left_link2" pos="0.3 0 0">
+              <inertial pos="0.125 0 0" mass="0.6" diaginertia="0.0001875 0.0032188 0.0032188"/>
+              <joint name="left_elbow" class="left_arm_joint" range="-2.3562 2.3562"/>
+              <geom class="left_visual" size="0.025 0.125" pos="0.125 0 0" quat="0.707107 0 -0.707107 0" type="cylinder"/>
+              <geom class="left_collision" size="0.025 0.125" pos="0.125 0 0" quat="0.707107 0 -0.707107 0" type="cylinder"/>
+              <site name="left_tool0" size="0.01" pos="0.25 0 0"/>
+            </body>
+          </body>
+        </body>
+      </frame>
+      <frame pos="0.15 -0.18 0.006">
+        <body name="right_base_link">
+          <inertial pos="0 0 0.05" mass="2" diaginertia="0.0029167 0.0029167 0.0025"/>
+          <geom class="right_visual" size="0.05 0.05" pos="0 0 0.05" type="cylinder"/>
+          <body name="right_link1" pos="0 0 0.1">
+            <inertial pos="0.15 0 0" mass="1" diaginertia="0.00045 0.007725 0.007725"/>
+            <joint name="right_shoulder" class="right_arm_joint" range="-1.5708 1.5708"/>
+            <geom class="right_visual" size="0.03 0.15" pos="0.15 0 0" quat="0.707107 0 -0.707107 0" type="cylinder"/>
+            <geom class="right_collision" size="0.03 0.15" pos="0.15 0 0" quat="0.707107 0 -0.707107 0" type="cylinder"/>
+            <body name="right_link2" pos="0.3 0 0">
+              <inertial pos="0.125 0 0" mass="0.6" diaginertia="0.0001875 0.0032188 0.0032188"/>
+              <joint name="right_elbow" class="right_arm_joint" range="-2.3562 2.3562"/>
+              <geom class="right_visual" size="0.025 0.125" pos="0.125 0 0" quat="0.707107 0 -0.707107 0" type="cylinder"/>
+              <geom class="right_collision" size="0.025 0.125" pos="0.125 0 0" quat="0.707107 0 -0.707107 0" type="cylinder"/>
+              <site name="right_tool0" size="0.01" pos="0.25 0 0"/>
+            </body>
+          </body>
+        </body>
+      </frame>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <general name="base_x_vel" joint="base_x" forcelimited="true" forcerange="-200 200" biastype="affine" gainprm="200" biasprm="0 0 -200"/>
+    <general name="base_y_vel" joint="base_y" forcelimited="true" forcerange="-200 200" biastype="affine" gainprm="200" biasprm="0 0 -200"/>
+    <general name="base_yaw_vel" joint="base_yaw" forcelimited="true" forcerange="-200 200" biastype="affine" gainprm="200" biasprm="0 0 -200"/>
+    <general name="left_shoulder_pos" joint="left_shoulder" forcelimited="true" forcerange="-40 40" biastype="affine" gainprm="50" biasprm="0 -50 -1"/>
+    <general name="left_elbow_pos" joint="left_elbow" forcelimited="true" forcerange="-20 20" biastype="affine" gainprm="50" biasprm="0 -50 -1"/>
+    <general name="right_shoulder_pos" joint="right_shoulder" forcelimited="true" forcerange="-40 40" biastype="affine" gainprm="50" biasprm="0 -50 -1"/>
+    <general name="right_elbow_pos" joint="right_elbow" forcelimited="true" forcerange="-20 20" biastype="affine" gainprm="50" biasprm="0 -50 -1"/>
+  </actuator>
+</mujoco>
