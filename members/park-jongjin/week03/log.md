@@ -20,7 +20,7 @@
 | 2 | (수) position 액추에이터 + kp · kv · armature 계단 응답 3종 | 오버슈트 시뮬/이론 2~4 %p 이내, kp 100 포화, 정상상태 오차 ≈ τg/kp | 100 % | [mjcf/scene_position.xml](mjcf/scene_position.xml), [scripts/wed_step_response.py](scripts/wed_step_response.py), [img/20261006_step_all.png](img/20261006_step_all.png), [results/wed_step_metrics.csv](results/wed_step_metrics.csv) |
 | 3 | **(개별)** MuJoCo 로딩 체크리스트 초안 (compiler 옵션 · 베이스 · 자기 충돌 · 액추에이터, 문서 근거) | A~F절, 항목별 MuJoCo 문서 링크 + 실험 E1~E6 | 100 % (초안) | [b1/docs/procedures/mujoco-urdf-loading-checklist.md](../../../b1/docs/procedures/mujoco-urdf-loading-checklist.md), [scripts/thu_loading_experiments.py](scripts/thu_loading_experiments.py), [results/thu_experiments.txt](results/thu_experiments.txt) |
 | 4 | (목) CAD → URDF → MJCF 파이프라인 그림 | SVG + PNG | 100 % | [img/pipeline_mujoco.png](img/pipeline_mujoco.png) |
-| 5 | **(팀 연계)** 함태훈 URDF ↔ MJCF 대응표 검토 → 체크리스트 G절 | 대응표 대기 | 0 % | |
+| 5 | **(팀 연계)** 함태훈 URDF ↔ MJCF 대응표 검토 → 체크리스트 G절 | 함태훈 notes/05 대응표 · notes/07 §5 제안 8개 반영(v0.2). 함태훈이 v0.1로 자기 URDF · MJCF 점검: 36항목 OK 30 · NG 1(E6 armature, BOM 전) · N-A 5 → E6에 BOM 조건 추가. **팀 규약 합의: 3단 파일 구조**(robot.xml → robot_actuated.xml → scene.xml, 4주차부터). balanceinertia 기본값은 의견 차이로 팀 결정 대기 | 100 % | [체크리스트 G · 0-2절](../../../b1/docs/procedures/mujoco-urdf-loading-checklist.md), [함태훈 notes/05](https://github.com/taehoonham0118-cell/-1-/blob/main/notes/05_urdf_mjcf_mapping.md), [notes/07](https://github.com/taehoonham0118-cell/-1-/blob/main/notes/07_mjcf_structure_urdf_loading.md) |
 
 ## 2. 핵심 수치 · 근거 (구술 대비)
 
@@ -81,7 +81,7 @@ results/ 의 txt · csv 는 노트북 실행본(3.14.0)으로 덮어씀.
 ## 5. 막힌 점 · 요청
 
 - armature · forcerange 실제 값에 BOM 구동기 사양(정격 · 피크 토크, 감속비, 로터 관성) 필요 → 보고서 3절로 요청 (2026-10-06)
-- 함태훈 URDF ↔ MJCF 대응표 대기 → 체크리스트 G절
+- (해결 10/6) 함태훈 대응표 수령 · 반영. 남은 결정: balanceinertia 기본값(B6)
 
 ## 6. 구술 질문 준비 (커리큘럼 지정)
 
