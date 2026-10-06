@@ -113,7 +113,7 @@
 |---|---|---|
 | H1 | cylinder · capsule `size` = **반지름, 반길이** (URDF `length`의 절반) — 또는 `fromto`로 양 끝점 지정 | [함태훈 대응표](https://github.com/taehoonham0118-cell/-1-/blob/main/notes/05_urdf_mjcf_mapping.md) §2 (0.15 = 0.3/2), 박종진 two_link_arm.xml은 fromto 사용 |
 | H2 | `compiler angle="radian"` 명시 (B3) | thu E4 |
-| H3 | URDF 변환본과 질량 · 관성 · 중력토크 자동 비교 | tue_urdf_to_mjcf.py 방식, 함태훈 `sim/scripts/checklist_check.py` |
+| H3 | URDF 변환본과 질량 · 관성 · 중력토크 자동 비교 | 공용: 함태훈 [`checklist_check.py`](https://github.com/taehoonham0118-cell/-1-/blob/c441a5e/sim/scripts/checklist_check.py) (H3 부분), 박종진 tue_urdf_to_mjcf.py |
 
 ## F. 로드 후 검증
 
@@ -155,14 +155,16 @@
 | 7. 월드 고정 베이스-첫 링크 충돌 | D1 · D2 (contype 0 대안 추가) |
 | 8. mj_saveLastXML 저장본으로 개수 대조 | F1 보강 |
 
-### G-3. 함태훈 파일 점검 결과 (체크리스트 v0.1 기준)
+### G-3. 함태훈 파일 점검 결과 (체크리스트 v0.1 기준, 함태훈 week03 태그 c441a5e)
 
-- 대상: `sim/urdf/two_link_arm.urdf`, `sim/mjcf/two_link_arm_v2.xml`
-- 결과: 36항목 — **OK 30 · NG 1 · N-A 5** ([함태훈 notes/07](https://github.com/taehoonham0118-cell/-1-/blob/main/notes/07_mjcf_structure_urdf_loading.md) §6 번호별 표)
-- NG 1건 = **E6 armature 0** (BOM 전) → E6에 "BOM 수령 전 0 허용 / 수령 후 J_rotor·N² 필수" 조건 추가로 해소
-- 점검 후 함태훈 수정: URDF에 `<mujoco><compiler fusestatic="false" discardvisual="false"/>` 추가, v2 joint에 `actuatorfrcrange ±25` 추가
-- 피드백: E1 액추에이터 위치 → 0-2절 3단 구조로 팀 규약화
-- 자동 점검 스크립트: 함태훈 `sim/scripts/checklist_check.py` (H3에 사용)
+- 대상: [`sim/urdf/two_link_arm.urdf`](https://github.com/taehoonham0118-cell/-1-/blob/c441a5e/sim/urdf/two_link_arm.urdf), [`sim/mjcf/two_link_arm_v2.xml`](https://github.com/taehoonham0118-cell/-1-/blob/c441a5e/sim/mjcf/two_link_arm_v2.xml) + `scene.xml`
+- 결과: 36항목 — **OK 30 · NG 1 · N-A 5** → [notes/07 §6 번호별 표](https://github.com/taehoonham0118-cell/-1-/blob/c441a5e/notes/07_mjcf_structure_urdf_loading.md#6-박종진-체크리스트-v01-로-내-urdf--mjcf-점검-결과-107-팀-연계)
+- 점검 스크립트: [`sim/scripts/checklist_check.py`](https://github.com/taehoonham0118-cell/-1-/blob/c441a5e/sim/scripts/checklist_check.py) — 박종진이 c441a5e 파일로 재실행(MuJoCo 3.15.0, 2026-10-06): 합계 동일 OK 30 · NG 1 · N-A 5, H3 중력토크 변환본 = v2 = 손계산 [5.886, 1.4715] N·m
+- NG 1건 = **E6 armature 0** (BOM 전) → E6 조건("BOM 수령 전 0 허용 / 수령 후 J_rotor·N² 필수")으로 해소
+- 점검하면서 함태훈이 고친 것: ① URDF에 `<mujoco><compiler fusestatic="false" discardvisual="false"/>` 추가 → 변환본 body 3 → 4, geom 2 → 5 (B1 · B2 · A7) ② v2 joint에 `actuatorfrcrange ±25` 추가해 변환본과 일치 (E4)
+- 피드백 반영: E1 → 0-2절 3단 구조 팀 규약(합의 내용은 함태훈 notes/07 §6에도 기재), E6 BOM 조건, D1 → D2에 "베이스 collision 없음" 대안 병기, H3 → 공용 스크립트
+- 4주차 참고: `checklist_check.py`는 2링크 파일 경로가 고정이고 `from_xml_path`를 써서, Windows 한글 경로에서는 [mjio.py](../../../members/park-jongjin/week03/scripts/mjio.py) 방식(문자열 + assets)이 필요. 우리 로봇 v0용으로 경로 인자화 예정
+- C1 비고: 평면 3-DOF(C3) 채택은 팀장 결정 대기 (함태훈 §6 C1)
 
 ## 실습 PC 배정 후 (Isaac Sim)
 
