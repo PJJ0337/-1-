@@ -1,0 +1,90 @@
+{
+ "sweep_deg": {
+  "left_shoulder_pitch_joint": {
+   "+": null,
+   "-": null
+  },
+  "left_shoulder_roll_joint": {
+   "+": null,
+   "-": [
+    19,
+    "torso_link",
+    "left_elbow_link"
+   ]
+  },
+  "left_shoulder_yaw_joint": {
+   "+": null,
+   "-": null
+  },
+  "left_elbow_joint": {
+   "+": [
+    108,
+    "left_shoulder_roll_link",
+    "left_elbow_link"
+   ],
+   "-": [
+    108,
+    "left_shoulder_roll_link",
+    "left_elbow_link"
+   ]
+  }
+ },
+ "gravity_worst_pitch": {
+  "payload_0kg": {
+   "q_pitch_deg": -90.0,
+   "tau": {
+    "shoulder_pitch": -23.8187642679,
+    "shoulder_roll": 1.2355425482723811e-18,
+    "shoulder_yaw": 0.0008345857499989506,
+    "elbow": -4.666916852983679e-20
+   },
+   "tool0_xyz": [
+    0.495,
+    0.2777,
+    1.191
+   ],
+   "margin_vs_100Nm_pct": 319.8
+  },
+  "payload_3kg": {
+   "q_pitch_deg": -90.0,
+   "tau": {
+    "shoulder_pitch": -38.38661426789999,
+    "shoulder_roll": 1.23554254827317e-18,
+    "shoulder_yaw": 0.0008345857499989506,
+    "elbow": -4.666916852983679e-20
+   },
+   "tool0_xyz": [
+    0.495,
+    0.2777,
+    1.191
+   ],
+   "margin_vs_100Nm_pct": 160.5
+  }
+ },
+ "left_arm_mass_kg": 14.685,
+ "total_mass_kg": 75.804,
+ "hold_zero": {
+  "cmd_deg": 0.0,
+  "left_pitch_deg": -0.024,
+  "sag_rad": -0.0004,
+  "act_force_Nm": 0.12,
+  "ncon": 0,
+  "base_xy": [
+   -0.0,
+   -0.0,
+   0.0
+  ]
+ },
+ "hold_arm_forward": {
+  "cmd_deg": -90.0,
+  "left_pitch_deg": -85.467,
+  "sag_rad": 0.0791,
+  "act_force_Nm": -23.73,
+  "ncon": 0,
+  "base_xy": [
+   0.0,
+   -0.0,
+   -0.0
+  ]
+ }
+}
