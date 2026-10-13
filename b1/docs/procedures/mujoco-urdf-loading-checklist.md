@@ -2,7 +2,7 @@
 
 | 항목 | 내용 |
 |---|---|
-| 상태 | **v0.2** (week03, 박종진, 2026-10-06) — 함태훈 notes/05 대응표 · [함태훈 notes/07](https://github.com/taehoonham0118-cell/-1-/blob/main/notes/07_mjcf_structure_urdf_loading.md) §5 제안 8개 반영, 함태훈 파일 점검 완료(G절), **팀 규약: 3단 파일 구조(0-2절)** |
+| 상태 | **v0.3** (week04, 박종진, 2026-10-13) — **B6 balanceinertia 기본 off 확정**(김이겸 10/8 회신), A3 기록 규칙 추가. 이전: **v0.2** (week03, 2026-10-06) — 함태훈 notes/05 대응표 · [함태훈 notes/07](https://github.com/taehoonham0118-cell/-1-/blob/main/notes/07_mjcf_structure_urdf_loading.md) §5 제안 8개 반영, 함태훈 파일 점검 완료(G절), **팀 규약: 3단 파일 구조(0-2절)** |
 | 대상 | MuJoCo 3.15.0 (`pip install mujoco`), 우리 로봇 = 6-DOF 팔 2개 + 홀로노믹 베이스 |
 | 배경 | 커리큘럼 10/6 변경: 실습 PC 전까지 Isaac Sim 임포트 대신 MuJoCo 로딩으로 같은 개념을 익힘. Isaac Sim용은 [urdf-import-checklist.md](urdf-import-checklist.md) (실습 PC 배정 후) |
 | 문서 근거 | [MuJoCo Modeling — URDF extensions](https://mujoco.readthedocs.io/en/stable/modeling.html#curdf) · [XML Reference — compiler](https://mujoco.readthedocs.io/en/stable/XMLreference.html#compiler) · [Computation — Collision selection](https://mujoco.readthedocs.io/en/stable/computation/index.html#coselection) · [XML Reference — actuator/position](https://mujoco.readthedocs.io/en/stable/XMLreference.html#actuator-position) |
@@ -42,7 +42,7 @@
 |---|---|---|---|
 | A1 | 움직이는 모든 link에 `<inertial>` | mass · origin · inertia 6성분 | `inertiafromgeom="auto"`: inertial 없으면 geom에서 추정(밀도 1000) → 0.2×0.1×0.1 상자가 2.0 kg (week02 실험). [compiler-inertiafromgeom](https://mujoco.readthedocs.io/en/stable/XMLreference.html#compiler-inertiafromgeom) |
 | A2 | 가상 링크(센서 프레임 등)도 질량이 0이면 **fixed joint로만** 연결 | 움직이는 가상 링크엔 mass ≥ 1e-3 | 움직이는 body 질량 0 → `mass and inertia of moving bodies must be larger than mjMINVAL` 컴파일 오류 (week02 실험) |
-| A3 | 관성 삼각부등식 A+B ≥ C | CAD 추출값 검사 | 위반 시 컴파일 오류. 급하면 `balanceinertia="true"`(평균값으로 바꿈 — 값이 바뀌므로 기록 필수). 실험: (0.02, 0.0075, 0.0002) → 오류 → balanceinertia 후 0.00923 × 3 (함태훈 · 박종진 재확인 일치). [compiler-balanceinertia](https://mujoco.readthedocs.io/en/stable/XMLreference.html#compiler-balanceinertia) |
+| A3 | 관성 삼각부등식 A+B ≥ C | CAD 추출값 검사 | 위반 시 컴파일 오류. **먼저 CAD · 관성 추출 좌표계(COM 기준인지, 링크 축 방향인지, mm²·g 단위인지)를 의심**하고 다시 뽑는다. 원인을 못 찾아 임시로 `balanceinertia="true"`를 켤 때는 **링크명 · 원래 값 · 바뀐 값 · 사유**를 그 주 log와 B절 아래 「A3 · B6 기록」에 남긴다 (B6, 팀 결정 10/8). 실험: (0.02, 0.0075, 0.0002) → 오류 → balanceinertia 후 0.00923 × 3 (함태훈 · 박종진 재확인 일치). [compiler-balanceinertia](https://mujoco.readthedocs.io/en/stable/XMLreference.html#compiler-balanceinertia) |
 | A4 | 단위 m · kg · rad, mm STL은 `scale="0.001 0.001 0.001"` | | 1000배 로봇 |
 | A5 | 모든 revolute에 `<limit lower upper effort velocity>` | effort = 구동기 토크 | **effort → `actuatorfrcrange`(관절 단위 힘 제한)로 변환, velocity는 버려짐** (tue 실험: `two_link_from_urdf.xml`). 속도 제한은 MJCF 액추에이터/제어기 쪽에서 별도 처리 |
 | A6 | 폐루프 없음 (트리) | | URDF · MJCF body 트리는 루프 표현 불가 → equality 제약으로 별도 |
@@ -61,8 +61,14 @@
 | B3 | **angle** | **항상 radian** | MJCF 쪽 파일엔 `angle="radian"` **명시** | MJCF 기본은 **degree** — 빼먹으면 range 1.5708이 ±1.5708°(0.0274 rad)로 해석 (thu E4). [compiler-angle](https://mujoco.readthedocs.io/en/stable/XMLreference.html#compiler-angle) |
 | B4 | strippath | true(URDF) | 그대로 + **meshdir** 지정 | `package://` 경로 정보 제거 → 파일명만 남으므로 `meshdir`로 메시 폴더 지정 필수. [compiler-meshdir](https://mujoco.readthedocs.io/en/stable/XMLreference.html#compiler-meshdir) |
 | B5 | inertiafromgeom | auto | auto (A1 지키면 영향 없음) | 공개 URDF 관성이 이상할 때만 true. [compiler-inertiafromgeom](https://mujoco.readthedocs.io/en/stable/XMLreference.html#compiler-inertiafromgeom) |
-| B6 | balanceinertia | false | false (A3 위반 시만) | 함태훈 제안은 기본 true([함태훈 notes/07](https://github.com/taehoonham0118-cell/-1-/blob/main/notes/07_mjcf_structure_urdf_loading.md) §5-1). 박종진 의견: true면 **틀린 CAD 관성이 조용히 평균값으로 바뀌므로**, 컴파일 오류로 먼저 드러나게 false 유지 → 위반 시 원인(CAD 값) 확인 후 켜고 log에 기록. **팀 결정 필요** |
+| B6 | balanceinertia | false | **false (확정)** | **팀 결정 2026-10-08 (김이겸)**: 기본 off. 켜면 CAD 관성값이 평균값으로 조용히 바뀌어 입력 오류를 못 잡는다. 삼각부등식 오류 시 CAD · 관성 추출 좌표계를 먼저 의심(A3), 임시로 켤 때는 바뀐 값과 사유를 A3 · B6에 기록. (논의 경과: 함태훈 제안 기본 true — [notes/07](https://github.com/taehoonham0118-cell/-1-/blob/main/notes/07_mjcf_structure_urdf_loading.md) §5-1, 박종진 의견 false → false 채택) |
 | B7 | autolimits | true | true | range 있으면 limited 자동 |
+
+**A3 · B6 기록** (balanceinertia를 임시로 켠 경우만)
+
+| 링크 | 원래 Ixx · Iyy · Izz | 바뀐 값 | 사유 | 날짜 · 기록자 |
+|---|---|---|---|---|
+| (없음) | | | | |
 
 예시 (우리 로봇 URDF 맨 위):
 ```xml
@@ -146,7 +152,7 @@
 
 | 제안 | 반영 |
 |---|---|
-| 1. `<mujoco><compiler meshdir discardvisual="false" balanceinertia="true">` | B절 예시 블록에 이미 있음. balanceinertia 기본값은 의견 차이 → B6 (팀 결정 필요) |
+| 1. `<mujoco><compiler meshdir discardvisual="false" balanceinertia="true">` | B절 예시 블록에 이미 있음. balanceinertia 기본값은 의견 차이 → B6 → **10/8 팀장 결정: 기본 off** (v0.3) |
 | 2. 루트 고정/자유 결정 + fusestatic 함께 | C3-0(freejoint + motor 대안) · C3-4 신설, B1 보강 |
 | 3. 모든 링크 inertial + 삼각부등식 | A1 · A3 (기존) |
 | 4. 실린더 반길이, 메시 scale 0.001 | E-1 H1 · A4 (기존) |
@@ -170,3 +176,11 @@
 
 - 액추에이터 대응: MuJoCo position `kp` → Drive stiffness, `kv` → Drive damping, `armature` → joint armature ([함태훈 대응표](https://github.com/taehoonham0118-cell/-1-/blob/main/notes/05_urdf_mjcf_mapping.md) §5-4) — 단위(rad vs deg)와 Drive Type(Force/Acceleration) 확인은 [urdf-import-checklist.md](urdf-import-checklist.md) B4
 - 같은 URDF를 Isaac Sim 5.1 URDF Importer로 임포트 → [urdf-import-checklist.md](urdf-import-checklist.md) C절, 중력토크 · 말단 위치를 F3과 비교
+
+## 변경 이력
+
+| 버전 | 날짜 | 내용 |
+|---|---|---|
+| v0.1 | 2026-10-06 | 함태훈 대응표(notes/05) 반영 |
+| v0.2 | 2026-10-06 | 함태훈 제안 8개 · 점검 결과(OK 30 · NG 1 · N-A 5), 3단 파일 구조 팀 규약 |
+| v0.3 | 2026-10-13 | B6 balanceinertia 기본 off 확정(김이겸 10/8 회신), A3 원인 점검 순서 · 기록 규칙, A3 · B6 기록표 신설 |

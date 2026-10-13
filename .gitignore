@@ -19,3 +19,13 @@ logs/
 outputs/
 # 평가표(개인 성적) 업로드 금지
 *평가표*
+# 4주차~ 우리 로봇 원본 CAD · BOM 공개 저장소 업로드 금지 (커리큘럼 4주차)
+*.step
+*.stp
+*.STEP
+*.STP
+*.SLDPRT
+*.sldprt
+*.zip
+bom*
+BOM*
