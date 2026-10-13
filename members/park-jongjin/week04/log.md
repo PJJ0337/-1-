@@ -15,6 +15,7 @@
 | 1 | STEP 링크 분할표 — ICD 이름 {side}_{부위}_{운동} ↔ STEP 부품 ↔ BOM (액추에이터 내부는 한 강체) | STEP 10/13 수령(카톡). OCCT로 트리 · 접촉 판정 → 팔당 링크 4 + torso, RI85는 고정측/출력측 분리. 관절 축 4개 추출. **팔 4-DOF(RI85 ×4)** 확인 | 100 % (BOM 열 대기) | b1/models/link-split-v0.md, week04/results/link_split_parts.csv, img/20261013_link_split.png |
 | 2 | (개별) 골격 URDF(link · joint · limit, 베이스 planar) + 구동기 effort · velocity · armature 표(가정값 표 포함), 체크리스트 점검 | 구동기 ICD 요청서 v0 작성 (10/13) | % | b1/docs/icd/actuator-spec-request.md |
 | 3 | 함태훈 메시 · inertial 합쳐 v0 URDF(3단 규약) MuJoCo 로드 · 캡처, 구술 대비 | | 0 % | |
+| + | (커리큘럼 준비물) FreeCAD 1.0 · trimesh 설치, STEP 열기 | FreeCAD 1.0.2 설치(공식 해시 일치) → `양팔로봇 최종버전.stp` 열기 성공 (10/13) | 100 % (pip은 확인 대기) | img/20261013_freecad_step_open.png |
 | + | (10/8 회신) 체크리스트 v0.3 — balanceinertia 기본 off | 완료 (10/13) | 100 % | b1/docs/procedures/mujoco-urdf-loading-checklist.md |
 
 ## 2. 핵심 수치 · 근거 (구술 대비)
@@ -43,6 +44,7 @@ python step_link_split_plot.py "<stp>" ../img/20261013_link_split.png
 
 - (10/13) 노션 커리큘럼 사본 페이지의 「배포 파일」에 STEP 첨부가 없음 → 원본 페이지에서 수령 필요
 - (10/13) STEP을 팀장에게 카톡으로 요청 → 수령. **팔 RI85 4개 = 4-DOF**(기획서 6-DOF), 몸통 없음, 전방(±z) 판단 불가 → 링크 분할표 6절로 팀장 확인 요청
+- (10/13) FreeCAD 1.0.2 STEP 가져오기: 한글 부품명이 `\X2\C591D314…` 그대로 보임(STEP 유니코드 이스케이프 미변환, CodePage 옵션 무관). 형상·트리는 정상 → 부품명은 OCCT 스크립트 결과(step_tree_arm.txt)로 대조. 가져오기 시 'Ignore instance names' 해제해야 인스턴스 번호 보존
 - (10/13) OCP 8.0: `TDF_LabelSequence` 대신 `OCP.collections.Sequence_TDF_Label`, `Bnd_Box.Get()` 대신 CornerMin/Max — 버전 차이
 - (10/13) `.gitignore`에 `*.step` · `*.stp` · `*.SLDPRT` · `*.zip` · `bom*` 추가 (원본 커밋 금지 규칙)
 
