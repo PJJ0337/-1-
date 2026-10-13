@@ -1,0 +1,11 @@
+('A', 'elbow_link') V=793.5cm3 Al=2.142kg com=[ 159.5 -380.1   -7. ] n=5
+('A', 'shoulder_pitch_link') V=1397.0cm3 Al=3.772kg com=[134.4 -10.5   0.3] n=6
+('A', 'shoulder_roll_link') V=1325.3cm3 Al=3.578kg com=[ 159.6 -112.8   -0.9] n=6
+('A', 'shoulder_yaw_link') V=1004.5cm3 Al=2.712kg com=[ 159.5 -280.8   -6.1] n=5
+('A', 'torso_link') V=579.9cm3 Al=1.566kg com=[11.4 -0.4  0.1] n=1
+('B', 'elbow_link') V=793.5cm3 Al=2.142kg com=[-388.6 -379.6   -7. ] n=5
+('B', 'shoulder_pitch_link') V=1419.6cm3 Al=3.833kg com=[-371.1  -10.8   -0.5] n=6
+('B', 'shoulder_roll_link') V=1325.3cm3 Al=3.578kg com=[-391.9 -112.7   -0.9] n=6
+('B', 'shoulder_yaw_link') V=1004.5cm3 Al=2.712kg com=[-388.6 -280.4   -6. ] n=5
+('B', 'torso_link') V=579.9cm3 Al=1.566kg com=[-2.477e+02  4.000e-01  1.000e-01] n=1
+10222.99579284039
