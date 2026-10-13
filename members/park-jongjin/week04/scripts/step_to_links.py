@@ -41,7 +41,7 @@ def collect(lab,loc,side,link,ri_out=None,top=None):
             s=sub.Value(k)
             r2=TDF_Label(); st.GetReferredShape_s(s,r2)
             lk=link
-            if ri_out is not None and name(r2).startswith("output"): lk=ri_out
+            if ri_out is not None and name(r2).startswith(("output","ring2","cover plate1")): lk=ri_out
             collect(s,l2,side,lk,None if ri_out is None or lk==ri_out else ri_out,top)
     else:
         leaves.append((side,link,pn,st.GetShape_s(ref).Moved(l2),top))

@@ -37,7 +37,7 @@ for i in range(1,comps.Length()+1):
         sub=TDF_LabelSequence(); st.GetComponents_s(ref,sub)
         for k in range(1,sub.Length()+1):
             sl=sub.Value(k); r2=TDF_Label(); st.GetReferredShape_s(sl,r2)
-            out=name(r2).startswith("output")
+            out=name(r2).startswith(("output","ring2","cover plate1"))
             if not (out or name(r2).startswith(("housing","RI85-PH","encoder cover"))): continue
             mesh(st.GetShape_s(r2).Moved(loc.Multiplied(st.GetLocation_s(sl))),link_of[(inst,out)])
     else:

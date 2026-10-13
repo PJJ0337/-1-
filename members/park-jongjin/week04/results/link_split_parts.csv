@@ -8,27 +8,27 @@ B,shoulder_pitch_link,어깨 브래킷2(반대):1,어깨 브래킷2(반대),구�
 A,shoulder_pitch_link,어깨 브래킷2:1,어깨 브래킷2,구조,178.98,147.7,-13.3,-51.7
 A,elbow_link,전완요크1:1,전완요크1,구조,284.36,159.5,-394.0,38.8
 A,elbow_link,전완요크2:1,전완요크2,구조,280.7,159.5,-393.6,-51.9
-A,torso_link,RI85 제작건:1,RI85 제작건 (출력부 제외: housing·기어·베어링·엔코더),구동기 J1 고정측,579.88,11.4,-0.4,0.1
-A,shoulder_pitch_link,RI85 제작건:1,output-v1,구동기 J1 출력측,111.45,51.6,-0.0,0.0
-A,shoulder_pitch_link,RI85 제작건:2,RI85 제작건 (출력부 제외: housing·기어·베어링·엔코더),구동기 J2 고정측,557.31,159.4,-20.1,3.0
-A,shoulder_roll_link,RI85 제작건:2,output-v1,구동기 J2 출력측,111.45,159.5,-20.0,41.2
+A,torso_link,RI85 제작건:1,RI85 제작건 (출력부 제외: housing·기어·베어링·엔코더),구동기 J1 고정측,562.56,10.7,-0.4,0.1
+A,shoulder_pitch_link,RI85 제작건:1,output-v1 + ring2 + cover plate1,구동기 J1 출력측(출력과 같이 도는 부품),128.77,49.5,-0.0,0.0
+A,shoulder_pitch_link,RI85 제작건:2,RI85 제작건 (출력부 제외: housing·기어·베어링·엔코더),구동기 J2 고정측,539.99,159.4,-20.1,2.3
+A,shoulder_roll_link,RI85 제작건:2,output-v1 + ring2 + cover plate1,구동기 J2 출력측(출력과 같이 도는 부품),128.77,159.5,-20.0,39.0
 A,shoulder_pitch_link,JIS B 1521 6810 50x65x7:1,JIS B 1521 - 6810 50x65x7x6.4,보조 베어링(반대편 지지),6.42,159.5,-20.0,-63.0
-A,shoulder_roll_link,RI85 제작건:3,RI85 제작건 (출력부 제외: housing·기어·베어링·엔코더),구동기 J3 고정측,579.88,159.8,-162.1,-1.1
-A,shoulder_yaw_link,RI85 제작건:3,output-v1,구동기 J3 출력측,111.45,159.5,-202.3,-2.2
-A,shoulder_yaw_link,RI85 제작건:4,RI85 제작건 (출력부 제외: housing·기어·베어링·엔코더),구동기 J4 고정측,557.31,159.5,-295.4,0.1
-A,elbow_link,RI85 제작건:4,output-v1,구동기 J4 출력측,111.45,159.6,-296.1,38.3
+A,shoulder_roll_link,RI85 제작건:3,RI85 제작건 (출력부 제외: housing·기어·베어링·엔코더),구동기 J3 고정측,562.56,159.8,-161.4,-1.0
+A,shoulder_yaw_link,RI85 제작건:3,output-v1 + ring2 + cover plate1,구동기 J3 출력측(출력과 같이 도는 부품),128.77,159.5,-200.2,-2.1
+A,shoulder_yaw_link,RI85 제작건:4,RI85 제작건 (출력부 제외: housing·기어·베어링·엔코더),구동기 J4 고정측,539.99,159.5,-295.3,-0.6
+A,elbow_link,RI85 제작건:4,output-v1 + ring2 + cover plate1,구동기 J4 출력측(출력과 같이 도는 부품),128.77,159.6,-296.1,36.1
 A,shoulder_yaw_link,JIS B 1521 6810 50x65x7:2,JIS B 1521 - 6810 50x65x7x6.4,보조 베어링(반대편 지지),6.42,159.6,-293.7,-64.9
-B,shoulder_pitch_link,RI85 제작건:5,RI85 제작건 (출력부 제외: housing·기어·베어링·엔코더),구동기 J2 고정측,579.88,-395.8,-20.4,1.0
-B,shoulder_roll_link,RI85 제작건:5,output-v1,구동기 J2 출력측,111.45,-395.7,-20.0,41.2
-B,torso_link,RI85 제작건:6,RI85 제작건 (출력부 제외: housing·기어·베어링·엔코더),구동기 J1 고정측,579.88,-247.7,0.4,0.1
-B,shoulder_pitch_link,RI85 제작건:6,output-v1,구동기 J1 출력측,111.45,-287.9,0.0,0.0
+B,shoulder_pitch_link,RI85 제작건:5,RI85 제작건 (출력부 제외: housing·기어·베어링·엔코더),구동기 J2 고정측,562.56,-395.8,-20.4,0.2
+B,shoulder_roll_link,RI85 제작건:5,output-v1 + ring2 + cover plate1,구동기 J2 출력측(출력과 같이 도는 부품),128.77,-395.7,-20.0,39.0
+B,torso_link,RI85 제작건:6,RI85 제작건 (출력부 제외: housing·기어·베어링·엔코더),구동기 J1 고정측,562.56,-247.0,0.4,0.1
+B,shoulder_pitch_link,RI85 제작건:6,output-v1 + ring2 + cover plate1,구동기 J1 출력측(출력과 같이 도는 부품),128.77,-285.8,0.0,0.0
 B,shoulder_pitch_link,JIS B 1521 6810 50x65x7:3,JIS B 1521 - 6810 50x65x7x6.4,보조 베어링(반대편 지지),6.42,-395.7,-20.0,-63.0
-B,shoulder_roll_link,RI85 제작건:7,RI85 제작건 (출력부 제외: housing·기어·베어링·엔코더),구동기 J3 고정측,579.88,-388.3,-161.6,-1.0
-B,shoulder_yaw_link,RI85 제작건:7,output-v1,구동기 J3 출력측,111.45,-388.6,-201.8,-2.2
+B,shoulder_roll_link,RI85 제작건:7,RI85 제작건 (출력부 제외: housing·기어·베어링·엔코더),구동기 J3 고정측,562.56,-388.3,-160.9,-1.0
+B,shoulder_yaw_link,RI85 제작건:7,output-v1 + ring2 + cover plate1,구동기 J3 출력측(출력과 같이 도는 부품),128.77,-388.6,-199.7,-2.1
 B,shoulder_yaw_link,상완 칼라1:2,상완 칼라1,구조,197.42,-388.6,-274.2,10.7
 B,shoulder_yaw_link,상완 칼라2:2,상완 칼라2,구조,131.89,-388.5,-294.0,-57.4
-B,shoulder_yaw_link,RI85 제작건:8,RI85 제작건 (출력부 제외: housing·기어·베어링·엔코더),구동기 J4 고정측,557.31,-388.6,-294.9,0.1
-B,elbow_link,RI85 제작건:8,output-v1,구동기 J4 출력측,111.45,-388.5,-295.6,38.3
+B,shoulder_yaw_link,RI85 제작건:8,RI85 제작건 (출력부 제외: housing·기어·베어링·엔코더),구동기 J4 고정측,539.99,-388.6,-294.8,-0.6
+B,elbow_link,RI85 제작건:8,output-v1 + ring2 + cover plate1,구동기 J4 출력측(출력과 같이 도는 부품),128.77,-388.5,-295.6,36.1
 B,elbow_link,전완요크1:2,전완요크1,구조,284.36,-388.6,-393.5,38.8
 B,elbow_link,전완요크2:2,전완요크2,구조,280.7,-388.6,-393.1,-51.9
 B,shoulder_yaw_link,JIS B 1521 6810 50x65x7:4,JIS B 1521 - 6810 50x65x7x6.4,보조 베어링(반대편 지지),6.42,-388.5,-293.2,-64.9

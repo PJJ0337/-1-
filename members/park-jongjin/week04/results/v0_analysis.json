@@ -33,10 +33,10 @@
   "payload_0kg": {
    "q_pitch_deg": -90.0,
    "tau": {
-    "shoulder_pitch": -23.8187642679,
-    "shoulder_roll": 1.2355425482723811e-18,
-    "shoulder_yaw": 0.0008345857499989506,
-    "elbow": -4.666916852983679e-20
+    "shoulder_pitch": -23.818849830719998,
+    "shoulder_roll": 1.2822117168030067e-18,
+    "shoulder_yaw": -0.0010447649999996145,
+    "elbow": -1.9721522630525295e-31
    },
    "tool0_xyz": [
     0.495,
@@ -48,10 +48,10 @@
   "payload_3kg": {
    "q_pitch_deg": -90.0,
    "tau": {
-    "shoulder_pitch": -38.38661426789999,
-    "shoulder_roll": 1.23554254827317e-18,
-    "shoulder_yaw": 0.0008345857499989506,
-    "elbow": -4.666916852983679e-20
+    "shoulder_pitch": -38.386699830720005,
+    "shoulder_roll": 1.2822117168022179e-18,
+    "shoulder_yaw": -0.0010447649999960618,
+    "elbow": 0.0
    },
    "tool0_xyz": [
     0.495,
@@ -61,7 +61,7 @@
    "margin_vs_100Nm_pct": 160.5
   }
  },
- "left_arm_mass_kg": 14.685,
+ "left_arm_mass_kg": 14.811,
  "total_mass_kg": 75.804,
  "hold_zero": {
   "cmd_deg": 0.0,

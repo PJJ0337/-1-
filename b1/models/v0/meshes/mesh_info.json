@@ -1,18 +1,18 @@
 {
  "torso_link": {
-  "visual_faces_raw": 98504,
-  "visual_faces": 25184,
+  "visual_faces_raw": 96512,
+  "visual_faces": 25136,
   "collision_faces": 500
  },
  "left_shoulder_pitch_link": {
   "visual_faces_raw": 62613,
   "visual_faces": 20000,
-  "collision_faces": 356
+  "collision_faces": 358
  },
  "right_shoulder_pitch_link": {
   "visual_faces_raw": 62613,
   "visual_faces": 20000,
-  "collision_faces": 356,
+  "collision_faces": 358,
   "mirrored_from": "left_shoulder_pitch_link"
  },
  "left_shoulder_roll_link": {
@@ -29,23 +29,23 @@
  "left_shoulder_yaw_link": {
   "visual_faces_raw": 58302,
   "visual_faces": 20000,
-  "collision_faces": 442
+  "collision_faces": 446
  },
  "right_shoulder_yaw_link": {
   "visual_faces_raw": 58302,
   "visual_faces": 20000,
-  "collision_faces": 442,
+  "collision_faces": 446,
   "mirrored_from": "left_shoulder_yaw_link"
  },
  "left_elbow_link": {
-  "visual_faces_raw": 14314,
-  "visual_faces": 14314,
-  "collision_faces": 282
+  "visual_faces_raw": 15310,
+  "visual_faces": 15310,
+  "collision_faces": 362
  },
  "right_elbow_link": {
-  "visual_faces_raw": 14314,
-  "visual_faces": 14314,
-  "collision_faces": 282,
+  "visual_faces_raw": 15310,
+  "visual_faces": 15310,
+  "collision_faces": 362,
   "mirrored_from": "left_elbow_link"
  }
 }

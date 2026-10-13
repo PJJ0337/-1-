@@ -10,7 +10,7 @@ A=json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"assump
 ARM=["shoulder_pitch","shoulder_roll","shoulder_yaw","elbow"]
 # ---- 관절 (left, 로봇 좌표 m) — link-split-v0 §3, CAD→robot: x_r=z_c, y_r=x_c+118.15, z_r=y_c
 J_XYZ={"shoulder_pitch":(0,0.16975,0),"shoulder_roll":(0,0.1079,-0.0200),"shoulder_yaw":(0,0,-0.1823),"elbow":(0,0,-0.0938)}
-J_AX ={"shoulder_pitch":(0,1,0),"shoulder_roll":(1,0,0),"shoulder_yaw":(0,0,-1),"elbow":(1,0,0)}
+J_AX ={"shoulder_pitch":(0,1,0),"shoulder_roll":(1,0,0),"shoulder_yaw":(0,0,1),"elbow":(1,0,0)}
 TOOL=(-0.009,0,-0.1989)
 def mirror_vec(v): return (v[0],-v[1],v[2])
 def mirror_axis(a): return (-a[0],a[1],-a[2])        # 거울면(y=0)에 대한 축벡터(유사벡터) 변환 = ICD 3.4 roll·yaw 부호 반전

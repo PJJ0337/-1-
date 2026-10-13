@@ -20,7 +20,7 @@ for i in range(1,comps.Length()+1):
         for j in range(1,sub.Length()+1):
             s=sub.Value(j); r2=TDF_Label(); st.GetReferredShape_s(s,r2)
             sh=st.GetShape_s(r2).Moved(loc.Multiplied(st.GetLocation_s(s)))
-            if name(r2).startswith("output"): items[nm+"/OUT"]=sh
+            if name(r2).startswith(("output","ring2","cover plate1")): items[nm+"/OUT"]=sh
             elif name(r2).startswith(("housing","RI85-PH","encoder cover")): bb.Add(H,sh)
         items[nm+"/HOUS"]=H
     else: items[nm]=shp

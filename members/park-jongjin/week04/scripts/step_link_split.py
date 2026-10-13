@@ -31,11 +31,11 @@ for i in range(1,comps.Length()+1):
         Vo=0;co=np.zeros(3)
         for k in range(1,sub.Length()+1):
             sl=sub.Value(k); r2=TDF_Label(); st.GetReferredShape_s(sl,r2)
-            if name(r2).startswith("output"):
-                Vo,co=props(st.GetShape_s(r2).Moved(loc.Multiplied(st.GetLocation_s(sl))))
+            if name(r2).startswith(("output","ring2","cover plate1")):
+                v_,c_=props(st.GetShape_s(r2).Moved(loc.Multiplied(st.GetLocation_s(sl)))); co=(co*Vo+c_*v_)/(Vo+v_); Vo+=v_
         Vh=V-Vo; ch=(com*V-co*Vo)/Vh
         rows.append([s,chain[j-1],inst,part+" (출력부 제외: housing·기어·베어링·엔코더)","구동기 J%d 고정측"%j,Vh,*ch])
-        rows.append([s,chain[j],inst,"output-v1","구동기 J%d 출력측"%j,Vo,*co])
+        rows.append([s,chain[j],inst,"output-v1 + ring2 + cover plate1","구동기 J%d 출력측(출력과 같이 도는 부품)"%j,Vo,*co])
         continue
     if base in M: link=M[base]; role="구조"
     elif base.startswith("모터드라이버"): link=drv[num]; role="전장(예상)"

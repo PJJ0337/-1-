@@ -14,7 +14,7 @@
 |---|---|---|---|---|
 | 1 | STEP 링크 분할표 — ICD 이름 {side}_{부위}_{운동} ↔ STEP 부품 ↔ BOM (액추에이터 내부는 한 강체) | STEP 10/13 수령(카톡). OCCT로 트리 · 접촉 판정 → 팔당 링크 4 + torso, RI85는 고정측/출력측 분리. 관절 축 4개 추출. **팔 4-DOF(RI85 ×4)** 확인 | 100 % (BOM 열 대기) | b1/models/link-split-v0.md, week04/results/link_split_parts.csv, img/20261013_link_split.png |
 | 2 | (개별) 골격 URDF(link · joint · limit, 베이스 planar) + 구동기 effort · velocity · armature 표(가정값 표 포함), 체크리스트 점검 | 구동기 ICD 요청서 v0 (10/13 오전). 골격 URDF: odom →planar→ base → torso → 팔 4관절 × 2 → tool0, link · joint · limit + CAD 관성(형상 없음). 구동기 표 + **가정값 표 S1~S13**(값 · 출처 · 교체 항목), 범위는 충돌 스윕으로 근거. 체크리스트 v0.3 자동 점검 **25항목 OK** | 100 % (값은 가정) | b1/models/v0/urdf/b1_humanoid_skeleton.urdf, b1/models/assumptions-v0.md, results/checklist_v0.md, b1/docs/icd/actuator-spec-request.md |
-| 3 | 함태훈 메시 · inertial 합쳐 v0 URDF(3단 규약) MuJoCo 로드 · 캡처, 구술 대비 | 함태훈 STL · 관성 표 미수령(10/13 기준) → **B1 임시본을 직접 생성**: STEP에서 링크별 visual(2만 면 단순화) · collision(convex hull) STL, 재질 가정 관성. v0 URDF → robot.xml(mj_saveLastXML) → robot_actuated.xml → scene.xml 로드 · 4자세 캡처, 접촉 0. 링크 1개 inertial 비교(OCCT vs trimesh). 구술 노트 작성 | 80 % (함태훈 값으로 교체 · 대조 남음) | b1/models/v0/, img/20261013_v0_mujoco.png, results/inertial_compare_left_elbow.md, notes/mujoco-urdf/03-cad-to-urdf.md |
+| 3 | 함태훈 메시 · inertial 합쳐 v0 URDF(3단 규약) MuJoCo 로드 · 캡처, 구술 대비 | 함태훈 STL · 관성 표 미수령(10/13 기준) → **B1 임시본을 직접 생성**: STEP에서 링크별 visual(2만 면 단순화) · collision(convex hull) STL, 재질 가정 관성. v0 URDF → robot.xml(mj_saveLastXML) → robot_actuated.xml → scene.xml 로드 · 4자세 캡처, 접촉 0. 링크 1개 inertial 비교(OCCT vs trimesh). 구술 노트 작성 | 90 % (함태훈 검증 반영, 관성 한 벌 통합은 week05) | b1/models/v0/, img/20261013_v0_mujoco.png, results/inertial_compare_left_elbow.md, notes/mujoco-urdf/03-cad-to-urdf.md |
 | + | (커리큘럼 준비물) FreeCAD 1.0 · trimesh 설치, STEP 열기 | FreeCAD 1.0.2 설치(공식 해시 일치) → `양팔로봇 최종버전.stp` 열기 성공 (10/13) · 노트북 pip 확인: trimesh 5.1.0 · numpy 2.5.3 · cadquery-ocp 8.0.1.1.0(클라우드와 동일 버전) | 100 % | img/20261013_freecad_step_open.png, img/20261013_pip_install.png |
 | + | (10/8 회신) 체크리스트 v0.3 — balanceinertia 기본 off | 완료 (10/13) | 100 % | b1/docs/procedures/mujoco-urdf-loading-checklist.md |
 
@@ -27,11 +27,11 @@
 | 관절 축 (left, CAD mm) | J1 (51.6,0,0)+x · J2 (159.5,−20,41.2)+z · J3 (159.5,−202.3,−2.2)−y · J4 (159.6,−296.1,38.3)+z | results/joint_axes.txt |
 | 상완 · 전완 길이, 리치 | 276.1 · 198.9 mm, J1축→플랜지 495 mm | link-split-v0.md §3 |
 | 조립 이상 | J3·J4 축 1.4° 기울어짐, right 상완 이하 x 7 mm 비대칭, encoder cover 3개 누락 | link-split-v0.md §4 |
-| v0 모델 | nq = nv = 11 (planar 3 + 팔 8), nu 11, nbody 14, 총 75.80 kg (팔 14.69 kg × 2, RI85 1개 ≈ 2.67 kg 추정) | checklist_v0.md F1 · F2 |
+| v0 모델 | nq = nv = 11 (planar 3 + 팔 8), nu 11, nbody 14, 총 75.80 kg (팔 14.81 kg × 2, RI85 1개 ≈ 2.67 kg 추정) | checklist_v0.md F1 · F2 |
 | 필요 토크 (팔 앞 수평) | 23.8 N·m (0 kg) / **38.4 N·m (3 kg)** — 손계산 = MuJoCo. 100 N·m 가정 대비 +161 % → RI85 피크 ≥ 46 N·m면 PDR 20 % 충족 | assumptions-v0.md §4, results/v0_analysis.json |
 | position 처짐 | 0.0791 rad (이론 τg/kp = 0.0794, kp 300) | checklist_v0.md E7 |
 | 충돌 스윕 | roll 내전 19°(몸통 box 가정), elbow ±108° (hull 기준, 보수적) → 범위 −0.28 ~ 1.5 / ±1.83 rad | assumptions-v0.md §3 |
-| inertial 비교 (left_elbow_link) | OCCT 2.1425 kg vs trimesh 2.1401 kg (0.11 %), 관성 ≤ 0.21 %, COM 0.07 mm | results/inertial_compare_left_elbow.md |
+| inertial 비교 (left_elbow_link) | OCCT 2.2677 kg vs trimesh 2.2630 kg (0.21 %), 관성 ≤ 0.78 %, COM 0.20 mm (v0.1, 함태훈 2.268 kg) | results/inertial_compare_left_elbow.md |
 
 ## 3. 재현 방법
 
@@ -63,6 +63,7 @@ python v0_mjio.py ../../../../b1/models/v0/mjcf/scene.xml     # Windows 한글 �
 - (10/13) MuJoCo URDF 로드: visual은 group 1 · contype 0, collision은 group 0으로 자동 분리됨 (D4 자동 충족). 오프스크린 렌더 기본 버퍼 640×480 → scene `offwidth/offheight` 지정
 - (10/13) trimesh 관성: 부품 2개가 watertight 아님 → `is_watertight` 분기로 0이 들어가 관성 22~34 % 차이 → 발산정리 적분(`mass_properties`)은 닫힘 여부와 무관하게 계산되므로 그대로 쓰니 0.2 % 이내로 일치
 - (10/13) 한글 경로 메시 로드: xml뿐 아니라 STL도 assets로 넘겨야 함(`v0_mjio.py`), 키는 파일명만 (meshdir 접두어와 동시 등록 시 'Repeated file name' 오류)
+- (10/13 함태훈 검증 반영 — 태그 후) ① 골격 관절: 어깨 pitch · roll 앵커 ≤ 0.05 mm · 축 0.01° 일치, yaw · elbow 1.37° · 7.4 mm는 이상화로 의도된 차이 ② **RI85 출력측 = output-v1 + ring2 + cover plate1**로 통일(OCCT 재확인) → elbow 2.1425 → 2.2677 kg(태훈 2.268) ③ left yaw 축 −z → +z (태훈과 일치), right는 거울 유지 — 규약 최종은 팀장 확인 (assumptions-v0 §6) ④ ICD 요청서 v0.1: 출력축 기준 반사관성(4-1) · 효율 · 백래시(11) · 밀도 보정 근거(7) 추가
 - (10/13) `.gitignore`에 `*.step` · `*.stp` · `*.SLDPRT` · `*.zip` · `bom*` 추가 (원본 커밋 금지 규칙)
 
 ## 5. 막힌 점 · 요청 (공유한 날짜)

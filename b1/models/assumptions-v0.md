@@ -30,7 +30,7 @@
 | S3 | armature | 0 | 체크리스트 E6 (BOM 전 0 허용) | J_rotor · N² (항목 1 · 4) |
 | S4 | damping / friction | 0.5 N·m·s/rad / 0 | 안정화용 작은 값 | 항목 6, 실측(다이나모) |
 | S5 | 관절 범위 | §3 | roll 하한 · elbow는 **충돌 스윕**, 나머지는 케이블 여유 가정 | A1 기구 스토퍼 · 케이블 경로 |
-| S6 | 링크 질량 · 관성 | STEP 체적 × 재질 가정 (기어 · 축 · 베어링 = 강 7.85, 나머지 Al 2.70 g/cm³) | [step_to_links.py](../../members/park-jongjin/week04/scripts/step_to_links.py) — left 팔 14.69 kg, RI85 1개 ≈ 2.67 kg | **함태훈 질량 · 관성 비교표(FreeCAD 재질 지정 · BOM)** · A4 실측 |
+| S6 | 링크 질량 · 관성 | STEP 체적 × 재질 가정 (기어 · 축 · 베어링 = 강 7.85, 나머지 Al 2.70 g/cm³) | [step_to_links.py](../../members/park-jongjin/week04/scripts/step_to_links.py) — left 팔 14.81 kg, RI85 1개 ≈ 2.67 kg, 출력측 = output-v1 + ring2 + cover plate1 (v0.1) | **함태훈 질량 · 관성 비교표(FreeCAD 재질 지정 · BOM)** · A4 실측. elbow는 함태훈 2.268 kg = B1 2.2677 kg 일치(10/13) |
 | S7 | 좌/우 · 전방 | CAD +z = 로봇 전방 → CAD x+ 팔 = left | CAD만으로 판단 불가 (link-split F3) | 팀장 확인 (10/13 질의) |
 | S8 | 영점 자세 | STEP 자세 = 모든 관절 0 (팔 아래로 곧게, 팔꿈치 축 = 전후축) | ICD 3.2 | 팀장 확인 |
 | S9 | 이상화 | J3 · J4 축 1.4° 기울기 · right 팔 x 7 mm 어긋남 무시, **right = left 거울** (ICD 3.4) | link-split §4 D1 · D2 | A1 CAD 수정본 |
@@ -65,3 +65,14 @@
 ## 5. 자기 점검 (체크리스트 v0.3) — [checklist_v0.md](../../members/park-jongjin/week04/results/checklist_v0.md)
 
 25항목 OK (A1~A8 · B1~B6 · C3 · D1 · D3 · D4 · E1 · E4~E7 · F1~F3 · F5). 주요 수치: nq = nv = 11 (planar 3 + 팔 8), nu 11, nbody 14, 총질량 75.80 kg, 영점 접촉 0, 수평 처짐 0.0791 rad = τg/kp 0.0794 (E7)
+
+## 6. 관절 축 방향(+/−) 규약 — **결정 대기** (함태훈 10/13 지적)
+
+| | shoulder_pitch | shoulder_roll | shoulder_yaw | elbow |
+|---|---|---|---|---|
+| left (v0.1) | +y | +x | **+z** (v0의 −z는 구동기 출력 방향을 그대로 따른 것 → 함태훈과 같게 +z로 정리) | +x |
+| right — 안 A 거울 (현재 v0.1, ICD v0 3.4) | +y | −x | −z | −x |
+| right — 안 B 같은 방향 (G1식) | +y | +x | +z | +x |
+
+- 안 A: 같은 명령 → 좌우 대칭 동작, 관절 범위 양팔 동일, ICD v0 3.4(SRR 제출)와 일치 / 안 B: 월드 축 기준이 같아 전신 제어 식 단순, 대신 범위가 좌우 반대(roll left −0.28~1.5 ↔ right −1.5~0.28)
+- B1 의견: **안 A** — B2 시작 전 함태훈 합의 → 팀장 확인. 실제 구동기 +방향과 URDF +방향의 부호표는 B2에 별도 전달
