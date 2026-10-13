@@ -1,0 +1,259 @@
+<?xml version="1.0"?>
+<!-- 자동 생성: build_v0_urdf.py (week04, 박종진). 값 출처는 assumptions-v0.md / link-split-v0.md -->
+<robot name="b1_humanoid_v0">
+  <mujoco>
+    <compiler meshdir="../meshes/" fusestatic="false" discardvisual="false" balanceinertia="false"/>
+  </mujoco>
+
+  <link name="odom"/>
+  <joint name="base_planar_joint" type="planar">
+    <parent link="odom"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0 0 0.238167" rpy="0 0 0"/>
+      <mass value="33.69"/>
+      <inertia ixx="1.01175" iyy="1.31774" izz="1.55693" ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+    <visual name="base_lower_visual">
+      <origin xyz="0 0 0.2190"/>
+      <geometry><box size="0.576 0.472 0.3380"/></geometry>
+    </visual>
+    <collision name="base_lower_collision">
+      <origin xyz="0 0 0.2190"/>
+      <geometry><box size="0.576 0.472 0.3380"/></geometry>
+    </collision>
+    <visual name="base_plate_visual">
+      <origin xyz="0 0 0.3940"/>
+      <geometry><box size="0.576 0.472 0.0120"/></geometry>
+    </visual>
+    <collision name="base_plate_collision">
+      <origin xyz="0 0 0.3940"/>
+      <geometry><box size="0.576 0.472 0.0120"/></geometry>
+    </collision>
+  </link>
+  <joint name="torso_fixed_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="torso_link"/>
+    <origin xyz="0 0 1.2" rpy="0 0 0"/>
+  </joint>
+
+  <link name="torso_link">
+    <inertial>
+      <origin xyz="1.86053e-05 3.72106e-06 -0.23546" rpy="0 0 0"/>
+      <mass value="12.741"/>
+      <inertia ixx="1.00863" iyy="0.916934" izz="0.117956" ixy="-1.48842e-09" ixz="-5.58159e-05" iyz="0.000109388"/>
+    </inertial>
+    <visual name="torso_actuators_visual">
+      <geometry><mesh filename="torso_link_visual.stl"/></geometry>
+    </visual>
+    <collision name="torso_actuators_collision">
+      <geometry><mesh filename="torso_link_collision.stl"/></geometry>
+    </collision>
+    <visual name="torso_box_visual">
+      <origin xyz="0 0 -0.3750"/>
+      <geometry><box size="0.12 0.15 0.8500"/></geometry>
+    </visual>
+    <collision name="torso_box_collision">
+      <origin xyz="0 0 -0.3750"/>
+      <geometry><box size="0.12 0.15 0.8500"/></geometry>
+    </collision>
+  </link>
+
+  <joint name="left_shoulder_pitch_joint" type="revolute">
+    <parent link="torso_link"/>
+    <child link="left_shoulder_pitch_link"/>
+    <origin xyz="0 0.16975 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-3.0" upper="3.0" effort="100.0" velocity="3.0"/>
+    <dynamics damping="0.5" friction="0.0"/>
+  </joint>
+  <link name="left_shoulder_pitch_link">
+    <inertial>
+      <origin xyz="0.0028 0.08736 -0.01225" rpy="0 0 0"/>
+      <mass value="4.6099"/>
+      <inertia ixx="0.0159084" iyy="0.0117902" izz="0.0141783" ixy="6.19853e-05" ixz="-0.000122534" iyz="0.000905332"/>
+    </inertial>
+    <visual name="left_shoulder_pitch_visual">
+      <geometry><mesh filename="left_shoulder_pitch_link_visual.stl"/></geometry>
+    </visual>
+    <collision name="left_shoulder_pitch_collision">
+      <geometry><mesh filename="left_shoulder_pitch_link_collision.stl"/></geometry>
+    </collision>
+  </link>
+  <joint name="left_shoulder_roll_joint" type="revolute">
+    <parent link="left_shoulder_pitch_link"/>
+    <child link="left_shoulder_roll_link"/>
+    <origin xyz="0 0.1079 -0.02" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-0.28" upper="1.5" effort="100.0" velocity="3.0"/>
+    <dynamics damping="0.5" friction="0.0"/>
+  </joint>
+  <link name="left_shoulder_roll_link">
+    <inertial>
+      <origin xyz="-0.00106 0.00011 -0.1049" rpy="0 0 0"/>
+      <mass value="4.3831"/>
+      <inertia ixx="0.0215152" iyy="0.0254554" izz="0.0125312" ixy="3.20349e-06" ixz="-0.000720991" iyz="-4.29123e-06"/>
+    </inertial>
+    <visual name="left_shoulder_roll_visual">
+      <geometry><mesh filename="left_shoulder_roll_link_visual.stl"/></geometry>
+    </visual>
+    <collision name="left_shoulder_roll_collision">
+      <geometry><mesh filename="left_shoulder_roll_link_collision.stl"/></geometry>
+    </collision>
+  </link>
+  <joint name="left_shoulder_yaw_joint" type="revolute">
+    <parent link="left_shoulder_roll_link"/>
+    <child link="left_shoulder_yaw_link"/>
+    <origin xyz="0 0 -0.1823" rpy="0 0 0"/>
+    <axis xyz="0 0 -1"/>
+    <limit lower="-2.5" upper="2.5" effort="100.0" velocity="3.0"/>
+    <dynamics damping="0.5" friction="0.0"/>
+  </joint>
+  <link name="left_shoulder_yaw_link">
+    <inertial>
+      <origin xyz="-0.00194 3e-05 -0.08202" rpy="0 0 0"/>
+      <mass value="3.55"/>
+      <inertia ixx="0.00910965" iyy="0.00953501" izz="0.0068437" ixy="-4.01114e-06" ixz="9.35157e-06" iyz="1.22437e-06"/>
+    </inertial>
+    <visual name="left_shoulder_yaw_visual">
+      <geometry><mesh filename="left_shoulder_yaw_link_visual.stl"/></geometry>
+    </visual>
+    <collision name="left_shoulder_yaw_collision">
+      <geometry><mesh filename="left_shoulder_yaw_link_collision.stl"/></geometry>
+    </collision>
+  </link>
+  <joint name="left_elbow_joint" type="revolute">
+    <parent link="left_shoulder_yaw_link"/>
+    <child link="left_elbow_link"/>
+    <origin xyz="0 0 -0.0938" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-1.83" upper="1.83" effort="100.0" velocity="3.0"/>
+    <dynamics damping="0.5" friction="0.0"/>
+  </joint>
+  <link name="left_elbow_link">
+    <inertial>
+      <origin xyz="-0.00701 -1e-05 -0.08395" rpy="0 0 0"/>
+      <mass value="2.1425"/>
+      <inertia ixx="0.0133939" iyy="0.0168102" izz="0.0079748" ixy="-6.56148e-07" ixz="-0.000588659" iyz="-7.96617e-06"/>
+    </inertial>
+    <visual name="left_elbow_visual">
+      <geometry><mesh filename="left_elbow_link_visual.stl"/></geometry>
+    </visual>
+    <collision name="left_elbow_collision">
+      <geometry><mesh filename="left_elbow_link_collision.stl"/></geometry>
+    </collision>
+  </link>
+  <joint name="left_tool0_joint" type="fixed">
+    <parent link="left_elbow_link"/>
+    <child link="left_tool0"/>
+    <origin xyz="-0.009 0 -0.1989" rpy="0 0 0"/>
+  </joint>
+  <link name="left_tool0">
+    <inertial>
+      <mass value="0.001"/>
+      <inertia ixx="1e-7" iyy="1e-7" izz="1e-7" ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+  </link>
+
+  <joint name="right_shoulder_pitch_joint" type="revolute">
+    <parent link="torso_link"/>
+    <child link="right_shoulder_pitch_link"/>
+    <origin xyz="0 -0.16975 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-3.0" upper="3.0" effort="100.0" velocity="3.0"/>
+    <dynamics damping="0.5" friction="0.0"/>
+  </joint>
+  <link name="right_shoulder_pitch_link">
+    <inertial>
+      <origin xyz="0.0028 -0.08736 -0.01225" rpy="0 0 0"/>
+      <mass value="4.6099"/>
+      <inertia ixx="0.0159084" iyy="0.0117902" izz="0.0141783" ixy="-6.19853e-05" ixz="-0.000122534" iyz="-0.000905332"/>
+    </inertial>
+    <visual name="right_shoulder_pitch_visual">
+      <geometry><mesh filename="right_shoulder_pitch_link_visual.stl"/></geometry>
+    </visual>
+    <collision name="right_shoulder_pitch_collision">
+      <geometry><mesh filename="right_shoulder_pitch_link_collision.stl"/></geometry>
+    </collision>
+  </link>
+  <joint name="right_shoulder_roll_joint" type="revolute">
+    <parent link="right_shoulder_pitch_link"/>
+    <child link="right_shoulder_roll_link"/>
+    <origin xyz="0 -0.1079 -0.02" rpy="0 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <limit lower="-0.28" upper="1.5" effort="100.0" velocity="3.0"/>
+    <dynamics damping="0.5" friction="0.0"/>
+  </joint>
+  <link name="right_shoulder_roll_link">
+    <inertial>
+      <origin xyz="-0.00106 -0.00011 -0.1049" rpy="0 0 0"/>
+      <mass value="4.3831"/>
+      <inertia ixx="0.0215152" iyy="0.0254554" izz="0.0125312" ixy="-3.20349e-06" ixz="-0.000720991" iyz="4.29123e-06"/>
+    </inertial>
+    <visual name="right_shoulder_roll_visual">
+      <geometry><mesh filename="right_shoulder_roll_link_visual.stl"/></geometry>
+    </visual>
+    <collision name="right_shoulder_roll_collision">
+      <geometry><mesh filename="right_shoulder_roll_link_collision.stl"/></geometry>
+    </collision>
+  </link>
+  <joint name="right_shoulder_yaw_joint" type="revolute">
+    <parent link="right_shoulder_roll_link"/>
+    <child link="right_shoulder_yaw_link"/>
+    <origin xyz="0 0 -0.1823" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-2.5" upper="2.5" effort="100.0" velocity="3.0"/>
+    <dynamics damping="0.5" friction="0.0"/>
+  </joint>
+  <link name="right_shoulder_yaw_link">
+    <inertial>
+      <origin xyz="-0.00194 -3e-05 -0.08202" rpy="0 0 0"/>
+      <mass value="3.55"/>
+      <inertia ixx="0.00910965" iyy="0.00953501" izz="0.0068437" ixy="4.01114e-06" ixz="9.35157e-06" iyz="-1.22437e-06"/>
+    </inertial>
+    <visual name="right_shoulder_yaw_visual">
+      <geometry><mesh filename="right_shoulder_yaw_link_visual.stl"/></geometry>
+    </visual>
+    <collision name="right_shoulder_yaw_collision">
+      <geometry><mesh filename="right_shoulder_yaw_link_collision.stl"/></geometry>
+    </collision>
+  </link>
+  <joint name="right_elbow_joint" type="revolute">
+    <parent link="right_shoulder_yaw_link"/>
+    <child link="right_elbow_link"/>
+    <origin xyz="0 0 -0.0938" rpy="0 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <limit lower="-1.83" upper="1.83" effort="100.0" velocity="3.0"/>
+    <dynamics damping="0.5" friction="0.0"/>
+  </joint>
+  <link name="right_elbow_link">
+    <inertial>
+      <origin xyz="-0.00701 1e-05 -0.08395" rpy="0 0 0"/>
+      <mass value="2.1425"/>
+      <inertia ixx="0.0133939" iyy="0.0168102" izz="0.0079748" ixy="6.56148e-07" ixz="-0.000588659" iyz="7.96617e-06"/>
+    </inertial>
+    <visual name="right_elbow_visual">
+      <geometry><mesh filename="right_elbow_link_visual.stl"/></geometry>
+    </visual>
+    <collision name="right_elbow_collision">
+      <geometry><mesh filename="right_elbow_link_collision.stl"/></geometry>
+    </collision>
+  </link>
+  <joint name="right_tool0_joint" type="fixed">
+    <parent link="right_elbow_link"/>
+    <child link="right_tool0"/>
+    <origin xyz="-0.009 0 -0.1989" rpy="0 0 0"/>
+  </joint>
+  <link name="right_tool0">
+    <inertial>
+      <mass value="0.001"/>
+      <inertia ixx="1e-7" iyy="1e-7" izz="1e-7" ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+  </link>
+
+</robot>

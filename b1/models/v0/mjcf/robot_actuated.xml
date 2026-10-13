@@ -1,0 +1,37 @@
+<!-- 3단 규약 2단계 (체크리스트 0-2절): robot.xml(URDF 변환본, 수정 금지) + 액추에이터 · 센서 · 충돌 제외
+     값 출처: ../../assumptions-v0.md (전부 가정값 — RI85 사양 수령 시 교체) -->
+<mujoco model="b1_humanoid_v0_actuated">
+  <include file="robot.xml"/>
+
+  <default>
+    <!-- E2 · E4 · E5: 팔 = position, forcerange = effort(피크 100 Nm 가정), ctrlrange = 관절 range 상속, 임계감쇠 -->
+    <default class="ri85">
+      <position kp="300" dampratio="1" forcerange="-100 100" inheritrange="1"/>
+    </default>
+    <!-- E3 · C3: 베이스 평면 3-DOF = velocity 액추에이터, 기획서 1.5 m/s · 90 °/s -->
+    <default class="base_vel">
+      <velocity kv="200" forcerange="-2000 2000"/>
+    </default>
+  </default>
+
+  <actuator>
+    <velocity class="base_vel" name="base_vx" joint="base_planar_joint_TX" ctrlrange="-1.5 1.5"/>
+    <velocity class="base_vel" name="base_vy" joint="base_planar_joint_TY" ctrlrange="-1.5 1.5"/>
+    <velocity class="base_vel" name="base_wz" joint="base_planar_joint_RZ" ctrlrange="-1.5708 1.5708" kv="50" forcerange="-500 500"/>
+    <position class="ri85" name="left_shoulder_pitch"  joint="left_shoulder_pitch_joint"/>
+    <position class="ri85" name="left_shoulder_roll"   joint="left_shoulder_roll_joint"/>
+    <position class="ri85" name="left_shoulder_yaw"    joint="left_shoulder_yaw_joint"/>
+    <position class="ri85" name="left_elbow"           joint="left_elbow_joint"/>
+    <position class="ri85" name="right_shoulder_pitch" joint="right_shoulder_pitch_joint"/>
+    <position class="ri85" name="right_shoulder_roll"  joint="right_shoulder_roll_joint"/>
+    <position class="ri85" name="right_shoulder_yaw"   joint="right_shoulder_yaw_joint"/>
+    <position class="ri85" name="right_elbow"          joint="right_elbow_joint"/>
+  </actuator>
+
+  <sensor>
+    <framepos name="left_tool0_pos"  objtype="body" objname="left_tool0"/>
+    <framepos name="right_tool0_pos" objtype="body" objname="right_tool0"/>
+    <actuatorfrc name="left_shoulder_pitch_frc"  actuator="left_shoulder_pitch"/>
+    <actuatorfrc name="right_shoulder_pitch_frc" actuator="right_shoulder_pitch"/>
+  </sensor>
+</mujoco>
