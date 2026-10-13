@@ -1,0 +1,57 @@
+{
+ "_note": "가정값 — 근거와 확정 시 교체 항목은 b1/models/assumptions-v0.md",
+ "actuator": {
+  "model": "RI85 (제작건)",
+  "effort_peak": 100.0,
+  "velocity": 3.0,
+  "damping": 0.5,
+  "friction": 0.0,
+  "armature": 0.0
+ },
+ "limits": {
+  "shoulder_pitch": [
+   -3.0,
+   3.0
+  ],
+  "shoulder_roll": [
+   -0.28,
+   1.5
+  ],
+  "shoulder_yaw": [
+   -2.5,
+   2.5
+  ],
+  "elbow": [
+   -1.83,
+   1.83
+  ]
+ },
+ "base": {
+  "plate_xy": [
+   0.576,
+   0.472
+  ],
+  "plate_t": 0.012,
+  "plate_top_z": 0.4,
+  "clearance_z": 0.05,
+  "mass_lower": 30.0,
+  "mass_plate": 3.69
+ },
+ "torso": {
+  "shoulder_z": 1.2,
+  "box_x": 0.12,
+  "box_y": 0.15,
+  "box_top_above_shoulder": 0.05,
+  "box_mass": 8.0
+ },
+ "mesh": {
+  "visual_max_faces": 20000
+ },
+ "control": {
+  "kp": 300.0,
+  "dampratio": 1.0,
+  "base_kv": 200.0,
+  "base_vxy": 1.5,
+  "base_wz": 1.5708
+ }
+}
