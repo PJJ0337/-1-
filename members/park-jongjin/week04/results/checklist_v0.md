@@ -16,7 +16,7 @@
 | B4 | meshdir 지정 | OK | strippath 기본 → 파일명만 |
 | B6 | balanceinertia=false (팀 결정 10/8) | OK |  |
 | B3 | robot.xml angle=radian | OK | mj_saveLastXML이 명시 |
-| F1 | body 수 · 이름 = URDF link | OK | nbody 14 = link 13 + world, njnt 11, ngeom 24 |
+| F1 | body 수 · 이름 = URDF link | OK | nbody 15 = link 14 + world, njnt 11, ngeom 24 |
 | C3 | 베이스 planar → slide·slide·hinge | OK | ['base_planar_joint_TX', 'base_planar_joint_TY', 'base_planar_joint_RZ'], nq 11 = 3 + 8 |
 | D1 | 영점 자세 접촉 0 | OK | ncon 0 |
 | D3 | 관절 범위 양 끝 접촉 0 (단독 구동) | OK | 16자세 접촉 합 0 — 범위는 충돌 스윕 기준(assumptions-v0 §2) |
@@ -26,6 +26,6 @@
 | E5 | implicitfast + dampratio | OK | dampratio=1 (임계감쇠) |
 | E6 | armature (BOM 전 0 허용) | OK | 0 — RI85 사양(J_rotor·N²) 수령 시 교체, ICD 요청서 |
 | F3 | 수평 자세 중력토크 손계산 = MuJoCo | OK | 손계산 Σ r×mg = 23.8188 N·m, MuJoCo 23.8188 N·m |
-| F2 | 총질량 ≤ 80 kg (기획서) | OK | 75.80 kg (베이스 33.7 · 몸통 box 8 kg 가정 포함) |
-| E7 | position 서보 처짐 ≈ τg/kp | OK | 시뮬 0.0791 rad vs 이론 0.0794 rad (kp 300) |
+| F2 | 총질량 ≤ 80 kg (기획서) | OK | 75.81 kg (베이스 33.7 · 몸통 box 8 kg 가정 포함) |
+| E7 | position 서보 처짐 ≈ τg/kp | OK | 시뮬 0.0792 rad vs 이론 0.0794 rad (kp 300) |
 | F5 | 뷰어/캡처: 영점 · 범위 · 중력 | OK | 캡처 4자세, 영점 유지 2 s 처짐 0.0004 rad |

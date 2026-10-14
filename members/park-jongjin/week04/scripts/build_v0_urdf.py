@@ -75,6 +75,13 @@ def build(with_geom):
         g=f'<origin xyz="0 0 {(tz0+tz1)/2:.4f}"/>\n      <geometry><box size="{t["box_x"]} {t["box_y"]} {th:.4f}"/></geometry>'
         w(f'    <visual name="torso_box_visual">\n      {g}\n    </visual>\n    <collision name="torso_box_collision">\n      {g}\n    </collision>\n')
     w('  </link>\n\n')
+    # cad_frame: STEP(CAD) 좌표계를 그대로 나타내는 고정 프레임 — CAD → 로봇 변환 하나를 여기 한 곳에 둠 (팀장 10/14)
+    import numpy as _np
+    from scipy.spatial.transform import Rotation as _Ro
+    _R=_np.array(A["cad_to_base"]["R"],float); _c=_np.array(A["cad_to_base"]["c_mm"],float)
+    _xyz=_R@(-_c)/1000.0; _rpy=_Ro.from_matrix(_R).as_euler("xyz")
+    w(f'  <joint name="cad_frame_joint" type="fixed">\n    <parent link="torso_link"/>\n    <child link="cad_frame"/>\n    <origin xyz="{f(_xyz)}" rpy="{f(_rpy)}"/>\n  </joint>\n')
+    w('  <link name="cad_frame">\n    <inertial>\n      <mass value="0.001"/>\n      <inertia ixx="1e-7" iyy="1e-7" izz="1e-7" ixy="0" ixz="0" iyz="0"/>\n    </inertial>\n  </link>\n\n')
     for side in ("left","right"):
         parent="torso_link"
         for a in ARM:
@@ -83,7 +90,10 @@ def build(with_geom):
             lo,hi=lim[a]
             if side=="right" and a in ("shoulder_roll","shoulder_yaw","elbow"): pass  # 거울 대칭 정의 → 같은 범위
             w(f'  <joint name="{side}_{a}_joint" type="revolute">\n    <parent link="{parent}"/>\n    <child link="{side}_{a}_link"/>\n')
-            w(f'    <origin xyz="{f(xyz)}" rpy="0 0 0"/>\n    <axis xyz="{f(ax)}"/>\n')
+            rpy=(0,0,0)
+            if a=="shoulder_yaw":   # 영점 = 팔 내린 자세 + 팔꿈치 전방 굽힘 → CAD 자세와의 차이(yaw 90°)를 origin rpy로 흡수 (팀장 10/14)
+                y0=A["zero_pose"]["left_shoulder_yaw_origin_yaw_rad"]; rpy=(0,0,y0 if side=="left" else -y0)
+            w(f'    <origin xyz="{f(xyz)}" rpy="{f(rpy)}"/>\n    <axis xyz="{f(ax)}"/>\n')
             w(f'    <limit lower="{lo}" upper="{hi}" effort="{act["effort_peak"]}" velocity="{act["velocity"]}"/>\n')
             w(f'    <dynamics damping="{act["damping"]}" friction="{act["friction"]}"/>\n  </joint>\n')
             w(f'  <link name="{side}_{a}_link">\n'+inertial_xml(li["mass"],com,I))

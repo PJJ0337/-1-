@@ -34,6 +34,18 @@
     </inertial>
   </link>
 
+  <joint name="cad_frame_joint" type="fixed">
+    <parent link="torso_link"/>
+    <child link="cad_frame"/>
+    <origin xyz="0 0.11815 0" rpy="1.5708 0 1.5708"/>
+  </joint>
+  <link name="cad_frame">
+    <inertial>
+      <mass value="0.001"/>
+      <inertia ixx="1e-7" iyy="1e-7" izz="1e-7" ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+  </link>
+
   <joint name="left_shoulder_pitch_joint" type="revolute">
     <parent link="torso_link"/>
     <child link="left_shoulder_pitch_link"/>
@@ -67,7 +79,7 @@
   <joint name="left_shoulder_yaw_joint" type="revolute">
     <parent link="left_shoulder_roll_link"/>
     <child link="left_shoulder_yaw_link"/>
-    <origin xyz="0 0 -0.1823" rpy="0 0 0"/>
+    <origin xyz="0 0 -0.1823" rpy="0 0 -1.5708"/>
     <axis xyz="0 0 1"/>
     <limit lower="-2.5" upper="2.5" effort="100.0" velocity="3.0"/>
     <dynamics damping="0.5" friction="0.0"/>
@@ -139,7 +151,7 @@
   <joint name="right_shoulder_yaw_joint" type="revolute">
     <parent link="right_shoulder_roll_link"/>
     <child link="right_shoulder_yaw_link"/>
-    <origin xyz="0 0 -0.1823" rpy="0 0 0"/>
+    <origin xyz="0 0 -0.1823" rpy="0 0 1.5708"/>
     <axis xyz="0 0 -1"/>
     <limit lower="-2.5" upper="2.5" effort="100.0" velocity="3.0"/>
     <dynamics damping="0.5" friction="0.0"/>

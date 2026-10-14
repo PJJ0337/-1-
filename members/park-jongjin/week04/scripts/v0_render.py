@@ -9,10 +9,10 @@ m=mujoco.MjModel.from_xml_path(scene); d=mujoco.MjData(m)
 r=mujoco.Renderer(m,720,960)
 def q(n): return m.jnt_qposadr[m.joint(n).id]
 poses={
- "a_zero":({}, "영점 (CAD 자세, 팔 아래)"),
+ "a_zero":({}, "영점 (팔 내림 · 팔꿈치 전방 굽힘 방향)"),
  "b_pitch_fwd":({"left_shoulder_pitch_joint":-1.5708,"right_shoulder_pitch_joint":-1.5708},"shoulder_pitch −90° (양팔 앞으로 수평)"),
  "c_roll_abduct":({"left_shoulder_roll_joint":1.2,"right_shoulder_roll_joint":1.2},"shoulder_roll +1.2 rad (외전, 좌우 대칭)"),
- "d_reach":({"left_shoulder_pitch_joint":-1.0,"left_shoulder_yaw_joint":1.5708,"left_elbow_joint":-1.2,"right_shoulder_pitch_joint":-0.5,"right_shoulder_roll_joint":0.6,"right_elbow_joint":1.0},"임의 자세 (yaw 90° 후 팔꿈치 앞으로 굽힘)"),
+ "d_reach":({"left_shoulder_pitch_joint":-0.6,"left_elbow_joint":1.4,"right_shoulder_pitch_joint":-0.3,"right_shoulder_roll_joint":0.5,"right_elbow_joint":0.9},"팔꿈치 전방 굽힘 (elbow +, 영점 재정의 후)"),
 }
 imgs=[]
 for key,(pose,title) in poses.items():

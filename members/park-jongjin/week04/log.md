@@ -65,11 +65,13 @@ python v0_mjio.py ../../../../b1/models/v0/mjcf/scene.xml     # Windows 한글 �
 - (10/13) trimesh 관성: 부품 2개가 watertight 아님 → `is_watertight` 분기로 0이 들어가 관성 22~34 % 차이 → 발산정리 적분(`mass_properties`)은 닫힘 여부와 무관하게 계산되므로 그대로 쓰니 0.2 % 이내로 일치
 - (10/13) 한글 경로 메시 로드: xml뿐 아니라 STL도 assets로 넘겨야 함(`v0_mjio.py`), 키는 파일명만 (meshdir 접두어와 동시 등록 시 'Repeated file name' 오류)
 - (10/13 함태훈 검증 반영 — 태그 후) ① 골격 관절: 어깨 pitch · roll 앵커 ≤ 0.05 mm · 축 0.01° 일치, yaw · elbow 1.37° · 7.4 mm는 이상화로 의도된 차이 ② **RI85 출력측 = output-v1 + ring2 + cover plate1**로 통일(OCCT 재확인) → elbow 2.1425 → 2.2677 kg(태훈 2.268) ③ left yaw 축 −z → +z (태훈과 일치), right는 거울 유지 — 규약 최종은 팀장 확인 (assumptions-v0 §6) ④ ICD 요청서 v0.1: 출력축 기준 반사관성(4-1) · 효율 · 백래시(11) · 밀도 보정 근거(7) 추가
+- (10/14 팀장 회신 반영) ① v0 = CAD대로 4-DOF ② base_link REP 103 + **CAD → base 고정 변환 하나**(URDF `cad_frame`, json `cad_to_base`), 좌/우 = 변환 후 +y 부호(step_to_links 리팩터, 결과 동일) ③ **영점 = 팔 내림 + 팔꿈치 전방 굽힘** → shoulder_yaw origin rpy ∓π/2, elbow + = 전방(tool0 x +0.143 m @ +0.8 rad), CAD 자세 재현 시 tool0 = CAD 플랜지 0.1 mm 이내 ④ URDF 공칭 유지 + **joint 원점 검증표**(b1/models/joint-origin-check-v0.md): 어깨 ≤ 0.01° · 0.1 mm, yaw · elbow 1.37°, right 7.4~7.5 mm — 함태훈 검증과 일치, 구동기 +방향 반대 관절 4개 = B2 부호표 초안 ⑤ A1 확인 요청 그림(img/20261014_a1_deviation_request.png) ⑥ 재점검: 영점 접촉 0, roll 내전 접촉 22°, 체크리스트 25 OK
 - (10/13) `.gitignore`에 `*.step` · `*.stp` · `*.SLDPRT` · `*.zip` · `bom*` 추가 (원본 커밋 금지 규칙)
 
 ## 5. 막힌 점 · 요청 (공유한 날짜)
 
-- (10/13 팀장) 4-DOF CAD 공유, +z 전방 여부, 팔꿈치 영점 정의, CAD 조립 이상 A1 전달 여부 — 링크 분할표 6절 · 카톡
+- (10/13 팀장) 4-DOF · +z 전방 · 영점 · 조립 이상 질의 → **10/14 회신 반영 완료**, 손목 계획은 팀장이 A1 확인 중
+- (10/14 → 팀장) A1 확인 요청 그림 전달 · 좌우 축 규약(거울) 확인 · RI85 요청서 v0.1 (함태훈 합의)
 - (10/13 팀장) C3 평면 베이스 채택 — 「확인 후 연락」 대기 (v0는 planar로 작성)
 - (함태훈) 링크별 STL · 질량/관성 비교표 → 수령 시 v0 관성 교체 · 대조 (B1 임시본은 cross-check용으로 공유)
 - RI85 사양(피크 토크 · 속도 · 감속비 · 로터 관성) — actuator-spec-request.md, 함태훈 검토 후 발송

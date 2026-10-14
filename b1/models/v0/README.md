@@ -16,8 +16,9 @@ v0/
 | 구성 | 값 |
 |---|---|
 | 링크 / 관절 | odom →(planar)→ base_link →(fixed)→ torso_link → {left,right}_{shoulder_pitch, shoulder_roll, shoulder_yaw, elbow}_link → {side}_tool0 |
+| 영점 | 팔 내림 + 팔꿈치 전방 굽힘(팀장 10/14) — `shoulder_yaw` origin rpy ∓π/2, elbow + = 전방 굽힘 |
 | 자유도 | nq = nv = 11 (베이스 평면 3 + 팔 4 × 2), nu = 11 |
-| 좌표 | ICD 3.1: x 전방 · y 좌측 · z 상방, base_link 원점 = 바닥면 중심. 어깨 J1축 높이 1.20 m (가정) |
+| 좌표 | base_link = REP 103(x 전방 · y 좌 · z 상), 원점 = 바닥면 중심. CAD 좌표는 `cad_frame`(torso_link 아래 고정 프레임) 하나로만 연결 — CAD 점 p는 cad_frame 기준 p/1000. 어깨 J1축 높이 1.20 m (가정) |
 | 총질량 | 75.80 kg (베이스 33.69 · 몸통 12.49 · 팔 14.81 × 2) — v0.1(출력측 부품 범위 통일) |
 
 ## 실행

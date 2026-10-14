@@ -31,13 +31,13 @@
 | S4 | damping / friction | 0.5 N·m·s/rad / 0 | 안정화용 작은 값 | 항목 6, 실측(다이나모) |
 | S5 | 관절 범위 | §3 | roll 하한 · elbow는 **충돌 스윕**, 나머지는 케이블 여유 가정 | A1 기구 스토퍼 · 케이블 경로 |
 | S6 | 링크 질량 · 관성 | STEP 체적 × 재질 가정 (기어 · 축 · 베어링 = 강 7.85, 나머지 Al 2.70 g/cm³) | [step_to_links.py](../../members/park-jongjin/week04/scripts/step_to_links.py) — left 팔 14.81 kg, RI85 1개 ≈ 2.67 kg, 출력측 = output-v1 + ring2 + cover plate1 (v0.1) | **함태훈 질량 · 관성 비교표(FreeCAD 재질 지정 · BOM)** · A4 실측. elbow는 함태훈 2.268 kg = B1 2.2677 kg 일치(10/13) |
-| S7 | 좌/우 · 전방 | CAD +z = 로봇 전방 → CAD x+ 팔 = left | CAD만으로 판단 불가 (link-split F3) | 팀장 확인 (10/13 질의) |
-| S8 | 영점 자세 | STEP 자세 = 모든 관절 0 (팔 아래로 곧게, 팔꿈치 축 = 전후축) | ICD 3.2 | 팀장 확인 |
-| S9 | 이상화 | J3 · J4 축 1.4° 기울기 · right 팔 x 7 mm 어긋남 무시, **right = left 거울** (ICD 3.4) | link-split §4 D1 · D2 | A1 CAD 수정본 |
+| S7 | 좌/우 · 전방 | base_link = **REP 103**(+x 전방 · +y 좌 · +z 상). CAD 축을 직접 쓰지 않고 **CAD → base 고정 변환 하나**(URDF `cad_frame`, json `cad_to_base`: x_r = z_c, y_r = x_c + 118.15, z_r = y_c), 좌/우 = 변환 후 **+y 부호** | 팀장 10/14: +z_CAD = 전방은 **가정 유지**(STEP이 눕혀져 있고 상판도 대칭이라 파일만으론 정면 불명) | 정면 확정 시 `cad_to_base.R`만 교체 → 재생성 |
+| S8 | 영점 자세 | **팔 내린 자세 + 팔꿈치 전방 굽힘** = 모든 관절 0. CAD 자세와의 차이(yaw 90°)는 `shoulder_yaw` origin rpy (0, 0, ∓π/2)로 흡수 → elbow 축 = base −y, elbow + = 전방 굽힘 | **팀장 확정 10/14** | – |
+| S9 | 공칭 · 편차 | URDF = **공칭값(축 직교 · 좌우 대칭, right = left 거울)**. CAD 편차(J3 · J4 1.37°, right 7.2~7.5 mm)는 [joint-origin-check-v0.md](joint-origin-check-v0.md)에 기록 | **팀장 확정 10/14** · A1에 의도 여부 확인 요청(그림) | A1 회신 |
 | S10 | 베이스 | 상판 576 × 472 × 12 mm(STEP) 위 하체 box, 상판 윗면 높이 **0.40 m**, 지상고 0.05 m, 하체 **30 kg** + 상판 3.69 kg | 하체 실측표 보류(함태훈 week02) · 기획서 총중량 ≤ 80 kg 에서 역산 | 하체 실측 (높이 · 질량 · COM) |
 | S11 | 몸통 | 어깨 J1축 높이 **1.20 m**, box 0.12 × 0.15 m (폭 = 양 J1 RI85 뒷면 간격 150 mm), **8 kg** + J1 RI85 고정측 2개(4.74 kg) | 기획서 전고 1,400~1,600 mm · STEP 어깨 간격 | A1 몸통 설계 |
 | S12 | 제어 게인 | kp 300 N·m/rad, dampratio 1 / 베이스 kv 200 · 50 | week03 계단응답 (kp↑ → 처짐↓, 포화 주의) | B2 튜닝 |
-| S13 | 손목 · 그리퍼 | 없음 (CAD 4-DOF) — tool0 = 그리퍼 플랜지면 | link-split F1 | 손목 2축 추가 시 링크 2개 · 관절 2개 추가 |
+| S13 | 손목 · 그리퍼 | 없음 — **v0는 CAD대로 4-DOF**(팀장 10/14), tool0 = 그리퍼 플랜지면 | link-split F1 | 팀장이 A1에 손목 계획 확인 중 → 추가 시 링크 · 관절 2개 |
 
 ## 3. 관절 범위 근거 — 충돌 스윕 (convex hull collision, 다른 관절 0, 1° 간격)
 
@@ -58,7 +58,7 @@
 | shoulder_pitch −90° (팔 앞으로 수평, 최악) | 0 kg | **23.8 N·m** (손계산 = MuJoCo, F3) | +320 % |
 | 〃 | **3 kg** (기획서 페이로드) | **38.4 N·m** | +161 % |
 | shoulder_roll 1.5 rad(86°) 외전 | 3 kg | 35.2 N·m | +184 % |
-| elbow 90° (전완 수평) | 3 kg | 7.6 N·m | – |
+| elbow +90° (전완 앞 수평, 영점 재정의 후) | 3 kg | 7.6 N·m | – |
 
 → **RI85 피크가 46 N·m 이상(38.4 × 1.2)이면 PDR 20 % 여유 충족.** 정적 중력만 본 값 — 가속 · 동적 토크는 B3 궤적 확정 후. 리치 495 mm(목표 700 mm급)로 늘어나면 토크는 거의 비례 증가
 
@@ -66,7 +66,10 @@
 
 25항목 OK (A1~A8 · B1~B6 · C3 · D1 · D3 · D4 · E1 · E4~E7 · F1~F3 · F5). 주요 수치: nq = nv = 11 (planar 3 + 팔 8), nu 11, nbody 14, 총질량 75.80 kg, 영점 접촉 0, 수평 처짐 0.0791 rad = τg/kp 0.0794 (E7)
 
-## 6. 관절 축 방향(+/−) 규약 — **결정 대기** (함태훈 10/13 지적)
+## 6. 관절 축 방향(+/−) 규약 — **B1 합의: 안 A 거울** (함태훈 10/14 동의), 팀장 확인 대기
+
+- 아래 축은 각 링크 프레임 기준. 영점 재정의(S8) 후 elbow 링크 프레임이 yaw ∓90° 돌아 있어 elbow 축은 base에서 −y (양팔 모두 + = 전방 굽힘)
+- 실제 구동기 출력 +방향과 다른 관절(B2 부호 반전) = [joint-origin-check-v0.md](joint-origin-check-v0.md) §2
 
 | | shoulder_pitch | shoulder_roll | shoulder_yaw | elbow |
 |---|---|---|---|---|

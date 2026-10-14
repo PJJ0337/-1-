@@ -53,5 +53,34 @@
   "base_kv": 200.0,
   "base_vxy": 1.5,
   "base_wz": 1.5708
+ },
+ "cad_to_base": {
+  "_note": "CAD 프레임 → 로봇 좌표(REP 103: +x 전방, +y 좌, +z 상) 고정 변환 하나. p_torso = R·(p_cad − c)/1000, torso_link 원점 = 어깨 J1축 중심(바닥에서 torso.shoulder_z). +z_CAD = 전방은 가정(팀장 10/14: 가정 유지, 축 직접 사용 금지) — 바뀌면 R만 교체. 좌/우 = 변환 후 y 부호",
+  "R": [
+   [
+    0,
+    0,
+    1
+   ],
+   [
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    1,
+    0
+   ]
+  ],
+  "c_mm": [
+   -118.15,
+   0,
+   0
+  ]
+ },
+ "zero_pose": {
+  "_note": "팀장 10/14: 영점 = 팔 내린 자세 + 팔꿈치 전방 굽힘. CAD 자세와의 차이는 shoulder_yaw joint origin rpy로 흡수 (left −90°, right +90° 거울)",
+  "left_shoulder_yaw_origin_yaw_rad": -1.5707963267948966
  }
 }
