@@ -30,7 +30,7 @@
 | S3 | armature | 0 | 체크리스트 E6 (BOM 전 0 허용) | J_rotor · N² (항목 1 · 4) |
 | S4 | damping / friction | 0.5 N·m·s/rad / 0 | 안정화용 작은 값 | 항목 6, 실측(다이나모) |
 | S5 | 관절 범위 | §3 | roll 하한 · elbow는 **충돌 스윕**, 나머지는 케이블 여유 가정 | A1 기구 스토퍼 · 케이블 경로 |
-| S6 | 링크 질량 · 관성 | STEP 체적 × 재질 가정 (기어 · 축 · 베어링 = 강 7.85, 나머지 Al 2.70 g/cm³) | [step_to_links.py](../../members/park-jongjin/week04/scripts/step_to_links.py) — left 팔 14.81 kg, RI85 1개 ≈ 2.67 kg, 출력측 = output-v1 + ring2 + cover plate1 (v0.1) | **함태훈 질량 · 관성 비교표(FreeCAD 재질 지정 · BOM)** · A4 실측. elbow는 함태훈 2.268 kg = B1 2.2677 kg 일치(10/13) |
+| S6 | 링크 질량 · 관성 | **v0 = 함태훈 메시 · inertial(f9c9eff, 10/14 통합)** — 팔 14.17 kg, 총 74.10 kg. 아래는 B1 임시값(대조용): | STEP 체적 × 재질 가정 (기어 · 축 · 베어링 = 강 7.85, 나머지 Al 2.70 g/cm³) | [step_to_links.py](../../members/park-jongjin/week04/scripts/step_to_links.py) — left 팔 14.81 kg, RI85 1개 ≈ 2.67 kg, 출력측 = output-v1 + ring2 + cover plate1 (v0.1) | **함태훈 질량 · 관성 비교표(FreeCAD 재질 지정 · BOM)** · A4 실측. elbow는 함태훈 2.268 kg = B1 2.2677 kg 일치(10/13) |
 | S7 | 좌/우 · 전방 | base_link = **REP 103**(+x 전방 · +y 좌 · +z 상). CAD 축을 직접 쓰지 않고 **CAD → base 고정 변환 하나**(URDF `cad_frame`, json `cad_to_base`: x_r = z_c, y_r = x_c + 118.15, z_r = y_c), 좌/우 = 변환 후 **+y 부호** | 팀장 10/14: +z_CAD = 전방은 **가정 유지**(STEP이 눕혀져 있고 상판도 대칭이라 파일만으론 정면 불명) | 정면 확정 시 `cad_to_base.R`만 교체 → 재생성 |
 | S8 | 영점 자세 | **팔 내린 자세 + 팔꿈치 전방 굽힘** = 모든 관절 0. CAD 자세와의 차이(yaw 90°)는 `shoulder_yaw` origin rpy (0, 0, ∓π/2)로 흡수 → elbow 축 = base −y, elbow + = 전방 굽힘 | **팀장 확정 10/14** | – |
 | S9 | 공칭 · 편차 | URDF = **공칭값(축 직교 · 좌우 대칭, right = left 거울)**. CAD 편차(J3 · J4 1.37°, right 7.2~7.5 mm)는 [joint-origin-check-v0.md](joint-origin-check-v0.md)에 기록 | **팀장 확정 10/14** · A1에 의도 여부 확인 요청(그림) | A1 회신 |

@@ -25,7 +25,7 @@ for key,(pose,title) in poses.items():
     plt.imsave(os.path.join(OUT,f"v0_{key}.png"),img)
 fig,ax=plt.subplots(1,4,figsize=(19,6.6))
 for a,(img,t,nc) in zip(ax,imgs): a.imshow(img); a.set_title(f"{t}\n접촉 {nc}개",fontsize=11); a.axis("off")
-fig.suptitle("b1_humanoid_v0 — URDF(메시 · CAD 관성) → MuJoCo 3.15.0 로드 (robot.xml → robot_actuated.xml → scene.xml)",fontsize=13)
+fig.suptitle("b1_humanoid_v0 — URDF(함태훈 메시 · inertial + 박종진 골격) → MuJoCo 3.15.0 로드 (robot.xml → robot_actuated.xml → scene.xml)",fontsize=13)
 plt.tight_layout(); plt.savefig(os.path.join(OUT,"20261013_v0_mujoco.png"),dpi=110)
 # collision(볼록 껍질) 보기
 mujoco.mj_resetData(m,d); mujoco.mj_forward(m,d)

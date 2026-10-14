@@ -25,7 +25,7 @@
 | E4 | forcerange = effort, ctrlrange = 관절 range | OK | forcerange ±100 Nm, inheritrange=1 |
 | E5 | implicitfast + dampratio | OK | dampratio=1 (임계감쇠) |
 | E6 | armature (BOM 전 0 허용) | OK | 0 — RI85 사양(J_rotor·N²) 수령 시 교체, ICD 요청서 |
-| F3 | 수평 자세 중력토크 손계산 = MuJoCo | OK | 손계산 Σ r×mg = 23.8188 N·m, MuJoCo 23.8188 N·m |
-| F2 | 총질량 ≤ 80 kg (기획서) | OK | 75.81 kg (베이스 33.7 · 몸통 box 8 kg 가정 포함) |
-| E7 | position 서보 처짐 ≈ τg/kp | OK | 시뮬 0.0792 rad vs 이론 0.0794 rad (kp 300) |
+| F3 | 수평 자세 중력토크 손계산 = MuJoCo | OK | 손계산 Σ r×mg = 22.7301 N·m, MuJoCo 22.7301 N·m |
+| F2 | 총질량 ≤ 80 kg (기획서) | OK | 74.10 kg (베이스 33.7 · 몸통 box 8 kg 가정 포함) |
+| E7 | position 서보 처짐 ≈ τg/kp | OK | 시뮬 0.0755 rad vs 이론 0.0758 rad (kp 300) |
 | F5 | 뷰어/캡처: 영점 · 범위 · 중력 | OK | 캡처 4자세, 영점 유지 2 s 처짐 0.0004 rad |
