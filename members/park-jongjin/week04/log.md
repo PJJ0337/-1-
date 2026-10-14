@@ -13,7 +13,7 @@
 | No. | 계획 (전주 합의) | 실제 수행 | 완료율 | 산출물 (파일 경로) |
 |---|---|---|---|---|
 | 1 | STEP 링크 분할표 — ICD 이름 {side}_{부위}_{운동} ↔ STEP 부품 ↔ BOM (액추에이터 내부는 한 강체) | STEP 10/13 수령(카톡). OCCT로 트리 · 접촉 판정 → 팔당 링크 4 + torso, RI85는 고정측/출력측 분리. 관절 축 4개 추출. **팔 4-DOF(RI85 ×4)** 확인 | 100 % (BOM 열 대기) | b1/models/link-split-v0.md, week04/results/link_split_parts.csv, img/20261013_link_split.png |
-| 2 | (개별) 골격 URDF(link · joint · limit, 베이스 planar) + 구동기 effort · velocity · armature 표(가정값 표 포함), 체크리스트 점검 | 구동기 ICD 요청서 v0 (10/13 오전). 골격 URDF: odom →planar→ base → torso → 팔 4관절 × 2 → tool0, link · joint · limit + CAD 관성(형상 없음). 구동기 표 + **가정값 표 S1~S13**(값 · 출처 · 교체 항목), 범위는 충돌 스윕으로 근거. 체크리스트 v0.3 자동 점검 **25항목 OK** | 100 % (값은 가정) | b1/models/v0/urdf/b1_humanoid_skeleton.urdf, b1/models/assumptions-v0.md, results/checklist_v0.md, b1/docs/icd/actuator-spec-request.md |
+| 2 | (개별) 골격 URDF(link · joint · limit, 베이스 planar) + 구동기 effort · velocity · armature 표(가정값 표 포함), 체크리스트 점검 | 구동기 ICD 요청서 v0 (10/13 오전). 골격 URDF: odom →planar→ base → torso → 팔 4관절 × 2 → tool0, link · joint · limit + CAD 관성(형상 없음). 구동기 표 + **가정값 표 S1~S13**(값 · 출처 · 교체 항목), 범위는 충돌 스윕으로 근거. 체크리스트 v0.3 자동 점검 **25항목 OK** | 100 % (값은 가정) | b1/models/v0/urdf/b1_humanoid_skeleton.urdf, b1/models/assumptions-v0.md, results/checklist_v0.md, b1/docs/icd/actuator-spec-request.md, **ICD 반영 목록 b1/models/icd-applied-v0.md** |
 | 3 | 함태훈 메시 · inertial 합쳐 v0 URDF(3단 규약) MuJoCo 로드 · 캡처, 구술 대비 | 함태훈 STL · 관성 표 미수령(10/13 기준) → **B1 임시본을 직접 생성**: STEP에서 링크별 visual(2만 면 단순화) · collision(convex hull) STL, 재질 가정 관성. v0 URDF → robot.xml(mj_saveLastXML) → robot_actuated.xml → scene.xml 로드 · 4자세 캡처, 접촉 0. 링크 1개 inertial 비교(OCCT vs trimesh). 구술 노트 작성 | **100 %** — 10/14 함태훈 f9c9eff 메시 · inertial을 골격 프레임으로 평행이동해 v0에 통합(merge_taehoon.py), 74.10 kg, 접촉 0, 체크리스트 25 OK, 캡처 img/20261014_v0_merged_*.png (5 % 정식 대조는 week05) | b1/models/v0/, img/20261013_v0_mujoco.png, results/inertial_compare_left_elbow.md, notes/mujoco-urdf/03-cad-to-urdf.md |
 | + | (커리큘럼 준비물) FreeCAD 1.0 · trimesh 설치, STEP 열기 | FreeCAD 1.0.2 설치(공식 해시 일치) → `양팔로봇 최종버전.stp` 열기 성공 (10/13) · 노트북 pip 확인: trimesh 5.1.0 · numpy 2.5.3 · cadquery-ocp 8.0.1.1.0(클라우드와 동일 버전) | 100 % | img/20261013_freecad_step_open.png, img/20261013_pip_install.png |
 | + | 노트북 재현 (Windows · 한글 경로, MuJoCo 3.14.0) | v0_mjio.py로 scene.xml 뷰어 실행 → 영점 정지, left_shoulder_pitch −1.5 · right_shoulder_roll +1.01 슬라이더 동작, base_vx 0.315 전진 확인 (10/13) | 100 % | img/repro/20261013_laptop_viewer_*.png · (영점 재정의 후 10/14) img/repro/20261014_laptop_v01_*.png — elbow +1.19 양팔 전방 접힘, pitch −1.5 + elbow +1.21 전완 위로 · (통합 v0, 10/14) img/repro/20261014_laptop_merged_*.png — **mass 74.10** 로드 · 영점 정지, L pitch −1.5 + L elbow +1.19 · R roll +1.02 외전 |
@@ -86,6 +86,6 @@ python v0_mjio.py ../../../../b1/models/v0/mjcf/scene.xml     # Windows 한글 �
 
 ## 7. 다음 주 계획 (검증 가능한 단위)
 
-1. 함태훈 링크별 질량 · 관성표와 B1 임시 관성(link_inertials_step.json) 링크별 대조표 → 차이 5 % 넘는 링크 원인 기록, v0.1 교체
-2. 팀장 회신(4-DOF · 전방 · 영점 · 베이스) 반영해 v0.1 URDF 재생성 + 체크리스트 재점검 (25항목)
-3. (완료 10/13 → 대체) 중력보상 없는 처짐을 B3 중력보상 토크(qfrc_bias)로 상쇄해 수평 유지 확인 · 캡처
+1. 함태훈 v1 메시 · inertial(골격 관절점 기준 원점) 통합 → 원점 차 ≤ 0.5 mm 확인, 링크별 질량 · 관성 5 % 대조표, 밀도 Al 통일(sun adapter · planet carrier)
+2. A1 편차 · 손목 계획, A2 RI85 사양, 팀장 축 부호 규약 회신 반영 → v1 URDF 재생성 + 체크리스트 25항목 재점검
+3. 중력보상 토크(qfrc_bias)로 팔 앞으로 뻗은 자세 유지 확인 · 캡처, 금요일 피드백(중력 낙하 · 관절 범위 · 충돌) 반영
