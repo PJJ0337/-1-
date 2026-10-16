@@ -1,0 +1,373 @@
+{
+ "model": {
+  "nq": 11,
+  "nv": 11,
+  "nu": 11,
+  "nbody": 18,
+  "nsensor": 30,
+  "mujoco": "3.15.0"
+ },
+ "mass": {
+  "total": 75.097,
+  "ref_total": 75.094,
+  "err_pct": 0.004,
+  "dummy_kg": 0.0031,
+  "links": [
+   {
+    "link": "base_link",
+    "model": 30.0,
+    "ref": 30.0,
+    "err_pct": 0.0
+   },
+   {
+    "link": "base_plate_link",
+    "model": 3.69,
+    "ref": 3.69,
+    "err_pct": 0.0
+   },
+   {
+    "link": "torso_link",
+    "model": 12.0634,
+    "ref": 12.0634,
+    "err_pct": 0.0
+   },
+   {
+    "link": "left_shoulder_pitch_link",
+    "model": 4.3963,
+    "ref": 4.3963,
+    "err_pct": 0.0
+   },
+   {
+    "link": "left_shoulder_roll_link",
+    "model": 4.1696,
+    "ref": 4.1696,
+    "err_pct": 0.0
+   },
+   {
+    "link": "left_shoulder_yaw_link",
+    "model": 3.3364,
+    "ref": 3.3364,
+    "err_pct": 0.0
+   },
+   {
+    "link": "left_elbow_link",
+    "model": 2.2677,
+    "ref": 2.2677,
+    "err_pct": 0.0
+   },
+   {
+    "link": "left_gripper_link",
+    "model": 0.5,
+    "ref": 0.5,
+    "err_pct": 0.0
+   },
+   {
+    "link": "right_shoulder_pitch_link",
+    "model": 4.3963,
+    "ref": 4.3963,
+    "err_pct": 0.0
+   },
+   {
+    "link": "right_shoulder_roll_link",
+    "model": 4.1696,
+    "ref": 4.1696,
+    "err_pct": 0.0
+   },
+   {
+    "link": "right_shoulder_yaw_link",
+    "model": 3.3364,
+    "ref": 3.3364,
+    "err_pct": 0.0
+   },
+   {
+    "link": "right_elbow_link",
+    "model": 2.2677,
+    "ref": 2.2677,
+    "err_pct": 0.0
+   },
+   {
+    "link": "right_gripper_link",
+    "model": 0.5,
+    "ref": 0.5,
+    "err_pct": 0.0
+   }
+  ],
+  "th_cad_right_arm": 14.231,
+  "pass_": true
+ },
+ "hold": {
+  "zero_nogc": {
+   "max_err_deg": 0.0454,
+   "final_err_deg": 0.0454,
+   "jitter_deg": 0.0,
+   "finite": true,
+   "ncon": 0,
+   "pass_": true
+  },
+  "forward_nogc": {
+   "max_err_deg": 5.1931,
+   "final_err_deg": 4.8324,
+   "jitter_deg": 0.0,
+   "finite": true,
+   "ncon": 0,
+   "pass_": false
+  },
+  "zero_gc": {
+   "max_err_deg": 0.0,
+   "final_err_deg": 0.0,
+   "jitter_deg": 0.0,
+   "finite": true,
+   "ncon": 0,
+   "pass_": true
+  },
+  "forward_gc": {
+   "max_err_deg": 0.0,
+   "final_err_deg": 0.0,
+   "jitter_deg": 0.0,
+   "finite": true,
+   "ncon": 0,
+   "pass_": true
+  },
+  "pass_": true
+ },
+ "gravity": {
+  "rated_criterion": 46.0,
+  "peak": 100.0,
+  "results": {
+   "0kg": {
+    "shoulder_pitch": {
+     "tau": 25.4,
+     "pose_deg": [
+      -90.0,
+      0.0,
+      -135.0,
+      0.0
+     ],
+     "margin_rated_pct": 81.1,
+     "margin_peak_pct": 293.6
+    },
+    "shoulder_roll": {
+     "tau": 22.25,
+     "pose_deg": [
+      0.0,
+      75.0,
+      -75.0,
+      -15.0
+     ],
+     "margin_rated_pct": 106.8,
+     "margin_peak_pct": 349.5
+    },
+    "shoulder_yaw": {
+     "tau": 3.04,
+     "pose_deg": [
+      90.0,
+      75.0,
+      90.0,
+      -90.0
+     ],
+     "margin_rated_pct": 1412.6,
+     "margin_peak_pct": 3188.2
+    },
+    "elbow": {
+     "tau": 2.99,
+     "pose_deg": [
+      -15.0,
+      75.0,
+      75.0,
+      15.0
+     ],
+     "margin_rated_pct": 1440.0,
+     "margin_peak_pct": 3247.8
+    }
+   },
+   "3kg": {
+    "shoulder_pitch": {
+     "tau": 42.91,
+     "pose_deg": [
+      -90.0,
+      0.0,
+      -135.0,
+      0.0
+     ],
+     "margin_rated_pct": 7.2,
+     "margin_peak_pct": 133.0
+    },
+    "shoulder_roll": {
+     "tau": 38.89,
+     "pose_deg": [
+      0.0,
+      75.0,
+      -75.0,
+      -15.0
+     ],
+     "margin_rated_pct": 18.3,
+     "margin_peak_pct": 157.1
+    },
+    "shoulder_yaw": {
+     "tau": 11.84,
+     "pose_deg": [
+      90.0,
+      75.0,
+      90.0,
+      -90.0
+     ],
+     "margin_rated_pct": 288.6,
+     "margin_peak_pct": 744.8
+    },
+    "elbow": {
+     "tau": 11.78,
+     "pose_deg": [
+      0.0,
+      0.0,
+      -120.0,
+      -90.0
+     ],
+     "margin_rated_pct": 290.4,
+     "margin_peak_pct": 748.6
+    }
+   }
+  },
+  "horizontal_0kg": 25.403,
+  "horizontal_3kg": 42.914,
+  "pass_": false
+ },
+ "sweep": {
+  "results": {
+   "left_shoulder_pitch_joint": {
+    "range_deg": [
+     -171.9,
+     171.9
+    ],
+    "samples": 688,
+    "hits": 0,
+    "first_hit": null,
+    "margin_beyond_limit_deg": {
+     "-": null,
+     "+": null
+    }
+   },
+   "left_shoulder_roll_joint": {
+    "range_deg": [
+     -16.0,
+     85.9
+    ],
+    "samples": 204,
+    "hits": 0,
+    "first_hit": null,
+    "margin_beyond_limit_deg": {
+     "-": 2,
+     "+": null
+    }
+   },
+   "left_shoulder_yaw_joint": {
+    "range_deg": [
+     -143.2,
+     143.2
+    ],
+    "samples": 573,
+    "hits": 0,
+    "first_hit": null,
+    "margin_beyond_limit_deg": {
+     "-": null,
+     "+": null
+    }
+   },
+   "left_elbow_joint": {
+    "range_deg": [
+     -104.9,
+     104.9
+    ],
+    "samples": 420,
+    "hits": 0,
+    "first_hit": null,
+    "margin_beyond_limit_deg": {
+     "-": 3,
+     "+": 4
+    }
+   },
+   "right_shoulder_pitch_joint": {
+    "range_deg": [
+     -171.9,
+     171.9
+    ],
+    "samples": 688,
+    "hits": 0,
+    "first_hit": null,
+    "margin_beyond_limit_deg": {
+     "-": null,
+     "+": null
+    }
+   },
+   "right_shoulder_roll_joint": {
+    "range_deg": [
+     -16.0,
+     85.9
+    ],
+    "samples": 204,
+    "hits": 0,
+    "first_hit": null,
+    "margin_beyond_limit_deg": {
+     "-": 2,
+     "+": null
+    }
+   },
+   "right_shoulder_yaw_joint": {
+    "range_deg": [
+     -143.2,
+     143.2
+    ],
+    "samples": 573,
+    "hits": 0,
+    "first_hit": null,
+    "margin_beyond_limit_deg": {
+     "-": null,
+     "+": null
+    }
+   },
+   "right_elbow_joint": {
+    "range_deg": [
+     -104.9,
+     104.9
+    ],
+    "samples": 420,
+    "hits": 0,
+    "first_hit": null,
+    "margin_beyond_limit_deg": {
+     "-": 3,
+     "+": 4
+    }
+   }
+  },
+  "pass_": true,
+  "excluded_pairs": "MuJoCo 기본: 부모-자식 body 접촉 제외 (추가 exclude 없음)"
+ },
+ "symmetry": {
+  "n": 504,
+  "max_dx_mm": 0.0,
+  "max_dz_mm": 0.0,
+  "max_y_sum_mm": 0.0,
+  "zero_left_ee": [
+   0.0,
+   0.2866,
+   0.605
+  ],
+  "zero_right_ee": [
+   0.0,
+   -0.2866,
+   0.605
+  ],
+  "pass_": true
+ },
+ "isaac_equiv": {
+  "isaac_nq": 11,
+  "isaac_joints": [
+   "base_x_joint",
+   "base_y_joint",
+   "base_yaw_joint"
+  ],
+  "mass_planar": 75.0965,
+  "mass_isaac": 75.0985,
+  "max_diff": 3.552713678800501e-15,
+  "pass_": true
+ }
+}

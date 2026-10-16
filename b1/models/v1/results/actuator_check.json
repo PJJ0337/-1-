@@ -1,0 +1,112 @@
+[
+ {
+  "actuator": "base_vx",
+  "joint": "base_planar_joint_TX",
+  "type": "velocity",
+  "cmd": 0.6,
+  "response": 0.5889,
+  "err": 0.0111,
+  "ok": true,
+  "ncon": 0
+ },
+ {
+  "actuator": "base_vy",
+  "joint": "base_planar_joint_TY",
+  "type": "velocity",
+  "cmd": 0.6,
+  "response": 0.5889,
+  "err": 0.0111,
+  "ok": true,
+  "ncon": 0
+ },
+ {
+  "actuator": "base_wz",
+  "joint": "base_planar_joint_RZ",
+  "type": "velocity",
+  "cmd": 0.6283,
+  "response": 0.6283,
+  "err": 0.0,
+  "ok": true,
+  "ncon": 0
+ },
+ {
+  "actuator": "left_shoulder_pitch",
+  "joint": "left_shoulder_pitch_joint",
+  "type": "position",
+  "cmd": 1.2,
+  "response": 1.2,
+  "err": 0.0,
+  "ok": true,
+  "ncon": 0
+ },
+ {
+  "actuator": "left_shoulder_roll",
+  "joint": "left_shoulder_roll_joint",
+  "type": "position",
+  "cmd": 0.6,
+  "response": 0.6,
+  "err": 0.0,
+  "ok": true,
+  "ncon": 0
+ },
+ {
+  "actuator": "left_shoulder_yaw",
+  "joint": "left_shoulder_yaw_joint",
+  "type": "position",
+  "cmd": 1.0,
+  "response": 1.0,
+  "err": 0.0,
+  "ok": true,
+  "ncon": 0
+ },
+ {
+  "actuator": "left_elbow",
+  "joint": "left_elbow_joint",
+  "type": "position",
+  "cmd": 0.732,
+  "response": 0.732,
+  "err": 0.0,
+  "ok": true,
+  "ncon": 0
+ },
+ {
+  "actuator": "right_shoulder_pitch",
+  "joint": "right_shoulder_pitch_joint",
+  "type": "position",
+  "cmd": 1.2,
+  "response": 1.2,
+  "err": 0.0,
+  "ok": true,
+  "ncon": 0
+ },
+ {
+  "actuator": "right_shoulder_roll",
+  "joint": "right_shoulder_roll_joint",
+  "type": "position",
+  "cmd": 0.6,
+  "response": 0.6,
+  "err": 0.0,
+  "ok": true,
+  "ncon": 0
+ },
+ {
+  "actuator": "right_shoulder_yaw",
+  "joint": "right_shoulder_yaw_joint",
+  "type": "position",
+  "cmd": 1.0,
+  "response": 1.0,
+  "err": 0.0,
+  "ok": true,
+  "ncon": 0
+ },
+ {
+  "actuator": "right_elbow",
+  "joint": "right_elbow_joint",
+  "type": "position",
+  "cmd": 0.732,
+  "response": 0.732,
+  "err": 0.0,
+  "ok": true,
+  "ncon": 0
+ }
+]

@@ -1,6 +1,6 @@
 {
  "_note": "가정값 — 근거와 확정 시 교체 항목은 b1/models/assumptions-v0.md",
- "version": "v0.1",
+ "version": "v0.2",
  "date": "2026-10-16",
  "actuator": {
   "model": "RI85 (제작건)",
@@ -40,7 +40,8 @@
   "clearance_z": 0.05,
   "mass_lower": 30.0,
   "mass_plate": 3.69,
-  "_note": "C3 평면 3-DOF 채택(10/16): URDF planar 1개, Isaac Sim 이식 시 slide x · slide y · revolute z 3관절로 분해. 상판 3.69 kg = 별도 링크(base_plate_link, fixed) — v1 재생성부터. v0는 base_link 안에서 하체 box와 합성(질량 · COM 동일)"
+  "_note": "C3 평면 3-DOF 채택(10/16): URDF planar 1개, Isaac Sim 이식 시 slide x · slide y · revolute z 3관절로 분해. 상판 3.69 kg = 별도 링크(base_plate_link, fixed) — v1 재생성부터. v0는 base_link 안에서 하체 box와 합성(질량 · COM 동일)",
+  "plate_separate_link": true
  },
  "torso": {
   "shoulder_z": 1.2,
@@ -99,5 +100,15 @@
   "_note": "공칭값: 오른팔 = 왼팔 거울(축 부호 규약 안 A, 팀장 승인 10/16). 팔당 4-DOF, 손목 없음(A1 확인 10/16)",
   "dof_per_arm": 4,
   "right_from_left_mirror": true
+ },
+ "gripper": {
+  "_note": "S14 (week05 커리큘럼: 그리퍼 플랜지까지 모델링 + 끝단 site, 본체는 BOM 질량 box로 임시) — BOM 그리퍼 질량 · 치수 수령 시 교체. tool0(플랜지면)에서 링크 −z(전완 방향)로 box를 붙이고 끝단에 {side}_ee site",
+  "mass": 0.5,
+  "box_xyz": [
+   0.08,
+   0.08,
+   0.1
+  ],
+  "ee_offset": 0.1
  }
 }

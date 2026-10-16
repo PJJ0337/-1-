@@ -1,0 +1,8 @@
+{
+ "tau_g": -25.403,
+ "kp": 300.0,
+ "theory_sag_deg": 4.852,
+ "final_sag_nogc_deg": 4.8324,
+ "final_sag_gc_deg": 0.0,
+ "force_gc": -25.403
+}
