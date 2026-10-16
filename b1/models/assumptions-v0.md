@@ -2,10 +2,10 @@
 
 | 항목 | 내용 |
 |---|---|
-| 상태 | **v0.1 — B1 공용** (week05, 박종진, 2026-10-16) · 팀장 확정 10/16. **박종진 · 함태훈 URDF/MJCF 모두 이 표의 값을 쓴다** (v0 때 두 모델 총질량 74.10 vs 67.46 kg → 통일) |
+| 상태 | **v0.2 — B1 공용** (week05, 박종진, 2026-10-16) · v0.1 = 팀장 확정 10/16, **v0.2 = S14 그리퍼 임시 box 추가(5주차 커리큘럼, 팀장 확인 필요)**. **박종진 · 함태훈 URDF/MJCF 모두 이 표의 값을 쓴다** (v0 때 두 모델 총질량 74.10 vs 67.46 kg → 통일) |
 | 이전 | v0 (week04, 2026-10-13, 박종진 개인 가정값 표) — 태그 week04 (d86aa1c) |
-| 값 파일 | **[assumptions_b1.json](assumptions_b1.json)** (B1 공용, v0.1). v0 생성에 쓴 [week04 assumptions_v0.json](../../members/park-jongjin/week04/scripts/assumptions_v0.json)과 수치 동일(주석 · 밀도 · 팔 항목만 추가) → **v0 모델은 재생성 불필요**. v1부터 공용 json 하나만 읽어 생성 |
-| 모델 | [v0/](v0/) — `urdf/b1_humanoid_skeleton.urdf` · `urdf/b1_humanoid_v0.urdf` · `mjcf/` 3단(robot → robot_actuated → scene) |
+| 값 파일 | **[assumptions_b1.json](assumptions_b1.json)** (B1 공용, v0.2 — v1 빌드 [v1/scripts/build_v1.py](v1/scripts/build_v1.py)가 읽음). v0 생성에 쓴 [week04 assumptions_v0.json](../../members/park-jongjin/week04/scripts/assumptions_v0.json)과 수치 동일(주석 · 밀도 · 팔 항목만 추가) → **v0 모델은 재생성 불필요**. v1부터 공용 json 하나만 읽어 생성 |
+| 모델 | **[v1/](v1/)** (week05, 양팔 + 베이스 3-DOF + 상판 링크 + 그리퍼, 검증 5종 [validate_model.md](v1/results/validate_model.md)) · [v0/](v0/) — `urdf/b1_humanoid_skeleton.urdf` · `urdf/b1_humanoid_v0.urdf` · `mjcf/` 3단(robot → robot_actuated → scene) |
 | 근거 | 링크 · 관절 위치 = [link-split-v0.md](link-split-v0.md) §3, 범위 · 토크 = [v0_analysis.json](../../members/park-jongjin/week04/results/v0_analysis.json), 점검 = [checklist_v0.md](../../members/park-jongjin/week04/results/checklist_v0.md), 두 모델 정합 = [b1_vs_taehoon_mass_torque.md](../../members/park-jongjin/week05/results/b1_vs_taehoon_mass_torque.md) |
 
 ## 0. B1 공용 확정값 (팀장 10/16) — 한눈에
@@ -54,6 +54,7 @@
 | S11 | 몸통 | 어깨 J1축 높이 **1.20 m**, box 0.12 × 0.15 m (폭 = 양 J1 RI85 뒷면 간격 150 mm), **8 kg** + J1 RI85 고정측 2개(CAD 4.06 kg) | 기획서 전고 1,400~1,600 mm · STEP 어깨 간격 | A1 몸통 설계 (폭 바뀌면 S5 재스윕) |
 | S12 | 제어 게인 | kp 300 N·m/rad, **dampratio 1** / 베이스 kv 200 · 50 | week03 계단응답. dampratio → kv는 컴파일 시 계산, **고정 kv로 쓰면 v1 관성 변경 시 재튜닝** | B2 튜닝 |
 | S13 | 손목 · 그리퍼 | **없음 — 4-DOF 확정** (A1 확인 10/16: 손목 없음, 4-DOF가 설계). 자리표시자 링크 · 관절 두지 않음, tool0 = 그리퍼 플랜지면 | link-split F1 · 팀장 10/16 | 기획서 6-DOF 불일치는 팀장 상위 보고 — 최종 사양인지 이번 제작분만인지 확인 중 |
+| S14 | **그리퍼 임시 형상** (v0.2) | **0.5 kg box 80 × 80 × 100 mm**, tool0(플랜지면)에서 전완 연장 방향, 끝단 `{side}_ee` site(+0.10 m) | 5주차 커리큘럼 「그리퍼 = BOM 질량 box」 — **BOM 미수령이라 질량 · 치수 근거 없음**. 팔 수평 토크 22.73 → 25.40 N·m(0 kg), 3 kg 페이로드를 ee에 두면 37.30 → **42.91 N·m** | A2 · BOM 그리퍼 질량 · 치수 · TCP 위치 |
 
 ## 3. 관절 범위 근거 — 충돌 스윕 (convex hull collision, 다른 관절 0, 1° 간격, v0 통합 모델)
 
@@ -77,6 +78,8 @@
 | 〃 — 강 상한 (sun adapter · carrier 강 가정, B1 임시) | 3 kg | 38.4 N·m | **46 N·m** |
 | shoulder_roll 1.5 rad(86°) 외전 | 3 kg | 34.25 N·m | 41.1 N·m |
 | elbow +90° (전완 앞 수평) | 3 kg | 7.62 N·m (elbow) | 9.1 N·m |
+
+> **v1 반영 결과 (S14 그리퍼 0.5 kg + 페이로드 작용점 플랜지 → ee 0.10 m)** — 검증 ③ [v1/results/validate_model.md](v1/results/validate_model.md): shoulder_pitch 3 kg **42.91 N·m → × 1.2 = 51.5 N·m > 46** (정격 46 가정 시 여유 7.2 %), shoulder_roll 38.89 N·m (여유 18.3 %). **그리퍼 질량 · TCP 위치가 정해지면 판정 기준을 다시 잡아야 함** — 팀장 보고 사항
 
 → **판정 기준(팀장 10/16): RI85 정격 토크 ≥ 46 N·m이면 PDR 20 % 여유 충족** (강 상한 38.4 × 1.2, 보수적). 피크는 이 기준과 별개로 **가속 · 동적 토크분**을 위한 여유로 B3 궤적 확정 후 따로 본다. effort(시뮬 힘 제한)는 계속 피크(요청서 §3).
 - v0 문서의 23.8 / 35.2 N·m는 B1 임시 관성 값 → 통합 모델 값으로 교체(checklist F3와 일치). 리치 495 mm(목표 700 mm급)로 늘어나면 토크는 거의 비례 증가
@@ -102,4 +105,5 @@
 | 버전 | 날짜 | 내용 |
 |---|---|---|
 | v0 | 2026-10-13 | 박종진 개인 가정값 표 S1~S13 (week04) |
-| **v0.1** | 2026-10-16 | **B1 공용 승격**(§0 C1~C8, 공용 json `assumptions_b1.json`) · 손목 없음 4-DOF 확정(S13) · C3 평면 3-DOF 확정(S10) · 안 A 거울 승인(§6) · PDR 토크 여유 = **정격 ≥ 46 N·m**(§4, 피크는 가속분 별도) · §3 · §4 · §5 수치를 v0 통합 모델 값으로 갱신(23.8 → 22.73 등) · 밀도 3종(C6) · kv 재튜닝 비고(C5) · 함태훈 URDF 정합 확인 |
+| v0.1 | 2026-10-16 | **B1 공용 승격**(§0 C1~C8, 공용 json `assumptions_b1.json`) · 손목 없음 4-DOF 확정(S13) · C3 평면 3-DOF 확정(S10) · 안 A 거울 승인(§6) · PDR 토크 여유 = **정격 ≥ 46 N·m**(§4, 피크는 가속분 별도) · §3 · §4 · §5 수치를 v0 통합 모델 값으로 갱신(23.8 → 22.73 등) · 밀도 3종(C6) · kv 재튜닝 비고(C5) · 함태훈 URDF 정합 확인 |
+| **v0.2** | 2026-10-16 | S14 그리퍼 임시 box(0.5 kg, 5주차 커리큘럼) · 상판 별도 링크 v1 적용 · §4 v1 반영 결과(3 kg 42.91 N·m → 정격 기준 51.5 N·m) |

@@ -2,7 +2,7 @@
 
 | 항목 | 내용 |
 |---|---|
-| 상태 | **v0.3.1** (week05, 박종진, 2026-10-16) — C3 평면 3-DOF 채택 · C3-1 Isaac Sim 분해 비고(팀장 10/16). **v0.3** (week04, 2026-10-13) — **B6 balanceinertia 기본 off 확정**(김이겸 10/8 회신), A3 기록 규칙 추가. 이전: **v0.2** (week03, 2026-10-06) — 함태훈 notes/05 대응표 · [함태훈 notes/07](https://github.com/taehoonham0118-cell/-1-/blob/main/notes/07_mjcf_structure_urdf_loading.md) §5 제안 8개 반영, 함태훈 파일 점검 완료(G절), **팀 규약: 3단 파일 구조(0-2절)** |
+| 상태 | **v0.4** (week05, 박종진, 2026-10-16) — **v1 기준 갱신**: 0-3절 빌드 스크립트 규약(제안), E8 액추에이터 응답 · M절 좌우 미러 · F6 검증 5종 추가, 자동 점검 [checklist_v1.md](../../models/v1/results/checklist_v1.md) 28항목 OK. **v0.3.1** (2026-10-16) — C3 평면 3-DOF 채택 · C3-1 Isaac Sim 분해 비고(팀장 10/16). **v0.3** (week04, 2026-10-13) — **B6 balanceinertia 기본 off 확정**(김이겸 10/8 회신), A3 기록 규칙 추가. 이전: **v0.2** (week03, 2026-10-06) — 함태훈 notes/05 대응표 · [함태훈 notes/07](https://github.com/taehoonham0118-cell/-1-/blob/main/notes/07_mjcf_structure_urdf_loading.md) §5 제안 8개 반영, 함태훈 파일 점검 완료(G절), **팀 규약: 3단 파일 구조(0-2절)** |
 | 대상 | MuJoCo 3.15.0 (`pip install mujoco`), 우리 로봇 = 4-DOF 팔 2개(손목 없음, 10/16 확정) + 홀로노믹 베이스(C3) |
 | 배경 | 커리큘럼 10/6 변경: 실습 PC 전까지 Isaac Sim 임포트 대신 MuJoCo 로딩으로 같은 개념을 익힘. Isaac Sim용은 [urdf-import-checklist.md](urdf-import-checklist.md) (실습 PC 배정 후) |
 | 문서 근거 | [MuJoCo Modeling — URDF extensions](https://mujoco.readthedocs.io/en/stable/modeling.html#curdf) · [XML Reference — compiler](https://mujoco.readthedocs.io/en/stable/XMLreference.html#compiler) · [Computation — Collision selection](https://mujoco.readthedocs.io/en/stable/computation/index.html#coselection) · [XML Reference — actuator/position](https://mujoco.readthedocs.io/en/stable/XMLreference.html#actuator-position) |
@@ -35,6 +35,18 @@
 
 - 근거: MuJoCo 권장(변환본은 그대로, 추가 정보는 include — 0절) + menagerie 구조(로봇 파일 = 액추에이터 포함, scene = 환경만). 2단계 파일만 열어도 구동되는 로봇, 3단계는 실험 환경.
 - 제안: 함태훈 ([함태훈 notes/07](https://github.com/taehoonham0118-cell/-1-/blob/main/notes/07_mjcf_structure_urdf_loading.md) 피드백). week03 2링크 파일은 각자 기존 구조 유지.
+
+### 0-3. v1 규약 — 빌드 스크립트로 3단 구조 자동화 (week05 커리큘럼 「팀 연계」, **박종진 제안 · 함태훈 합의 필요**)
+
+| 단계 | 파일 (b1/models/v1/) | 내용 | 수정 |
+|---|---|---|---|
+| 0 | `urdf/b1_v1.urdf` · `urdf/b1_v1_isaac.urdf` | `scripts/build_v1.py`가 `assumptions_b1.json`에서 생성 (원본 = planar, Isaac 사본 = prismatic · prismatic · revolute) | **생성물 — 손으로 수정 금지**, 값은 json에서 |
+| 1 | `mjcf/b1_urdf.xml` | URDF → `mj_saveLastXML` 변환본 (0-2절 1단계와 같음) | 수정 금지 |
+| 2 | `mjcf/b1.xml` | 변환본 + site(ee · IMU) + `default class`(shoulder · elbow · base) + 액추에이터 + 센서 — **`actuator_params.json`에서 생성** | params만 수정 (**함태훈 담당**) |
+| 3 | `mjcf/scene.xml` | `<include file="b1.xml"/>` + 바닥 · 조명 · option | 생성 |
+
+- 0-2절과 차이: 2단계를 손으로 관리하던 것을 **params 파일 + 빌드**로 바꿈 → URDF를 다시 만들어도 덧붙이기가 사라지지 않음. site는 body 안에 있어야 해서 include로 덧붙일 수 없음 → 빌드가 변환본을 읽어 b1.xml에 넣음 (변환본 자체는 그대로)
+- 순서: `python b1/models/v1/scripts/build_v1.py` → `validate_model.py` → `render_v1.py` → `checklist_v1_check.py`
 
 ## A. 로드 전 — URDF 자체 점검
 
@@ -112,6 +124,8 @@
 | E5 | 감쇠 설정 | kv 대신 `dampratio`(1 = 임계감쇠) 고려, kv 쓰면 `implicitfast` 적분기 | 문서: kv 사용 시 implicitfast/implicit 권장. kv 5(ζ 0.95) → 오버슈트 0 %, 정착 0.28 s (wed) |
 | E6 | **armature** = J_rotor × N² (감속기 반사 관성) | **BOM 수령 전: 0 허용**(log에 "BOM 대기" 명시) / **BOM 수령 후: J_rotor × N² 필수** (함태훈 제안) | armature 0 → 0.15: 유효관성 0.142 → 0.292 kg·m², ωn 18.8 → 13.1 rad/s (wed). [body-joint-armature](https://mujoco.readthedocs.io/en/stable/XMLreference.html#body-joint-armature) |
 | E7 | 중력 | position 서보는 중력보상 없으면 **정상상태 오차 ≈ τg / kp** | kp 50: 0.072 rad (이론 0.070) (wed) |
+| E7-1 | 중력보상 | position 목표에 **τg / kp 오프셋**(τg = `qfrc_bias`, qvel ≈ 0에서 중력항)을 더하면 처짐 상쇄 — 토크 직접 인가가 아니라 서보 목표만 바꾸므로 forcerange 제한 유지 | v1 팔 수평: 4.83° → 0.000° ([v1_gravcomp.png](../../models/v1/img/v1_gravcomp.png)) |
+| E8 | 액추에이터 응답 | 액추에이터마다 범위 40 % 명령 → 관절이 같은 부호 · 크기로 응답(뷰어 Control 슬라이더 점검의 자동판) | v1 11/11 ([actuator_check.json](../../models/v1/results/actuator_check.json)) |
 
 ## E-1. MJCF를 손으로 쓸 때 (변환본을 고치지 않고 새로 쓸 경우)
 
@@ -130,6 +144,15 @@
 | F3 | 수평 자세 중력토크 = 손계산 | 2링크: 3.9731 / 0.7358 Nm |
 | F4 | `mj_saveLastXML` 결과에서 확장 속성 반영 확인 (A7) | |
 | F5 | 뷰어: 영점 자세 정지 · 관절 범위 양 끝 · 중력 낙하 | `python -m mujoco.viewer --mjcf=scene.xml` |
+| F6 | **모델 검증 5종** (week05): ① 질량 ±5 % ② 정지 유지 5 s ≤ 0.5° ③ 중력 토크 vs 정격 ④ 범위 sweep 자기 충돌 0 ⑤ 좌우 대칭 x · z ≤ 1 mm | [validate_model.md](../../models/v1/results/validate_model.md) — ③은 정격 미수령(판정 기준 46 N·m 가정) |
+
+## M. 좌우 미러 (v1 양팔)
+
+| No. | 점검 | 방법 | 근거 |
+|---|---|---|---|
+| M1 | 한쪽 팔만 정의, 다른 쪽은 **스크립트로 생성** | 장착 위치 · COM · 메시 y 반전, 축 = 유사벡터 변환(x · z 반전, y 유지), rpy roll · yaw 반전, 관성 ixy · iyz 반전 | [mirror_rules.md](../../models/v1/docs/mirror_rules.md) |
+| M2 | 메시 거울은 **면 방향(winding)도 뒤집기** | y 반전만 하면 법선이 안쪽 → 렌더 · 체적 부호 오류 | build_v1.py `faces[:, ::-1]` |
+| M3 | 같은 관절각에서 ee y 부호만 다름 (검증 ⑤) | 무작위 500자세 + 대표 4자세 | 차 0 mm (생성식이 정확한 거울) |
 
 ## G. 팀 연계 — 함태훈 URDF ↔ MJCF 대응표 반영
 
@@ -184,3 +207,5 @@
 | v0.1 | 2026-10-06 | 함태훈 대응표(notes/05) 반영 |
 | v0.2 | 2026-10-06 | 함태훈 제안 8개 · 점검 결과(OK 30 · NG 1 · N-A 5), 3단 파일 구조 팀 규약 |
 | v0.3 | 2026-10-13 | B6 balanceinertia 기본 off 확정(김이겸 10/8 회신), A3 원인 점검 순서 · 기록 규칙, A3 · B6 기록표 신설 |
+| v0.3.1 | 2026-10-16 | C3 채택 · C3-1 Isaac 분해 비고(팀장 10/16), 대상 4-DOF |
+| v0.4 | 2026-10-16 | v1 기준: 0-3절 빌드 규약(제안), E7-1 중력보상, E8 액추에이터 응답, F6 검증 5종, M절 좌우 미러 |
