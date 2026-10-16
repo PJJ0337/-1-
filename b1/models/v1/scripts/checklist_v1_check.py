@@ -65,7 +65,7 @@ tot=float(sum(m.body_mass))
 add("F2","총질량 ≤ 80 kg (기획서) · 검증 ①",tot<=80 and VAL["mass"]["pass_"],f"{tot:.3f} kg, 기준 대비 {VAL['mass']['err_pct']:+.3f} %")
 add("E7","position 서보 처짐 ≈ τg/kp · 중력보상으로 상쇄",abs(GC["final_sag_nogc_deg"]-GC["theory_sag_deg"])<0.1 and abs(GC["final_sag_gc_deg"])<0.01,f"보상 없음 {GC['final_sag_nogc_deg']}° vs 이론 {GC['theory_sag_deg']}° → 보상(목표 + τg/kp) {GC['final_sag_gc_deg']}°")
 add("M1","좌우 미러 = 규칙표 · 검증 ⑤",VAL["symmetry"]["pass_"],f"{VAL['symmetry']['n']}자세 |Δx|·|Δz|·|y_L+y_R| ≤ {max(VAL['symmetry']['max_dx_mm'],VAL['symmetry']['max_dz_mm'],VAL['symmetry']['max_y_sum_mm']):.1e} mm — docs/mirror_rules.md")
-add("F5","캡처: 4자세 · collision · 중력보상","img/v1_poses.png" and os.path.exists(os.path.join(V1,"img","v1_poses.png")),"img/v1_poses.png · v1_collision.png · v1_gravcomp.png (노트북 뷰어 슬라이더 캡처는 별도)")
+add("F5","캡처: 4자세 · collision · 중력보상","img/v1_poses.png" and os.path.exists(os.path.join(V1,"img","v1_poses.png")),"img/v1_poses.png · v1_collision.png · v1_gravcomp.png + 노트북 뷰어 재현 img/repro/20261016_laptop_v1_*.png (Control 슬라이더 · 양팔 대칭 · base_vx)")
 ok=sum(r[2] for r in rows); ng=[r[0] for r in rows if not r[2]]
 L=[f"# 체크리스트 v0.4 점검 — b1_v1 (MuJoCo {mujoco.__version__})","",f"자동 생성: checklist_v1_check.py · 합계 {len(rows)}항목 — OK {ok} · NG {len(ng)} {ng if ng else ''}","","| No. | 점검 | 결과 | 근거 |","|---|---|---|---|"]
 L+=[f"| {no} | {it} | {'OK' if o else 'NG'} | {de} |" for no,it,o,de in rows]

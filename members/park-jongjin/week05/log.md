@@ -21,6 +21,7 @@
 | 7 | (4주차 합의 ③) 중력보상으로 수평 처짐 상쇄 · 캡처 | 목표 + τg/kp 피드포워드: 4.83°(이론 4.85°) → 0.000°, 토크 25.40 N·m 동일 | 100 % | scripts/render_v1.py, img/v1_gravcomp.png, results/gravcomp.json |
 | 8 | (팀장 10/16 ④) RI85 요청서 §2 J1~J4 × 양팔 8행 | STEP 구동기 번호 · 시뮬 범위 · 축/구동기 +방향 · 비고 채움, 감속비 · 토크 · 스토퍼는 요청 | 100 % | b1/docs/icd/actuator-spec-request.md (v0.2) |
 | 9 | (4주차 합의 ②) A1 · A2 회신 반영 v1 재생성 | 회신 대기 — 가정값 유지. 수령 시 json만 바꾸고 `build_v1.py` 재실행 | 0 % | – |
+| 9-1 | (커리큘럼 수) 뷰어에서 액추에이터 슬라이더 정상 동작 캡처 | (10/16) 노트북 Windows · 한글 경로, MuJoCo 3.14 → 3.15.0 업그레이드 후 v1_mjio.py: 75.097 kg 로드, 영점 정지, 양팔 shoulder_pitch 3 rad 대칭, base_vx 0.195 m/s 전진 | 100 % | b1/models/v1/img/repro/20261016_laptop_v1_*.png |
 | 10 | 구술 Q1 · Q2 대비 | 미러 축 판별(유사벡터), 평면 근사의 손실 · 정당화 + 수치 | 100 % | notes/mujoco-urdf/04-v1-mirror-base.md |
 
 ## 2. 핵심 수치 · 근거 (구술 대비)
