@@ -2,8 +2,8 @@
 
 | 항목 | 내용 |
 |---|---|
-| 상태 | **v0.3** (week04, 박종진, 2026-10-13) — **B6 balanceinertia 기본 off 확정**(김이겸 10/8 회신), A3 기록 규칙 추가. 이전: **v0.2** (week03, 2026-10-06) — 함태훈 notes/05 대응표 · [함태훈 notes/07](https://github.com/taehoonham0118-cell/-1-/blob/main/notes/07_mjcf_structure_urdf_loading.md) §5 제안 8개 반영, 함태훈 파일 점검 완료(G절), **팀 규약: 3단 파일 구조(0-2절)** |
-| 대상 | MuJoCo 3.15.0 (`pip install mujoco`), 우리 로봇 = 6-DOF 팔 2개 + 홀로노믹 베이스 |
+| 상태 | **v0.3.1** (week05, 박종진, 2026-10-16) — C3 평면 3-DOF 채택 · C3-1 Isaac Sim 분해 비고(팀장 10/16). **v0.3** (week04, 2026-10-13) — **B6 balanceinertia 기본 off 확정**(김이겸 10/8 회신), A3 기록 규칙 추가. 이전: **v0.2** (week03, 2026-10-06) — 함태훈 notes/05 대응표 · [함태훈 notes/07](https://github.com/taehoonham0118-cell/-1-/blob/main/notes/07_mjcf_structure_urdf_loading.md) §5 제안 8개 반영, 함태훈 파일 점검 완료(G절), **팀 규약: 3단 파일 구조(0-2절)** |
+| 대상 | MuJoCo 3.15.0 (`pip install mujoco`), 우리 로봇 = 4-DOF 팔 2개(손목 없음, 10/16 확정) + 홀로노믹 베이스(C3) |
 | 배경 | 커리큘럼 10/6 변경: 실습 PC 전까지 Isaac Sim 임포트 대신 MuJoCo 로딩으로 같은 개념을 익힘. Isaac Sim용은 [urdf-import-checklist.md](urdf-import-checklist.md) (실습 PC 배정 후) |
 | 문서 근거 | [MuJoCo Modeling — URDF extensions](https://mujoco.readthedocs.io/en/stable/modeling.html#curdf) · [XML Reference — compiler](https://mujoco.readthedocs.io/en/stable/XMLreference.html#compiler) · [Computation — Collision selection](https://mujoco.readthedocs.io/en/stable/computation/index.html#coselection) · [XML Reference — actuator/position](https://mujoco.readthedocs.io/en/stable/XMLreference.html#actuator-position) |
 | 실험 근거 | [tue_urdf_to_mjcf.py](../../../members/park-jongjin/week03/scripts/tue_urdf_to_mjcf.py) · [wed_step_response.py](../../../members/park-jongjin/week03/scripts/wed_step_response.py) · [thu_loading_experiments.py](../../../members/park-jongjin/week03/scripts/thu_loading_experiments.py) → 결과 [results/](../../../members/park-jongjin/week03/results/) |
@@ -85,9 +85,9 @@
 |---|---|---|---|---|---|
 | C1 | **고정** | 루트 body에 joint 없음 = world에 용접 (URDF 루트 링크 기본) | 4 / 4 | 팔 단독 검증 · 매니퓰레이션 학습 초기 | thu E5 |
 | C2 | **freejoint** | `<freejoint/>` (URDF `floating` joint도 free로 변환됨) | 11 / 10 (위치 3 + 쿼터니언 4) | 바퀴-바닥 접촉 · 전복 · 가속 시 기울어짐까지 볼 때. 바퀴 모델 · 마찰 필요 | thu E1 · E5, [body-freejoint](https://mujoco.readthedocs.io/en/stable/XMLreference.html#body-freejoint) |
-| C3 | **홀로노믹(평면 3-DOF)** | 베이스 body에 `slide x` · `slide y` · `hinge z` 3개 + **velocity 액추에이터** | 7 / 7 | **우리 로봇 1차 권장**: 옴니휠 기구를 빼고 "평면 어디로든 이동" 만 표현. 높이 · 롤 · 피치 고정 | thu E5 · E6 |
+| C3 | **홀로노믹(평면 3-DOF)** — **B1 채택(팀장 10/16)** | 베이스 body에 `slide x` · `slide y` · `hinge z` 3개 + **velocity 액추에이터** | 7 / 7 | **우리 로봇 1차 권장**: 옴니휠 기구를 빼고 "평면 어디로든 이동" 만 표현. 높이 · 롤 · 피치 고정 | thu E5 · E6 |
 | C3-0 | 대안: free + 힘 인가 | `<freejoint/>` + 베이스에 `<motor>`로 x · y · yaw 힘/토크 직접 인가 (옴니휠 추상화) | 11 / 10 | 기울어짐 · 바닥 접촉까지 보면서 휠은 생략할 때. 바퀴 4개 hinge + 접촉은 하체 실측 후 | [함태훈 notes/07](https://github.com/taehoonham0118-cell/-1-/blob/main/notes/07_mjcf_structure_urdf_loading.md) §3 |
-| C3-1 | URDF로 쓸 때 | `type="planar"` 1개 → MuJoCo가 `_TX`·`_TY`(slide) + `_RZ`(hinge) 로 자동 변환 | 3 / 3 | 더미 링크 2개 없이 URDF 1관절로 표현 가능 | thu E1 |
+| C3-1 | URDF로 쓸 때 | `type="planar"` 1개 → MuJoCo가 `_TX`·`_TY`(slide) + `_RZ`(hinge) 로 자동 변환 | 3 / 3 | 더미 링크 2개 없이 URDF 1관절로 표현 가능. **비고(팀장 10/16, C3 채택): URDF는 planar 1개 유지. Isaac Sim 이식 시 planar를 지원하지 않으므로 더미 링크 2개 + `prismatic x` · `prismatic y` · `revolute z` 3관절로 분해한 Isaac용 사본을 만든다(원본 URDF는 그대로)** | thu E1 |
 | C3-2 | **명령 좌표계** | slide 축은 yaw보다 **먼저** 적용 → world 고정 축 | | 90° 돈 뒤 `base_x` 0.3 m/s → world x로 이동(로봇 기준 옆걸음). body 기준 명령은 `[vx_w, vy_w] = R(yaw)·[vx_b, vy_b]` 변환 필요 | thu E5, [thu_holonomic.csv](../../../members/park-jongjin/week03/results/thu_holonomic.csv) |
 | C3-4 | 결정 순서 | 베이스 표현(C1 · C2 · C3)을 먼저 정하고 **fusestatic(B1)을 같이 결정** — 베이스를 나중에 free로 바꿀 계획이면 베이스 질량이 world로 흡수되지 않게 | | | [함태훈 notes/07](https://github.com/taehoonham0118-cell/-1-/blob/main/notes/07_mjcf_structure_urdf_loading.md) §5-2 |
 | C3-3 | 베이스 치수 | 상판 575 × 472 × 12 mm (BASE 3.STEP, 노션 4주차 미리보기) + 하체 박스 임시값 | | 하체 실측표(함태훈 week02)로 질량 · 높이 교체 예정 | [holonomic_base_two_arms.xml](../../../members/park-jongjin/week03/mjcf/holonomic_base_two_arms.xml) |
