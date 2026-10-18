@@ -55,9 +55,9 @@
   </joint>
   <link name="torso_link">
     <inertial>
-      <origin xyz="5.01887e-05 -1.34735e-06 -0.248686" rpy="0 0 0"/>
+      <origin xyz="4.68203e-05 2.02102e-06 -0.248686" rpy="0 0 0"/>
       <mass value="12.0634"/>
-      <inertia ixx="0.950137" iyy="0.876333" izz="0.0991423" ixy="1.60604e-09" ixz="-0.000150566" iyz="0.000111909"/>
+      <inertia ixx="0.950137" iyy="0.876333" izz="0.0991423" ixy="-2.24738e-09" ixz="-0.000140461" iyz="0.000101804"/>
     </inertial>
     <visual name="torso_actuators_visual">
       <geometry><mesh filename="torso_link_visual.stl"/></geometry>

@@ -6,14 +6,16 @@
 #   3) mjcf/b1.xml            변환본 + site(ee · IMU) + default class(관절 그룹별) + 액추에이터 + 센서 ← actuator_params.json
 #      mjcf/scene.xml         include b1.xml + 바닥 · 조명 · option
 # 값: ../../assumptions_b1.json (B1 공용 가정값) + ../actuator_params.json (MJCF 덧붙이기, 함태훈 담당)
-#     링크 질량 · 관성 · 메시 = v0 통합본(함태훈 f9c9eff → B1 골격 프레임, ../../v0/meshes · link_inertials_taehoon_in_b1frame.json)
+#     링크 질량 · 관성 = inputs/link_inertials_v1.json(함태훈 13b01ad, 관절점 원점), 메시 = ../../v0/meshes(함태훈 f9c9eff 원점 보정본 — 함태훈 robot_v1 메시와 collision 0.0 mm 동일, visual은 2만 면 단순화본)
 # 사용: python build_v1.py            (저장소 어디서 실행해도 됨)
 import os,sys,json,copy,shutil,numpy as np,trimesh,mujoco,xml.etree.ElementTree as ET
 from scipy.spatial.transform import Rotation as Ro
 HERE=os.path.dirname(os.path.abspath(__file__)); V1=os.path.dirname(HERE); MODELS=os.path.dirname(V1); REPO=os.path.dirname(os.path.dirname(MODELS))
 A=json.load(open(os.path.join(MODELS,"assumptions_b1.json"),encoding="utf-8"))
 P=json.load(open(os.path.join(V1,"actuator_params.json"),encoding="utf-8"))
-INER=json.load(open(os.path.join(REPO,"members/park-jongjin/week04/results/link_inertials_taehoon_in_b1frame.json"),encoding="utf-8"))
+# 링크 질량 · 관성: 함태훈 sim/robot_v1/link_inertials_v1.json (13b01ad, 원점 = B1 골격 관절점) — 평행이동 변환(merge_taehoon) 불필요.
+#   week04 B1 프레임 변환본과 질량 차 ≤ 2.4e-6 kg · COM ≤ 0.01 mm · 관성 ≤ 4e-8 (10/18 대조). 오른팔은 왼팔 미러
+INER=json.load(open(os.path.join(V1,"inputs","link_inertials_v1.json"),encoding="utf-8"))
 SRC_MESH=os.path.join(MODELS,"v0","meshes")
 ARM=["shoulder_pitch","shoulder_roll","shoulder_yaw","elbow"]
 for d in ("urdf","meshes","mjcf","docs"): os.makedirs(os.path.join(V1,d),exist_ok=True)
@@ -157,6 +159,13 @@ def build_mjcf():
             if n.endswith(f"_{a}_joint"):
                 j.set("class",c)
                 for k in ("damping","armature","frictionloss"): j.attrib.pop(k,None)   # 값은 class(=params)에서
+    # (함태훈 제안 10/17) 중력보상 B: 팔 body gravcomp + joint actuatorgravcomp — 보상 토크가 qfrc_actuator 로 들어가 ctrlrange 클리핑과 무관, 합계는 actuatorfrcrange 로 제한
+    if P.get("gravcomp",{}).get("enable",False):
+        for b in root.iter("body"):
+            if b.get("name","").startswith(("left_","right_")): b.set("gravcomp","1")
+        for d_ in dflt.iter("default"):
+            j_=d_.find("joint")
+            if d_.get("class") in P["classes"] and j_ is not None: j_.set("actuatorgravcomp","true")
     # site: 끝점 ee (그리퍼 끝단) · 베이스 IMU (상판 중심)
     for b in root.iter("body"):
         if b.get("name","").endswith("_gripper_link"):
@@ -175,6 +184,7 @@ def build_mjcf():
             jn=f"{side}_{a}_joint"
             ET.SubElement(sen,"jointpos",{"name":f"{side}_{a}_pos","joint":jn}); ET.SubElement(sen,"jointvel",{"name":f"{side}_{a}_vel","joint":jn})
             ET.SubElement(sen,"actuatorfrc",{"name":f"{side}_{a}_frc","actuator":f"{side}_{a}"})
+            if P.get("gravcomp",{}).get("enable",False): ET.SubElement(sen,"jointactuatorfrc",{"name":f"{side}_{a}_jfrc","joint":jn})   # 보상분 포함 관절 토크
     ET.SubElement(sen,"gyro",{"name":"base_gyro","site":"base_imu"}); ET.SubElement(sen,"accelerometer",{"name":"base_acc","site":"base_imu"})
     for s in P["sensors"]["ee_sites"]:
         ET.SubElement(sen,"framepos",{"name":f"{s}_pos","objtype":"site","objname":s}); ET.SubElement(sen,"framequat",{"name":f"{s}_quat","objtype":"site","objname":s})

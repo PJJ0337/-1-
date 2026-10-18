@@ -5,9 +5,10 @@ v0(week04)를 커리큘럼 5주차 「핵심 설계 결정」대로 확장. **UR
 ```
 v1/
 ├── actuator_params.json        MJCF 덧붙이기 값 (class별 kp · dampratio · forcerange · armature · damping, 베이스 kv, 센서)
+├── inputs/link_inertials_v1.json  링크 질량 · 관성 (함태훈 13b01ad, 원점 = 골격 관절점)
 ├── urdf/b1_v1.urdf             원본: odom →planar→ base_link →fixed→ base_plate_link · torso_link → 양팔 4관절 → tool0 → gripper_link
 ├── urdf/b1_v1_isaac.urdf       Isaac Sim용: planar → base_x(prismatic) · base_y(prismatic) · base_yaw(continuous) + 가상 링크 2
-├── meshes/*.stl                링크 프레임 · m 단위 (왼팔 · 몸통 = v0 통합본(함태훈 f9c9eff), 오른팔 = 미러 생성)
+├── meshes/*.stl                링크 프레임 · m 단위 (왼팔 · 몸통 = v0 통합본, 함태훈 robot_v1 메시와 collision 동일 · visual 2만 면 단순화, 오른팔 = 미러 생성)
 ├── mjcf/b1_urdf.xml            URDF 변환본 (mj_saveLastXML, 수정 금지)
 ├── mjcf/b1.xml                 변환본 + site(left_ee · right_ee · base_imu) + default class + 액추에이터 11 + 센서 30
 ├── mjcf/scene.xml              include b1.xml + 바닥 · 조명 · option

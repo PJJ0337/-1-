@@ -18,7 +18,7 @@
 | B3 | 변환본 angle=radian | OK | mj_saveLastXML이 명시 |
 | F1 | body 수 · 이름 = URDF link | OK | nbody 18 = link 17 + world, njnt 11, ngeom 29, nsite 3 |
 | C3 | 베이스 planar → slide · slide · hinge (원본) | OK | ['base_planar_joint_TX', 'base_planar_joint_TY', 'base_planar_joint_RZ'], nq 11 = 3 + 8 |
-| C3-1 | Isaac 사본: prismatic · prismatic · continuous(z) + 가상 링크 2 | OK | [('base_x_joint', 'prismatic'), ('base_y_joint', 'prismatic'), ('base_yaw_joint', 'continuous')], 원본과 50자세 차 3.6e-15 |
+| C3-1 | Isaac 사본: prismatic · prismatic · continuous(z) + 가상 링크 2 | OK | [('base_x_joint', 'prismatic'), ('base_y_joint', 'prismatic'), ('base_yaw_joint', 'continuous')], 원본과 50자세 차 5.3e-15 |
 | D1 | 영점 자세 접촉 0 (바닥 제외) | OK | ncon 0 |
 | D3 | 관절 범위 sweep 자기 충돌 0 (검증 ④) | OK | 8관절 × 0.5° 3770자세, 접촉 0. 한계 밖 여유 최소: roll − 2° · elbow ± 3~4° |
 | D4 | visual geom contype=conaffinity=0 | OK | URDF visual → group 1 |
