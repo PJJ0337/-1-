@@ -180,7 +180,7 @@
   "pass_": true
  },
  "gravity": {
-  "rated_criterion": 46.0,
+  "rated_criterion": 52.0,
   "peak": 100.0,
   "results": {
    "0kg": {
@@ -193,7 +193,7 @@
       -45.0,
       0.5
      ],
-     "margin_rated_pct": 81.1,
+     "margin_rated_pct": 104.7,
      "margin_peak_pct": 293.6
     },
     "shoulder_roll": {
@@ -205,7 +205,7 @@
       -35.1,
       -1.6
      ],
-     "margin_rated_pct": 101.2,
+     "margin_rated_pct": 127.4,
      "margin_peak_pct": 337.4
     },
     "shoulder_yaw": {
@@ -217,7 +217,7 @@
       94.7,
       -89.3
      ],
-     "margin_rated_pct": 1407.4,
+     "margin_rated_pct": 1604.0,
      "margin_peak_pct": 3176.9
     },
     "elbow": {
@@ -229,7 +229,7 @@
       -120.0,
       -89.6
      ],
-     "margin_rated_pct": 1439.9,
+     "margin_rated_pct": 1640.8,
      "margin_peak_pct": 3247.7
     }
    },
@@ -243,7 +243,7 @@
       -45.0,
       0.0
      ],
-     "margin_rated_pct": 7.2,
+     "margin_rated_pct": 21.2,
      "margin_peak_pct": 133.0
     },
     "shoulder_roll": {
@@ -255,7 +255,7 @@
       -55.1,
       -3.1
      ],
-     "margin_rated_pct": 15.7,
+     "margin_rated_pct": 30.8,
      "margin_peak_pct": 151.5
     },
     "shoulder_yaw": {
@@ -267,7 +267,7 @@
       92.5,
       -89.8
      ],
-     "margin_rated_pct": 288.2,
+     "margin_rated_pct": 338.9,
      "margin_peak_pct": 743.9
     },
     "elbow": {
@@ -279,14 +279,14 @@
       -45.0,
       90.1
      ],
-     "margin_rated_pct": 290.4,
+     "margin_rated_pct": 341.3,
      "margin_peak_pct": 748.6
     }
    }
   },
   "horizontal_0kg": 25.403,
   "horizontal_3kg": 42.914,
-  "pass_": false
+  "pass_": true
  },
  "sweep": {
   "results": {

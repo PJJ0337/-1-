@@ -17,7 +17,7 @@
 | 3 | (개별) 홀로노믹 베이스 3-DOF + velocity 액추에이터, 속도 명령 vs qvel | kv 200 / 50, 시정수 0.378 s(이론 M/kv 0.375 s), yaw 회전 후 body 기준 명령 → world 변환 확인 | 100 % | scripts/base_velocity_test.py, img/base_velocity_test.png, results/base_velocity_test.json |
 | 4-1 | (팀 연계 · 10/18) 함태훈 결과 반영 | actuator_params.json 근거 채운 본(값 · b1.xml 동일), gravcomp 옵션 패치(+ jointactuatorfrc 센서), 링크 관성 입력 교체, 0-3절 규약 확정, 검증 ②③ 함태훈 대조 일치 | 100 % | actuator_params.json, inputs/link_inertials_v1.json, checklist v0.4.1 |
 | 4 | (팀 연계) URDF 생성 → MJCF 변환 → 덧붙이기 **빌드 스크립트** | 덧붙이기 값을 `actuator_params.json`(함태훈 담당)으로 분리 → 재빌드해도 유지. class shoulder · elbow · base, 액추에이터 11, 센서 30(jointpos · jointvel · actuatorfrc, IMU gyro · acc, ee framepos · quat) | 100 % (함태훈 값 채우기 · 규약 합의 대기) | build_v1.py, actuator_params.json, mjcf/b1_urdf.xml · b1.xml · scene.xml |
-| 5 | (개별) **검증 ④ · ⑤** (+ ① · ② · ③ 공용 기준 계산 → 함태훈 결과 대조용) | ① 75.097 kg (+0.004 %) ② 영점 0.045°, 수평 4.83° → 중력보상 0.000° ③ 3 kg pitch 42.92 · roll 39.77 N·m → 정격 46 기준 미통과(그리퍼 가정 영향) ④ 3,770자세 접촉 0 ⑤ 504자세 차 0 mm. Isaac 사본 동등(1e-15) | 100 % | scripts/validate_model.py, results/validate_model.md · .json |
+| 5 | (개별) **검증 ④ · ⑤** (+ ① · ② · ③ 공용 기준 계산 → 함태훈 결과 대조용) | ① 75.097 kg (+0.004 %) ② 영점 0.045°, 수평 4.83° → 중력보상 0.000° ③ 3 kg pitch 42.92 · roll 39.77 N·m → 기준 정격 ≥ 52 N·m(팀장 10/19 상향) 통과, 여유 21.2 · 30.8 % ④ 3,770자세 접촉 0 ⑤ 504자세 차 0 mm. Isaac 사본 동등(1e-15) | 100 % | scripts/validate_model.py, results/validate_model.md · .json |
 | 6 | (개별) 체크리스트를 v1 기준으로 갱신 | v0.4: 0-3절 빌드 규약(제안), E7-1 중력보상, E8 액추에이터 응답, F6 검증 5종, M절 미러. 자동 점검 28항목 OK | 100 % | b1/docs/procedures/mujoco-urdf-loading-checklist.md, v1/results/checklist_v1.md |
 | 7 | (4주차 합의 ③) 중력보상으로 수평 처짐 상쇄 · 캡처 | 목표 + τg/kp 피드포워드: 4.83°(이론 4.85°) → 0.000°, 토크 25.40 N·m 동일 | 100 % | scripts/render_v1.py, img/v1_gravcomp.png, results/gravcomp.json |
 | 8 | (팀장 10/16 ④) RI85 요청서 §2 J1~J4 × 양팔 8행 | STEP 구동기 번호 · 시뮬 범위 · 축/구동기 +방향 · 비고 채움, 감속비 · 토크 · 스토퍼는 요청 | 100 % | b1/docs/icd/actuator-spec-request.md (v0.2) |
@@ -33,7 +33,7 @@
 | 검증 ① 질량 | 75.097 vs 기준 75.094 kg (+0.004 %), 링크별 0 % (기준 = 공용 가정값 + 함태훈 CAD, BOM 대기) | validate_model.md ① |
 | 검증 ② 정지 유지 5 s | 영점 0.045°, 팔 수평 보상 없음 4.83° (이론 −bias/kp 4.85°) → **중력보상 0.000°**, 떨림 0 | validate_model.md ②, img/v1_gravcomp.png |
 | 검증 ③ 최악 중력 토크 (15° 격자 + 국소 최적화) | 0 kg: pitch 25.41 · roll 22.86 · yaw 3.05 · elbow 2.99 / **3 kg: 42.92 · 39.77 · 11.85 · 11.78 N·m** (함태훈 독립 계산과 일치) | validate_model.md ③ |
-| ③ 판정 | 정격 46 N·m 가정 시 pitch 여유 **7.2 %** (< 20 %) → 필요 정격 51.5 N·m. 원인 = 그리퍼 0.5 kg(+2.7) + 페이로드 점 플랜지 → ee 0.10 m(+2.9) | assumptions-v0.md §4 |
+| ③ 판정 | 이전 기준 46 N·m로는 pitch 여유 7.2 % → 원인 = 그리퍼 0.5 kg(+2.7) + 페이로드 점 플랜지 → ee 0.10 m(+2.9). **팀장 10/19: box 가정 유지 · 기준 52 N·m로 상향** → pitch 21.2 % · roll 30.8 % 통과 | assumptions-v0.md §4 |
 | 검증 ④ sweep | 8관절 0.5° 간격 3,770자세 범위 안 접촉 0, 한계 밖 첫 접촉: roll −2° · elbow −3° / +4° | validate_model.md ④ |
 | 검증 ⑤ 대칭 | 504자세 \|Δx\| · \|Δz\| · \|y_L + y_R\| = 0 mm, 영점 ee (0, ±0.2866, 0.605) m | validate_model.md ⑤ |
 | 손계산 = MuJoCo (F3) | 25.4035 = 25.4035 N·m (그리퍼 포함) | checklist_v1.md F3 |
@@ -70,7 +70,7 @@ python members/park-jongjin/week05/scripts/compare_b1_taehoon.py b1/models/v0/ur
 ## 5. 막힌 점 · 요청 (공유한 날짜)
 
 - (팀장, 10/16) A1 편차 의도 · +z 정면, A2 RI85 사양 — 회신 대기
-- (팀장, 10/16 예정) 그리퍼 질량 · 치수 · TCP 위치(BOM) — S14 0.5 kg 가정, 검증 ③ 판정에 직접 영향
+- (팀장 10/19 회신) 그리퍼 BOM 정보 없음 → box 가정 유지, 토크 기준은 그만큼 높임(46 → 52 N·m) → 반영 완료. A팀(A1 · A2) 회신 아직 없음 → 가정값 유지
 - (함태훈, 10/16) 공용값 v0.1 적용 · v1 메시(관절점 원점) · `actuator_params.json` 값 · 0-3절 빌드 규약 합의, 검증 ① · ② · ③ 함태훈 결과와 대조
 
 ## 6. 구술 질문 준비 (커리큘럼 5주차)

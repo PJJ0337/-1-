@@ -145,7 +145,7 @@
 | F3 | 수평 자세 중력토크 = 손계산 | 2링크: 3.9731 / 0.7358 Nm |
 | F4 | `mj_saveLastXML` 결과에서 확장 속성 반영 확인 (A7) | |
 | F5 | 뷰어: 영점 자세 정지 · 관절 범위 양 끝 · 중력 낙하 | `python -m mujoco.viewer --mjcf=scene.xml` |
-| F6 | **모델 검증 5종** (week05): ① 질량 ±5 % ② 정지 유지 5 s ≤ 0.5° ③ 중력 토크 vs 정격 ④ 범위 sweep 자기 충돌 0 ⑤ 좌우 대칭 x · z ≤ 1 mm | [validate_model.md](../../models/v1/results/validate_model.md) — ③은 정격 미수령(판정 기준 46 N·m 가정) |
+| F6 | **모델 검증 5종** (week05): ① 질량 ±5 % ② 정지 유지 5 s ≤ 0.5° ③ 중력 토크 vs 정격 ④ 범위 sweep 자기 충돌 0 ⑤ 좌우 대칭 x · z ≤ 1 mm | [validate_model.md](../../models/v1/results/validate_model.md) — ③은 정격 미수령 → 판정 기준 정격 ≥ 52 N·m(그리퍼 box 가정 포함, 팀장 10/19) |
 
 ## M. 좌우 미러 (v1 양팔)
 

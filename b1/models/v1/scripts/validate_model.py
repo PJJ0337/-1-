@@ -12,7 +12,7 @@ m=load_model(SCENE); d=mujoco.MjData(m)
 ARM=["shoulder_pitch","shoulder_roll","shoulder_yaw","elbow"]; SIDES=("left","right")
 qa=lambda n: m.jnt_qposadr[m.joint(n).id]; da=lambda n: m.jnt_dofadr[m.joint(n).id]
 R={"model":dict(nq=m.nq,nv=m.nv,nu=m.nu,nbody=m.nbody,nsensor=m.nsensor,mujoco=mujoco.__version__)}
-RATED=46.0   # PDR 판정 기준: 정격 ≥ 46 N·m (팀장 10/16, 강 상한 38.4 × 1.2) — RI85 정격 수령 시 교체
+RATED=float(A["pdr_torque"]["rated_criterion_Nm"])   # PDR 판정 기준: 정격 ≥ 52 N·m (팀장 10/19, 그리퍼 box 가정 포함 42.92 × 1.2 올림; 이전 46) — RI85 정격 수령 시 교체
 PEAK=A["actuator"]["effort_peak"]
 
 # ① 질량 합계 — BOM 미수령 → 기준 = B1 공용 가정값 표 + 함태훈 CAD 링크 질량(밀도 3종)
@@ -163,7 +163,7 @@ L=["# v1 모델 검증 5종 결과 (자동 생성 — validate_model.py)","",f"�
    "| 검증 | 통과 기준 | 결과 | 판정 |","|---|---|---|---|",
    f'| ① 질량 합계 | 전체 · 링크별 ±5 % (기준 = 공용 가정값 + 함태훈 CAD 질량, BOM 대기) | 모델 {R["mass"]["total"]} kg vs 기준 {R["mass"]["ref_total"]} kg ({R["mass"]["err_pct"]:+.3f} %), 링크별 최대 {max(abs(r["err_pct"]) for r in rows):.3f} % | {ok(R["mass"]["pass_"])} |',
    f'| ② 정지 유지 | 5 s, 관절 오차 ≤ 0.5°, 발산 · 떨림 없음 | 영점 {R["hold"]["zero_none"]["final_err_deg"]}°. 앞으로 수평: 보상 없음 {R["hold"]["forward_none"]["final_err_deg"]}° → 보상 A {R["hold"]["forward_A"]["final_err_deg"]}° · B {R["hold"]["forward_B"]["final_err_deg"]}°. roll 상한: A {R["hold"]["roll_upper_A"]["final_err_deg"]}°(ctrlrange 클리핑) → **B {R["hold"]["roll_upper_B"]["final_err_deg"]}°** | {ok(R["hold"]["pass_"])} (중력보상 B 필요) |',
-   f'| ③ 중력 토크 vs 구동기 | 관절별 최악 |τg| × 1.2 ≤ 정격 (판정 기준 {RATED:g} N·m, 정격 미수령) | 3 kg: pitch {grav["3kg"]["shoulder_pitch"]["tau"]} · roll {grav["3kg"]["shoulder_roll"]["tau"]} · yaw {grav["3kg"]["shoulder_yaw"]["tau"]} · elbow {grav["3kg"]["elbow"]["tau"]} N·m | {ok(R["gravity"]["pass_"])} (정격 가정) |',
+   f'| ③ 중력 토크 vs 구동기 | 관절별 최악 |τg| × 1.2 ≤ 정격 (판정 기준 {RATED:g} N·m = 그리퍼 가정 포함 최악 × 1.2, 팀장 10/19 · 정격 미수령) | 3 kg: pitch {grav["3kg"]["shoulder_pitch"]["tau"]} · roll {grav["3kg"]["shoulder_roll"]["tau"]} · yaw {grav["3kg"]["shoulder_yaw"]["tau"]} · elbow {grav["3kg"]["elbow"]["tau"]} N·m | {ok(R["gravity"]["pass_"])} (정격 가정) |',
    f'| ④ 관절 범위 sweep | 범위 안 자기 충돌 0건 | {sum(v["samples"] for v in sweep.values())}자세(8관절 × 0.5°), 접촉 {sum(v["hits"] for v in sweep.values())}건 | {ok(R["sweep"]["pass_"])} |',
    f'| ⑤ 좌우 대칭 | y 부호만 다르고 x · z 차 ≤ 1 mm | {R["symmetry"]["n"]}자세 최대 |Δx| {R["symmetry"]["max_dx_mm"]:.2e} · |Δz| {R["symmetry"]["max_dz_mm"]:.2e} · |y_L + y_R| {R["symmetry"]["max_y_sum_mm"]:.2e} mm | {ok(R["symmetry"]["pass_"])} |',
    f'| 보조 · Isaac용 URDF | planar ↔ prismatic · prismatic · revolute 동등 | 질량 {R["isaac_equiv"]["mass_planar"]} vs {R["isaac_equiv"]["mass_isaac"]} kg(가상 링크 2 g), 50자세 최대 차 {R["isaac_equiv"]["max_diff"]:.1e} | {ok(R["isaac_equiv"]["pass_"])} |',
