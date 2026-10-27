@@ -1,0 +1,489 @@
+{
+ "N_per_arm": 30000,
+ "voxel_m": 0.03,
+ "plate_top_z": 0.4,
+ "frame": "base_link = world (베이스 영점), z = 바닥 기준",
+ "arms": {
+  "left": {
+   "n_valid": 29757,
+   "n_self_collision": 243,
+   "shoulder": [
+    0.0,
+    0.1698,
+    1.2
+   ],
+   "x": [
+    -0.594,
+    0.594
+   ],
+   "y": [
+    -0.095,
+    0.852
+   ],
+   "z": [
+    0.606,
+    1.789
+   ],
+   "above_plate": [
+    0.206,
+    1.389
+   ],
+   "reach_from_shoulder_max": 0.685,
+   "reach_from_shoulder_min": 0.267,
+   "forward_reach_max": 0.594,
+   "forward_reach_z": 1.223,
+   "forward_beyond_plate_edge": 0.306,
+   "cross_midline_max": 0.095,
+   "height_bands": [
+    {
+     "z_band": [
+      0.6,
+      0.7
+     ],
+     "above_plate": [
+      0.2,
+      0.3
+     ],
+     "n": 968,
+     "x_max": 0.308,
+     "beyond_plate_edge": 0.02
+    },
+    {
+     "z_band": [
+      0.7,
+      0.8
+     ],
+     "above_plate": [
+      0.3,
+      0.4
+     ],
+     "n": 1937,
+     "x_max": 0.437,
+     "beyond_plate_edge": 0.149
+    },
+    {
+     "z_band": [
+      0.8,
+      0.9
+     ],
+     "above_plate": [
+      0.4,
+      0.5
+     ],
+     "n": 2693,
+     "x_max": 0.507,
+     "beyond_plate_edge": 0.219
+    },
+    {
+     "z_band": [
+      0.9,
+      1.0
+     ],
+     "above_plate": [
+      0.5,
+      0.6
+     ],
+     "n": 2989,
+     "x_max": 0.559,
+     "beyond_plate_edge": 0.271
+    },
+    {
+     "z_band": [
+      1.0,
+      1.1
+     ],
+     "above_plate": [
+      0.6,
+      0.7
+     ],
+     "n": 3391,
+     "x_max": 0.583,
+     "beyond_plate_edge": 0.295
+    },
+    {
+     "z_band": [
+      1.1,
+      1.2
+     ],
+     "above_plate": [
+      0.7,
+      0.8
+     ],
+     "n": 3515,
+     "x_max": 0.594,
+     "beyond_plate_edge": 0.306
+    },
+    {
+     "z_band": [
+      1.2,
+      1.3
+     ],
+     "above_plate": [
+      0.8,
+      0.9
+     ],
+     "n": 3418,
+     "x_max": 0.594,
+     "beyond_plate_edge": 0.306
+    },
+    {
+     "z_band": [
+      1.3,
+      1.4
+     ],
+     "above_plate": [
+      0.9,
+      1.0
+     ],
+     "n": 3258,
+     "x_max": 0.583,
+     "beyond_plate_edge": 0.295
+    },
+    {
+     "z_band": [
+      1.4,
+      1.5
+     ],
+     "above_plate": [
+      1.0,
+      1.1
+     ],
+     "n": 2901,
+     "x_max": 0.56,
+     "beyond_plate_edge": 0.272
+    },
+    {
+     "z_band": [
+      1.5,
+      1.6
+     ],
+     "above_plate": [
+      1.1,
+      1.2
+     ],
+     "n": 2324,
+     "x_max": 0.511,
+     "beyond_plate_edge": 0.223
+    },
+    {
+     "z_band": [
+      1.6,
+      1.7
+     ],
+     "above_plate": [
+      1.2,
+      1.3
+     ],
+     "n": 1640,
+     "x_max": 0.437,
+     "beyond_plate_edge": 0.149
+    },
+    {
+     "z_band": [
+      1.7,
+      1.8
+     ],
+     "above_plate": [
+      1.3,
+      1.4
+     ],
+     "n": 723,
+     "x_max": 0.305,
+     "beyond_plate_edge": 0.017
+    },
+    {
+     "z_band": [
+      1.8,
+      1.9
+     ],
+     "above_plate": [
+      1.4,
+      1.5
+     ],
+     "n": 0,
+     "x_max": null,
+     "beyond_plate_edge": null
+    }
+   ]
+  },
+  "right": {
+   "n_valid": 29775,
+   "n_self_collision": 225,
+   "shoulder": [
+    0.0,
+    -0.1698,
+    1.2
+   ],
+   "x": [
+    -0.595,
+    0.595
+   ],
+   "y": [
+    -0.852,
+    0.09
+   ],
+   "z": [
+    0.606,
+    1.791
+   ],
+   "above_plate": [
+    0.206,
+    1.391
+   ],
+   "reach_from_shoulder_max": 0.685,
+   "reach_from_shoulder_min": 0.27,
+   "forward_reach_max": 0.595,
+   "forward_reach_z": 1.214,
+   "forward_beyond_plate_edge": 0.307,
+   "cross_midline_max": 0.09,
+   "height_bands": [
+    {
+     "z_band": [
+      0.6,
+      0.7
+     ],
+     "above_plate": [
+      0.2,
+      0.3
+     ],
+     "n": 962,
+     "x_max": 0.316,
+     "beyond_plate_edge": 0.028
+    },
+    {
+     "z_band": [
+      0.7,
+      0.8
+     ],
+     "above_plate": [
+      0.3,
+      0.4
+     ],
+     "n": 1818,
+     "x_max": 0.43,
+     "beyond_plate_edge": 0.142
+    },
+    {
+     "z_band": [
+      0.8,
+      0.9
+     ],
+     "above_plate": [
+      0.4,
+      0.5
+     ],
+     "n": 2709,
+     "x_max": 0.512,
+     "beyond_plate_edge": 0.224
+    },
+    {
+     "z_band": [
+      0.9,
+      1.0
+     ],
+     "above_plate": [
+      0.5,
+      0.6
+     ],
+     "n": 2980,
+     "x_max": 0.554,
+     "beyond_plate_edge": 0.266
+    },
+    {
+     "z_band": [
+      1.0,
+      1.1
+     ],
+     "above_plate": [
+      0.6,
+      0.7
+     ],
+     "n": 3278,
+     "x_max": 0.584,
+     "beyond_plate_edge": 0.296
+    },
+    {
+     "z_band": [
+      1.1,
+      1.2
+     ],
+     "above_plate": [
+      0.7,
+      0.8
+     ],
+     "n": 3461,
+     "x_max": 0.593,
+     "beyond_plate_edge": 0.305
+    },
+    {
+     "z_band": [
+      1.2,
+      1.3
+     ],
+     "above_plate": [
+      0.8,
+      0.9
+     ],
+     "n": 3518,
+     "x_max": 0.595,
+     "beyond_plate_edge": 0.307
+    },
+    {
+     "z_band": [
+      1.3,
+      1.4
+     ],
+     "above_plate": [
+      0.9,
+      1.0
+     ],
+     "n": 3270,
+     "x_max": 0.585,
+     "beyond_plate_edge": 0.297
+    },
+    {
+     "z_band": [
+      1.4,
+      1.5
+     ],
+     "above_plate": [
+      1.0,
+      1.1
+     ],
+     "n": 2944,
+     "x_max": 0.554,
+     "beyond_plate_edge": 0.266
+    },
+    {
+     "z_band": [
+      1.5,
+      1.6
+     ],
+     "above_plate": [
+      1.1,
+      1.2
+     ],
+     "n": 2468,
+     "x_max": 0.509,
+     "beyond_plate_edge": 0.221
+    },
+    {
+     "z_band": [
+      1.6,
+      1.7
+     ],
+     "above_plate": [
+      1.2,
+      1.3
+     ],
+     "n": 1649,
+     "x_max": 0.434,
+     "beyond_plate_edge": 0.146
+    },
+    {
+     "z_band": [
+      1.7,
+      1.8
+     ],
+     "above_plate": [
+      1.3,
+      1.4
+     ],
+     "n": 718,
+     "x_max": 0.32,
+     "beyond_plate_edge": 0.032
+    },
+    {
+     "z_band": [
+      1.8,
+      1.9
+     ],
+     "above_plate": [
+      1.4,
+      1.5
+     ],
+     "n": 0,
+     "x_max": null,
+     "beyond_plate_edge": null
+    }
+   ]
+  }
+ },
+ "shared": {
+  "dense_slab_samples_per_arm": 300000,
+  "dense_slab_points": [
+   27248,
+   27420
+  ],
+  "n_voxel_left": 18089,
+  "n_voxel_right": 18241,
+  "n_voxel_shared": 2568,
+  "vol_left_m3": 0.4884,
+  "vol_right_m3": 0.4925,
+  "vol_shared_m3": 0.0693,
+  "shared_pct_of_left": 14.2,
+  "x": [
+   -0.495,
+   0.495
+  ],
+  "y": [
+   -0.105,
+   0.105
+  ],
+  "z": [
+   0.735,
+   1.695
+  ],
+  "above_plate": [
+   0.335,
+   1.295
+  ],
+  "centroid": [
+   0.002,
+   -0.0,
+   1.24
+  ],
+  "note": "복셀 점유 기반(|y| ≤ 0.15 m 판은 추가 샘플로 조밀화, 그래도 경계 복셀 일부 누락 가능 → 부피는 하한). 양손 협업 영역 = 몸통 정면 y ≈ 0 부근",
+  "front_candidates": [
+   [
+    0.165,
+    0.015,
+    0.735
+   ],
+   [
+    0.225,
+    0.105,
+    0.975
+   ],
+   [
+    0.375,
+    -0.045,
+    1.125
+   ],
+   [
+    0.405,
+    -0.015,
+    1.275
+   ],
+   [
+    0.165,
+    0.045,
+    1.425
+   ]
+  ]
+ },
+ "with_base": {
+  "z_band": [
+   0.606,
+   1.789
+  ],
+  "above_plate": [
+   0.206,
+   1.389
+  ],
+  "horizontal": "무제한 (base_x · base_y slide, 실제는 주행 공간 · 장애물로 제한)",
+  "yaw": "base_yaw 360° → 한 팔로 전 방위 접근, 공유 작업공간도 원하는 방위로 회전",
+  "note": "베이스는 높이를 바꾸지 못함 → 도달 높이 대역은 팔 단독과 같음. 상판 높이(0.40 m) ~ 그 위 0.20 m 와 0.605 m 이하(예: 바닥 · 낮은 선반)는 베이스 이동으로도 도달 불가"
+ },
+ "elapsed_s": 18.7
+}
