@@ -60,6 +60,7 @@ MUJOCO_GL=glfw xvfb-run -a python b1/models/v1/scripts/render_v1.py && python b1
 ## 5. 막힌 점 · 요청 (공유한 날짜)
 
 - (팀장) 어깨 구동기 = TQ ILM-E85x30(A2 사양서) vs RI85(CAD) 확정 요청 — 둘 다 PDR 토크 통과, 기본 case a2_doc
+- (팀장 10/27 회신) 「노션 내용 최대한 진행, 모르는 부분은 빼고 진행. 이번 주 출장으로 답변 늦을 수 있음」 → 어깨 구동기는 확정 전까지 a2_doc(A2 사양서) 가정으로 제출, 회신 오면 a2.case만 바꿔 재빌드
 - (함태훈) ① actuator_params.json에 `a2` · gravcomp on 반영한 것 확인 ② kp · kv 튜닝을 a2_doc 기준으로 ③ `workspace_max_torque.json` · `ik.py` 인터페이스 v1(orientation_limit 추가) 사용 — 집기 시나리오는 위치만 IK + 연속 q_init 권장
 - (A팀 피드백, PDR) 상판 위 0.2 m 이하 · 바닥 도달 불가, 테이블 높이에서 가장자리 밖 0.15 m, 공유 작업공간 폭 0.21 m, 4-DOF로 수직 하강 접근 제한 → 손목 2축 · 몸통 높이 · roll 하한(몸통 폭) 검토 요청
 
