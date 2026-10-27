@@ -1,0 +1,282 @@
+{
+ "urdf_check": [
+  {
+   "file": "b1_v1.urdf",
+   "n_mesh": 18,
+   "relative": true,
+   "exists": true,
+   "base_joints": [
+    "planar",
+    "fixed",
+    "fixed"
+   ]
+  },
+  {
+   "file": "b1_v1_isaac.urdf",
+   "n_mesh": 18,
+   "relative": true,
+   "exists": true,
+   "base_joints": [
+    "prismatic",
+    "prismatic",
+    "continuous"
+   ]
+  }
+ ],
+ "meshes": {
+  "visual/left_elbow_link_visual.stl": {
+   "faces": 11226,
+   "extent_m": 0.2516,
+   "watertight": false,
+   "convex": false
+  },
+  "visual/left_shoulder_pitch_link_visual.stl": {
+   "faces": 19999,
+   "extent_m": 0.1988,
+   "watertight": false,
+   "convex": false
+  },
+  "visual/left_shoulder_roll_link_visual.stl": {
+   "faces": 20000,
+   "extent_m": 0.2601,
+   "watertight": false,
+   "convex": false
+  },
+  "visual/left_shoulder_yaw_link_visual.stl": {
+   "faces": 19999,
+   "extent_m": 0.1836,
+   "watertight": false,
+   "convex": false
+  },
+  "visual/right_elbow_link_visual.stl": {
+   "faces": 11226,
+   "extent_m": 0.2516,
+   "watertight": false,
+   "convex": false
+  },
+  "visual/right_shoulder_pitch_link_visual.stl": {
+   "faces": 19999,
+   "extent_m": 0.1988,
+   "watertight": false,
+   "convex": false
+  },
+  "visual/right_shoulder_roll_link_visual.stl": {
+   "faces": 20000,
+   "extent_m": 0.2601,
+   "watertight": false,
+   "convex": false
+  },
+  "visual/right_shoulder_yaw_link_visual.stl": {
+   "faces": 19999,
+   "extent_m": 0.1836,
+   "watertight": false,
+   "convex": false
+  },
+  "visual/torso_link_visual.stl": {
+   "faces": 19999,
+   "extent_m": 0.3722,
+   "watertight": false,
+   "convex": false
+  },
+  "collision/left_elbow_link_collision.stl": {
+   "faces": 292,
+   "extent_m": 0.2516,
+   "watertight": true,
+   "convex": true
+  },
+  "collision/left_shoulder_pitch_link_collision.stl": {
+   "faces": 282,
+   "extent_m": 0.1983,
+   "watertight": true,
+   "convex": true
+  },
+  "collision/left_shoulder_roll_link_collision.stl": {
+   "faces": 272,
+   "extent_m": 0.2596,
+   "watertight": true,
+   "convex": true
+  },
+  "collision/left_shoulder_yaw_link_collision.stl": {
+   "faces": 318,
+   "extent_m": 0.1836,
+   "watertight": true,
+   "convex": true
+  },
+  "collision/right_elbow_link_collision.stl": {
+   "faces": 292,
+   "extent_m": 0.2516,
+   "watertight": true,
+   "convex": false
+  },
+  "collision/right_shoulder_pitch_link_collision.stl": {
+   "faces": 282,
+   "extent_m": 0.1983,
+   "watertight": true,
+   "convex": false
+  },
+  "collision/right_shoulder_roll_link_collision.stl": {
+   "faces": 272,
+   "extent_m": 0.2596,
+   "watertight": true,
+   "convex": false
+  },
+  "collision/right_shoulder_yaw_link_collision.stl": {
+   "faces": 318,
+   "extent_m": 0.1836,
+   "watertight": true,
+   "convex": false
+  },
+  "collision/torso_link_collision.stl": {
+   "faces": 388,
+   "extent_m": 0.3722,
+   "watertight": true,
+   "convex": true
+  }
+ },
+ "actuators": {
+  "base_vx": {
+   "joint": "base_planar_joint_TX",
+   "kp": 200.0,
+   "kv": 200.0,
+   "force": 2000.0,
+   "armature": 0.0,
+   "damping": 0.0,
+   "frictionloss": 0.0,
+   "range": [
+    0.0,
+    0.0
+   ]
+  },
+  "base_vy": {
+   "joint": "base_planar_joint_TY",
+   "kp": 200.0,
+   "kv": 200.0,
+   "force": 2000.0,
+   "armature": 0.0,
+   "damping": 0.0,
+   "frictionloss": 0.0,
+   "range": [
+    0.0,
+    0.0
+   ]
+  },
+  "base_wz": {
+   "joint": "base_planar_joint_RZ",
+   "kp": 50.0,
+   "kv": 50.0,
+   "force": 500.0,
+   "armature": 0.0,
+   "damping": 0.0,
+   "frictionloss": 0.0,
+   "range": [
+    0.0,
+    0.0
+   ]
+  },
+  "left_shoulder_pitch": {
+   "joint": "left_shoulder_pitch_joint",
+   "kp": 300.0,
+   "kv": 29.791,
+   "force": 381.7,
+   "armature": 0.219,
+   "damping": 0.5,
+   "frictionloss": 0.0,
+   "range": [
+    -3.0,
+    3.0
+   ]
+  },
+  "left_shoulder_roll": {
+   "joint": "left_shoulder_roll_joint",
+   "kp": 300.0,
+   "kv": 32.448,
+   "force": 381.7,
+   "armature": 0.219,
+   "damping": 0.5,
+   "frictionloss": 0.0,
+   "range": [
+    -0.28,
+    1.5
+   ]
+  },
+  "left_shoulder_yaw": {
+   "joint": "left_shoulder_yaw_joint",
+   "kp": 300.0,
+   "kv": 16.761,
+   "force": 381.7,
+   "armature": 0.219,
+   "damping": 0.5,
+   "frictionloss": 0.0,
+   "range": [
+    -2.5,
+    2.5
+   ]
+  },
+  "left_elbow": {
+   "joint": "left_elbow_joint",
+   "kp": 300.0,
+   "kv": 12.823,
+   "force": 181.5,
+   "armature": 0.098,
+   "damping": 0.5,
+   "frictionloss": 0.0,
+   "range": [
+    -1.83,
+    1.83
+   ]
+  },
+  "right_shoulder_pitch": {
+   "joint": "right_shoulder_pitch_joint",
+   "kp": 300.0,
+   "kv": 29.791,
+   "force": 381.7,
+   "armature": 0.219,
+   "damping": 0.5,
+   "frictionloss": 0.0,
+   "range": [
+    -3.0,
+    3.0
+   ]
+  },
+  "right_shoulder_roll": {
+   "joint": "right_shoulder_roll_joint",
+   "kp": 300.0,
+   "kv": 32.448,
+   "force": 381.7,
+   "armature": 0.219,
+   "damping": 0.5,
+   "frictionloss": 0.0,
+   "range": [
+    -0.28,
+    1.5
+   ]
+  },
+  "right_shoulder_yaw": {
+   "joint": "right_shoulder_yaw_joint",
+   "kp": 300.0,
+   "kv": 16.761,
+   "force": 381.7,
+   "armature": 0.219,
+   "damping": 0.5,
+   "frictionloss": 0.0,
+   "range": [
+    -2.5,
+    2.5
+   ]
+  },
+  "right_elbow": {
+   "joint": "right_elbow_joint",
+   "kp": 300.0,
+   "kv": 12.823,
+   "force": 181.5,
+   "armature": 0.098,
+   "damping": 0.5,
+   "frictionloss": 0.0,
+   "range": [
+    -1.83,
+    1.83
+   ]
+  }
+ },
+ "a2_case": "a2_doc"
+}
