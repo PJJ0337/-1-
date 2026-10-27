@@ -19,7 +19,8 @@ for l in links:
     g=lambda k: float(i.get(k)); I=np.array([[g("ixx"),g("ixy"),g("ixz")],[g("ixy"),g("iyy"),g("iyz")],[g("ixz"),g("iyz"),g("izz")]]); w=np.linalg.eigvalsh(I)
     if w[0]<=0 or w[0]+w[1]<w[2]*(1-1e-9): bad.append(l.get("name"))
 add("A3","관성 양정치 · 삼각부등식 (오른팔 미러 관성 포함)",not bad,f"위반 {bad or 0} — balanceinertia 미사용(B6)")
-mx=max(max(trimesh.load(os.path.join(V1,"meshes",f)).extents) for f in os.listdir(os.path.join(V1,"meshes")) if f.endswith(".stl"))
+import glob as _g
+mx=max(max(trimesh.load(f).extents) for f in _g.glob(os.path.join(V1,"meshes","*","*.stl")))
 add("A4","단위 m (메시 최대 길이)",0.05<mx<1.0,f"최대 extent {mx:.3f} m")
 miss=[j.get("name") for j in rev if j.find("limit") is None or any(j.find("limit").get(k) is None for k in ("lower","upper","effort","velocity"))]
 add("A5","revolute 8개 limit(lower·upper·effort·velocity)",not miss and len(rev)==8,f"revolute {len(rev)}, 누락 {miss or 0} — 값 = assumptions_b1.json (공용 v0.2)")
@@ -28,7 +29,8 @@ add("A8","transmission · gazebo 미사용",root.find("transmission") is None an
 comp=root.find("mujoco/compiler").attrib
 add("B1","fusestatic=false",comp.get("fusestatic")=="false","base_plate_link · torso · tool0 · gripper_link 이름 보존 → site · sensor 대상")
 add("B2","discardvisual=false",comp.get("discardvisual")=="false","")
-add("B4","meshdir 지정",comp.get("meshdir")=="../meshes/","상대 경로(package:// 없음) — Isaac 임포트 패키지 요건")
+_mf=[mm.find("geometry/mesh").get("filename") for l in links for mm in l.findall("visual")+l.findall("collision") if mm.find("geometry/mesh") is not None]
+add("B4","메시 상대 경로 (../meshes/visual · collision, package:// 없음)",all(f.startswith(("../meshes/visual/","../meshes/collision/")) for f in _mf) and comp.get("strippath")=="false",f"{len(_mf)}개, strippath=false — Isaac 임포트 패키지 요건 (week06: meshdir → 파일별 상대 경로)")
 add("B6","balanceinertia=false (팀 결정 10/8)",comp.get("balanceinertia")=="false","")
 add("B3","변환본 angle=radian",'angle="radian"' in open(os.path.join(V1,"mjcf","b1_urdf.xml"),encoding="utf-8").read(),"mj_saveLastXML이 명시")
 mu=mujoco.MjModel.from_xml_path(U); m=load_model(S); d=mujoco.MjData(m)
@@ -47,10 +49,12 @@ add("E1","파일 구조: 변환본 · 빌드 생성 b1.xml · scene",all(os.path
 arm=[i for i in range(m.nu) if not m.actuator(i).name.startswith("base")]
 eff={j.get("name"):float(j.find("limit").get("effort")) for j in rev}
 okE4=all(abs(m.actuator_forcerange[i][1]-eff[m.joint(m.actuator_trnid[i,0]).name])<1e-9 for i in arm) and all(np.allclose(m.actuator_ctrlrange[i],m.jnt_range[m.actuator_trnid[i,0]]) for i in arm)
-add("E4","forcerange = effort, ctrlrange = 관절 range",okE4,"±100 N·m, inheritrange=1, class shoulder · elbow")
+add("E4","forcerange = effort, ctrlrange = 관절 range",okE4,f"±{sorted({round(float(m.actuator_forcerange[i][1]),1) for i in arm})} N·m (A2 피크), inheritrange=1, class shoulder · elbow")
 add("E5","implicitfast + dampratio",m.opt.integrator==mujoco.mjtIntegrator.mjINT_IMPLICITFAST,"dampratio 1 → kv는 컴파일 시 영점 관성으로 계산 (관성 바뀌면 자동 갱신)")
 arma=[float(m.dof_armature[m.jnt_dofadr[m.actuator_trnid[i,0]]]) for i in arm]
-add("E6","armature (BOM 전 0 허용)",all(a==0 for a in arma),"0 — RI85 출력축 반사관성(요청서 4-1) 수령 시 actuator_params.json만 교체")
+_A2=json.load(open(os.path.join(V1,"inputs","a2_actuators.json"),encoding="utf-8")); _P=json.load(open(os.path.join(V1,"actuator_params.json"),encoding="utf-8")); _case=_P.get("a2",{}).get("case","none")
+_exp=[] if _case=="none" else [_A2["cases"][_case]["classes"]["shoulder"]["armature"]]*3+[_A2["cases"][_case]["classes"]["elbow"]["armature"]]
+add("E6","armature = A2 사양 (J_rotor × i², week06)",(all(a==0 for a in arma) if _case=="none" else all(abs(a-b)<1e-9 for a,b in zip(list(arma)[:4],_exp))),f"case {_case}: {[round(float(a),3) for a in list(arma)[:4]]} (pitch · roll · yaw · elbow, 양팔 같음) — 로터만, 기어열 관성 TBD(A2) → 과소 추정")
 ac=json.load(open(os.path.join(V1,"results","actuator_check.json"),encoding="utf-8"))
 add("E8","액추에이터 11개 명령 → 관절 응답 (뷰어 슬라이더 점검 자동판)",all(c["ok"] for c in ac),f"{sum(c['ok'] for c in ac)}/{len(ac)} — 범위 40 % 명령, position 오차 ≤ 2 %, 베이스 velocity 1.5 s 후 98 %")
 # F3 손계산

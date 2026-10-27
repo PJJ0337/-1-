@@ -58,7 +58,11 @@
   "kv_fixed": "6주차 kv 고정 튜닝 시 pitch Mᵢᵢ 가 자세에 따라 0.049~0.849 kg·m² (17배) 변함 → 고정 kv 면 ζ 0.64~2.68. dampratio 유지 또는 자세별 확인"
  },
  "gravcomp": {
-  "enable": false,
-  "_note": "함태훈 제안(10/17) 중력보상 B: 팔 body gravcomp=1 + joint actuatorgravcomp=true → 보상 토크가 actuator 쪽(qfrc_actuator)으로 들어가 ctrlrange 클리핑과 무관, 합은 actuatorfrcrange(±100)로 제한. 켜면 jointactuatorfrc 센서 8개 추가(actuatorfrc는 보상분 미포함). week05 제출본은 꺼 둠(검증 수치 기준 유지) → week06에서 켬"
+  "enable": true,
+  "_note": "함태훈 제안(10/17) 중력보상 B: 팔 body gravcomp=1 + joint actuatorgravcomp=true → 보상 토크가 actuator 쪽(qfrc_actuator)으로 들어가 ctrlrange 클리핑과 무관, 합은 actuatorfrcrange(±100)로 제한. 켜면 jointactuatorfrc 센서 8개 추가(actuatorfrc는 보상분 미포함). week05 제출본은 꺼 둠(검증 수치 기준 유지) → week06에서 켬 · (10/27 week06) enable = true — 함태훈 제안 반영(박종진), 검증 ②의 '보상 없음 · A' 는 validate_model.py가 gravcomp를 뺀 모델로 따로 계산"
+ },
+ "a2": {
+  "case": "a2_doc",
+  "_note": "(10/27 week06, 박종진 → 함태훈 확인 요청) inputs/a2_actuators.json case 선택. classes의 armature · forcerange 값은 빌드 시 case 값으로 덮어씀(이 파일 값 = A2 이전 가정, 비교용으로 남김). 어깨 TQ/RI85 팀장 확인 후 case 확정"
  }
 }

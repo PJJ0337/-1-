@@ -13,6 +13,13 @@ from scipy.spatial.transform import Rotation as Ro
 HERE=os.path.dirname(os.path.abspath(__file__)); V1=os.path.dirname(HERE); MODELS=os.path.dirname(V1); REPO=os.path.dirname(os.path.dirname(MODELS))
 A=json.load(open(os.path.join(MODELS,"assumptions_b1.json"),encoding="utf-8"))
 P=json.load(open(os.path.join(V1,"actuator_params.json"),encoding="utf-8"))
+# (week06) A2 구동기 사양(10/19) 반영: actuator_params.json "a2.case" → inputs/a2_actuators.json 의 case 값으로 class별 armature · forcerange, URDF effort 를 덮어씀
+A2C=json.load(open(os.path.join(V1,"inputs","a2_actuators.json"),encoding="utf-8"))
+CASE=os.environ.get("B1_A2_CASE",P.get("a2",{}).get("case","none"))
+if CASE!="none":
+    for cname,cv in A2C["cases"][CASE]["classes"].items():
+        P["classes"][cname]["armature"]=cv["armature"]; P["classes"][cname]["forcerange"]=cv["peak"]
+EFF={a:(A2C["cases"][CASE]["classes"][c]["peak"] if CASE!="none" else A["actuator"]["effort_peak"]) for c,cp in P["classes"].items() for a in cp["joints"]}
 # 링크 질량 · 관성: 함태훈 sim/robot_v1/link_inertials_v1.json (13b01ad, 원점 = B1 골격 관절점) — 평행이동 변환(merge_taehoon) 불필요.
 #   week04 B1 프레임 변환본과 질량 차 ≤ 2.4e-6 kg · COM ≤ 0.01 mm · 관성 ≤ 4e-8 (10/18 대조). 오른팔은 왼팔 미러
 INER=json.load(open(os.path.join(V1,"inputs","link_inertials_v1.json"),encoding="utf-8"))
@@ -57,18 +64,20 @@ def meshes():
     info={}
     for k in ["torso_link"]+[f"left_{a}_link" for a in ARM]:
         for kind in ("visual","collision"):
-            shutil.copy(os.path.join(SRC_MESH,f"{k}_{kind}.stl"),os.path.join(V1,"meshes",f"{k}_{kind}.stl"))
+            os.makedirs(os.path.join(V1,"meshes",kind),exist_ok=True)
+            shutil.copy(os.path.join(SRC_MESH,f"{k}_{kind}.stl"),os.path.join(V1,"meshes",kind,f"{k}_{kind}.stl"))
             if k.startswith("left_"):
                 t=trimesh.load(os.path.join(SRC_MESH,f"{k}_{kind}.stl")); t.apply_transform(np.diag([1,-1,1,1])); t.faces=t.faces[:,::-1]
-                t.export(os.path.join(V1,"meshes",f"{k.replace('left_','right_')}_{kind}.stl"))
-            info[f"{k}_{kind}"]=len(trimesh.load(os.path.join(V1,"meshes",f"{k}_{kind}.stl")).faces)
+                t.export(os.path.join(V1,"meshes",kind,f"{k.replace('left_','right_')}_{kind}.stl"))
+            for kk in ([k] if not k.startswith("left_") else [k,k.replace("left_","right_")]):
+                info[f"{kk}_{kind}"]=len(trimesh.load(os.path.join(V1,"meshes",kind,f"{kk}_{kind}.stl")).faces)
     return info
 
 def build_urdf(variant):
     b=A["base"]; t=A["torso"]; act=A["actuator"]; lim=A["limits"]; g=A["gripper"]; c=A["control"]
     L=['<?xml version="1.0"?>\n<!-- 자동 생성: b1/models/v1/scripts/build_v1.py (week05, 박종진) — 손으로 고치지 말 것. 값: assumptions_b1.json -->\n',
        f'<robot name="b1_v1{"_isaac" if variant=="isaac" else ""}">\n',
-       '  <mujoco>\n    <compiler meshdir="../meshes/" fusestatic="false" discardvisual="false" balanceinertia="false"/>\n  </mujoco>\n\n  <link name="odom"/>\n']
+       '  <mujoco>\n    <compiler strippath="false" fusestatic="false" discardvisual="false" balanceinertia="false"/>\n  </mujoco>\n\n  <link name="odom"/>\n']
     w=L.append
     # ---- 베이스 3-DOF (C3)
     if variant=="planar":
@@ -90,7 +99,7 @@ def build_urdf(variant):
     M,C,I=combine([(ti["mass"],ti["com"],ti["inertia"]),(t["box_mass"],(0,0,(tz0+tz1)/2),box_I(t["box_mass"],t["box_x"],t["box_y"],th))])
     w('  <link name="torso_link">\n'+inertial(M,C,I))
     for kind in ("visual","collision"):
-        w(f'    <{kind} name="torso_actuators_{kind}">\n      <geometry><mesh filename="torso_link_{kind}.stl"/></geometry>\n    </{kind}>\n')
+        w(f'    <{kind} name="torso_actuators_{kind}">\n      <geometry><mesh filename="../meshes/{kind}/torso_link_{kind}.stl"/></geometry>\n    </{kind}>\n')
     w(boxgeo("torso_box",(0,0,(tz0+tz1)/2),(t["box_x"],t["box_y"],th))+'  </link>\n')
     R=np.array(A["cad_to_base"]["R"],float); cc=np.array(A["cad_to_base"]["c_mm"],float)
     w(joint("cad_frame_joint","fixed","torso_link","cad_frame",xyz=R@(-cc)/1000.0,rpy=Ro.from_matrix(R).as_euler("xyz")))
@@ -105,10 +114,10 @@ def build_urdf(variant):
             if side=="right": xyz,ax,rpy,com,I=m_pt(xyz),m_axis(ax),m_rpy(rpy),m_pt(com),m_I(I)
             lo,hi=lim[a]
             w(joint(f"{side}_{a}_joint","revolute",parent,f"{side}_{a}_link",xyz,rpy,ax,
-                    {"lower":lo,"upper":hi,"effort":act["effort_peak"],"velocity":act["velocity"]},(act["damping"],act["friction"])))
+                    {"lower":lo,"upper":hi,"effort":EFF[a],"velocity":act["velocity"]},(act["damping"],act["friction"])))
             w(f'  <link name="{side}_{a}_link">\n'+inertial(li["mass"],com,I))
             for kind in ("visual","collision"):
-                w(f'    <{kind} name="{side}_{a}_{kind}">\n      <geometry><mesh filename="{side}_{a}_link_{kind}.stl"/></geometry>\n    </{kind}>\n')
+                w(f'    <{kind} name="{side}_{a}_{kind}">\n      <geometry><mesh filename="../meshes/{kind}/{side}_{a}_link_{kind}.stl"/></geometry>\n    </{kind}>\n')
             w('  </link>\n'); parent=f"{side}_{a}_link"
             if side=="left": rows.append((a,J_XYZ[a],m_pt(J_XYZ[a]),J_AX[a],m_axis(J_AX[a]),(0,0,YAW0) if a=="shoulder_yaw" else (0,0,0),lim[a]))
         tx=TOOL if side=="left" else m_pt(TOOL)
@@ -144,6 +153,8 @@ def build_mjcf():
     raw=os.path.join(V1,"mjcf","b1_urdf.xml"); mujoco.mj_saveLastXML(raw,m)
     tree=ET.parse(raw); root=tree.getroot(); root.set("model","b1_v1")
     comp=root.find("compiler"); comp.set("meshdir","../meshes/")
+    for me in root.iter("mesh"):   # URDF 상대 경로(../meshes/visual/x.stl) → MJCF는 meshdir 기준(visual/x.stl)
+        f_=me.get("file","").replace("\\","/"); me.set("file","/".join(f_.split("/")[-2:]))
     # default class: 관절 그룹별 (어깨 · 팔꿈치) + 베이스
     dflt=ET.Element("default")
     for cname,cp in P["classes"].items():
@@ -165,7 +176,8 @@ def build_mjcf():
             if b.get("name","").startswith(("left_","right_")): b.set("gravcomp","1")
         for d_ in dflt.iter("default"):
             j_=d_.find("joint")
-            if d_.get("class") in P["classes"] and j_ is not None: j_.set("actuatorgravcomp","true")
+            if d_.get("class") in P["classes"] and j_ is not None:
+                fr=P["classes"][d_.get("class")]["forcerange"]; j_.set("actuatorgravcomp","true"); j_.set("actuatorfrcrange",f"{-fr} {fr}")
     # site: 끝점 ee (그리퍼 끝단) · 베이스 IMU (상판 중심)
     for b in root.iter("body"):
         if b.get("name","").endswith("_gripper_link"):
@@ -218,4 +230,5 @@ if __name__=="__main__":
     mirror_table(rows); build_mjcf()
     json.dump(info,open(os.path.join(V1,"meshes","mesh_info.json"),"w"),indent=1)
     m=mujoco.MjModel.from_xml_path(os.path.join(V1,"mjcf","scene.xml"))
+    print(f"A2 case: {CASE}, gravcomp {P.get('gravcomp',{}).get('enable',False)}, armature "+str({c:P['classes'][c]['armature'] for c in P['classes']}))
     print(f"built: nq {m.nq} nv {m.nv} nu {m.nu} nbody {m.nbody} nsensor {m.nsensor} mass {sum(m.body_mass):.3f} kg")

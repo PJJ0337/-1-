@@ -2,7 +2,7 @@
 <!-- 자동 생성: b1/models/v1/scripts/build_v1.py (week05, 박종진) — 손으로 고치지 말 것. 값: assumptions_b1.json -->
 <robot name="b1_v1">
   <mujoco>
-    <compiler meshdir="../meshes/" fusestatic="false" discardvisual="false" balanceinertia="false"/>
+    <compiler strippath="false" fusestatic="false" discardvisual="false" balanceinertia="false"/>
   </mujoco>
 
   <link name="odom"/>
@@ -60,10 +60,10 @@
       <inertia ixx="0.950137" iyy="0.876333" izz="0.0991423" ixy="-2.24738e-09" ixz="-0.000140461" iyz="0.000101804"/>
     </inertial>
     <visual name="torso_actuators_visual">
-      <geometry><mesh filename="torso_link_visual.stl"/></geometry>
+      <geometry><mesh filename="../meshes/visual/torso_link_visual.stl"/></geometry>
     </visual>
     <collision name="torso_actuators_collision">
-      <geometry><mesh filename="torso_link_collision.stl"/></geometry>
+      <geometry><mesh filename="../meshes/collision/torso_link_collision.stl"/></geometry>
     </collision>
     <visual name="torso_box_visual">
       <origin xyz="0 0 -0.375"/>
@@ -91,7 +91,7 @@
     <child link="left_shoulder_pitch_link"/>
     <origin xyz="0 0.16975 0" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
-    <limit lower="-3.0" upper="3.0" effort="100.0" velocity="3.0"/>
+    <limit lower="-3.0" upper="3.0" effort="381.7" velocity="3.0"/>
     <dynamics damping="0.5" friction="0.0"/>
   </joint>
   <link name="left_shoulder_pitch_link">
@@ -101,10 +101,10 @@
       <inertia ixx="0.0166562" iyy="0.0114135" izz="0.0147659" ixy="0.000299613" ixz="-0.000220698" iyz="0.000988489"/>
     </inertial>
     <visual name="left_shoulder_pitch_visual">
-      <geometry><mesh filename="left_shoulder_pitch_link_visual.stl"/></geometry>
+      <geometry><mesh filename="../meshes/visual/left_shoulder_pitch_link_visual.stl"/></geometry>
     </visual>
     <collision name="left_shoulder_pitch_collision">
-      <geometry><mesh filename="left_shoulder_pitch_link_collision.stl"/></geometry>
+      <geometry><mesh filename="../meshes/collision/left_shoulder_pitch_link_collision.stl"/></geometry>
     </collision>
   </link>
   <joint name="left_shoulder_roll_joint" type="revolute">
@@ -112,7 +112,7 @@
     <child link="left_shoulder_roll_link"/>
     <origin xyz="0 0.1079 -0.02" rpy="0 0 0"/>
     <axis xyz="1 0 0"/>
-    <limit lower="-0.28" upper="1.5" effort="100.0" velocity="3.0"/>
+    <limit lower="-0.28" upper="1.5" effort="381.7" velocity="3.0"/>
     <dynamics damping="0.5" friction="0.0"/>
   </joint>
   <link name="left_shoulder_roll_link">
@@ -122,10 +122,10 @@
       <inertia ixx="0.0208169" iyy="0.0247167" izz="0.0122861" ixy="3.651e-06" ixz="-0.00102148" iyz="-3.691e-06"/>
     </inertial>
     <visual name="left_shoulder_roll_visual">
-      <geometry><mesh filename="left_shoulder_roll_link_visual.stl"/></geometry>
+      <geometry><mesh filename="../meshes/visual/left_shoulder_roll_link_visual.stl"/></geometry>
     </visual>
     <collision name="left_shoulder_roll_collision">
-      <geometry><mesh filename="left_shoulder_roll_link_collision.stl"/></geometry>
+      <geometry><mesh filename="../meshes/collision/left_shoulder_roll_link_collision.stl"/></geometry>
     </collision>
   </link>
   <joint name="left_shoulder_yaw_joint" type="revolute">
@@ -133,7 +133,7 @@
     <child link="left_shoulder_yaw_link"/>
     <origin xyz="0 0 -0.1823" rpy="0 0 -1.5708"/>
     <axis xyz="0 0 1"/>
-    <limit lower="-2.5" upper="2.5" effort="100.0" velocity="3.0"/>
+    <limit lower="-2.5" upper="2.5" effort="381.7" velocity="3.0"/>
     <dynamics damping="0.5" friction="0.0"/>
   </joint>
   <link name="left_shoulder_yaw_link">
@@ -143,10 +143,10 @@
       <inertia ixx="0.00984427" iyy="0.0100491" izz="0.00641762" ixy="-1.2339e-05" ixz="-0.000184265" iyz="-1.229e-06"/>
     </inertial>
     <visual name="left_shoulder_yaw_visual">
-      <geometry><mesh filename="left_shoulder_yaw_link_visual.stl"/></geometry>
+      <geometry><mesh filename="../meshes/visual/left_shoulder_yaw_link_visual.stl"/></geometry>
     </visual>
     <collision name="left_shoulder_yaw_collision">
-      <geometry><mesh filename="left_shoulder_yaw_link_collision.stl"/></geometry>
+      <geometry><mesh filename="../meshes/collision/left_shoulder_yaw_link_collision.stl"/></geometry>
     </collision>
   </link>
   <joint name="left_elbow_joint" type="revolute">
@@ -154,7 +154,7 @@
     <child link="left_elbow_link"/>
     <origin xyz="0 0 -0.0938" rpy="0 0 0"/>
     <axis xyz="1 0 0"/>
-    <limit lower="-1.83" upper="1.83" effort="100.0" velocity="3.0"/>
+    <limit lower="-1.83" upper="1.83" effort="181.5" velocity="3.0"/>
     <dynamics damping="0.5" friction="0.0"/>
   </joint>
   <link name="left_elbow_link">
@@ -164,10 +164,10 @@
       <inertia ixx="0.0144908" iyy="0.0178861" izz="0.00821005" ixy="-9.25e-07" ixz="-0.000888535" iyz="-8.733e-06"/>
     </inertial>
     <visual name="left_elbow_visual">
-      <geometry><mesh filename="left_elbow_link_visual.stl"/></geometry>
+      <geometry><mesh filename="../meshes/visual/left_elbow_link_visual.stl"/></geometry>
     </visual>
     <collision name="left_elbow_collision">
-      <geometry><mesh filename="left_elbow_link_collision.stl"/></geometry>
+      <geometry><mesh filename="../meshes/collision/left_elbow_link_collision.stl"/></geometry>
     </collision>
   </link>
   <joint name="left_tool0_joint" type="fixed">
@@ -207,7 +207,7 @@
     <child link="right_shoulder_pitch_link"/>
     <origin xyz="0 -0.16975 0" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
-    <limit lower="-3.0" upper="3.0" effort="100.0" velocity="3.0"/>
+    <limit lower="-3.0" upper="3.0" effort="381.7" velocity="3.0"/>
     <dynamics damping="0.5" friction="0.0"/>
   </joint>
   <link name="right_shoulder_pitch_link">
@@ -217,10 +217,10 @@
       <inertia ixx="0.0166562" iyy="0.0114135" izz="0.0147659" ixy="-0.000299613" ixz="-0.000220698" iyz="-0.000988489"/>
     </inertial>
     <visual name="right_shoulder_pitch_visual">
-      <geometry><mesh filename="right_shoulder_pitch_link_visual.stl"/></geometry>
+      <geometry><mesh filename="../meshes/visual/right_shoulder_pitch_link_visual.stl"/></geometry>
     </visual>
     <collision name="right_shoulder_pitch_collision">
-      <geometry><mesh filename="right_shoulder_pitch_link_collision.stl"/></geometry>
+      <geometry><mesh filename="../meshes/collision/right_shoulder_pitch_link_collision.stl"/></geometry>
     </collision>
   </link>
   <joint name="right_shoulder_roll_joint" type="revolute">
@@ -228,7 +228,7 @@
     <child link="right_shoulder_roll_link"/>
     <origin xyz="0 -0.1079 -0.02" rpy="0 0 0"/>
     <axis xyz="-1 0 0"/>
-    <limit lower="-0.28" upper="1.5" effort="100.0" velocity="3.0"/>
+    <limit lower="-0.28" upper="1.5" effort="381.7" velocity="3.0"/>
     <dynamics damping="0.5" friction="0.0"/>
   </joint>
   <link name="right_shoulder_roll_link">
@@ -238,10 +238,10 @@
       <inertia ixx="0.0208169" iyy="0.0247167" izz="0.0122861" ixy="-3.651e-06" ixz="-0.00102148" iyz="3.691e-06"/>
     </inertial>
     <visual name="right_shoulder_roll_visual">
-      <geometry><mesh filename="right_shoulder_roll_link_visual.stl"/></geometry>
+      <geometry><mesh filename="../meshes/visual/right_shoulder_roll_link_visual.stl"/></geometry>
     </visual>
     <collision name="right_shoulder_roll_collision">
-      <geometry><mesh filename="right_shoulder_roll_link_collision.stl"/></geometry>
+      <geometry><mesh filename="../meshes/collision/right_shoulder_roll_link_collision.stl"/></geometry>
     </collision>
   </link>
   <joint name="right_shoulder_yaw_joint" type="revolute">
@@ -249,7 +249,7 @@
     <child link="right_shoulder_yaw_link"/>
     <origin xyz="0 0 -0.1823" rpy="0 0 1.5708"/>
     <axis xyz="0 0 -1"/>
-    <limit lower="-2.5" upper="2.5" effort="100.0" velocity="3.0"/>
+    <limit lower="-2.5" upper="2.5" effort="381.7" velocity="3.0"/>
     <dynamics damping="0.5" friction="0.0"/>
   </joint>
   <link name="right_shoulder_yaw_link">
@@ -259,10 +259,10 @@
       <inertia ixx="0.00984427" iyy="0.0100491" izz="0.00641762" ixy="1.2339e-05" ixz="-0.000184265" iyz="1.229e-06"/>
     </inertial>
     <visual name="right_shoulder_yaw_visual">
-      <geometry><mesh filename="right_shoulder_yaw_link_visual.stl"/></geometry>
+      <geometry><mesh filename="../meshes/visual/right_shoulder_yaw_link_visual.stl"/></geometry>
     </visual>
     <collision name="right_shoulder_yaw_collision">
-      <geometry><mesh filename="right_shoulder_yaw_link_collision.stl"/></geometry>
+      <geometry><mesh filename="../meshes/collision/right_shoulder_yaw_link_collision.stl"/></geometry>
     </collision>
   </link>
   <joint name="right_elbow_joint" type="revolute">
@@ -270,7 +270,7 @@
     <child link="right_elbow_link"/>
     <origin xyz="0 0 -0.0938" rpy="0 0 0"/>
     <axis xyz="-1 0 0"/>
-    <limit lower="-1.83" upper="1.83" effort="100.0" velocity="3.0"/>
+    <limit lower="-1.83" upper="1.83" effort="181.5" velocity="3.0"/>
     <dynamics damping="0.5" friction="0.0"/>
   </joint>
   <link name="right_elbow_link">
@@ -280,10 +280,10 @@
       <inertia ixx="0.0144908" iyy="0.0178861" izz="0.00821005" ixy="9.25e-07" ixz="-0.000888535" iyz="8.733e-06"/>
     </inertial>
     <visual name="right_elbow_visual">
-      <geometry><mesh filename="right_elbow_link_visual.stl"/></geometry>
+      <geometry><mesh filename="../meshes/visual/right_elbow_link_visual.stl"/></geometry>
     </visual>
     <collision name="right_elbow_collision">
-      <geometry><mesh filename="right_elbow_link_collision.stl"/></geometry>
+      <geometry><mesh filename="../meshes/collision/right_elbow_link_collision.stl"/></geometry>
     </collision>
   </link>
   <joint name="right_tool0_joint" type="fixed">

@@ -1,0 +1,107 @@
+{
+ "none (week05, armature 0)": {
+  "shoulder_pitch": {
+   "armature": 0.0,
+   "kv": 20.531,
+   "I_eff_hold": 0.8466,
+   "wn": 18.8,
+   "overshoot_pct": 3.68,
+   "settle_s": 0.316
+  },
+  "shoulder_roll": {
+   "armature": 0.0,
+   "kv": 28.058,
+   "I_eff_hold": 0.737,
+   "wn": 20.2,
+   "overshoot_pct": 0.05,
+   "settle_s": 0.272
+  },
+  "shoulder_yaw": {
+   "armature": 0.0,
+   "kv": 4.251,
+   "I_eff_hold": 0.0153,
+   "wn": 140.0,
+   "overshoot_pct": 0.01,
+   "settle_s": 0.044
+  },
+  "elbow": {
+   "armature": 0.0,
+   "kv": 6.244,
+   "I_eff_hold": 0.0605,
+   "wn": 70.4,
+   "overshoot_pct": 1.61,
+   "settle_s": 0.062
+  },
+  "hold_forward_err_deg": 0.0
+ },
+ "a2_doc": {
+  "shoulder_pitch": {
+   "armature": 0.219,
+   "kv": 29.791,
+   "I_eff_hold": 1.0656,
+   "wn": 16.8,
+   "overshoot_pct": 0.6,
+   "settle_s": 0.266
+  },
+  "shoulder_roll": {
+   "armature": 0.219,
+   "kv": 32.448,
+   "I_eff_hold": 0.956,
+   "wn": 17.7,
+   "overshoot_pct": 0.04,
+   "settle_s": 0.316
+  },
+  "shoulder_yaw": {
+   "armature": 0.219,
+   "kv": 16.761,
+   "I_eff_hold": 0.2343,
+   "wn": 35.8,
+   "overshoot_pct": 0.0,
+   "settle_s": 0.164
+  },
+  "elbow": {
+   "armature": 0.098,
+   "kv": 12.823,
+   "I_eff_hold": 0.1585,
+   "wn": 43.5,
+   "overshoot_pct": 0.28,
+   "settle_s": 0.122
+  },
+  "hold_forward_err_deg": 0.0
+ },
+ "cad_ri85": {
+  "shoulder_pitch": {
+   "armature": 0.098,
+   "kv": 27.235,
+   "I_eff_hold": 0.9446,
+   "wn": 17.8,
+   "overshoot_pct": 0.77,
+   "settle_s": 0.24
+  },
+  "shoulder_roll": {
+   "armature": 0.098,
+   "kv": 30.109,
+   "I_eff_hold": 0.835,
+   "wn": 19.0,
+   "overshoot_pct": 0.05,
+   "settle_s": 0.294
+  },
+  "shoulder_yaw": {
+   "armature": 0.098,
+   "kv": 11.649,
+   "I_eff_hold": 0.1133,
+   "wn": 51.5,
+   "overshoot_pct": 0.0,
+   "settle_s": 0.116
+  },
+  "elbow": {
+   "armature": 0.098,
+   "kv": 12.678,
+   "I_eff_hold": 0.1585,
+   "wn": 43.5,
+   "overshoot_pct": 0.36,
+   "settle_s": 0.118
+  },
+  "hold_forward_err_deg": 0.0
+ }
+}

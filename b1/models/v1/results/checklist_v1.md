@@ -13,7 +13,7 @@
 | A8 | transmission · gazebo 미사용 | OK | 액추에이터는 b1.xml(빌드 덧붙이기) |
 | B1 | fusestatic=false | OK | base_plate_link · torso · tool0 · gripper_link 이름 보존 → site · sensor 대상 |
 | B2 | discardvisual=false | OK |  |
-| B4 | meshdir 지정 | OK | 상대 경로(package:// 없음) — Isaac 임포트 패키지 요건 |
+| B4 | 메시 상대 경로 (../meshes/visual · collision, package:// 없음) | OK | 18개, strippath=false — Isaac 임포트 패키지 요건 (week06: meshdir → 파일별 상대 경로) |
 | B6 | balanceinertia=false (팀 결정 10/8) | OK |  |
 | B3 | 변환본 angle=radian | OK | mj_saveLastXML이 명시 |
 | F1 | body 수 · 이름 = URDF link | OK | nbody 18 = link 17 + world, njnt 11, ngeom 29, nsite 3 |
@@ -23,9 +23,9 @@
 | D3 | 관절 범위 sweep 자기 충돌 0 (검증 ④) | OK | 8관절 × 0.5° 3770자세, 접촉 0. 한계 밖 여유 최소: roll − 2° · elbow ± 3~4° |
 | D4 | visual geom contype=conaffinity=0 | OK | URDF visual → group 1 |
 | E1 | 파일 구조: 변환본 · 빌드 생성 b1.xml · scene | OK | b1_urdf.xml(수정 금지) → b1.xml(build_v1.py + actuator_params.json) → scene.xml (0-3절) |
-| E4 | forcerange = effort, ctrlrange = 관절 range | OK | ±100 N·m, inheritrange=1, class shoulder · elbow |
+| E4 | forcerange = effort, ctrlrange = 관절 range | OK | ±[181.5, 381.7] N·m (A2 피크), inheritrange=1, class shoulder · elbow |
 | E5 | implicitfast + dampratio | OK | dampratio 1 → kv는 컴파일 시 영점 관성으로 계산 (관성 바뀌면 자동 갱신) |
-| E6 | armature (BOM 전 0 허용) | OK | 0 — RI85 출력축 반사관성(요청서 4-1) 수령 시 actuator_params.json만 교체 |
+| E6 | armature = A2 사양 (J_rotor × i², week06) | OK | case a2_doc: [0.219, 0.219, 0.219, 0.098] (pitch · roll · yaw · elbow, 양팔 같음) — 로터만, 기어열 관성 TBD(A2) → 과소 추정 |
 | E8 | 액추에이터 11개 명령 → 관절 응답 (뷰어 슬라이더 점검 자동판) | OK | 11/11 — 범위 40 % 명령, position 오차 ≤ 2 %, 베이스 velocity 1.5 s 후 98 % |
 | F3 | 수평 자세 중력토크 손계산 = MuJoCo | OK | 손계산 Σ r×mg = 25.4035 N·m, MuJoCo 25.4035 N·m (그리퍼 0.5 kg 포함, v0 22.7301) |
 | F2 | 총질량 ≤ 80 kg (기획서) · 검증 ① | OK | 75.097 kg, 기준 대비 +0.004 % |

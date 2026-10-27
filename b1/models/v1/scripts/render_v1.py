@@ -34,6 +34,8 @@ fig.suptitle("b1_v1 — 양팔(오른팔 = 왼팔 미러 생성) + 홀로노믹 
 plt.tight_layout(); plt.savefig(os.path.join(IMG,"v1_poses.png"),dpi=105); plt.close()
 img,_=shot({},groups=(0,2,3)); plt.imsave(os.path.join(IMG,"v1_collision.png"),img)
 # 액추에이터 점검: 각 액추에이터에 범위의 40 % 명령, 1.5 s 후 응답
+#   (week06) 빌드에 중력보상(gravcomp)이 켜져 있으면 목표 오프셋 피드포워드(FF)는 넣지 않음 (이중 보상 방지)
+FF=0.0 if m.ngravcomp else 1.0
 chk=[]
 for i in range(m.nu):
     mujoco.mj_resetData(m,d); nm=m.actuator(i).name; j=m.actuator_trnid[i][0]; jn=m.joint(j).name
@@ -44,8 +46,8 @@ for i in range(m.nu):
         for s in SIDES:
             for a in ARM:
                 ai=m.actuator(f"{s}_{a}").id
-                if ai!=i: d.ctrl[ai]=d.qfrc_bias[da(f"{s}_{a}_joint")]/m.actuator_gainprm[ai][0]
-                else: d.ctrl[ai]=u+d.qfrc_bias[da(jn)]/m.actuator_gainprm[ai][0]
+                if ai!=i: d.ctrl[ai]=FF*d.qfrc_bias[da(f"{s}_{a}_joint")]/m.actuator_gainprm[ai][0]
+                else: d.ctrl[ai]=u+FF*d.qfrc_bias[da(jn)]/m.actuator_gainprm[ai][0]
         mujoco.mj_step(m,d)
     typ="velocity" if nm.startswith("base") else "position"
     got=float(d.qvel[m.jnt_dofadr[j]]) if typ=="velocity" else float(d.qpos[m.jnt_qposadr[j]])
@@ -53,9 +55,11 @@ for i in range(m.nu):
                     ok=bool(np.sign(got)==np.sign(u) and abs(got-u)<=0.02*abs(u)+1e-3),ncon=int(sum(1 for c in d.contact[:d.ncon] if 'floor' not in (m.geom(c.geom1).name,m.geom(c.geom2).name)))))
 json.dump(chk,open(os.path.join(V1,"results","actuator_check.json"),"w"),indent=1,ensure_ascii=False)
 print("actuator ok",sum(c["ok"] for c in chk),"/",len(chk))
-# 중력보상 처짐: left 팔 앞으로 수평 유지 3 s
+# 중력보상 처짐: left 팔 앞으로 수평 유지 3 s — 보상 없음(gravcomp 뺀 모델) vs 보상(빌드 gravcomp B, 없으면 목표 + τg/kp)
+m_on=m; m_off=load_model(os.path.join(V1,"mjcf","scene.xml"),strip_gravcomp=True)
 out={}
 for gc in (False,True):
+    m=m_on if gc else m_off; d=mujoco.MjData(m); ffg=(gc and not m.ngravcomp)
     mujoco.mj_resetData(m,d); q0=-np.pi/2
     for s in SIDES: d.qpos[qa(f"{s}_shoulder_pitch_joint")]=q0
     mujoco.mj_forward(m,d); T=[];E=[];F=[]
@@ -63,17 +67,17 @@ for gc in (False,True):
         for s in SIDES:
             for a in ARM:
                 j=f"{s}_{a}_joint"; ai=m.actuator(f"{s}_{a}").id; tgt=q0 if a=="shoulder_pitch" else 0.0
-                d.ctrl[ai]=tgt+(d.qfrc_bias[da(j)]/m.actuator_gainprm[ai][0] if gc else 0)
-        mujoco.mj_step(m,d); T.append(d.time); E.append(np.rad2deg(d.qpos[qa("left_shoulder_pitch_joint")]-q0)); F.append(d.actuator_force[m.actuator("left_shoulder_pitch").id])
+                d.ctrl[ai]=tgt+(d.qfrc_bias[da(j)]/m.actuator_gainprm[ai][0] if ffg else 0)
+        mujoco.mj_step(m,d); T.append(d.time); E.append(np.rad2deg(d.qpos[qa("left_shoulder_pitch_joint")]-q0)); F.append(d.qfrc_actuator[da("left_shoulder_pitch_joint")])   # 관절 토크 = 서보 + 중력보상분(actuatorgravcomp)
     out[gc]=(np.array(T),np.array(E),np.array(F))
-kp=m.actuator_gainprm[m.actuator("left_shoulder_pitch").id][0]
+m=m_off; d=mujoco.MjData(m); kp=m.actuator_gainprm[m.actuator("left_shoulder_pitch").id][0]
 mujoco.mj_resetData(m,d); d.qpos[qa("left_shoulder_pitch_joint")]=-np.pi/2; mujoco.mj_forward(m,d); tg=d.qfrc_bias[da("left_shoulder_pitch_joint")]
 fig,ax=plt.subplots(1,2,figsize=(12,3.6))
-for gc,c,lab in ((False,"#c0392b","중력보상 없음"),(True,"#1f6fb4","중력보상 (목표 + τg/kp)")):
+for gc,c,lab in ((False,"#c0392b","중력보상 없음"),(True,"#1f6fb4","중력보상 B (gravcomp + actuatorgravcomp)" if m_on.ngravcomp else "중력보상 (목표 + τg/kp)")):
     T,E,F=out[gc]; ax[0].plot(T,E,color=c,label=f"{lab}: 최종 {E[-1]:+.3f}°"); ax[1].plot(T,F,color=c,label=lab)
 ax[0].axhline(np.rad2deg(-tg/kp),ls=":",color="#888",label=f"이론 처짐 −bias/kp = {np.rad2deg(-tg/kp):+.2f}°")
 ax[0].set_title("left shoulder_pitch 오차 (목표 −90°, 팔 앞으로 수평)"); ax[0].set_xlabel("t [s]"); ax[0].set_ylabel("°"); ax[0].legend(fontsize=8); ax[0].grid(alpha=.3)
-ax[1].set_title(f"액추에이터 토크 (정적 중력 토크 {abs(tg):.2f} N·m)"); ax[1].set_xlabel("t [s]"); ax[1].set_ylabel("N·m"); ax[1].legend(fontsize=8); ax[1].grid(alpha=.3)
+ax[1].set_title(f"관절 구동 토크 qfrc_actuator (정적 중력 토크 {abs(tg):.2f} N·m)"); ax[1].set_xlabel("t [s]"); ax[1].set_ylabel("N·m"); ax[1].legend(fontsize=8); ax[1].grid(alpha=.3)
 plt.tight_layout(); plt.savefig(os.path.join(IMG,"v1_gravcomp.png"),dpi=110)
 g=dict(tau_g=round(float(tg),3),kp=float(kp),theory_sag_deg=round(float(np.rad2deg(-tg/kp)),3),final_sag_nogc_deg=round(float(out[False][1][-1]),4),final_sag_gc_deg=round(float(out[True][1][-1]),5),
        force_gc=round(float(out[True][2][-1]),3))
