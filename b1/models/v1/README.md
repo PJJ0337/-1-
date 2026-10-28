@@ -16,6 +16,7 @@ v1/
 ├── docs/mirror_rules.md        좌우 미러 규칙표 (자동 생성)
 ├── docs/ik_interface.md        IK 함수 인터페이스 (함태훈 집기 시나리오용, week06 v1)
 ├── docs/import_settings.md     MuJoCo ↔ Isaac Sim URDF Importer ↔ Isaac Lab 대응표 + 실습 PC 첫날 할 일 (자동 생성)
+├── docs/actuator_params.md     관절별 Isaac Lab ImplicitActuatorCfg 값 (함태훈 week06 사본, 원본 sim/w06/docs)
 ├── isaac/b1_v1_cfg.py          Isaac Lab ArticulationCfg 초안 (자동 생성)
 ├── scripts/                    build_v1 · validate_model · base_velocity_test · render_v1 · checklist_v1_check · v1_mjio
 │                               + week06: workspace · ik · ik_demo · a2_case_compare · export_isaac

@@ -57,6 +57,7 @@ MUJOCO_GL=glfw xvfb-run -a python b1/models/v1/scripts/render_v1.py && python b1
 - (10/27) gravcomp를 빌드 기본 on으로 바꾸자 render_v1.py의 목표 오프셋 피드포워드가 이중 보상(−4.84°) · 액추에이터 점검 7/11 → 빌드에 gravcomp가 있으면 피드포워드 생략, 처짐 그래프는 gravcomp 뺀 모델과 비교, 토크는 actuator_force 대신 qfrc_actuator(보상분 포함) → 11/11, 0.0°
 - (10/27) MuJoCo URDF 파서는 기본으로 메시 경로의 디렉터리를 버림 → `strippath="false"` + URDF는 `../meshes/visual/x.stl`, MJCF는 `meshdir="../meshes/"` + `visual/x.stl`로 다시 씀. 한글 경로 로더(assets dict) 키도 `visual/x.stl` 형태로 변경
 - 5주차 평가 피드백 미수령 → 수령 시 week07에 반영
+- (10/28 노션 6주차 재점검) 「Isaac 임포트 패키지」 체크리스트의 `docs/actuator_params.md`가 공용 패키지에 없었음 → 함태훈 원본(2dcb548) 사본 추가(출처 주석), import_settings.md에 기준 버전(Isaac Sim 5.1 · Isaac Lab 2.3.2) 명시. 보고서 「핵심 수치」 칸에 커리큘럼 지정 3개(IK 수렴률 · 최대 추종 오차 · 최소 토크 여유율)가 다 있도록 2-③ 수정
 
 ## 5. 막힌 점 · 요청 (공유한 날짜)
 

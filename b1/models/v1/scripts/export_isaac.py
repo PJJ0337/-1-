@@ -33,7 +33,7 @@ eff={j.get("name"):float(j.find("limit").get("effort")) for j in ri.findall("joi
 a=act; sp,se=a["left_shoulder_pitch"],a["left_elbow"]
 L=[f"# Isaac 임포트 대응표 — MuJoCo ↔ Isaac Sim URDF Importer ↔ Isaac Lab (자동 생성: export_isaac.py, week06)","",
  "실습 PC 배정 첫날 이 표대로 임포트하고, 마지막 절 「첫날 할 일」로 MuJoCo 검증 ② · ③을 재현해 수치를 비교한다. 수치는 컴파일된 `mjcf/b1.xml`(A2 case `"+CASE+"`)에서 읽음.",
- "기준 문서: Isaac Sim 5.1 URDF Importer · Isaac Lab Import New Asset / Actuators / ArticulationCfg. **Isaac 쪽 기본값 · 옵션 이름은 버전마다 달라 실습 PC 버전에서 확인할 것(⚠ 표시)**","",
+ "기준 버전 = 노션 개발환경(Isaac Sim 5.1 · Isaac Lab 2.3.2). 기준 문서: Isaac Sim 5.1 URDF Importer · Isaac Lab Import New Asset / Actuators / ArticulationCfg. 팔 게인 · Isaac 액추에이터 값 전체 = [actuator_params.md](actuator_params.md)(함태훈). **Isaac 쪽 기본값 · 옵션 이름은 버전마다 달라 실습 PC 버전에서 확인할 것(⚠ 표시)**","",
  "## 1. 임포트할 파일","",
  "| 파일 | 용도 | 점검 |","|---|---|---|"]
 for U,n,rel,ex,jt in chk:
