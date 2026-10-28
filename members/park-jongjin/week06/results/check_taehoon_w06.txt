@@ -1,0 +1,12 @@
+T 2.0: pitch |tau| max 42.91  peak qdot 1.47
+T 1.5: pitch |tau| max 42.90  peak qdot 1.96
+T 1.0: pitch |tau| max 42.87  peak qdot 2.95
+T 0.6: pitch |tau| max 60.57  peak qdot 4.91
+shoulder_pitch kp 400.0 kv 31.0
+   OS 1.56 %  settle 0.192 s
+shoulder_roll kp 350.0 kv 27.5
+   OS 1.92 %  settle 0.184 s
+shoulder_yaw kp 300.0 kv 15.0
+   OS 0.18 %  settle 0.132 s
+elbow kp 300.0 kv 11.0
+   OS 1.35 %  settle 0.094 s

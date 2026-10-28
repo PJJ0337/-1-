@@ -7,6 +7,7 @@ import os,sys,json,re,glob,numpy as np,mujoco,trimesh,xml.etree.ElementTree as E
 HERE=os.path.dirname(os.path.abspath(__file__)); V1=os.path.dirname(HERE); MODELS=os.path.dirname(V1); sys.path.insert(0,HERE); from v1_mjio import load_model
 A=json.load(open(os.path.join(MODELS,"assumptions_b1.json"),encoding="utf-8")); P=json.load(open(os.path.join(V1,"actuator_params.json"),encoding="utf-8"))
 A2=json.load(open(os.path.join(V1,"inputs","a2_actuators.json"),encoding="utf-8")); CASE=P.get("a2",{}).get("case","none")
+GI=json.load(open(os.path.join(V1,"inputs","isaac_arm_gains.json"),encoding="utf-8"))["joints"]   # (10/28) 함태훈 week06 고정 kv 게인 → Isaac 팔 게인
 m=load_model(os.path.join(V1,"mjcf","scene.xml")); ARM=["shoulder_pitch","shoulder_roll","shoulder_yaw","elbow"]
 # ---- 1) 패키지 점검
 chk=[]
@@ -45,12 +46,12 @@ L+=[f'| `meshes/visual/*.stl` ({sum(1 for k in MI if k.startswith("visual"))}개
     "| 고정 관절 병합 | `<compiler fusestatic=\"false\">` (base_plate_link · torso · cad_frame · tool0 · gripper_link 보존) | Merge Fixed Joints **끔** | `UrdfConverterCfg(merge_fixed_joints=False)` | 켜면 gripper_link · base_plate_link가 사라져 ee · IMU 기준 프레임을 잃음. Isaac Lab 문서는 대부분 True 권장 → 우리는 프레임 보존 우선. 성능 문제 시 cad_frame · tool0만 병합 |",
     "| 베이스 | planar 1개 (원본) → slide · slide · hinge 3-DOF, velocity 액추에이터 | Isaac용 사본 사용, **Static base(Fix Base) 켬** — 루트 `odom`을 world에 고정하고 3관절로 이동 | `fix_base=True` | Moveable base로 두면 6-DOF 자유 + 3관절이 중복. 옴니휠 미모델링(알려진 한계) |",
     f'| 베이스 구동 | velocity kv vx · vy {a["base_vx"]["kv"]:g}, wz {a["base_wz"]["kv"]:g}, forcerange ±{a["base_vx"]["force"]:g} / ±{a["base_wz"]["force"]:g} | Joint Drive: Target = Velocity, Stiffness 0, Damping = kv | `ImplicitActuatorCfg(joint_names_expr=["base_.*"], stiffness=0.0, damping={{"base_[xy]_joint": {a["base_vx"]["kv"]:g}, "base_yaw_joint": {a["base_wz"]["kv"]:g}}})` | 속도 제어 = D 게인만 |',
-    f'| 팔 구동 | position kp {sp["kp"]:g}, dampratio 1 → kv(컴파일) pitch {a["left_shoulder_pitch"]["kv"]} · roll {a["left_shoulder_roll"]["kv"]} · yaw {a["left_shoulder_yaw"]["kv"]} · elbow {a["left_elbow"]["kv"]} | Joint Drive: Drive Type **Force**, Target **Position**, Joint Configuration = **Stiffness** 모드로 kp · kv 직접 입력 | `ImplicitActuatorCfg(stiffness=…, damping=…)` (값 = 함태훈 `docs/actuator_params.md`) | Natural Frequency 모드는 Kp = m·ωn², Kd = 2m·ζ·ωn(m = 관절 등가관성) — MuJoCo dampratio와 같은 개념이지만 등가관성 계산이 달라 kv를 숫자로 옮기는 쪽이 재현에 유리. ⚠ Isaac Lab의 stiffness 단위 = N·m/rad (deg 아님) |',
+    f'| 팔 구동 | position kp {sp["kp"]:g}, dampratio 1 → kv(컴파일) pitch {a["left_shoulder_pitch"]["kv"]} · roll {a["left_shoulder_roll"]["kv"]} · yaw {a["left_shoulder_yaw"]["kv"]} · elbow {a["left_elbow"]["kv"]} (week05 방식, MuJoCo 빌드 현재값) | Joint Drive: Drive Type **Force**, Target **Position**, Joint Configuration = **Stiffness** 모드로 kp · kv 직접 입력 | **함태훈 week06 고정 게인** `ImplicitActuatorCfg(stiffness, damping)`: pitch {GI["shoulder_pitch"]["stiffness"]} · {GI["shoulder_pitch"]["damping"]} / roll {GI["shoulder_roll"]["stiffness"]} · {GI["shoulder_roll"]["damping"]} / yaw {GI["shoulder_yaw"]["stiffness"]} · {GI["shoulder_yaw"]["damping"]} / elbow {GI["elbow"]["stiffness"]} · {GI["elbow"]["damping"]} (`inputs/isaac_arm_gains.json` ← 함태훈 `sim/w06/docs/actuator_params.md`) | Isaac에는 dampratio가 없어 고정 kv로 튜닝(두 case에서 오버슈트 ≤ 1.5 %, 정착 ≤ 0.29 s). Natural Frequency 모드는 Kp = m·ωn², Kd = 2m·ζ·ωn(m = 관절 등가관성). ⚠ stiffness 단위 = N·m/rad, MuJoCo joint damping 0.5는 PhysX에 별도 항이 없어 damping에 더하는지 확인 |',
     f'| 토크 한계 | forcerange ±{sp["force"]:g}(어깨) · ±{se["force"]:g}(팔꿈치) = A2 피크 | URDF `<limit effort>` = 같은 값 | `effort_limit_sim` (⚠ 2.x 이전 이름 `effort_limit`) | PDR 판정은 정격(어깨 TQ 118.8 · 팔꿈치 RI85 72.6, A2 10/19). 정격으로 묶어 보려면 effort만 바꿔 재빌드 |',
     f'| 속도 한계 | (MuJoCo는 속도 한계 없음 — 궤적에서 관리) | URDF `<limit velocity>` {vel.get("left_shoulder_pitch_joint")} rad/s | `velocity_limit_sim` | A2 TQ star-serial 무부하 3.50 rad/s 이하로 둠 |',
     f'| 반사 관성 | `armature` 어깨 {sp["armature"]} · 팔꿈치 {se["armature"]} kg·m² (A2 J_rotor × i², 로터만) | URDF에 항목 없음 → 임포트 후 설정 | `ImplicitActuatorCfg(armature=…)` | 기어열 관성 TBD(A2) → 과소 추정 |',
     f'| 관절 감쇠 · 마찰 | joint damping {sp["damping"]} · frictionloss {sp["frictionloss"]} (C4 가정) | URDF `<dynamics damping friction>` 로 들어옴 ⚠ 버전에 따라 drive damping에 더해지는지 확인 | `friction` (· 필요 시 `viscous_friction`) | A2 마찰 · 백드라이브 TBD(다이나모 시험 후) |',
-    "| 중력보상 | 팔 body `gravcomp=1` + joint `actuatorgravcomp=true` (week06 기본 on) — 보상 토크가 액추에이터 쪽, forcerange 안에서 | 대응 옵션 없음 | 팔 링크 `RigidBodyPropertiesCfg(disable_gravity=True)` 또는 컨트롤러에서 `gravity_compensation` 피드포워드 | disable_gravity는 토크 한계를 쓰지 않는 「공짜」 보상 → 토크 예산 비교 시 끄고 피드포워드로 |",
+    "| 중력보상 | 팔 body `gravcomp=1` + joint `actuatorgravcomp=true` (week06 기본 on) — 보상 토크가 액추에이터 쪽, forcerange 안에서 | 대응 옵션 없음 | **관절 중력 항을 effort 피드포워드로**(권장, 함태훈 10/28) — `disable_gravity=True`는 중력이 토크 예산에서 빠짐 | actuatorgravcomp에 해당하는 API 없음 ⚠ 실습 PC에서 중력 항 읽는 API 확인 |",
     "| 자기 충돌 | 부모-자식 자동 제외, 추가 exclude 0 (검증 ④: 범위 안 3,770자세 접촉 0) | Allow self-collision **켬** (인접 링크는 PhysX가 자동 필터) | `ArticulationRootPropertiesCfg(enabled_self_collisions=True)` | ⚠ 문서는 기본 끔 권장 — 우리는 ④로 범위 안 무충돌 확인했으므로 켜서 팔-몸통 충돌을 잡음. 폭주 시 끄고 원인 링크 기록 |",
     "| 충돌 형상 | collision STL = 볼록 껍질 (MuJoCo는 메시를 항상 convex hull) | Collider Type **Convex Hull**, Collision From Visuals 끔 | `UrdfConverterCfg(collider_type=\"convex_hull\")` ⚠ | 이미 볼록 → 분해 불필요, MuJoCo와 같은 형상 |",
     "| 질량 · 관성 | URDF inertial 그대로, `balanceinertia=false` | Import Inertia Tensor 켬, Default Density 0(미사용) | 기본 | 모든 링크 질량 지정(가상 링크 1 g) |",
@@ -78,9 +79,9 @@ L+=[f'| `meshes/visual/*.stl` ({sum(1 for k in MI if k.startswith("visual"))}개
     "",f"## 5. 메시 목록 (면 수)","","| 파일 | 면 수 | 최대 길이 [m] | 볼록 |","|---|---|---|---|"]+[f'| {k} | {v["faces"]:,} | {v["extent_m"]} | {v["convex"]} |' for k,v in MI.items()]
 os.makedirs(os.path.join(V1,"docs"),exist_ok=True); open(os.path.join(V1,"docs","import_settings.md"),"w",encoding="utf-8").write("\n".join(L)+"\n")
 # ---- 3) Isaac Lab cfg 초안
-kv={x:act[f"left_{x}"]["kv"] for x in ARM}
+kv={x:GI[x]["damping"] for x in ARM}; kp={x:GI[x]["stiffness"] for x in ARM}   # 팔 게인 = 함태훈 week06 고정 게인
 cfg=f'''# 자동 생성: b1/models/v1/scripts/export_isaac.py (week06, 박종진) — Isaac Lab ArticulationCfg 초안. 실습 PC 버전에서 import 경로 · 인자 이름 확인(⚠)
-# 값 출처: mjcf/b1.xml 컴파일 결과(A2 case "{CASE}"), urdf/b1_v1_isaac.urdf. 팔 게인 최종값은 함태훈 docs/actuator_params.md 를 우선
+# 값 출처: mjcf/b1.xml 컴파일 결과(A2 case "{CASE}"), urdf/b1_v1_isaac.urdf. 팔 stiffness · damping = 함태훈 week06 고정 게인(inputs/isaac_arm_gains.json ← sim/w06/docs/actuator_params.md)
 import os
 import isaaclab.sim as sim_utils
 from isaaclab.actuators import ImplicitActuatorCfg
@@ -94,9 +95,9 @@ B1_V1_CFG = ArticulationCfg(
         merge_fixed_joints=False,           # gripper_link(ee) · base_plate_link(IMU) 보존
         joint_drive=sim_utils.UrdfConverterCfg.JointDriveCfg(
             drive_type="force", target_type="position",
-            gains=sim_utils.UrdfConverterCfg.JointDriveCfg.PDGainsCfg(stiffness={act["left_shoulder_pitch"]["kp"]:g}, damping={kv["shoulder_pitch"]}),
+            gains=sim_utils.UrdfConverterCfg.JointDriveCfg.PDGainsCfg(stiffness={kp["shoulder_pitch"]:g}, damping={kv["shoulder_pitch"]}),   # 임포트 기본값, 실제 게인은 아래 actuators가 덮어씀
         ),
-        rigid_props=sim_utils.RigidBodyPropertiesCfg(disable_gravity=False),   # 중력보상은 컨트롤러 피드포워드로 (토크 예산 비교 위해)
+        rigid_props=sim_utils.RigidBodyPropertiesCfg(disable_gravity=False),   # 중력보상은 관절 중력 항 effort 피드포워드로 (토크 예산에 중력 포함, 함태훈 actuator_params.md 2절)
         articulation_props=sim_utils.ArticulationRootPropertiesCfg(enabled_self_collisions=True, solver_position_iteration_count=8, solver_velocity_iteration_count=1),
     ),
     init_state=ArticulationCfg.InitialStateCfg(pos=(0.0, 0.0, 0.0), joint_pos={{".*": 0.0}}),   # 영점 = 팔 내림 · 팔꿈치 전방 굽힘 방향
@@ -105,11 +106,11 @@ B1_V1_CFG = ArticulationCfg(
                                     damping={{"base_[xy]_joint": {act["base_vx"]["kv"]:g}, "base_yaw_joint": {act["base_wz"]["kv"]:g}}},
                                     effort_limit_sim={{"base_[xy]_joint": {act["base_vx"]["force"]:g}, "base_yaw_joint": {act["base_wz"]["force"]:g}}}),
         "shoulder": ImplicitActuatorCfg(joint_names_expr=[".*_shoulder_(pitch|roll|yaw)_joint"],
-                                        stiffness={act["left_shoulder_pitch"]["kp"]:g},
+                                        stiffness={{".*_shoulder_pitch_joint": {kp["shoulder_pitch"]:g}, ".*_shoulder_roll_joint": {kp["shoulder_roll"]:g}, ".*_shoulder_yaw_joint": {kp["shoulder_yaw"]:g}}},
                                         damping={{".*_shoulder_pitch_joint": {kv["shoulder_pitch"]}, ".*_shoulder_roll_joint": {kv["shoulder_roll"]}, ".*_shoulder_yaw_joint": {kv["shoulder_yaw"]}}},
                                         effort_limit_sim={act["left_shoulder_pitch"]["force"]:g}, velocity_limit_sim={vel["left_shoulder_pitch_joint"]:g},
                                         armature={act["left_shoulder_pitch"]["armature"]}, friction={act["left_shoulder_pitch"]["frictionloss"]}),
-        "elbow": ImplicitActuatorCfg(joint_names_expr=[".*_elbow_joint"], stiffness={act["left_elbow"]["kp"]:g}, damping={kv["elbow"]},
+        "elbow": ImplicitActuatorCfg(joint_names_expr=[".*_elbow_joint"], stiffness={kp["elbow"]:g}, damping={kv["elbow"]},
                                      effort_limit_sim={act["left_elbow"]["force"]:g}, velocity_limit_sim={vel["left_elbow_joint"]:g},
                                      armature={act["left_elbow"]["armature"]}, friction={act["left_elbow"]["frictionloss"]}),
     }},
