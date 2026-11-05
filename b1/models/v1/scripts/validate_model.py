@@ -14,6 +14,7 @@ m=load_model(SCENE,strip_gravcomp=True); d=mujoco.MjData(m)
 ARM=["shoulder_pitch","shoulder_roll","shoulder_yaw","elbow"]; SIDES=("left","right")
 qa=lambda n: m.jnt_qposadr[m.joint(n).id]; da=lambda n: m.jnt_dofadr[m.joint(n).id]
 R={"model":dict(nq=m.nq,nv=m.nv,nu=m.nu,nbody=m.nbody,nsensor=m_built.nsensor,mujoco=mujoco.__version__,gravcomp_built=GRAVCOMP_BUILT,armature=[float(x) for x in m.dof_armature[3:7]])}
+GAIN_STR=" · ".join(f"{a} {m.actuator_gainprm[m.actuator('left_'+a).id][0]:g}/{-m.actuator_biasprm[m.actuator('left_'+a).id][2]:g}" if m.actuator_biasprm[m.actuator('left_'+a).id][2]<0 else f"{a} {m.actuator_gainprm[m.actuator('left_'+a).id][0]:g}/dampratio" for a in ARM)   # (week07) 표 제목에 실제 게인
 RATED=float(A["pdr_torque"]["rated_criterion_Nm"])   # PDR 판정 기준: 정격 ≥ 52 N·m (팀장 10/19, 그리퍼 box 가정 포함 42.92 × 1.2 올림; 이전 46) — RI85 정격 수령 시 교체
 PEAK=A["actuator"]["effort_peak"]
 
@@ -171,7 +172,7 @@ L=["# v1 모델 검증 5종 결과 (자동 생성 — validate_model.py)","",f"�
    f'| 보조 · Isaac용 URDF | planar ↔ prismatic · prismatic · revolute 동등 | 질량 {R["isaac_equiv"]["mass_planar"]} vs {R["isaac_equiv"]["mass_isaac"]} kg(가상 링크 2 g), 50자세 최대 차 {R["isaac_equiv"]["max_diff"]:.1e} | {ok(R["isaac_equiv"]["pass_"])} |',
    "","## ① 링크별 질량","","| 링크 | 모델 kg | 기준 kg | 오차 % |","|---|---|---|---|"]+[f'| {r["link"]} | {r["model"]} | {r["ref"]} | {r["err_pct"]} |' for r in rows]+[
    "",f'- 더미 프레임(odom · cad_frame · tool0 등) {R["mass"]["dummy_kg"]} kg 포함. 오른팔 기준 = 왼팔 거울(공칭). 함태훈 CAD 오른팔 {R["mass"]["th_cad_right_arm"]} kg과 차 {R["mass"]["th_cad_right_arm"]-sum(ref[f"right_{a}_link"] for a in ARM):+.3f} kg (0.4 %)',
-   "","## ② 정지 유지 (kp 300, dampratio 1)","","| 자세 | 보상 | 최대 오차 ° | 5 s 후 오차 ° | 마지막 1 s 떨림 ° | ctrlrange 클리핑 | 접촉 |","|---|---|---|---|---|---|---|"]+[
+   "",f"## ② 정지 유지 (게인 = 빌드 모델 그대로: kp/kv {GAIN_STR})","","| 자세 | 보상 | 최대 오차 ° | 5 s 후 오차 ° | 마지막 1 s 떨림 ° | ctrlrange 클리핑 | 접촉 |","|---|---|---|---|---|---|---|"]+[
    f'| {k.rsplit("_",1)[0]} | {dict(none="없음",A="A 목표 오프셋",B="B gravcomp")[k.rsplit("_",1)[1]]} | {v["max_err_deg"]} | {v["final_err_deg"]} | {v["jitter_deg"]} | {"예" if v["ctrl_clipped"] else "-"} | {v["ncon"]} |' for k,v in R["hold"].items() if k!="pass_"]+[
    "","- A = 위치 목표에 τg / kp 오프셋(qfrc_bias, qvel ≈ 0). 목표가 ctrlrange(= 관절 범위, inheritrange)를 넘으면 잘려서 한계 근처 자세에서 처짐이 남음 (함태훈 발견 10/17: roll 상한 4.33°)","- B = 팔 body `gravcomp=1` + joint `actuatorgravcomp=true` — 보상 토크가 actuator 쪽(qfrc_actuator)으로 들어가 ctrlrange와 무관, 합은 actuatorfrcrange ±100으로 제한. build_v1.py `actuator_params.json` gravcomp.enable(제출본 off, week06 on) — 여기서는 b1.xml에 같은 속성을 넣은 모델을 따로 컴파일해 시험",
    "",f"## ③ 관절별 최악 중력 토크 (왼팔 15° 격자 전수 + 상위 6자세 국소 최적화(L-BFGS-B), 판정 기준 정격 {RATED:g} N·m · 피크 {PEAK:g} N·m 가정)","",

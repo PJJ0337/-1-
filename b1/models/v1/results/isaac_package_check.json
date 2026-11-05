@@ -175,8 +175,8 @@
   },
   "left_shoulder_pitch": {
    "joint": "left_shoulder_pitch_joint",
-   "kp": 300.0,
-   "kv": 29.791,
+   "kp": 400.0,
+   "kv": 31.0,
    "force": 381.7,
    "armature": 0.219,
    "damping": 0.5,
@@ -188,8 +188,8 @@
   },
   "left_shoulder_roll": {
    "joint": "left_shoulder_roll_joint",
-   "kp": 300.0,
-   "kv": 32.448,
+   "kp": 350.0,
+   "kv": 27.5,
    "force": 381.7,
    "armature": 0.219,
    "damping": 0.5,
@@ -202,7 +202,7 @@
   "left_shoulder_yaw": {
    "joint": "left_shoulder_yaw_joint",
    "kp": 300.0,
-   "kv": 16.761,
+   "kv": 15.0,
    "force": 381.7,
    "armature": 0.219,
    "damping": 0.5,
@@ -215,7 +215,7 @@
   "left_elbow": {
    "joint": "left_elbow_joint",
    "kp": 300.0,
-   "kv": 12.823,
+   "kv": 11.0,
    "force": 181.5,
    "armature": 0.098,
    "damping": 0.5,
@@ -227,8 +227,8 @@
   },
   "right_shoulder_pitch": {
    "joint": "right_shoulder_pitch_joint",
-   "kp": 300.0,
-   "kv": 29.791,
+   "kp": 400.0,
+   "kv": 31.0,
    "force": 381.7,
    "armature": 0.219,
    "damping": 0.5,
@@ -240,8 +240,8 @@
   },
   "right_shoulder_roll": {
    "joint": "right_shoulder_roll_joint",
-   "kp": 300.0,
-   "kv": 32.448,
+   "kp": 350.0,
+   "kv": 27.5,
    "force": 381.7,
    "armature": 0.219,
    "damping": 0.5,
@@ -254,7 +254,7 @@
   "right_shoulder_yaw": {
    "joint": "right_shoulder_yaw_joint",
    "kp": 300.0,
-   "kv": 16.761,
+   "kv": 15.0,
    "force": 381.7,
    "armature": 0.219,
    "damping": 0.5,
@@ -267,7 +267,7 @@
   "right_elbow": {
    "joint": "right_elbow_joint",
    "kp": 300.0,
-   "kv": 12.823,
+   "kv": 11.0,
    "force": 181.5,
    "armature": 0.098,
    "damping": 0.5,

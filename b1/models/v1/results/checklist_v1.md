@@ -29,6 +29,6 @@
 | E8 | 액추에이터 11개 명령 → 관절 응답 (뷰어 슬라이더 점검 자동판) | OK | 11/11 — 범위 40 % 명령, position 오차 ≤ 2 %, 베이스 velocity 1.5 s 후 98 % |
 | F3 | 수평 자세 중력토크 손계산 = MuJoCo | OK | 손계산 Σ r×mg = 25.4035 N·m, MuJoCo 25.4035 N·m (그리퍼 0.5 kg 포함, v0 22.7301) |
 | F2 | 총질량 ≤ 80 kg (기획서) · 검증 ① | OK | 75.097 kg, 기준 대비 +0.004 % |
-| E7 | position 서보 처짐 ≈ τg/kp · 중력보상으로 상쇄 | OK | 보상 없음 4.8324° vs 이론 4.852° → 보상(목표 + τg/kp) 0.0° |
+| E7 | position 서보 처짐 ≈ τg/kp · 중력보상으로 상쇄 | OK | 보상 없음 3.6303° vs 이론 3.639° → 보상(목표 + τg/kp) 0.0° |
 | M1 | 좌우 미러 = 규칙표 · 검증 ⑤ | OK | 504자세 |Δx|·|Δz|·|y_L+y_R| ≤ 0.0e+00 mm — docs/mirror_rules.md |
 | F5 | 캡처: 4자세 · collision · 중력보상 | OK | img/v1_poses.png · v1_collision.png · v1_gravcomp.png + 노트북 뷰어 재현 img/repro/20261016_laptop_v1_*.png (Control 슬라이더 · 양팔 대칭 · base_vx) |

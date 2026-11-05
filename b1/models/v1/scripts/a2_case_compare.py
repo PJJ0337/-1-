@@ -1,5 +1,5 @@
 # A2 구동기 case 비교 (week06) — armature 0(week05) · cad_ri85(8개 RI85) · a2_doc(어깨 TQ + 팔꿈치 RI85)
-#   같은 kp 300 · dampratio 1(kv는 컴파일 시 armature 포함 관성으로 다시 계산), 중력보상 B 켠 상태에서 관절별 0.2 rad 계단 응답
+#   빌드 게인 그대로(week07: actuator_params.json joint_gains 고정 kp · kv, 함태훈 통일 — week06까지는 kp 300 · dampratio 1), 중력보상 B 켠 상태에서 관절별 0.2 rad 계단 응답
 #   → 오버슈트 · 2 % 정착시간 · 고유진동수 ω_n = √(kp / I_eff), 그리고 팔 앞으로 수평 정지 유지 5 s 오차
 #   결과: results/a2_case_compare.{json,md}
 import os,sys,json,numpy as np,mujoco,xml.etree.ElementTree as ET
@@ -28,7 +28,7 @@ for name,case in CASES.items():
         y=np.array(y); t=np.arange(1,1501)*m.opt.timestep; band=np.abs(y-step)>0.02*step
         ts=float(t[np.where(band)[0][-1]]) if band.any() else 0.0
         res[a]=dict(armature=float(m.dof_armature[da]),kv=round(float(m.actuator_biasprm[ai][2]*-1),3),I_eff_hold=round(float(M[da,da]),4),
-                    wn=round(float(np.sqrt(300/M[da,da])),1),overshoot_pct=round(float(max(0,(y.max()-step)/step*100)),2),settle_s=round(ts,3))
+                    kp=float(m.actuator_gainprm[ai][0]),wn=round(float(np.sqrt(m.actuator_gainprm[ai][0]/M[da,da])),1),overshoot_pct=round(float(max(0,(y.max()-step)/step*100)),2),settle_s=round(ts,3))
     # 앞으로 수평 정지 유지 (양팔 pitch −90°, 5 s)
     mujoco.mj_resetData(m,d)
     for s in ("left","right"):
@@ -37,7 +37,7 @@ for name,case in CASES.items():
     res["hold_forward_err_deg"]=round(float(np.rad2deg(abs(d.qpos[m.jnt_qposadr[m.joint("left_shoulder_pitch_joint").id]]+np.pi/2))),4)
     out[name]=res
 json.dump(out,open(os.path.join(V1,"results","a2_case_compare.json"),"w",encoding="utf-8"),indent=1,ensure_ascii=False)
-L=["# A2 구동기 case 비교 (자동 생성 — a2_case_compare.py)","","kp 300 · dampratio 1(kv 재계산), 중력보상 B on, 영점에서 왼팔 관절별 0.2 rad 계단 3 s. I_eff = 영점 질량행렬 대각(다른 관절 서보 고정 근사)","",
+L=["# A2 구동기 case 비교 (자동 생성 — a2_case_compare.py)","","게인 = 빌드 모델(week07 고정 kp · kv: pitch 400 · 31 / roll 350 · 27.5 / yaw 300 · 15 / elbow 300 · 11 — week06까지는 kp 300 · dampratio 1), 중력보상 B on, 영점에서 왼팔 관절별 0.2 rad 계단 3 s. I_eff = 영점 질량행렬 대각(다른 관절 서보 고정 근사)","",
    "| case | 관절 | armature [kg·m²] | kv | I_eff [kg·m²] | ω_n [rad/s] | 오버슈트 % | 2 % 정착 [s] |","|---|---|---|---|---|---|---|---|"]
 for n,r in out.items():
     for a in ARM: v=r[a]; L.append(f'| {n} | {a} | {v["armature"]} | {v["kv"]} | {v["I_eff_hold"]} | {v["wn"]} | {v["overshoot_pct"]} | {v["settle_s"]} |')

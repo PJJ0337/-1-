@@ -24,11 +24,11 @@
   <default>
     <default class="shoulder">
       <joint armature="0.219" damping="0.5" frictionloss="0.0" actuatorgravcomp="true" actuatorfrcrange="-381.7 381.7" />
-      <position kp="300.0" dampratio="1.0" forcerange="-381.7 381.7" inheritrange="1" />
+      <position kp="300.0" forcerange="-381.7 381.7" inheritrange="1" />
     </default>
     <default class="elbow">
       <joint armature="0.098" damping="0.5" frictionloss="0.0" actuatorgravcomp="true" actuatorfrcrange="-181.5 181.5" />
-      <position kp="300.0" dampratio="1.0" forcerange="-181.5 181.5" inheritrange="1" />
+      <position kp="300.0" forcerange="-181.5 181.5" inheritrange="1" />
     </default>
     <default class="base">
       <velocity kv="200.0" forcerange="-2000.0 2000.0" />
@@ -132,14 +132,14 @@
     <velocity class="base" name="base_vx" joint="base_planar_joint_TX" kv="200.0" ctrlrange="-1.5 1.5" forcerange="-2000.0 2000.0" />
     <velocity class="base" name="base_vy" joint="base_planar_joint_TY" kv="200.0" ctrlrange="-1.5 1.5" forcerange="-2000.0 2000.0" />
     <velocity class="base" name="base_wz" joint="base_planar_joint_RZ" kv="50.0" ctrlrange="-1.5708 1.5708" forcerange="-500.0 500.0" />
-    <position class="shoulder" name="left_shoulder_pitch" joint="left_shoulder_pitch_joint" />
-    <position class="shoulder" name="left_shoulder_roll" joint="left_shoulder_roll_joint" />
-    <position class="shoulder" name="left_shoulder_yaw" joint="left_shoulder_yaw_joint" />
-    <position class="elbow" name="left_elbow" joint="left_elbow_joint" />
-    <position class="shoulder" name="right_shoulder_pitch" joint="right_shoulder_pitch_joint" />
-    <position class="shoulder" name="right_shoulder_roll" joint="right_shoulder_roll_joint" />
-    <position class="shoulder" name="right_shoulder_yaw" joint="right_shoulder_yaw_joint" />
-    <position class="elbow" name="right_elbow" joint="right_elbow_joint" />
+    <position class="shoulder" name="left_shoulder_pitch" joint="left_shoulder_pitch_joint" kp="400.0" kv="31.0" />
+    <position class="shoulder" name="left_shoulder_roll" joint="left_shoulder_roll_joint" kp="350.0" kv="27.5" />
+    <position class="shoulder" name="left_shoulder_yaw" joint="left_shoulder_yaw_joint" kp="300.0" kv="15.0" />
+    <position class="elbow" name="left_elbow" joint="left_elbow_joint" kp="300.0" kv="11.0" />
+    <position class="shoulder" name="right_shoulder_pitch" joint="right_shoulder_pitch_joint" kp="400.0" kv="31.0" />
+    <position class="shoulder" name="right_shoulder_roll" joint="right_shoulder_roll_joint" kp="350.0" kv="27.5" />
+    <position class="shoulder" name="right_shoulder_yaw" joint="right_shoulder_yaw_joint" kp="300.0" kv="15.0" />
+    <position class="elbow" name="right_elbow" joint="right_elbow_joint" kp="300.0" kv="11.0" />
   </actuator>
   <sensor>
     <jointpos name="left_shoulder_pitch_pos" joint="left_shoulder_pitch_joint" />

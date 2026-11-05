@@ -64,5 +64,24 @@
  "a2": {
   "case": "a2_doc",
   "_note": "(10/27 week06, 박종진 → 함태훈 확인 요청) inputs/a2_actuators.json case 선택. classes의 armature · forcerange 값은 빌드 시 case 값으로 덮어씀(이 파일 값 = A2 이전 가정, 비교용으로 남김). 어깨 TQ/RI85 팀장 확인 후 case 확정"
+ },
+ "joint_gains": {
+  "_note": "(week07 게인 통일, 함태훈 제안 11/04 — 박종진 합의 대기) 팔 position 액추에이터를 관절별 고정 kp · kv 로 지정(dampratio 대신). 값 = 함태훈 week06 w06_kpkv_tune.py 결과(fcf74bf, kpkv_tune.md): 고정 kv = Isaac ImplicitActuatorCfg damping 과 같은 방식이라 MuJoCo ↔ Isaac 게인이 한 벌로 같아짐. 근거 R1 1 kg 처짐 ≤ 1°, R3 계단 0.2 rad OS ≤ 5 % · 정착 ≤ 0.3 s (영점 + 300 자세 × 2 case 최악 2.75 % · 0.300 s). 이 키가 있으면 build_v1.py 가 classes 의 kp · dampratio 대신 이 값을 씀",
+  "shoulder_pitch": {
+   "kp": 400.0,
+   "kv": 31.0
+  },
+  "shoulder_roll": {
+   "kp": 350.0,
+   "kv": 27.5
+  },
+  "shoulder_yaw": {
+   "kp": 300.0,
+   "kv": 15.0
+  },
+  "elbow": {
+   "kp": 300.0,
+   "kv": 11.0
+  }
  }
 }

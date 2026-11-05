@@ -104,8 +104,8 @@
  },
  "hold": {
   "zero_none": {
-   "max_err_deg": 0.0454,
-   "final_err_deg": 0.0454,
+   "max_err_deg": 0.0407,
+   "final_err_deg": 0.0393,
    "jitter_deg": 0.0,
    "finite": true,
    "ctrl_clipped": false,
@@ -131,8 +131,8 @@
    "pass_": true
   },
   "forward_none": {
-   "max_err_deg": 4.8807,
-   "final_err_deg": 4.8324,
+   "max_err_deg": 3.7472,
+   "final_err_deg": 3.6303,
    "jitter_deg": 0.0,
    "finite": true,
    "ctrl_clipped": false,
@@ -158,8 +158,8 @@
    "pass_": true
   },
   "roll_upper_none": {
-   "max_err_deg": 4.3342,
-   "final_err_deg": 4.3339,
+   "max_err_deg": 3.8236,
+   "final_err_deg": 3.72,
    "jitter_deg": 0.0,
    "finite": true,
    "ctrl_clipped": false,
@@ -167,8 +167,8 @@
    "pass_": false
   },
   "roll_upper_A": {
-   "max_err_deg": 4.3342,
-   "final_err_deg": 4.3339,
+   "max_err_deg": 3.8236,
+   "final_err_deg": 3.72,
    "jitter_deg": 0.0,
    "finite": true,
    "ctrl_clipped": true,

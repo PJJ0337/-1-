@@ -25,6 +25,7 @@ EFF={a:(A2C["cases"][CASE]["classes"][c]["peak"] if CASE!="none" else A["actuato
 INER=json.load(open(os.path.join(V1,"inputs","link_inertials_v1.json"),encoding="utf-8"))
 SRC_MESH=os.path.join(MODELS,"v0","meshes")
 ARM=["shoulder_pitch","shoulder_roll","shoulder_yaw","elbow"]
+JG={k:v for k,v in P.get("joint_gains",{}).items() if not k.startswith("_")}   # (week07 게인 통일, 함태훈) 관절별 고정 kp · kv
 for d in ("urdf","meshes","mjcf","docs"): os.makedirs(os.path.join(V1,d),exist_ok=True)
 
 # ---- 왼팔 기준 기하 (link-split-v0 §3, 로봇 좌표 m) — 오른팔은 미러 규칙으로 생성
@@ -160,7 +161,9 @@ def build_mjcf():
     for cname,cp in P["classes"].items():
         d=ET.SubElement(dflt,"default",{"class":cname})
         ET.SubElement(d,"joint",{"armature":f'{cp["armature"]}',"damping":f'{cp["damping"]}',"frictionloss":f'{cp["frictionloss"]}'})
-        ET.SubElement(d,"position",{"kp":f'{cp["kp"]}',"dampratio":f'{cp["dampratio"]}',"forcerange":f'{-cp["forcerange"]} {cp["forcerange"]}',"inheritrange":"1"})
+        pos_attr={"kp":f'{cp["kp"]}',"dampratio":f'{cp["dampratio"]}',"forcerange":f'{-cp["forcerange"]} {cp["forcerange"]}',"inheritrange":"1"}
+        if JG: pos_attr.pop("dampratio")   # (week07 게인 통일) 관절별 고정 kp · kv 는 액추에이터에 직접
+        ET.SubElement(d,"position",pos_attr)
     bp=P["base"]; d=ET.SubElement(dflt,"default",{"class":"base"}); ET.SubElement(d,"velocity",{"kv":f'{bp["vx_kv"]}',"forcerange":f'{-bp["lin_forcerange"]} {bp["lin_forcerange"]}'})
     root.insert(list(root).index(root.find("worldbody")),dflt)
     cls_of={a:c for c,cp in P["classes"].items() for a in cp["joints"]}
@@ -189,7 +192,10 @@ def build_mjcf():
     for nm,jn,kv,cr,fr in (("base_vx","base_planar_joint_TX",bp["vx_kv"],bp["v_max"],bp["lin_forcerange"]),("base_vy","base_planar_joint_TY",bp["vy_kv"],bp["v_max"],bp["lin_forcerange"]),("base_wz","base_planar_joint_RZ",bp["wz_kv"],bp["w_max"],bp["yaw_forcerange"])):
         ET.SubElement(act,"velocity",{"class":"base","name":nm,"joint":jn,"kv":f"{kv}","ctrlrange":f"{-cr} {cr}","forcerange":f"{-fr} {fr}"})
     for side in ("left","right"):
-        for a in ARM: ET.SubElement(act,"position",{"class":cls_of[a],"name":f"{side}_{a}","joint":f"{side}_{a}_joint"})
+        for a in ARM:
+            at={"class":cls_of[a],"name":f"{side}_{a}","joint":f"{side}_{a}_joint"}
+            if a in JG: at.update(kp=f'{JG[a]["kp"]}',kv=f'{JG[a]["kv"]}')   # (week07) actuator_params.json joint_gains
+            ET.SubElement(act,"position",at)
     sen=ET.SubElement(root,"sensor")
     for side in ("left","right"):
         for a in ARM:

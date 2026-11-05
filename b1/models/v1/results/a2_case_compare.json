@@ -2,105 +2,117 @@
  "none (week05, armature 0)": {
   "shoulder_pitch": {
    "armature": 0.0,
-   "kv": 20.531,
+   "kv": 31.0,
    "I_eff_hold": 0.8466,
-   "wn": 18.8,
-   "overshoot_pct": 3.68,
-   "settle_s": 0.316
+   "kp": 400.0,
+   "wn": 21.7,
+   "overshoot_pct": 0.5,
+   "settle_s": 0.214
   },
   "shoulder_roll": {
    "armature": 0.0,
-   "kv": 28.058,
+   "kv": 27.5,
    "I_eff_hold": 0.737,
-   "wn": 20.2,
-   "overshoot_pct": 0.05,
-   "settle_s": 0.272
+   "kp": 350.0,
+   "wn": 21.8,
+   "overshoot_pct": 0.23,
+   "settle_s": 0.208
   },
   "shoulder_yaw": {
    "armature": 0.0,
-   "kv": 4.251,
+   "kv": 15.0,
    "I_eff_hold": 0.0153,
+   "kp": 300.0,
    "wn": 140.0,
-   "overshoot_pct": 0.01,
-   "settle_s": 0.044
+   "overshoot_pct": 0.0,
+   "settle_s": 0.194
   },
   "elbow": {
    "armature": 0.0,
-   "kv": 6.244,
+   "kv": 11.0,
    "I_eff_hold": 0.0605,
+   "kp": 300.0,
    "wn": 70.4,
-   "overshoot_pct": 1.61,
-   "settle_s": 0.062
+   "overshoot_pct": 0.0,
+   "settle_s": 0.124
   },
   "hold_forward_err_deg": 0.0
  },
  "a2_doc": {
   "shoulder_pitch": {
    "armature": 0.219,
-   "kv": 29.791,
+   "kv": 31.0,
    "I_eff_hold": 1.0656,
-   "wn": 16.8,
-   "overshoot_pct": 0.6,
-   "settle_s": 0.266
+   "kp": 400.0,
+   "wn": 19.4,
+   "overshoot_pct": 1.56,
+   "settle_s": 0.192
   },
   "shoulder_roll": {
    "armature": 0.219,
-   "kv": 32.448,
+   "kv": 27.5,
    "I_eff_hold": 0.956,
-   "wn": 17.7,
-   "overshoot_pct": 0.04,
-   "settle_s": 0.316
+   "kp": 350.0,
+   "wn": 19.1,
+   "overshoot_pct": 1.92,
+   "settle_s": 0.184
   },
   "shoulder_yaw": {
    "armature": 0.219,
-   "kv": 16.761,
+   "kv": 15.0,
    "I_eff_hold": 0.2343,
+   "kp": 300.0,
    "wn": 35.8,
-   "overshoot_pct": 0.0,
-   "settle_s": 0.164
+   "overshoot_pct": 0.18,
+   "settle_s": 0.132
   },
   "elbow": {
    "armature": 0.098,
-   "kv": 12.823,
+   "kv": 11.0,
    "I_eff_hold": 0.1585,
+   "kp": 300.0,
    "wn": 43.5,
-   "overshoot_pct": 0.28,
-   "settle_s": 0.122
+   "overshoot_pct": 1.35,
+   "settle_s": 0.094
   },
   "hold_forward_err_deg": 0.0
  },
  "cad_ri85": {
   "shoulder_pitch": {
    "armature": 0.098,
-   "kv": 27.235,
+   "kv": 31.0,
    "I_eff_hold": 0.9446,
-   "wn": 17.8,
-   "overshoot_pct": 0.77,
-   "settle_s": 0.24
+   "kp": 400.0,
+   "wn": 20.6,
+   "overshoot_pct": 0.85,
+   "settle_s": 0.202
   },
   "shoulder_roll": {
    "armature": 0.098,
-   "kv": 30.109,
+   "kv": 27.5,
    "I_eff_hold": 0.835,
-   "wn": 19.0,
-   "overshoot_pct": 0.05,
-   "settle_s": 0.294
+   "kp": 350.0,
+   "wn": 20.5,
+   "overshoot_pct": 0.81,
+   "settle_s": 0.194
   },
   "shoulder_yaw": {
    "armature": 0.098,
-   "kv": 11.649,
+   "kv": 15.0,
    "I_eff_hold": 0.1133,
+   "kp": 300.0,
    "wn": 51.5,
    "overshoot_pct": 0.0,
-   "settle_s": 0.116
+   "settle_s": 0.172
   },
   "elbow": {
    "armature": 0.098,
-   "kv": 12.678,
+   "kv": 11.0,
    "I_eff_hold": 0.1585,
+   "kp": 300.0,
    "wn": 43.5,
-   "overshoot_pct": 0.36,
-   "settle_s": 0.118
+   "overshoot_pct": 1.43,
+   "settle_s": 0.094
   },
   "hold_forward_err_deg": 0.0
  }
