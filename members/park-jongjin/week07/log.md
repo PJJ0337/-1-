@@ -1,0 +1,72 @@
+# week07 기여 로그 — 박종진 (B1)
+
+| 항목 | 내용 |
+|---|---|
+| 주차 / 기간 | 제 07 주차 (2026-11-02 ~ 2026-11-06), 마감 11/5(목) |
+| 커리큘럼 | 노션 「B1 7·8·9주차 학습 커리큘럼」 §1 — 베이스 + 팔 협조(전신) IK · 작업공간 속도 제어 + 게인 정리 (박종진 = 전신 IK `wb_ik.py` · 인터페이스 v2 · 작업공간 확장 정량화) |
+| 저장소 태그 | `week07` (제출 시) |
+| 주간 보고서 | [학부생_주간활동보고서_7주차_박종진_22212289_20261105.docx](../reports/학부생_주간활동보고서_7주차_박종진_22212289_20261105.docx) |
+| 함태훈 대응 | taehoonham0118-cell/-1- `8fa9750` (11/04) — 게인 통일 패치 · 짐 중력보상 · resolved-rate · 베이스 가속 토크 |
+
+## 1. 계획 대비 수행
+
+| No. | 계획 (6주차 보고서 · 커리큘럼) | 실제 수행 | 완료율 | 산출물 |
+|---|---|---|---|---|
+| 1 | 팀장 어깨 구동기 확정 → case 고정 · 재빌드, 5 · 6주차 평가 피드백 반영 | 팀장 출장 · 회신 대기 → `a2_doc` 유지(두 case 모두 토크 통과 — 통합 예산표에 병기). 5 · 6주차 평가표 미수령 → 수령 시 week08 | 0 % (외부 대기) | — |
+| 2 | (함태훈과) MuJoCo 게인 통일 · 검증 ② 재기록, 짐에 따른 게인 조정 | 함태훈 패치(`joint_gains` + build_v1.py 9줄) 합의 · 적용 → b1.xml 액추에이터 8줄만 변경(함태훈 스냅샷과 공백 제외 동일). **검증 5종 재실행 통과**: ② 보상 끔 앞으로 수평 **4.83 → 3.63°**(이론 25.40/400 = 3.64°), roll 상한 A 3.72°, B 0.0°. a2_case_compare(빌드 게인 그대로 · ω_n = √(kp/I) kp 하드코딩 300 수정), 체크리스트 28/28. 짐 0 · 3 kg 계단 · 게인 스케줄은 함태훈(3 kg ζ 0.53, 스케줄 OS 5.2 %) | 100 % | actuator_params.json, mjcf/b1.xml, results/validate_model.md · a2_case_compare.md · checklist_v1.md |
+| 3 | 전신 IK `wb_ik.py`(가중치 · 영공간 2차 목표 · 관절 한계), `ik.py` 인터페이스 v2 | 함태훈 제안 시그니처(wb_jacobian · wb_weights · wdls · limit_avoid) 그대로 + `null_proj`(λ 없는 정확한 가중 영공간) + `solve_wb_ik`(위치 / 위치 + 그리퍼 축, 베이스 원위치 · 관절 한계 2차 목표, 주행 범위 · **테이블 제한(회전한 상판 사각형)**, 재시작 = 베이스 yaw 시드). `ik.py solve_ik(..., include_base=True)` → WBIKResult | 100 % | scripts/wb_ik.py · ik.py, docs/ik_interface.md §v2 |
+| 4 | 팔만 IK vs 전신 IK 비교표 (6주차 「밖」 목표 + A팀 지적 지점) | 13목표: 팔만 **0** → 전신 **10** 성공(높이 3개는 전신도 불가). 무작위 300(위치만) 13.0 → **100 %**, 150(위치 + 아래로) 0 → **78.0 %**(실패 = 수직 하강 대역 z > 0.992 m). W 1 · 10 · 100 비교, 영공간 1 → 4차원 · 영공간만으로 베이스 0.077 m 이동 시 끝점 0.001 mm | 100 % | scripts/wb_ik_compare.py, results/wb_ik_compare.{md,json} |
+| 5 | 작업공간 확장 정량화 — 높이별 단면, A팀 지적 지점 도달 표 | 테이블(앞 가장자리 = 상판 앞) 안쪽 깊이: 테이블 높이 z 0.7 ~ 0.8 m **팔만 0.149 → 전신 0.464 m**(옆면 붙이기 yaw −90°), 전 높이 +0.31 m. 수직 하강 가능 끝점 z **0.605 ~ 0.992 m**(18,471자세 투영). 상판 위 0.2 m 이하 · 바닥 · 공유 폭은 전신으로도 불변 → A팀 지적 ↔ 해결 여부 표 | 100 % | scripts/workspace_wb.py, results/workspace_wb.{md,json}, img/workspace_wb.png · wb_ik_solutions.png |
+| 6 | (팀 연계) 함태훈 제어기에 자코비안 · 가중치 함수 제공 | 함태훈 `w07_wb_rrc.py`의 import 한 줄만 `wb_ik`로 교체 + 이 저장소 빌드로 9런 재실행 → **지표 최대 차 0**(직선 추종 전신 W 10 최대 7.6 · RMS 4.8 mm, 팔만 323 mm 실패) | 100 % | results/wb_rrc_crosscheck.md |
+| 7 | 토크 예산표 B1 통합본 + A팀 피드백 문안 | 박종진 정적 + 함태훈 집기 · 뻗기 · 베이스 가속 + **옆면 · 하강 접근 25자세**(정적 최대 pitch 34.21 · roll 28.03 → 정적 최악 이하). 필요 pitch 44.12 N·m, 정격 × 1.2 두 case 통과, PDR 52 여유 17.85 % 주의 · 가속 제한 조건. A팀 문안 초안 | 100 % (발송은 합의 후) | scripts/torque_budget_b1.py, results/torque_budget_b1.md, inputs/torque_budget_w07_taehoon.csv |
+| 8 | 작은 수정: import_settings 팔 구동 행 · isaac_arm_gains 주석 2.75 % · 0.300 s, 출처 태그 | export_isaac.py 문구(MuJoCo = 고정 kp · kv, Isaac과 같은 값), 출처 fcf74bf, 검증 ② 재현 기대값 3.64° → 재생성 | 100 % | docs/import_settings.md, inputs/isaac_arm_gains.json |
+| 9 | 실습 PC 배정 시 import_settings 4절 / 미배정 시 손목 2축 예측 | 미배정. 손목 2축 예측은 노션 9주차 개별 과제로 이동(이번 주는 「손목 없이 전신으로 되는 범위」를 먼저 수치화 — 손목 필요 범위 = 수직 하강 z > 0.992 m · 테이블 깊은 곳) | 0 % (9주차) | — |
+
+## 2. 핵심 수치 · 근거 (구술 대비)
+
+| 수치 | 값 | 근거 |
+|---|---|---|
+| 게인 통일 후 검증 ② | 보상 끔 앞으로 수평 3.63°(이론 3.64°), B 0.0°, 5종 통과 | validate_model.md |
+| 전신 IK 수렴률 | 무작위 위치 300: 팔만 13.0 % → **전신 100 %**(반복 중앙값 10, 베이스 이동 중앙값 0.359 m) / 위치 + 아래로 150: 0 → **78.0 %** | wb_ik_compare.md |
+| A팀 지적 13목표 | 팔만 0 · 전신 10 성공, 높이(T10 · A1 · A2) 불가 | wb_ik_compare.md |
+| 작업공간 확장 | 테이블 안쪽 깊이(z 0.7 ~ 0.8) 0.149 → **0.464 m**, 수직 하강 z 0.605 ~ 0.992 m, 높이 대역 불변(0.606 ~ 1.789 m) | workspace_wb.md, img/workspace_wb.png |
+| 직선 추종 오차 | 경로 A(z 0.75, x 0.30 → 0.80) 전신 W 10 최대 7.6 · RMS 4.8 mm, 팔만 323 mm 실패 (함태훈 제어기 × 박종진 wb_ik, 원본과 차 0) | wb_rrc_crosscheck.md |
+| 영공간 | 팔 3 × 4 → 1차원, 전신 3 × 7 → 4차원. 영공간만으로 베이스 0.077 m · 끝점 0.001 mm | wb_ik_compare.md |
+| 토크 예산 | 필요 pitch 44.12 N·m(베이스 가속 포함), 정격 여유 TQ 169 % · RI85 65 %, PDR 52 여유 17.85 % | torque_budget_b1.md |
+
+## 3. 재현 방법
+
+```bash
+pip install mujoco==3.15.0 trimesh scipy matplotlib imageio pillow
+python b1/models/v1/scripts/build_v1.py && python b1/models/v1/scripts/validate_model.py   # 게인 통일 빌드 · 검증 5종
+python b1/models/v1/scripts/workspace_wb.py        # ~15 s
+python b1/models/v1/scripts/wb_ik_compare.py       # ~25 s (workspace_wb 다음)
+python b1/models/v1/scripts/torque_budget_b1.py    # ~8 s
+MUJOCO_GL=glfw xvfb-run -a python b1/models/v1/scripts/wb_ik_render.py   # 그림 (Windows는 그냥 python)
+```
+
+## 4. 발견한 문제 · 해결
+
+- (11/05) 테이블 안쪽 목표에서 전신 IK가 base_limit로 끝남(A4 · A5) — 반면 작업공간 해석은 yaw −90°에서 0.464 m 가능 → 원인: 정면 근처 국소해 + 재시작 때 베이스를 원위치(yaw 0)로 당기는 영공간 항. 해결: 재시작 시작 yaw를 −90 · +90 · −45 · +45 · 180°로 두고, 재시작에서는 그 시작 베이스 쪽으로만 당김 → A4 · A5 · A6 · A9 수렴, 해석값과 일치(0.45 m 안쪽은 45 mm 부족 = z 0.75에서 최대 ≈ 0.40 m)
+- (11/05) 수직 하강 가능 높이를 「무작위 자세 중 축 ±1°」로 세면 6만 개 중 7개 · z 0.605 ~ 0.736 m(과소) → 조건을 만족하는 자세가 2차원 곡면(측도 0)이라 표본으로 잡히지 않음. 무작위 2만 → 축 2조건 Gauss-Newton 투영으로 바꿔 18,471개 · z 0.605 ~ 0.992 m
+- (11/05) 테이블 제한을 베이스 원점 x로만 걸면 회전 시 상판 모서리가 테이블을 뚫음 → 회전한 상판 사각형 가장 앞 x = x_b + 0.288|cos ψ| + 0.236|sin ψ| ≤ 가장자리로 제한
+- (11/05) a2_case_compare.py가 ω_n = √(300/I)로 kp 하드코딩 → 게인 통일 후 틀린 값 → 액추에이터 gainprm에서 읽도록 수정
+- 노션 예시 「테이블 높이 0.6 m 직선」: 바닥 기준이면 팔 최저 0.606 m 아래 → 전신으로도 불가(함태훈과 같은 판단) → 0.75 m
+
+## 5. 막힌 점 · 요청 (공유한 날짜)
+
+- (팀장) 어깨 구동기 TQ ↔ RI85 확정 — 회신 대기(출장). 두 case 모두 정격 × 1.2 통과, RI85면 베이스 계단 명령 시 roll 정격 초과 → 가속 제한 조건
+- (평가) 5 · 6주차 평가표 미수령 → 수령 시 week08 반영
+- (함태훈에게 11/05) ① 게인 통일 패치 적용 완료(f061e4b) — 스냅샷 대신 원본 사용 가능(`B1_V1`) ② `wb_ik.py` 공유 — `wb_jac` import 한 줄 교체로 9런 동일 ③ 옆면 접근(yaw −90°) 자세 roll 토크 · 베이스 가속 토크도 예산표에 넣었음(28.03 N·m, 최악 이하) ④ A팀 문안(torque_budget_b1.md) 확인 후 같이 발송
+- (A팀 · A1) 상판 위 0.2 m 이하 · 바닥은 베이스로 해결 불가 → 리프트 · 허리 · 어깨 높이 검토 요청(문안 3번)
+
+## 6. 구술 질문 준비 (커리큘럼 7주차)
+
+- Q1 가중 DLS에서 베이스 가중치 ↑ / ↓, 팔 우선 이유 / Q2 팔 4-DOF · 전신 7-DOF 위치 IK 영공간 차원과 용도 → [notes/mujoco-urdf/06-wholebody-ik.md](../notes/mujoco-urdf/06-wholebody-ik.md)
+
+## 7. 다음 주 계획 (8주차, 검증 가능한 단위)
+
+1. 시나리오 상태기계(접근 → 정렬 → 하강 → 파지 → 들기 → 이동 → 놓기 → 복귀) + 성공 판정 + 물체 초기 위치 무작위 20회 성공률 · 실패 분류표 — 전문가 정책 = `wb_ik` + 함태훈 resolved-rate, 접근 방향은 workspace_wb 결과(옆면 · 수직 하강 대역 z ≤ 0.99 m)
+2. 데이터 수집 스크립트(함태훈 `docs/dataset_spec.md` 형식) — 에피소드 100개 · 재생 일치 검증, 샘플 3개 커밋
+3. `wb_ik`에 팔 링크 ↔ 테이블 충돌 확인 추가(현재 끝점만), 8주차 테이블 · 물체 scene 사용
+4. 팀장 어깨 확정 · 평가표 수령 시 반영
