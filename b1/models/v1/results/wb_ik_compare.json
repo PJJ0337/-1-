@@ -1,0 +1,690 @@
+{
+ "targets": [
+  {
+   "name": "T9",
+   "group": "6주차 밖",
+   "pos": [
+    0.8,
+    0.25,
+    1.2
+   ],
+   "axis": null,
+   "table_x": null,
+   "desc": "정면 0.80 m (도달 반경 밖)",
+   "arm": {
+    "status": "unreachable",
+    "ok": false,
+    "pos_mm": 205.48,
+    "axis_deg": 0.0
+   },
+   "wb": {
+    "status": "converged",
+    "ok": true,
+    "pos_mm": 0.16,
+    "axis_deg": 0.0,
+    "iters": 8,
+    "base": [
+     0.209,
+     -0.112,
+     -0.086
+    ],
+    "base_move": 0.237,
+    "base_turn_deg": -4.9,
+    "q_deg": [
+     -74.1,
+     14.5,
+     -3.3,
+     30.6
+    ],
+    "ncon": 0
+   }
+  },
+  {
+   "name": "T10",
+   "group": "6주차 밖",
+   "pos": [
+    0.2,
+    0.2,
+    0.42
+   ],
+   "axis": null,
+   "table_x": null,
+   "desc": "상판 윗면 z 0.42 m",
+   "arm": {
+    "status": "unreachable",
+    "ok": false,
+    "pos_mm": 214.11,
+    "axis_deg": 0.0
+   },
+   "wb": {
+    "status": "unreachable_height",
+    "ok": false,
+    "pos_mm": 186.57,
+    "axis_deg": 0.0,
+    "iters": 300,
+    "base": [
+     0.429,
+     0.207,
+     1.37
+    ],
+    "base_move": 0.476,
+    "base_turn_deg": 78.5,
+    "q_deg": [
+     1.5,
+     -1.9,
+     43.8,
+     -9.6
+    ],
+    "ncon": 0
+   }
+  },
+  {
+   "name": "X0",
+   "group": "4-DOF 자세",
+   "pos": [
+    0.55,
+    0.28,
+    1.2
+   ],
+   "axis": [
+    1,
+    0,
+    0
+   ],
+   "table_x": null,
+   "desc": "정면 어깨 높이 · 앞으로 접근",
+   "arm": {
+    "status": "orientation_limit",
+    "ok": false,
+    "pos_mm": 0.0,
+    "axis_deg": 21.66
+   },
+   "wb": {
+    "status": "converged",
+    "ok": true,
+    "pos_mm": 0.71,
+    "axis_deg": 0.04,
+    "iters": 8,
+    "base": [
+     -0.05,
+     -0.006,
+     -0.016
+    ],
+    "base_move": 0.051,
+    "base_turn_deg": -0.9,
+    "q_deg": [
+     -89.9,
+     0.9,
+     -4.8,
+     0.1
+    ],
+    "ncon": 0
+   }
+  },
+  {
+   "name": "X2",
+   "group": "4-DOF 자세",
+   "pos": [
+    0.3,
+    0.25,
+    0.85
+   ],
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "table_x": null,
+   "desc": "상판 위 0.45 m · 아래로 접근",
+   "arm": {
+    "status": "orientation_limit",
+    "ok": false,
+    "pos_mm": 0.0,
+    "axis_deg": 1.84
+   },
+   "wb": {
+    "status": "converged",
+    "ok": true,
+    "pos_mm": 0.42,
+    "axis_deg": 0.05,
+    "iters": 9,
+    "base": [
+     0.007,
+     -0.071,
+     -0.014
+    ],
+    "base_move": 0.071,
+    "base_turn_deg": -0.8,
+    "q_deg": [
+     -80.0,
+     8.0,
+     1.5,
+     -80.0
+    ],
+    "ncon": 0
+   }
+  },
+  {
+   "name": "A1",
+   "group": "A팀 ① 낮은 영역",
+   "pos": [
+    0.25,
+    0.28,
+    0.55
+   ],
+   "axis": null,
+   "table_x": null,
+   "desc": "상판 위 0.15 m (팔 최저 0.606 m 아래)",
+   "arm": {
+    "status": "unreachable",
+    "ok": false,
+    "pos_mm": 101.83,
+    "axis_deg": 0.0
+   },
+   "wb": {
+    "status": "unreachable_height",
+    "ok": false,
+    "pos_mm": 57.35,
+    "axis_deg": 0.0,
+    "iters": 300,
+    "base": [
+     0.503,
+     0.155,
+     1.368
+    ],
+    "base_move": 0.526,
+    "base_turn_deg": 78.4,
+    "q_deg": [
+     -3.0,
+     -1.2,
+     3.8,
+     8.5
+    ],
+    "ncon": 0
+   }
+  },
+  {
+   "name": "A2",
+   "group": "A팀 ① 바닥",
+   "pos": [
+    0.6,
+    0.28,
+    0.05
+   ],
+   "axis": null,
+   "table_x": null,
+   "desc": "바닥 물체 z 0.05 m",
+   "arm": {
+    "status": "unreachable",
+    "ok": false,
+    "pos_mm": 702.45,
+    "axis_deg": 0.0
+   },
+   "wb": {
+    "status": "unreachable_height",
+    "ok": false,
+    "pos_mm": 555.99,
+    "axis_deg": 0.0,
+    "iters": 300,
+    "base": [
+     0.784,
+     0.342,
+     1.961
+    ],
+    "base_move": 0.855,
+    "base_turn_deg": 112.4,
+    "q_deg": [
+     0.1,
+     -2.6,
+     -78.4,
+     10.1
+    ],
+    "ncon": 0
+   }
+  },
+  {
+   "name": "A3",
+   "group": "A팀 ② 가장자리 밖",
+   "pos": [
+    0.6,
+    0.28,
+    0.75
+   ],
+   "axis": null,
+   "table_x": null,
+   "desc": "테이블 높이 · 상판 앞 0.31 m (장애물 없음)",
+   "arm": {
+    "status": "unreachable",
+    "ok": false,
+    "pos_mm": 155.18,
+    "axis_deg": 0.0
+   },
+   "wb": {
+    "status": "converged",
+    "ok": true,
+    "pos_mm": 0.92,
+    "axis_deg": 0.0,
+    "iters": 5,
+    "base": [
+     0.199,
+     -0.041,
+     -0.066
+    ],
+    "base_move": 0.203,
+    "base_turn_deg": -3.8,
+    "q_deg": [
+     -33.9,
+     6.2,
+     -1.5,
+     12.3
+    ],
+    "ncon": 0
+   }
+  },
+  {
+   "name": "A4",
+   "group": "A팀 ② 테이블 안쪽",
+   "pos": [
+    0.43799999999999994,
+    0.28,
+    0.75
+   ],
+   "axis": null,
+   "table_x": 0.288,
+   "desc": "테이블(앞 가장자리 = 상판 앞) 안쪽 0.15 m · z 0.75",
+   "arm": {
+    "status": "max_iter",
+    "ok": false,
+    "pos_mm": 32.9,
+    "axis_deg": 0.0
+   },
+   "wb": {
+    "status": "converged",
+    "ok": true,
+    "pos_mm": 0.13,
+    "axis_deg": 0.0,
+    "iters": 5,
+    "base": [
+     -0.079,
+     -0.015,
+     -1.569
+    ],
+    "base_move": 0.08,
+    "base_turn_deg": -89.9,
+    "q_deg": [
+     24.9,
+     24.2,
+     0.2,
+     -15.0
+    ],
+    "ncon": 0
+   }
+  },
+  {
+   "name": "A5",
+   "group": "A팀 ② 테이블 안쪽",
+   "pos": [
+    0.588,
+    0.28,
+    0.75
+   ],
+   "axis": null,
+   "table_x": 0.288,
+   "desc": "같은 테이블 안쪽 0.30 m",
+   "arm": {
+    "status": "unreachable",
+    "ok": false,
+    "pos_mm": 145.58,
+    "axis_deg": 0.0
+   },
+   "wb": {
+    "status": "converged",
+    "ok": true,
+    "pos_mm": 0.29,
+    "axis_deg": 0.0,
+    "iters": 5,
+    "base": [
+     0.01,
+     0.041,
+     -1.556
+    ],
+    "base_move": 0.042,
+    "base_turn_deg": -89.2,
+    "q_deg": [
+     20.9,
+     31.2,
+     -0.2,
+     -10.6
+    ],
+    "ncon": 0
+   }
+  },
+  {
+   "name": "A6",
+   "group": "A팀 ② 테이블 안쪽 · 높은 선반",
+   "pos": [
+    0.588,
+    0.28,
+    1.1
+   ],
+   "axis": null,
+   "table_x": 0.288,
+   "desc": "선반 z 1.10 · 안쪽 0.30 m",
+   "arm": {
+    "status": "max_iter",
+    "ok": false,
+    "pos_mm": 1.38,
+    "axis_deg": 0.0
+   },
+   "wb": {
+    "status": "converged",
+    "ok": true,
+    "pos_mm": 0.2,
+    "axis_deg": 0.0,
+    "iters": 8,
+    "base": [
+     -0.166,
+     -0.011,
+     -1.562
+    ],
+    "base_move": 0.166,
+    "base_turn_deg": -89.5,
+    "q_deg": [
+     41.9,
+     60.6,
+     -5.4,
+     -29.3
+    ],
+    "ncon": 0
+   }
+  },
+  {
+   "name": "A7",
+   "group": "A팀 ③ 공유 폭",
+   "pos": [
+    0.35,
+    -0.3,
+    1.0
+   ],
+   "axis": null,
+   "table_x": null,
+   "desc": "왼팔로 정중면 반대쪽 0.30 m",
+   "arm": {
+    "status": "joint_limit",
+    "ok": false,
+    "pos_mm": 365.66,
+    "axis_deg": 0.0
+   },
+   "wb": {
+    "status": "converged",
+    "ok": true,
+    "pos_mm": 0.1,
+    "axis_deg": 0.0,
+    "iters": 12,
+    "base": [
+     -0.134,
+     -0.309,
+     -0.11
+    ],
+    "base_move": 0.337,
+    "base_turn_deg": -6.3,
+    "q_deg": [
+     -49.6,
+     -15.1,
+     -31.0,
+     37.0
+    ],
+    "ncon": 0
+   }
+  },
+  {
+   "name": "A8",
+   "group": "A팀 ④ 수직 하강",
+   "pos": [
+    0.45,
+    0.28,
+    0.8
+   ],
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "table_x": null,
+   "desc": "테이블 위 물체 · 위에서 아래로 접근",
+   "arm": {
+    "status": "max_iter",
+    "ok": false,
+    "pos_mm": 92.63,
+    "axis_deg": 15.01
+   },
+   "wb": {
+    "status": "converged",
+    "ok": true,
+    "pos_mm": 0.58,
+    "axis_deg": 0.11,
+    "iters": 8,
+    "base": [
+     0.158,
+     -0.028,
+     -0.052
+    ],
+    "base_move": 0.161,
+    "base_turn_deg": -3.0,
+    "q_deg": [
+     -69.9,
+     7.6,
+     2.8,
+     -70.0
+    ],
+    "ncon": 0
+   }
+  },
+  {
+   "name": "A9",
+   "group": "A팀 ④ 수직 하강 · 테이블",
+   "pos": [
+    0.388,
+    0.28,
+    0.8
+   ],
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "table_x": 0.288,
+   "desc": "테이블 안쪽 0.10 m · 아래로 접근",
+   "arm": {
+    "status": "orientation_limit",
+    "ok": false,
+    "pos_mm": 0.0,
+    "axis_deg": 23.67
+   },
+   "wb": {
+    "status": "converged",
+    "ok": true,
+    "pos_mm": 0.98,
+    "axis_deg": 0.14,
+    "iters": 8,
+    "base": [
+     0.042,
+     0.009,
+     -1.57
+    ],
+    "base_move": 0.043,
+    "base_turn_deg": -89.9,
+    "q_deg": [
+     69.5,
+     12.4,
+     -4.7,
+     69.9
+    ],
+    "ncon": 0
+   }
+  }
+ ],
+ "rates": {
+  "pos": {
+   "n": 300,
+   "arm_rate": 13.0,
+   "wb_rate": 100.0,
+   "base_move_median": 0.359,
+   "base_move_max": 0.954,
+   "iters_median": 10
+  },
+  "down": {
+   "n": 150,
+   "arm_rate": 0.0,
+   "wb_rate": 78.0,
+   "base_move_median": 0.42,
+   "base_move_max": 0.876,
+   "iters_median": 10
+  }
+ },
+ "down_band": {
+  "n": 18471,
+  "z_min": 0.605,
+  "z_max": 0.992
+ },
+ "weights": [
+  {
+   "target": "T9",
+   "w": 1,
+   "status": "converged",
+   "base_move": 0.575,
+   "base_turn_deg": -16.4,
+   "arm_move_deg": 91.0,
+   "iters": 10
+  },
+  {
+   "target": "T9",
+   "w": 10,
+   "status": "converged",
+   "base_move": 0.237,
+   "base_turn_deg": -4.9,
+   "arm_move_deg": 81.6,
+   "iters": 8
+  },
+  {
+   "target": "T9",
+   "w": 100,
+   "status": "converged",
+   "base_move": 0.19,
+   "base_turn_deg": -3.2,
+   "arm_move_deg": 88.8,
+   "iters": 11
+  },
+  {
+   "target": "A3",
+   "w": 1,
+   "status": "converged",
+   "base_move": 0.331,
+   "base_turn_deg": -7.3,
+   "arm_move_deg": 38.1,
+   "iters": 6
+  },
+  {
+   "target": "A3",
+   "w": 10,
+   "status": "converged",
+   "base_move": 0.203,
+   "base_turn_deg": -3.8,
+   "arm_move_deg": 36.6,
+   "iters": 5
+  },
+  {
+   "target": "A3",
+   "w": 100,
+   "status": "converged",
+   "base_move": 0.194,
+   "base_turn_deg": -3.3,
+   "arm_move_deg": 40.7,
+   "iters": 9
+  },
+  {
+   "target": "A7",
+   "w": 1,
+   "status": "converged",
+   "base_move": 1.003,
+   "base_turn_deg": -7.9,
+   "arm_move_deg": 69.2,
+   "iters": 12
+  },
+  {
+   "target": "A7",
+   "w": 10,
+   "status": "converged",
+   "base_move": 0.337,
+   "base_turn_deg": -6.3,
+   "arm_move_deg": 70.8,
+   "iters": 12
+  },
+  {
+   "target": "A7",
+   "w": 100,
+   "status": "converged",
+   "base_move": 0.097,
+   "base_turn_deg": -88.7,
+   "arm_move_deg": 84.8,
+   "iters": 8
+  },
+  {
+   "target": "A8",
+   "w": 1,
+   "status": "converged",
+   "base_move": 0.171,
+   "base_turn_deg": -3.3,
+   "arm_move_deg": 99.8,
+   "iters": 10
+  },
+  {
+   "target": "A8",
+   "w": 10,
+   "status": "converged",
+   "base_move": 0.161,
+   "base_turn_deg": -3.0,
+   "arm_move_deg": 99.2,
+   "iters": 8
+  },
+  {
+   "target": "A8",
+   "w": 100,
+   "status": "converged",
+   "base_move": 0.158,
+   "base_turn_deg": -2.7,
+   "arm_move_deg": 99.1,
+   "iters": 10
+  }
+ ],
+ "nullspace": {
+  "rank_arm": 3,
+  "rank_wb": 3,
+  "null_arm": 1,
+  "null_wb": 4,
+  "demo_base_dy": 0.077,
+  "demo_ee_drift_mm": 0.001,
+  "demo_arm_change_deg": [
+   -0.3,
+   -7.3,
+   -0.8,
+   0.4
+  ]
+ },
+ "settings": {
+  "lam": 0.05,
+  "w_xy": 10,
+  "w_yaw": 10,
+  "k_limit": 0.5,
+  "k_base": 0.05,
+  "pos_tol_mm": 1,
+  "rot_tol_rad": 0.01,
+  "restarts": 8,
+  "foot": [
+   0.576,
+   0.472
+  ]
+ },
+ "mujoco": "3.15.0",
+ "runtime_s": 24.8
+}

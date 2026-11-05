@@ -1,4 +1,4 @@
-# b1_v1 — 양팔 + 홀로노믹 베이스 전체 모델 (week05 → week06: 기구학 · 작업공간 · IK · Isaac 임포트 패키지)
+# b1_v1 — 양팔 + 홀로노믹 베이스 전체 모델 (week05 → week06: 기구학 · 작업공간 · IK · Isaac 임포트 패키지 → week07: 게인 통일 · 전신 IK)
 
 v0(week04)를 커리큘럼 5주차 「핵심 설계 결정」대로 확장. **URDF가 원본**이고 MJCF는 빌드가 URDF에서 만든다. 값은 [../assumptions_b1.json](../assumptions_b1.json)(B1 공용 v0.3)과 [actuator_params.json](actuator_params.json)(MJCF 덧붙이기, 함태훈 담당), [inputs/a2_actuators.json](inputs/a2_actuators.json)(A2 구동기 사양 10/19, week06) 세 곳뿐.
 
@@ -14,15 +14,17 @@ v1/
 ├── mjcf/b1.xml                 변환본 + site(left_ee · right_ee · base_imu) + default class + 액추에이터 11 + 센서 30
 ├── mjcf/scene.xml              include b1.xml + 바닥 · 조명 · option
 ├── docs/mirror_rules.md        좌우 미러 규칙표 (자동 생성)
-├── docs/ik_interface.md        IK 함수 인터페이스 (함태훈 집기 시나리오용, week06 v1)
+├── docs/ik_interface.md        IK 함수 인터페이스 (함태훈 집기 시나리오용, week06 v1 → week07 v2: 전신 IK · include_base)
 ├── docs/import_settings.md     MuJoCo ↔ Isaac Sim URDF Importer ↔ Isaac Lab 대응표 + 실습 PC 첫날 할 일 (자동 생성)
 ├── docs/actuator_params.md     관절별 Isaac Lab ImplicitActuatorCfg 값 (함태훈 week06 사본, 원본 sim/w06/docs)
 ├── isaac/b1_v1_cfg.py          Isaac Lab ArticulationCfg 초안 (자동 생성)
 ├── scripts/                    build_v1 · validate_model · base_velocity_test · render_v1 · checklist_v1_check · v1_mjio
 │                               + week06: workspace · ik · ik_demo · a2_case_compare · export_isaac
+│                               + week07: wb_ik(전신 IK 모듈) · wb_ik_compare · workspace_wb · wb_ik_render
 ├── results/                    validate_model.md(검증 5종) · checklist_v1.md · base_velocity_test · actuator_check · gravcomp
 │                               + week06: workspace.md · workspace_max_torque.json · ik_results.md · a2_case_compare.md · isaac_package_check.json
-└── img/                        v1_poses · v1_collision · v1_gravcomp · base_velocity_test + week06: workspace.png · ik_targets.png · ik_targets.gif
+│                               + week07: wb_ik_compare.md · workspace_wb.md · wb_rrc_crosscheck.md
+└── img/                        v1_poses · v1_collision · v1_gravcomp · base_velocity_test + week06: workspace.png · ik_targets.png · ik_targets.gif + week07: workspace_wb.png · wb_ik_solutions.png
 ```
 
 | 구성 | 값 |
@@ -48,14 +50,18 @@ python b1/models/v1/scripts/ik.py                           # IK 목표 10개 ·
 python b1/models/v1/scripts/ik_demo.py                      # IK GIF (리눅스: MUJOCO_GL=glfw xvfb-run -a …)
 python b1/models/v1/scripts/a2_case_compare.py              # A2 armature case별 계단 응답
 python b1/models/v1/scripts/export_isaac.py                 # Isaac 패키지 점검 + import_settings.md + isaac/b1_v1_cfg.py
+# week07
+python b1/models/v1/scripts/workspace_wb.py                 # 작업공간 확장(팔만 vs 전신): 높이별 테이블 안쪽 깊이 · 수직 하강 대역 (~15 s)
+python b1/models/v1/scripts/wb_ik_compare.py                # 팔만 vs 전신 IK 13목표 · 무작위 450 도달률 · W 비교 · 영공간 (~25 s, workspace_wb 다음)
+python b1/models/v1/scripts/wb_ik_render.py                 # 해 그림 (리눅스: MUJOCO_GL=glfw xvfb-run -a …)
 ```
 
-week06 빌드 기본값: **중력보상 B on**(`actuator_params.json` gravcomp.enable), **A2 case `a2_doc`**(어깨 armature 0.219 · 피크 381.7, 팔꿈치 0.098 · 181.5). case 전환 = `actuator_params.json` `a2.case` 또는 `B1_A2_CASE=cad_ri85 python build_v1.py`. 검증 ②의 「보상 없음 · A」는 `load_model(..., strip_gravcomp=True)`로 계산
+week07 빌드: 팔 액추에이터 **고정 kp · kv**(`actuator_params.json` joint_gains, 함태훈 통일 — Isaac `inputs/isaac_arm_gains.json`과 같은 값) → 검증 ② 보상 끔 처짐 3.63°(이론 25.40 / 400 = 3.64°). week06 빌드 기본값: **중력보상 B on**(`actuator_params.json` gravcomp.enable), **A2 case `a2_doc`**(어깨 armature 0.219 · 피크 381.7, 팔꿈치 0.098 · 181.5). case 전환 = `actuator_params.json` `a2.case` 또는 `B1_A2_CASE=cad_ri85 python build_v1.py`. 검증 ②의 「보상 없음 · A」는 `load_model(..., strip_gravcomp=True)`로 계산
 
 ## 알려진 한계
 
 - 옴니휠 미모델링(평면 3-DOF 근사) — 바퀴 슬립 · 접촉력 · 전복 없음 (구술 노트 [04](../../../members/park-jongjin/notes/mujoco-urdf/04-v1-mirror-base.md))
 - 그리퍼 = 0.5 kg box 가정(S14), armature = A2 로터만(기어열 TBD → 과소), 어깨 구동기 TQ/RI85 팀장 확인 대기, 관절 범위 = 충돌 스윕 + 케이블 가정, 하체 · 몸통 = 가정값
-- 4-DOF(손목 없음): 위치 + 그리퍼 축 동시 지정은 2차원 곡면에서만 가능(IK `orientation_limit`), 최저 도달 z 0.606 m → 상판 윗면 ~ 0.206 m 위는 도달 불가
+- 4-DOF(손목 없음): 위치 + 그리퍼 축 동시 지정은 2차원 곡면에서만 가능(IK `orientation_limit`) — 전신 IK(week07)면 z 0.605 ~ 0.992 m에서 수직 하강 가능, 최저 도달 z 0.606 m → 상판 윗면 ~ 0.206 m 위는 베이스로도 도달 불가
 - 오른팔 = 공칭 거울 — CAD 오른팔 편차(축 1.37°, 위치 7.4 mm)는 [joint-origin-check-v0.md](../joint-origin-check-v0.md)
 - 함태훈 v1 메시 · 관성(골격 관절점 원점) 수령 시 `link_inertials` 입력만 바꾸고 다시 빌드

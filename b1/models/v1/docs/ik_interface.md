@@ -1,4 +1,4 @@
-# IK 함수 인터페이스 (week06 v1 — 구현 완료 10/27, 박종진 → 함태훈 집기 시나리오용. 초안 10/18)
+# IK 함수 인터페이스 (week07 v2 — 전신 IK 추가 11/05 · week06 v1 구현 10/27, 박종진 → 함태훈 집기 · 제어기용. 초안 10/18)
 
 커리큘럼 6주차 「팀 연계」: 박종진 IK 모듈 → 함태훈 집기 시나리오. 구현 = `b1/models/v1/scripts/ik.py`, 결과 = `results/ik_results.md`.
 
@@ -43,3 +43,46 @@ res: IKResult = solve_ik(
 - **집기 시나리오 제안**: 목표 위치는 위치만 IK(수렴률 99.6 %), 하강 · 상승은 같은 해 근처 q_init으로 연속 호출(해 가지 유지). 그리퍼 방향이 필요하면 `ik_results.json`의 `pick_point`(수직 접근 실현점) 기준으로 목표를 잡기
 - **작업공간 밖**: 상판 윗면(z 0.40 m) ~ z 0.606 m는 팔이 닿지 않음 → T10 `unreachable`. 바닥 · 상판 위 물체 집기는 현재 기구로 불가(A팀 피드백 항목)
 - 토크 예산표 최악 조건: `results/workspace_max_torque.json` (관절별 q · ee 위치 · τ, 페이로드 0 / 0.5 / 1.0 / 3 kg) — 완료
+
+## v2 (week07, 11/05) — 전신(베이스 3 + 팔 4) IK · 함태훈 제어기 연결
+
+커리큘럼 7주차 「팀 연계」: 박종진 `wb_ik`의 자코비안 · 가중치 함수 → 함태훈 resolved-rate 제어기. 함태훈이 먼저 제안한 시그니처(`sim/w07/wb_jac.py`, 8fa9750)를 그대로 채택 → 함태훈 쪽은 `from wb_jac import …`를 `from wb_ik import …`로 한 줄만 바꾸면 됨(9런 결과 완전 일치, [../results/wb_rrc_crosscheck.md](../results/wb_rrc_crosscheck.md))
+
+```python
+import sys; sys.path.insert(0, "b1/models/v1/scripts")
+from wb_ik import wb_jacobian, wb_weights, wdls, limit_avoid, null_proj, solve_wb_ik, apply, WBIKResult
+
+# --- 제어기용 저수준 함수 (함태훈 제안 시그니처 그대로) ---
+J, dofs = wb_jacobian(m, d, side, include_base=True)        # 3×7 (팔만 3×4). 열 = base TX · TY · RZ, pitch · roll · yaw · elbow (world)
+(Jp, Jr), dofs = wb_jacobian(m, d, side, rot=True)           # v2 추가: 회전 자코비안도 (그리퍼 축 과제용)
+W  = wb_weights(include_base=True, w_xy=10, w_yaw=10)        # 대각 가중치, 클수록 덜 움직임 (팔 = 1). 기본 W 10 = 팔 우선
+Jw = wdls(J, W, lam=0.03)                                    # J# = W⁻¹Jᵀ(J W⁻¹ Jᵀ + λ²I)⁻¹
+q0 = limit_avoid(m, d, side, include_base=True, k=1.0)       # 팔 관절 범위 중앙 쪽, 베이스 0
+N  = null_proj(J, W)                                         # v2 추가: λ 없는 정확한 가중 영공간 투영 I − J⁺_W J
+qdot = Jw @ xdot + N @ q0                                    # (함태훈 제어기는 (I − Jw J) 사용 — 결과 동일 범위, 정확도는 N이 우수)
+
+# --- 반복 IK (목표 자세 계산) ---
+res: WBIKResult = solve_wb_ik(
+    m, d, side, target_pos,          # world [m]
+    target_axis=None,                # 그리퍼 접근 방향 (ee −z가 향할 방향, world). 예: [0, 0, -1] = 위에서 아래로
+    include_base=True,               # False = 팔만(같은 반복식, 비교용)
+    q_init=None, base_init=None,     # 시작 팔 각 · 베이스 [x, y, yaw] (None = d의 현재값)
+    w_xy=10, w_yaw=10, lam=0.05, rot_weight=0.3,
+    k_limit=0.5, k_base=0.05,        # 영공간 2차 목표: 관절 한계 회피 · 베이스 원위치 복귀(이동 최소)
+    base_box=None,                   # ((x_lo, x_hi), (y_lo, y_hi)) 베이스 원점 허용 범위 (주행 공간)
+    yaw_range=None,                  # (lo, hi) rad
+    table_x=None,                    # 정면 테이블 앞 가장자리 world x → 상판 사각형(0.576 × 0.472, 회전 포함)이 뚫지 않게
+    pos_tol=1e-3, rot_tol=1e-2, max_iter=300, step_max=0.3, base_step=0.1,
+    restarts=4, seed=0)              # 재시작: 베이스 yaw −90 · +90 · −45 · +45 · 180°부터 (옆면 붙이기 같은 먼 해)
+# WBIKResult: q(4) · base(3: x, y, yaw world) · success · pos_err · rot_err · iters · restarts_used · base_move [m] · base_turn_deg
+#   status: converged | orientation_limit | unreachable_height(팔 높이 대역 0.606 ~ 1.789 m 밖 — 베이스로 불가) | base_limit(주행 제한 · 테이블) | max_iter
+apply(m, d, side, res)               # d.qpos에 베이스 · 팔 해 넣고 forward
+
+# --- 6주차 ik.py 호환 (v2 옵션) ---
+res = solve_ik(m, d, side, target_pos, approach_quat([0, 0, -1]), include_base=True, table_x=0.288)   # WBIKResult 반환
+```
+
+- 베이스 열: MuJoCo slide 축은 world 고정 → TX · TY 열 = world x · y 단위벡터, RZ 열 = ẑ × (p − p_RZ). 로봇 기준 베이스 속도 명령 = R(yaw)ᵀ [ẋ, ẏ] (함태훈 제어기 로그 `v_body`)
+- 영공간 차원(위치만): 팔 4 − 3 = **1**, 전신 7 − 3 = **4**. 위치 + 그리퍼 축(5조건): 팔 −1(부족 → orientation_limit) · 전신 2
+- 결과: [../results/wb_ik_compare.md](../results/wb_ik_compare.md)(13목표 · 무작위 도달률 · W 비교 · 영공간), [../results/workspace_wb.md](../results/workspace_wb.md)(작업공간 확장)
+- 한계: 끝점 위치 · 축만 — 팔 링크 ↔ 테이블 · 몸통 충돌은 IK에서 안 봄(결과 `ncon`으로 자기 충돌만 확인). 8주차 테이블 scene에서 충돌 확인 추가 예정
