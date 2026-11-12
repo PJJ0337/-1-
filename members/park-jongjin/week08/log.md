@@ -58,11 +58,11 @@ MUJOCO_GL=egl python scenarios/render_pick_gif.py 6 # Windows는 그냥 python
 
 ## 5. 막힌 점 · 요청 (공유한 날짜)
 
-- (함태훈에게 11/12) ① week08 그리퍼 · 접촉 scene과 `docs/dataset_spec.md`가 아직 없어 B1 임시본(pick_env.GRIPPER · CONTACT, dataset_spec_draft.md)으로 수집 — 형식 · 필드 이름 맞춰 줄 것, 받으면 `save()`만 바꿔 재수집(2분) ② 실패 사례 분석 요청: seed 1080(원기둥 2.98 kg 들기 순간 발산), 파지력 · 손가락 질량 · dt 민감도 → solref · solimp 원인 표 ③ 파지 중 토크 예산: 3 kg + 그리퍼 0.9 kg, 옆면 접근 자세 roll ④ action = 관절 목표(재생 정확) vs 끝점 목표 — 함태훈 구술 ② 주제와 연결
+- (함태훈에게 11/12 오후 — 아래 회신으로 ① ~ ④ 모두 해결, §8) ① week08 그리퍼 · 접촉 scene과 `docs/dataset_spec.md`가 아직 없어 B1 임시본(pick_env.GRIPPER · CONTACT, dataset_spec_draft.md)으로 수집 — 형식 · 필드 이름 맞춰 줄 것, 받으면 `save()`만 바꿔 재수집(2분) ② 실패 사례 분석 요청: seed 1080(원기둥 2.98 kg 들기 순간 발산), 파지력 · 손가락 질량 · dt 민감도 → solref · solimp 원인 표 ③ 파지 중 토크 예산: 3 kg + 그리퍼 0.9 kg, 옆면 접근 자세 roll ④ action = 관절 목표(재생 정확) vs 끝점 목표 — 함태훈 구술 ② 주제와 연결
 - (팀장) 어깨 구동기 TQ ↔ RI85 확정 · (평가) 5 ~ 7주차 평가표 — 대기
 
-- **(함태훈 11/12 회신 · 태그 week08 = 7f434ae, 반영은 제출 후 → week09 태그)**
-  ① 그리퍼 · 접촉 = 임시값 그대로 채택, **OPTION timestep 1 → 0.5 ms · NSUB 20 → 40**(제어 50 Hz 유지) → seed 1000 ~ 1099 100/100(1080 포함), 계산 1.9배
+- **(함태훈 11/12 회신 · 함태훈 태그 week08 = 7f434ae → 제출 전에 반영, §8)**
+  ① 그리퍼 · 접촉 = 임시값 그대로 채택, **OPTION timestep 1 → 0.5 ms · NSUB 20 → 40**(제어 50 Hz 유지) → seed 1000 ~ 1099 100/100(1080 포함), 계산 1.6배(함태훈 측정 1.9배는 CPU 2개 동시 실행 때문 — 1.6배로 통일)
   ② 명세 `docs/dataset_spec.md` v1.0(`b1-dataset-1.0`): 초안 필드 유지 + 로봇 좌표 파생 4개(obs/base_pose · ee_pos_base · obj_pos_base, action_base_body) · 속성 5개 · 성공 시 fail = "" — `b1_dataset.upgrade()`/`check()` → `datasets/`에 사본, collect.py가 초안으로 쓴 뒤 upgrade · check
   ③ seed 1080 원인: 미끄러짐이 아니라 **수치 발산**(들기 10.86 s부터 물체 각속도 0.1 → 17 rad/s 지수 증가). solref · solimp 딱딱 → 발산 증가(0.005: 11건), 부드럽게 → 관통 · 낙하 증가, impratio ↓ → 발산 증가, condim 무관. **dt 0.5 ms만 해결**(3 kg 고정 20회 9 → 19/20, 원기둥 2/12 → 12/12). 손가락 0.2 kg · 닫기 속도 · dt 2 → 1 ms 조치는 같은 원인을 줄이는 쪽이라 유지
   ④ 파지 토크: 3 kg @ 파지 중심 + 손가락 0.4 kg 정적 최악 pitch 46.53 · roll 42.52, + 베이스 가속 → **필요 48.69 · 46.71 N·m**, 옆면 집기 실행 최대 roll 8.7 N·m. TQ 144 % · RI85 49 % 통과, **PDR 52 pitch 여유 6.8 %(× 1.2 미달)** → `torque_budget_b1.md` 갱신(+ A팀 추가 문안 초안)
@@ -77,7 +77,7 @@ MUJOCO_GL=egl python scenarios/render_pick_gif.py 6 # Windows는 그냥 python
 1. BC 파이프라인: 데이터 로더(HDF5 → obs · action 정규화, 학습 / 검증 분리) · MLP(CPU) · 롤아웃 성공률 — 전문가 95 % 대비, 랜덤화 없음 / 있음
 2. Isaac Lab 환경 명세 `docs/isaaclab_env_spec.md` — 상태기계 · 판정 · 실패 분류 → Observation · Action · Termination · Event 대응, 함태훈 Event 매핑 통합
 3. 손목 2축 예측 1쪽 — 이번 주 경계(깊이 0.24 m · 상자 방향) 기준으로 수렴률 · 성공률이 어떻게 달라질지
-4. 함태훈 명세 · 접촉 분석 받으면 형식 맞춰 재수집 · sim_unstable 원인 반영
+4. (함태훈과 공동) 9주차 BC · 도메인 랜덤화 — 랜덤화 범위 근거 = 가정값 표 S15 ~ S17, 함태훈 2.14 kg(PDR 52 × 1.2 최대 짐) 계산 스크립트 수령 시 토크 예산 · A팀 문안 근거로 링크
 
 ## 8. 함태훈 회신 반영 (11/12 저녁, 함태훈 week08 7f434ae — 제출 전이라 week08 태그를 40a345e 이후 커밋으로 다시 찍음)
 
@@ -89,3 +89,4 @@ MUJOCO_GL=egl python scenarios/render_pick_gif.py 6 # Windows는 그냥 python
 | action | 관절 목표 유지(합의) | — | 함태훈 sim/w08/results/action_format.md |
 
 - 재실행 결과(dt 0.5 ms): 무작위 20회 **19/20** 그대로(실패 seed 1 상자 ik_fail — 계획 단계라 dt 무관), 목표 오차 평균 6.0 · 최대 13.6 mm / 그리퍼 54조합 이론 일치 54/54 그대로 / **수집 100/100 성공**(seed 1080 포함), 123,040 스텝 · 160 s(1 ms 103 s의 1.6배) / **v1.0 check 100/100 통과 · 재생 qpos 차 0 100/100**, 모델 지문 7016330767f5 → 4d070b18a640 / 샘플 3개 v1.0으로 다시 생성
+- (함태훈 11/12 밤 교차 확인, 216b202 기준) 수집 seed 1000 ~ 1099 100/100 · check 100/100 · 재생 차 0 100/100 · 모델 지문 4d070b18a640 일치, 샘플 3개 원본 check 통과 · 재생 차 0, torque_budget_w08 사본 = 원본. A팀 문안 수치 일치 → 2번에 「52 N·m에서 × 1.2를 지키는 최대 짐 약 2.1 kg(pitch, 그리퍼 0.9 kg 포함)」, 3번에 「① 짐 2 kg 제한 ② 최악 자세 동작 금지 중 하나」 추가(함태훈 제안). 박종진 손 검산: 짐 0 kg 앞으로 수평 ≈ 27.8 N·m(그리퍼 box 25.40 + 손가락 0.4 kg), 짐 1 kg당 ≈ 6.24 N·m, 베이스 가속 2.16 → (52/1.2 − 2.16 − 27.8)/6.24 ≈ 2.14 kg — 일치
