@@ -17,7 +17,7 @@ GRIPPER=dict(stroke=0.055,          # 손가락 1개 이동 [m] (안쪽 면 0 ~ 
              grasp_off=0.045)       # ee site(손바닥 아래면) → 파지 중심 거리 [m] (손바닥 ↔ 물체 윗면 여유 ≥ 15 mm)
 CONTACT=dict(pad_friction=(1.0,0.005,0.0001), obj_friction=(1.0,0.005,0.0001), table_friction=(0.8,0.005,0.0001),
              condim=4, solref=(0.01,1.0), solimp=(0.95,0.99,0.001))
-OPTION='timestep="0.001" cone="elliptic" impratio="10"'   # 파지 크리프 방지(gripper_slip.md: 기본 pyramidal은 F ≫ F_min에서도 흘러내림) + 시간 간격 1 ms(2 ms면 2 ~ 3 kg 물체 들기 · 놓기에서 발산, 8주차 발견)
+OPTION='timestep="0.0005" cone="elliptic" impratio="10"'   # 파지 크리프 방지(gripper_slip.md: 기본 pyramidal은 F ≫ F_min에서도 흘러내림) + 시간 간격 0.5 ms(2 ms면 2 ~ 3 kg 들기 · 놓기 발산, 1 ms도 3 kg 원기둥 들기에서 수치 진동 발산 — 함태훈 week08 7f434ae contact_sweep: dt 0.5 ms만 해결, 3 kg 20회 9 → 19/20)
 TABLE=dict(edge_x=0.45, depth=0.6, y=(-0.9,0.9), top=0.70)   # 테이블 앞 가장자리 world x, 윗면 높이 (7주차 그림 · 작업공간 분석과 같은 0.70 m)
 OBJ=dict(box_half=0.03, cyl_r=0.028, cyl_half=0.0325, mass=(0.2,3.0))
 SPAWN=dict(depth=(0.06,0.22), y=(0.00,0.35), yaw_deg=(-45,45))   # 물체 초기 위치 무작위 범위(테이블 가장자리 기준 안쪽 깊이 · world y)

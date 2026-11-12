@@ -49,7 +49,7 @@ if __name__=="__main__":
     rows=[trial(mu,F,ms,k) for mu,F,ms,k in itertools.product((0.3,0.6,1.0),(10.0,20.0,40.0),(0.2,1.0,3.0),("box","cyl"))]
     rows+= [trial(1.0,40.0,3.0,k,c) for k in ("box","cyl") for c in (3,6)]
     # 마찰 원뿔 비교: MuJoCo 기본(pyramidal, impratio 1) — 같은 54조합
-    PYR='timestep="0.001" cone="pyramidal" impratio="1"'
+    PYR='timestep="0.0005" cone="pyramidal" impratio="1"'
     pyr=[trial(mu,F,ms,k,opt=PYR) for mu,F,ms,k in itertools.product((0.3,0.6,1.0),(10.0,20.0,40.0),(0.2,1.0,3.0),("box","cyl"))]
     pyr_ok=sum(r["held"]==(r["F"]>=r["F_min"]) for r in pyr); pyr_worst=max(r["slip_lift_mm"]+r["slip_hold_mm"] for r in pyr if r["F"]>=1.5*r["F_min"])
     el_worst=max(r["slip_lift_mm"]+r["slip_hold_mm"] for r in rows if r["condim"]==CONTACT["condim"] and r["F"]>=1.5*r["F_min"])

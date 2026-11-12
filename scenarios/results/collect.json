@@ -1,13 +1,11 @@
 {
  "n": 100,
- "success": 99,
- "fails": {
-  "sim_unstable": 1
- },
- "steps_total": 122400,
- "mb_total": 44.6,
- "seconds": 103.4,
- "model_hash": "7016330767f5",
+ "success": 100,
+ "fails": {},
+ "steps_total": 123040,
+ "mb_total": 50.5,
+ "seconds": 159.7,
+ "model_hash": "4d070b18a640",
  "seeds": [
   1000,
   1099
@@ -21,7 +19,7 @@
    "fail": null,
    "steps": 1433,
    "t_total": 28.64,
-   "kb": 512.5
+   "kb": 579.4
   },
   {
    "seed": 1001,
@@ -31,7 +29,7 @@
    "fail": null,
    "steps": 1211,
    "t_total": 24.2,
-   "kb": 460.5
+   "kb": 517.8
   },
   {
    "seed": 1002,
@@ -41,7 +39,7 @@
    "fail": null,
    "steps": 1226,
    "t_total": 24.5,
-   "kb": 467.4
+   "kb": 524.8
   },
   {
    "seed": 1003,
@@ -51,7 +49,7 @@
    "fail": null,
    "steps": 1218,
    "t_total": 24.34,
-   "kb": 445.7
+   "kb": 504.5
   },
   {
    "seed": 1004,
@@ -61,7 +59,7 @@
    "fail": null,
    "steps": 1207,
    "t_total": 24.12,
-   "kb": 461.5
+   "kb": 518.5
   },
   {
    "seed": 1005,
@@ -71,7 +69,7 @@
    "fail": null,
    "steps": 1381,
    "t_total": 27.6,
-   "kb": 498.1
+   "kb": 563.0
   },
   {
    "seed": 1006,
@@ -81,7 +79,7 @@
    "fail": null,
    "steps": 1208,
    "t_total": 24.14,
-   "kb": 460.0
+   "kb": 515.8
   },
   {
    "seed": 1007,
@@ -91,7 +89,7 @@
    "fail": null,
    "steps": 1253,
    "t_total": 25.04,
-   "kb": 451.1
+   "kb": 510.5
   },
   {
    "seed": 1008,
@@ -101,7 +99,7 @@
    "fail": null,
    "steps": 1214,
    "t_total": 24.26,
-   "kb": 439.9
+   "kb": 498.5
   },
   {
    "seed": 1009,
@@ -111,7 +109,7 @@
    "fail": null,
    "steps": 1201,
    "t_total": 24.0,
-   "kb": 463.3
+   "kb": 518.8
   },
   {
    "seed": 1010,
@@ -121,7 +119,7 @@
    "fail": null,
    "steps": 1226,
    "t_total": 24.5,
-   "kb": 467.4
+   "kb": 523.4
   },
   {
    "seed": 1011,
@@ -131,7 +129,7 @@
    "fail": null,
    "steps": 1204,
    "t_total": 24.06,
-   "kb": 436.2
+   "kb": 493.8
   },
   {
    "seed": 1012,
@@ -141,7 +139,7 @@
    "fail": null,
    "steps": 1207,
    "t_total": 24.12,
-   "kb": 457.2
+   "kb": 514.0
   },
   {
    "seed": 1013,
@@ -151,7 +149,7 @@
    "fail": null,
    "steps": 1242,
    "t_total": 24.82,
-   "kb": 448.7
+   "kb": 507.5
   },
   {
    "seed": 1014,
@@ -161,7 +159,7 @@
    "fail": null,
    "steps": 1232,
    "t_total": 24.62,
-   "kb": 464.1
+   "kb": 522.3
   },
   {
    "seed": 1015,
@@ -171,7 +169,7 @@
    "fail": null,
    "steps": 1223,
    "t_total": 24.44,
-   "kb": 459.9
+   "kb": 518.1
   },
   {
    "seed": 1016,
@@ -181,7 +179,7 @@
    "fail": null,
    "steps": 1213,
    "t_total": 24.24,
-   "kb": 463.1
+   "kb": 520.3
   },
   {
    "seed": 1017,
@@ -191,7 +189,7 @@
    "fail": null,
    "steps": 1234,
    "t_total": 24.66,
-   "kb": 463.8
+   "kb": 521.9
   },
   {
    "seed": 1018,
@@ -201,7 +199,7 @@
    "fail": null,
    "steps": 1233,
    "t_total": 24.64,
-   "kb": 470.6
+   "kb": 528.8
   },
   {
    "seed": 1019,
@@ -211,7 +209,7 @@
    "fail": null,
    "steps": 1220,
    "t_total": 24.38,
-   "kb": 442.4
+   "kb": 500.5
   },
   {
    "seed": 1020,
@@ -221,7 +219,7 @@
    "fail": null,
    "steps": 1197,
    "t_total": 23.92,
-   "kb": 456.8
+   "kb": 513.6
   },
   {
    "seed": 1021,
@@ -231,7 +229,7 @@
    "fail": null,
    "steps": 1238,
    "t_total": 24.74,
-   "kb": 447.5
+   "kb": 506.1
   },
   {
    "seed": 1022,
@@ -241,7 +239,7 @@
    "fail": null,
    "steps": 1237,
    "t_total": 24.72,
-   "kb": 467.6
+   "kb": 526.0
   },
   {
    "seed": 1023,
@@ -251,7 +249,7 @@
    "fail": null,
    "steps": 1239,
    "t_total": 24.76,
-   "kb": 447.9
+   "kb": 507.0
   },
   {
    "seed": 1024,
@@ -261,7 +259,7 @@
    "fail": null,
    "steps": 1214,
    "t_total": 24.26,
-   "kb": 464.1
+   "kb": 520.9
   },
   {
    "seed": 1025,
@@ -271,7 +269,7 @@
    "fail": null,
    "steps": 1205,
    "t_total": 24.08,
-   "kb": 454.9
+   "kb": 511.4
   },
   {
    "seed": 1026,
@@ -281,7 +279,7 @@
    "fail": null,
    "steps": 1205,
    "t_total": 24.08,
-   "kb": 455.7
+   "kb": 512.8
   },
   {
    "seed": 1027,
@@ -291,7 +289,7 @@
    "fail": null,
    "steps": 1228,
    "t_total": 24.54,
-   "kb": 469.6
+   "kb": 525.5
   },
   {
    "seed": 1028,
@@ -299,9 +297,9 @@
    "mass": 1.935,
    "success": true,
    "fail": null,
-   "steps": 1232,
-   "t_total": 24.62,
-   "kb": 474.5
+   "steps": 1231,
+   "t_total": 24.6,
+   "kb": 531.0
   },
   {
    "seed": 1029,
@@ -311,7 +309,7 @@
    "fail": null,
    "steps": 1194,
    "t_total": 23.86,
-   "kb": 452.9
+   "kb": 509.2
   },
   {
    "seed": 1030,
@@ -321,7 +319,7 @@
    "fail": null,
    "steps": 1228,
    "t_total": 24.54,
-   "kb": 444.3
+   "kb": 503.2
   },
   {
    "seed": 1031,
@@ -331,7 +329,7 @@
    "fail": null,
    "steps": 1251,
    "t_total": 25.0,
-   "kb": 469.8
+   "kb": 528.2
   },
   {
    "seed": 1032,
@@ -341,7 +339,7 @@
    "fail": null,
    "steps": 1235,
    "t_total": 24.68,
-   "kb": 446.4
+   "kb": 505.5
   },
   {
    "seed": 1033,
@@ -351,7 +349,7 @@
    "fail": null,
    "steps": 1255,
    "t_total": 25.08,
-   "kb": 472.3
+   "kb": 531.2
   },
   {
    "seed": 1034,
@@ -361,7 +359,7 @@
    "fail": null,
    "steps": 1214,
    "t_total": 24.26,
-   "kb": 468.3
+   "kb": 524.8
   },
   {
    "seed": 1035,
@@ -371,7 +369,7 @@
    "fail": null,
    "steps": 1225,
    "t_total": 24.48,
-   "kb": 442.2
+   "kb": 500.4
   },
   {
    "seed": 1036,
@@ -381,7 +379,7 @@
    "fail": null,
    "steps": 1222,
    "t_total": 24.42,
-   "kb": 442.1
+   "kb": 499.7
   },
   {
    "seed": 1037,
@@ -391,7 +389,7 @@
    "fail": null,
    "steps": 1239,
    "t_total": 24.76,
-   "kb": 447.1
+   "kb": 506.2
   },
   {
    "seed": 1038,
@@ -401,7 +399,7 @@
    "fail": null,
    "steps": 1232,
    "t_total": 24.62,
-   "kb": 445.5
+   "kb": 504.5
   },
   {
    "seed": 1039,
@@ -411,7 +409,7 @@
    "fail": null,
    "steps": 1218,
    "t_total": 24.34,
-   "kb": 466.3
+   "kb": 523.4
   },
   {
    "seed": 1040,
@@ -421,7 +419,7 @@
    "fail": null,
    "steps": 1237,
    "t_total": 24.72,
-   "kb": 447.9
+   "kb": 506.6
   },
   {
    "seed": 1041,
@@ -431,7 +429,7 @@
    "fail": null,
    "steps": 1229,
    "t_total": 24.56,
-   "kb": 470.0
+   "kb": 527.9
   },
   {
    "seed": 1042,
@@ -441,7 +439,7 @@
    "fail": null,
    "steps": 1222,
    "t_total": 24.42,
-   "kb": 465.1
+   "kb": 522.3
   },
   {
    "seed": 1043,
@@ -451,7 +449,7 @@
    "fail": null,
    "steps": 1218,
    "t_total": 24.34,
-   "kb": 463.2
+   "kb": 520.5
   },
   {
    "seed": 1044,
@@ -461,7 +459,7 @@
    "fail": null,
    "steps": 1210,
    "t_total": 24.18,
-   "kb": 439.1
+   "kb": 497.3
   },
   {
    "seed": 1045,
@@ -471,7 +469,7 @@
    "fail": null,
    "steps": 1224,
    "t_total": 24.46,
-   "kb": 469.4
+   "kb": 526.1
   },
   {
    "seed": 1046,
@@ -481,7 +479,7 @@
    "fail": null,
    "steps": 1245,
    "t_total": 24.88,
-   "kb": 449.2
+   "kb": 508.5
   },
   {
    "seed": 1047,
@@ -491,7 +489,7 @@
    "fail": null,
    "steps": 1212,
    "t_total": 24.22,
-   "kb": 439.7
+   "kb": 497.7
   },
   {
    "seed": 1048,
@@ -501,7 +499,7 @@
    "fail": null,
    "steps": 1232,
    "t_total": 24.62,
-   "kb": 471.2
+   "kb": 528.8
   },
   {
    "seed": 1049,
@@ -511,7 +509,7 @@
    "fail": null,
    "steps": 1228,
    "t_total": 24.54,
-   "kb": 462.8
+   "kb": 520.7
   },
   {
    "seed": 1050,
@@ -521,7 +519,7 @@
    "fail": null,
    "steps": 1237,
    "t_total": 24.72,
-   "kb": 447.2
+   "kb": 505.3
   },
   {
    "seed": 1051,
@@ -531,7 +529,7 @@
    "fail": null,
    "steps": 1207,
    "t_total": 24.12,
-   "kb": 437.6
+   "kb": 494.9
   },
   {
    "seed": 1052,
@@ -541,7 +539,7 @@
    "fail": null,
    "steps": 1210,
    "t_total": 24.18,
-   "kb": 463.6
+   "kb": 518.6
   },
   {
    "seed": 1053,
@@ -551,7 +549,7 @@
    "fail": null,
    "steps": 1232,
    "t_total": 24.62,
-   "kb": 445.5
+   "kb": 503.8
   },
   {
    "seed": 1054,
@@ -561,7 +559,7 @@
    "fail": null,
    "steps": 1226,
    "t_total": 24.5,
-   "kb": 444.4
+   "kb": 503.9
   },
   {
    "seed": 1055,
@@ -571,7 +569,7 @@
    "fail": null,
    "steps": 1238,
    "t_total": 24.74,
-   "kb": 447.8
+   "kb": 506.7
   },
   {
    "seed": 1056,
@@ -581,7 +579,7 @@
    "fail": null,
    "steps": 1217,
    "t_total": 24.32,
-   "kb": 466.3
+   "kb": 523.0
   },
   {
    "seed": 1057,
@@ -591,7 +589,7 @@
    "fail": null,
    "steps": 1209,
    "t_total": 24.16,
-   "kb": 456.2
+   "kb": 513.1
   },
   {
    "seed": 1058,
@@ -601,7 +599,7 @@
    "fail": null,
    "steps": 1223,
    "t_total": 24.44,
-   "kb": 466.7
+   "kb": 524.5
   },
   {
    "seed": 1059,
@@ -611,7 +609,7 @@
    "fail": null,
    "steps": 1216,
    "t_total": 24.3,
-   "kb": 464.4
+   "kb": 521.5
   },
   {
    "seed": 1060,
@@ -621,7 +619,7 @@
    "fail": null,
    "steps": 1249,
    "t_total": 24.96,
-   "kb": 451.0
+   "kb": 509.9
   },
   {
    "seed": 1061,
@@ -631,7 +629,7 @@
    "fail": null,
    "steps": 1209,
    "t_total": 24.16,
-   "kb": 456.1
+   "kb": 513.2
   },
   {
    "seed": 1062,
@@ -641,7 +639,7 @@
    "fail": null,
    "steps": 1226,
    "t_total": 24.5,
-   "kb": 473.6
+   "kb": 530.5
   },
   {
    "seed": 1063,
@@ -651,7 +649,7 @@
    "fail": null,
    "steps": 1209,
    "t_total": 24.16,
-   "kb": 438.5
+   "kb": 496.4
   },
   {
    "seed": 1064,
@@ -661,7 +659,7 @@
    "fail": null,
    "steps": 1206,
    "t_total": 24.1,
-   "kb": 458.9
+   "kb": 516.0
   },
   {
    "seed": 1065,
@@ -671,7 +669,7 @@
    "fail": null,
    "steps": 1230,
    "t_total": 24.58,
-   "kb": 468.7
+   "kb": 526.4
   },
   {
    "seed": 1066,
@@ -679,9 +677,9 @@
    "mass": 1.716,
    "success": true,
    "fail": null,
-   "steps": 1199,
-   "t_total": 23.96,
-   "kb": 458.5
+   "steps": 1200,
+   "t_total": 23.98,
+   "kb": 514.2
   },
   {
    "seed": 1067,
@@ -691,7 +689,7 @@
    "fail": null,
    "steps": 1363,
    "t_total": 27.24,
-   "kb": 492.1
+   "kb": 555.1
   },
   {
    "seed": 1068,
@@ -701,7 +699,7 @@
    "fail": null,
    "steps": 1212,
    "t_total": 24.22,
-   "kb": 439.2
+   "kb": 497.0
   },
   {
    "seed": 1069,
@@ -709,9 +707,9 @@
    "mass": 1.873,
    "success": true,
    "fail": null,
-   "steps": 1225,
-   "t_total": 24.48,
-   "kb": 467.7
+   "steps": 1226,
+   "t_total": 24.5,
+   "kb": 524.8
   },
   {
    "seed": 1070,
@@ -721,7 +719,7 @@
    "fail": null,
    "steps": 1373,
    "t_total": 27.44,
-   "kb": 495.7
+   "kb": 560.1
   },
   {
    "seed": 1071,
@@ -731,7 +729,7 @@
    "fail": null,
    "steps": 1230,
    "t_total": 24.58,
-   "kb": 463.8
+   "kb": 521.4
   },
   {
    "seed": 1072,
@@ -741,7 +739,7 @@
    "fail": null,
    "steps": 1232,
    "t_total": 24.62,
-   "kb": 464.5
+   "kb": 522.7
   },
   {
    "seed": 1073,
@@ -751,7 +749,7 @@
    "fail": null,
    "steps": 1250,
    "t_total": 24.98,
-   "kb": 450.6
+   "kb": 509.7
   },
   {
    "seed": 1074,
@@ -761,7 +759,7 @@
    "fail": null,
    "steps": 1234,
    "t_total": 24.66,
-   "kb": 470.4
+   "kb": 528.4
   },
   {
    "seed": 1075,
@@ -771,7 +769,7 @@
    "fail": null,
    "steps": 1232,
    "t_total": 24.62,
-   "kb": 464.0
+   "kb": 522.0
   },
   {
    "seed": 1076,
@@ -781,7 +779,7 @@
    "fail": null,
    "steps": 1239,
    "t_total": 24.76,
-   "kb": 447.7
+   "kb": 506.5
   },
   {
    "seed": 1077,
@@ -791,7 +789,7 @@
    "fail": null,
    "steps": 1223,
    "t_total": 24.44,
-   "kb": 474.5
+   "kb": 530.4
   },
   {
    "seed": 1078,
@@ -801,7 +799,7 @@
    "fail": null,
    "steps": 1207,
    "t_total": 24.12,
-   "kb": 460.8
+   "kb": 517.9
   },
   {
    "seed": 1079,
@@ -811,17 +809,17 @@
    "fail": null,
    "steps": 1270,
    "t_total": 25.38,
-   "kb": 456.8
+   "kb": 517.2
   },
   {
    "seed": 1080,
    "kind": "cyl",
    "mass": 2.984,
-   "success": false,
-   "fail": "sim_unstable",
-   "steps": 596,
-   "t_total": 11.9,
-   "kb": 247.9
+   "success": true,
+   "fail": null,
+   "steps": 1235,
+   "t_total": 24.68,
+   "kb": 530.2
   },
   {
    "seed": 1081,
@@ -831,7 +829,7 @@
    "fail": null,
    "steps": 1232,
    "t_total": 24.62,
-   "kb": 472.7
+   "kb": 528.5
   },
   {
    "seed": 1082,
@@ -841,7 +839,7 @@
    "fail": null,
    "steps": 1217,
    "t_total": 24.32,
-   "kb": 464.5
+   "kb": 522.1
   },
   {
    "seed": 1083,
@@ -851,7 +849,7 @@
    "fail": null,
    "steps": 1196,
    "t_total": 23.9,
-   "kb": 453.8
+   "kb": 510.4
   },
   {
    "seed": 1084,
@@ -861,7 +859,7 @@
    "fail": null,
    "steps": 1233,
    "t_total": 24.64,
-   "kb": 445.8
+   "kb": 504.7
   },
   {
    "seed": 1085,
@@ -871,7 +869,7 @@
    "fail": null,
    "steps": 1229,
    "t_total": 24.56,
-   "kb": 470.3
+   "kb": 528.6
   },
   {
    "seed": 1086,
@@ -881,7 +879,7 @@
    "fail": null,
    "steps": 1234,
    "t_total": 24.66,
-   "kb": 471.0
+   "kb": 529.2
   },
   {
    "seed": 1087,
@@ -891,7 +889,7 @@
    "fail": null,
    "steps": 1212,
    "t_total": 24.22,
-   "kb": 438.6
+   "kb": 495.7
   },
   {
    "seed": 1088,
@@ -901,7 +899,7 @@
    "fail": null,
    "steps": 1239,
    "t_total": 24.76,
-   "kb": 453.1
+   "kb": 512.3
   },
   {
    "seed": 1089,
@@ -911,7 +909,7 @@
    "fail": null,
    "steps": 1246,
    "t_total": 24.9,
-   "kb": 449.0
+   "kb": 508.0
   },
   {
    "seed": 1090,
@@ -921,7 +919,7 @@
    "fail": null,
    "steps": 1217,
    "t_total": 24.32,
-   "kb": 445.9
+   "kb": 504.1
   },
   {
    "seed": 1091,
@@ -931,7 +929,7 @@
    "fail": null,
    "steps": 1230,
    "t_total": 24.58,
-   "kb": 472.4
+   "kb": 529.5
   },
   {
    "seed": 1092,
@@ -941,7 +939,7 @@
    "fail": null,
    "steps": 1216,
    "t_total": 24.3,
-   "kb": 464.3
+   "kb": 521.6
   },
   {
    "seed": 1093,
@@ -951,7 +949,7 @@
    "fail": null,
    "steps": 1227,
    "t_total": 24.52,
-   "kb": 462.2
+   "kb": 520.1
   },
   {
    "seed": 1094,
@@ -961,7 +959,7 @@
    "fail": null,
    "steps": 1209,
    "t_total": 24.16,
-   "kb": 460.0
+   "kb": 516.8
   },
   {
    "seed": 1095,
@@ -971,7 +969,7 @@
    "fail": null,
    "steps": 1208,
    "t_total": 24.14,
-   "kb": 437.4
+   "kb": 494.4
   },
   {
    "seed": 1096,
@@ -981,7 +979,7 @@
    "fail": null,
    "steps": 1222,
    "t_total": 24.42,
-   "kb": 463.2
+   "kb": 520.9
   },
   {
    "seed": 1097,
@@ -991,7 +989,7 @@
    "fail": null,
    "steps": 1207,
    "t_total": 24.12,
-   "kb": 437.0
+   "kb": 494.2
   },
   {
    "seed": 1098,
@@ -1001,7 +999,7 @@
    "fail": null,
    "steps": 1229,
    "t_total": 24.56,
-   "kb": 471.3
+   "kb": 528.4
   },
   {
    "seed": 1099,
@@ -1011,16 +1009,17 @@
    "fail": null,
    "steps": 1217,
    "t_total": 24.32,
-   "kb": 441.5
+   "kb": 499.7
   }
  ],
  "replay": {
+  "spec_check_pass": 100,
   "n": 100,
   "max_abs_qpos_diff": 0.0,
   "all_zero": true,
   "success_consistent": 100,
   "hash_match": 100,
-  "seconds": 51.7,
+  "seconds": 101.3,
   "rows": [
    {
     "file": "ep_01000.hdf5",
@@ -1277,7 +1276,7 @@
    {
     "file": "ep_01028.hdf5",
     "seed": 1028,
-    "steps": 1232,
+    "steps": 1231,
     "max_abs_qpos_diff": 0.0,
     "success_saved": true,
     "success_replayed_goal": true,
@@ -1619,7 +1618,7 @@
    {
     "file": "ep_01066.hdf5",
     "seed": 1066,
-    "steps": 1199,
+    "steps": 1200,
     "max_abs_qpos_diff": 0.0,
     "success_saved": true,
     "success_replayed_goal": true,
@@ -1646,7 +1645,7 @@
    {
     "file": "ep_01069.hdf5",
     "seed": 1069,
-    "steps": 1225,
+    "steps": 1226,
     "max_abs_qpos_diff": 0.0,
     "success_saved": true,
     "success_replayed_goal": true,
@@ -1745,10 +1744,10 @@
    {
     "file": "ep_01080.hdf5",
     "seed": 1080,
-    "steps": 596,
+    "steps": 1235,
     "max_abs_qpos_diff": 0.0,
-    "success_saved": false,
-    "success_replayed_goal": false,
+    "success_saved": true,
+    "success_replayed_goal": true,
     "model_hash_match": true
    },
    {
@@ -1925,12 +1924,13 @@
   ]
  },
  "replay_samples": {
+  "spec_check_pass": 3,
   "n": 3,
   "max_abs_qpos_diff": 0.0,
   "all_zero": true,
   "success_consistent": 3,
   "hash_match": 3,
-  "seconds": 1.7,
+  "seconds": 3.2,
   "rows": [
    {
     "file": "ep_01000.hdf5",

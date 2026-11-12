@@ -1,5 +1,5 @@
 # week08 박종진 — 시연 데이터 수집: 전문가 정책(상태기계)으로 에피소드 자동 생성 → 에피소드 1개 = HDF5 1개
-#   형식 = datasets/dataset_spec_draft.md (B1 초안 v0.1, 함태훈 docs/dataset_spec.md 받으면 그 형식으로 맞춤)
+#   형식 = datasets/dataset_spec.md (함태훈 v1.0 `b1-dataset-1.0`, 7f434ae) — 초안 v0.1로 쓴 뒤 함태훈 upgrade()로 변환 · check() 검사
 #   저장 주기 = 제어 주기 50 Hz (관측은 행동 직전 상태, 행동 = 그 주기 동안 유지한 명령)
 #   재생 검증: 같은 seed로 reset → 저장된 action만 넣어 다시 시뮬 → qpos 전 구간 최대 차 (MuJoCo 단일 스레드 = 결정적이면 0)
 #   실행: python scenarios/collect.py --n 100 --start 1000 --out datasets/raw      (~3 분, 대용량 → .gitignore)
@@ -11,7 +11,8 @@ import numpy as np,mujoco,h5py
 HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.dirname(HERE); sys.path.insert(0,HERE)
 from expert import Expert,apply_action,STAGES,NSUB,DT
 from pick_env import build,reset,sample_task,GRIPPER,CONTACT,TABLE,GOAL,OBJ,OPTION,SPAWN
-SPEC="b1-w08-draft-0.1"
+SPEC="b1-w08-draft-0.1"   # 1차 저장 형식 → save()가 함태훈 upgrade()로 v1.0(b1-dataset-1.0)으로 바꿔 씀
+sys.path.insert(0,os.path.join(ROOT,"datasets")); import b1_dataset   # 함태훈 week08 7f434ae 사본(check · upgrade)
 ACTION_NAMES=["base_vx","base_vy","base_wz","left_shoulder_pitch","left_shoulder_roll","left_shoulder_yaw","left_elbow","gripper_opening"]
 
 def model_hash(m):
@@ -36,6 +37,12 @@ def record(m,seed,cam=None,max_t=40.0):
     return ex.result,B,task
 
 def save(path,res,B,task,mh):
+    """초안 형식으로 임시 파일 → 함태훈 b1_dataset.upgrade()로 v1.0 최종 파일(원본 배열 그대로 + 파생 필드 · 속성) → check() 통과 확인"""
+    tmp=path+".v01tmp"; _save_draft(tmp,res,B,task,mh)
+    b1_dataset.upgrade(tmp,path,mujoco_version=mujoco.__version__,source="PJJ0337/-1- scenarios/collect.py (week09, dt 0.5 ms)")
+    os.remove(tmp); bad=b1_dataset.check(path); assert not bad,bad
+
+def _save_draft(path,res,B,task,mh):
     with h5py.File(path,"w") as f:
         f.attrs.update(dict(spec=SPEC,seed=task["seed"],kind=task["kind"],mass=task["mass"],obj_xy=task["pos"],obj_yaw=task["yaw"],success=bool(res["success"]),
                             fail=str(res["fail"]),fail_stage=str(res["fail_stage"]),goal_err_mm=res["goal_err_mm"],t_total=res["t_total"],control_hz=round(1/DT),
@@ -73,7 +80,8 @@ if __name__=="__main__":
         m=build(cam=True); mh0=model_hash(m); t0=time.time(); R=[replay(m,p,mh0) for p in sorted(glob.glob(os.path.join(a.replay,"*.hdf5")))]
         res_f=os.path.join(HERE,"results","collect.json"); C=json.load(open(res_f)) if os.path.exists(res_f) else {}
         key="replay" if len(R)>=20 else "replay_samples"   # 샘플 재생은 따로 기록
-        C[key]=dict(n=len(R),max_abs_qpos_diff=max(r["max_abs_qpos_diff"] for r in R),all_zero=all(r["max_abs_qpos_diff"]==0 for r in R),
+        chk=[b1_dataset.check(p) for p in sorted(glob.glob(os.path.join(a.replay,"*.hdf5")))]
+        C[key]=dict(spec_check_pass=sum(1 for b in chk if not b),n=len(R),max_abs_qpos_diff=max(r["max_abs_qpos_diff"] for r in R),all_zero=all(r["max_abs_qpos_diff"]==0 for r in R),
                          success_consistent=sum(r["success_saved"]==r["success_replayed_goal"] for r in R),hash_match=sum(r["model_hash_match"] for r in R),
                          seconds=round(time.time()-t0,1),rows=R)
         json.dump(C,open(res_f,"w"),indent=1,ensure_ascii=False); print({k:v for k,v in C[key].items() if k!="rows"}); sys.exit()

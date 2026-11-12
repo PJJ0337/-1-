@@ -14,7 +14,7 @@ HERE=os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0,HERE)
 from pick_env import (build,reset,sample_task,contacts,Ids,TABLE,GOAL,GRIPPER,OBJ,obj_half_h)
 from wb_ik import (wb_jacobian,wb_weights,wdls,null_proj,limit_avoid,qadr,_clip_base,solve_wb_ik,ARM)
 
-DT_SIM=0.001; NSUB=20; DT=DT_SIM*NSUB          # 제어 50 Hz, 시뮬 1 kHz
+DT_SIM=0.0005; NSUB=40; DT=DT_SIM*NSUB         # 제어 50 Hz, 시뮬 2 kHz (함태훈 week08 권장 dt 0.5 ms)
 GRIP_RATE=0.06                                   # 그리퍼 명령 변화율 [m/s] — 한 번에 닫으면 손가락 1.5 m/s로 물체를 쳐서 관통 · 발산(8주차 발견)
 GRASP_Z=TABLE["top"]+0.032                      # 파지 중심 높이(물체 아래 1/2 지점 근처, 손가락 끝 테이블 위 12 mm)
 PRE_H=0.10                                      # 접근 · 들기 높이 [m]
