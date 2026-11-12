@@ -4,3 +4,4 @@ usd-core==26.8
 yourdfpy==0.0.60
 numpy
 pillow
+h5py          # week08 시연 데이터(HDF5)

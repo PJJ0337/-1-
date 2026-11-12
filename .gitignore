@@ -29,3 +29,8 @@ outputs/
 *.zip
 bom*
 BOM*
+
+# week08 시연 데이터 원본(대용량) — 샘플 3개만 datasets/samples/ 에 커밋
+datasets/raw/
+MUJOCO_LOG.TXT
+scenarios/results/down_poses.npz
