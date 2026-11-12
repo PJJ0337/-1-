@@ -1,0 +1,1599 @@
+{
+ "stat": {
+  "n": 20,
+  "success": 19,
+  "rate": 0.95,
+  "fails": {
+   "ik_fail": 1
+  },
+  "goal_err_mm": {
+   "mean": 6.0,
+   "max": 13.5
+  },
+  "t_total_s": {
+   "mean": 24.5
+  },
+  "mass_success": {
+   "heavy_ge_2kg": [
+    3,
+    3
+   ]
+  },
+  "table_contact_runs": 0,
+  "run_s": 31.5,
+  "sweep_s": 24.3
+ },
+ "rows": [
+  {
+   "seed": 0,
+   "kind": "cyl",
+   "mass": 1.809,
+   "depth": 0.103,
+   "y": 0.014,
+   "yaw_deg": -43.5,
+   "success": true,
+   "fail": null,
+   "fail_stage": null,
+   "goal_err_mm": 3.2,
+   "tilt_deg": 0.0,
+   "t_total": 24.16,
+   "align_err_mm": 2.44,
+   "grip_width_mm": 55.5,
+   "lift_rise_mm": 96.4,
+   "backoff": 0.3,
+   "table_contacts": [],
+   "path_checks": [
+    [
+     "APPROACH",
+     []
+    ],
+    [
+     "MOVE",
+     []
+    ],
+    [
+     "RETURN",
+     []
+    ]
+   ],
+   "plan_grasp": [
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": true,
+     "pre_h": 0.1,
+     "pos_err_mm": 0.65,
+     "rot_err_deg": 0.0,
+     "base_yaw_deg": -90.0,
+     "table_hits": [],
+     "pose_ok": true,
+     "chosen": true
+    }
+   ]
+  },
+  {
+   "seed": 1,
+   "kind": "box",
+   "mass": 0.465,
+   "depth": 0.212,
+   "y": 0.05,
+   "yaw_deg": 40.4,
+   "success": false,
+   "fail": "ik_fail",
+   "fail_stage": "APPROACH",
+   "goal_err_mm": 355.9,
+   "tilt_deg": 0.0,
+   "t_total": 0.4,
+   "align_err_mm": null,
+   "grip_width_mm": null,
+   "lift_rise_mm": null,
+   "backoff": null,
+   "table_contacts": [],
+   "path_checks": null,
+   "plan_grasp": [
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": false,
+     "pre_ok": false,
+     "pre_h": null,
+     "pos_err_mm": 81.92,
+     "rot_err_deg": 3.99,
+     "base_yaw_deg": -81.5,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": false,
+     "pre_ok": false,
+     "pre_h": null,
+     "pos_err_mm": 56.04,
+     "rot_err_deg": 0.02,
+     "base_yaw_deg": -86.7,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": false,
+     "pre_ok": false,
+     "pre_h": null,
+     "pos_err_mm": 56.05,
+     "rot_err_deg": 0.02,
+     "base_yaw_deg": -86.7,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": false,
+     "pre_ok": false,
+     "pre_h": null,
+     "pos_err_mm": 81.92,
+     "rot_err_deg": 3.99,
+     "base_yaw_deg": -81.5,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": false,
+     "pre_ok": false,
+     "pre_h": null,
+     "pos_err_mm": 152.83,
+     "rot_err_deg": 10.49,
+     "base_yaw_deg": -101.1,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": false,
+     "pre_ok": false,
+     "pre_h": null,
+     "pos_err_mm": 25.9,
+     "rot_err_deg": 0.01,
+     "base_yaw_deg": -92.8,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": false,
+     "pre_ok": false,
+     "pre_h": null,
+     "pos_err_mm": 81.92,
+     "rot_err_deg": 3.99,
+     "base_yaw_deg": -81.5,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": false,
+     "pre_ok": false,
+     "pre_h": null,
+     "pos_err_mm": 56.04,
+     "rot_err_deg": 0.02,
+     "base_yaw_deg": -86.7,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": false,
+     "pre_ok": false,
+     "pre_h": null,
+     "pos_err_mm": 81.92,
+     "rot_err_deg": 3.99,
+     "base_yaw_deg": -81.5,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": false,
+     "pre_ok": false,
+     "pre_h": null,
+     "pos_err_mm": 56.04,
+     "rot_err_deg": 0.02,
+     "base_yaw_deg": -86.7,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": false,
+     "pre_ok": false,
+     "pre_h": null,
+     "pos_err_mm": 81.92,
+     "rot_err_deg": 3.99,
+     "base_yaw_deg": -81.5,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": false,
+     "pre_ok": false,
+     "pre_h": null,
+     "pos_err_mm": 56.04,
+     "rot_err_deg": 0.02,
+     "base_yaw_deg": -86.7,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": false,
+     "pre_ok": false,
+     "pre_h": null,
+     "pos_err_mm": 81.92,
+     "rot_err_deg": 3.99,
+     "base_yaw_deg": -81.5,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": false,
+     "pre_ok": false,
+     "pre_h": null,
+     "pos_err_mm": 56.04,
+     "rot_err_deg": 0.02,
+     "base_yaw_deg": -86.7,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": false,
+     "pre_ok": false,
+     "pre_h": null,
+     "pos_err_mm": 81.92,
+     "rot_err_deg": 3.99,
+     "base_yaw_deg": -81.5,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": false,
+     "pre_ok": false,
+     "pre_h": null,
+     "pos_err_mm": 56.04,
+     "rot_err_deg": 0.02,
+     "base_yaw_deg": -86.7,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "wb",
+     "base_seed_deg": -90,
+     "wb_status": "base_limit",
+     "grasp_ok": false,
+     "pre_ok": false,
+     "pre_h": null,
+     "pos_err_mm": 26.9,
+     "rot_err_deg": 0.01,
+     "base_yaw_deg": -93.0,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "wb",
+     "base_seed_deg": -90,
+     "wb_status": "base_limit",
+     "grasp_ok": false,
+     "pre_ok": false,
+     "pre_h": null,
+     "pos_err_mm": 271.32,
+     "rot_err_deg": 17.27,
+     "base_yaw_deg": -86.3,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "wb",
+     "base_seed_deg": -67,
+     "wb_status": "base_limit",
+     "grasp_ok": false,
+     "pre_ok": false,
+     "pre_h": null,
+     "pos_err_mm": 26.9,
+     "rot_err_deg": 0.01,
+     "base_yaw_deg": -93.0,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "wb",
+     "base_seed_deg": -67,
+     "wb_status": "base_limit",
+     "grasp_ok": false,
+     "pre_ok": false,
+     "pre_h": null,
+     "pos_err_mm": 271.32,
+     "rot_err_deg": 17.27,
+     "base_yaw_deg": -86.3,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "wb",
+     "base_seed_deg": -113,
+     "wb_status": "base_limit",
+     "grasp_ok": false,
+     "pre_ok": false,
+     "pre_h": null,
+     "pos_err_mm": 26.9,
+     "rot_err_deg": 0.01,
+     "base_yaw_deg": -93.0,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "wb",
+     "base_seed_deg": -113,
+     "wb_status": "base_limit",
+     "grasp_ok": false,
+     "pre_ok": false,
+     "pre_h": null,
+     "pos_err_mm": 271.32,
+     "rot_err_deg": 17.27,
+     "base_yaw_deg": -86.3,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib_pre",
+     "grasp_ok": false,
+     "pre_ok": true,
+     "pre_h": 0.1,
+     "pos_err_mm": 15.15,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib_pre",
+     "grasp_ok": false,
+     "pre_ok": true,
+     "pre_h": 0.1,
+     "pos_err_mm": 14.96,
+     "table_hits": [],
+     "pose_ok": false
+    }
+   ]
+  },
+  {
+   "seed": 2,
+   "kind": "cyl",
+   "mass": 1.016,
+   "depth": 0.108,
+   "y": 0.285,
+   "yaw_deg": -36.7,
+   "success": true,
+   "fail": null,
+   "fail_stage": null,
+   "goal_err_mm": 2.9,
+   "tilt_deg": 0.0,
+   "t_total": 24.54,
+   "align_err_mm": 2.41,
+   "grip_width_mm": 55.5,
+   "lift_rise_mm": 98.0,
+   "backoff": 0.3,
+   "table_contacts": [],
+   "path_checks": [
+    [
+     "APPROACH",
+     []
+    ],
+    [
+     "MOVE",
+     []
+    ],
+    [
+     "RETURN",
+     []
+    ]
+   ],
+   "plan_grasp": [
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": true,
+     "pre_h": 0.1,
+     "pos_err_mm": 0.85,
+     "rot_err_deg": 0.0,
+     "base_yaw_deg": -90.0,
+     "table_hits": [],
+     "pose_ok": true,
+     "chosen": true
+    }
+   ]
+  },
+  {
+   "seed": 3,
+   "kind": "cyl",
+   "mass": 0.258,
+   "depth": 0.098,
+   "y": 0.28,
+   "yaw_deg": 7.4,
+   "success": true,
+   "fail": null,
+   "fail_stage": null,
+   "goal_err_mm": 4.1,
+   "tilt_deg": 0.0,
+   "t_total": 24.58,
+   "align_err_mm": 2.45,
+   "grip_width_mm": 55.5,
+   "lift_rise_mm": 99.4,
+   "backoff": 0.3,
+   "table_contacts": [],
+   "path_checks": [
+    [
+     "APPROACH",
+     []
+    ],
+    [
+     "MOVE",
+     []
+    ],
+    [
+     "RETURN",
+     []
+    ]
+   ],
+   "plan_grasp": [
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": true,
+     "pre_h": 0.1,
+     "pos_err_mm": 0.61,
+     "rot_err_deg": 0.0,
+     "base_yaw_deg": -90.0,
+     "table_hits": [],
+     "pose_ok": true,
+     "chosen": true
+    }
+   ]
+  },
+  {
+   "seed": 4,
+   "kind": "cyl",
+   "mass": 1.036,
+   "depth": 0.142,
+   "y": 0.342,
+   "yaw_deg": -37.7,
+   "success": true,
+   "fail": null,
+   "fail_stage": null,
+   "goal_err_mm": 4.7,
+   "tilt_deg": 0.0,
+   "t_total": 24.7,
+   "align_err_mm": 2.29,
+   "grip_width_mm": 55.5,
+   "lift_rise_mm": 98.2,
+   "backoff": 0.3,
+   "table_contacts": [],
+   "path_checks": [
+    [
+     "APPROACH",
+     []
+    ],
+    [
+     "MOVE",
+     []
+    ],
+    [
+     "RETURN",
+     []
+    ]
+   ],
+   "plan_grasp": [
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": true,
+     "pre_h": 0.1,
+     "pos_err_mm": 0.53,
+     "rot_err_deg": 0.0,
+     "base_yaw_deg": -90.0,
+     "table_hits": [],
+     "pose_ok": true,
+     "chosen": true
+    }
+   ]
+  },
+  {
+   "seed": 5,
+   "kind": "cyl",
+   "mass": 0.231,
+   "depth": 0.189,
+   "y": 0.18,
+   "yaw_deg": -19.3,
+   "success": true,
+   "fail": null,
+   "fail_stage": null,
+   "goal_err_mm": 8.3,
+   "tilt_deg": 0.0,
+   "t_total": 24.34,
+   "align_err_mm": 1.88,
+   "grip_width_mm": 55.5,
+   "lift_rise_mm": 99.8,
+   "backoff": 0.3,
+   "table_contacts": [],
+   "path_checks": [
+    [
+     "APPROACH",
+     []
+    ],
+    [
+     "MOVE",
+     []
+    ],
+    [
+     "RETURN",
+     []
+    ]
+   ],
+   "plan_grasp": [
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": true,
+     "pre_h": 0.1,
+     "pos_err_mm": 0.68,
+     "rot_err_deg": 0.0,
+     "base_yaw_deg": -90.0,
+     "table_hits": [],
+     "pose_ok": true,
+     "chosen": true
+    }
+   ]
+  },
+  {
+   "seed": 6,
+   "kind": "box",
+   "mass": 2.9,
+   "depth": 0.115,
+   "y": 0.129,
+   "yaw_deg": -11.3,
+   "success": true,
+   "fail": null,
+   "fail_stage": null,
+   "goal_err_mm": 5.9,
+   "tilt_deg": 0.0,
+   "t_total": 24.8,
+   "align_err_mm": 1.21,
+   "grip_width_mm": 59.7,
+   "lift_rise_mm": 97.4,
+   "backoff": 0.3,
+   "table_contacts": [],
+   "path_checks": [
+    [
+     "APPROACH",
+     []
+    ],
+    [
+     "MOVE",
+     []
+    ],
+    [
+     "RETURN",
+     []
+    ]
+   ],
+   "plan_grasp": [
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": false,
+     "pre_ok": false,
+     "pre_h": null,
+     "pos_err_mm": 71.51,
+     "rot_err_deg": 0.03,
+     "base_yaw_deg": -93.5,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": true,
+     "pre_h": 0.1,
+     "pos_err_mm": 0.76,
+     "rot_err_deg": 0.02,
+     "base_yaw_deg": -105.8,
+     "table_hits": [],
+     "pose_ok": true,
+     "chosen": true
+    }
+   ]
+  },
+  {
+   "seed": 7,
+   "kind": "cyl",
+   "mass": 0.451,
+   "depth": 0.204,
+   "y": 0.271,
+   "yaw_deg": -24.7,
+   "success": true,
+   "fail": null,
+   "fail_stage": null,
+   "goal_err_mm": 9.7,
+   "tilt_deg": 0.0,
+   "t_total": 24.98,
+   "align_err_mm": 1.58,
+   "grip_width_mm": 55.5,
+   "lift_rise_mm": 99.6,
+   "backoff": 0.45,
+   "table_contacts": [],
+   "path_checks": [
+    [
+     "APPROACH",
+     []
+    ],
+    [
+     "MOVE",
+     []
+    ],
+    [
+     "RETURN",
+     []
+    ]
+   ],
+   "plan_grasp": [
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": false,
+     "pre_h": 0.05,
+     "pos_err_mm": 0.98,
+     "rot_err_deg": 0.2,
+     "base_yaw_deg": -88.1,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": false,
+     "pre_h": 0.05,
+     "pos_err_mm": 0.99,
+     "rot_err_deg": 0.21,
+     "base_yaw_deg": -88.2,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": true,
+     "pre_h": 0.1,
+     "pos_err_mm": 0.64,
+     "rot_err_deg": 0.0,
+     "base_yaw_deg": -90.0,
+     "table_hits": [],
+     "pose_ok": true,
+     "chosen": true
+    }
+   ]
+  },
+  {
+   "seed": 8,
+   "kind": "cyl",
+   "mass": 2.109,
+   "depth": 0.218,
+   "y": 0.112,
+   "yaw_deg": 26.0,
+   "success": true,
+   "fail": null,
+   "fail_stage": null,
+   "goal_err_mm": 11.1,
+   "tilt_deg": 0.0,
+   "t_total": 24.66,
+   "align_err_mm": 1.13,
+   "grip_width_mm": 55.5,
+   "lift_rise_mm": 98.5,
+   "backoff": 0.45,
+   "table_contacts": [],
+   "path_checks": [
+    [
+     "APPROACH",
+     []
+    ],
+    [
+     "MOVE",
+     []
+    ],
+    [
+     "RETURN",
+     []
+    ]
+   ],
+   "plan_grasp": [
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": true,
+     "pre_h": 0.1,
+     "pos_err_mm": 0.97,
+     "rot_err_deg": 0.0,
+     "base_yaw_deg": -90.0,
+     "table_hits": [],
+     "pose_ok": true,
+     "chosen": true
+    }
+   ]
+  },
+  {
+   "seed": 9,
+   "kind": "box",
+   "mass": 1.391,
+   "depth": 0.106,
+   "y": 0.211,
+   "yaw_deg": 25.0,
+   "success": true,
+   "fail": null,
+   "fail_stage": null,
+   "goal_err_mm": 2.2,
+   "tilt_deg": 0.0,
+   "t_total": 24.4,
+   "align_err_mm": 2.42,
+   "grip_width_mm": 59.7,
+   "lift_rise_mm": 97.4,
+   "backoff": 0.3,
+   "table_contacts": [],
+   "path_checks": [
+    [
+     "APPROACH",
+     []
+    ],
+    [
+     "MOVE",
+     []
+    ],
+    [
+     "RETURN",
+     []
+    ]
+   ],
+   "plan_grasp": [
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": true,
+     "pre_h": 0.1,
+     "pos_err_mm": 0.98,
+     "rot_err_deg": 0.08,
+     "base_yaw_deg": -90.0,
+     "table_hits": [],
+     "pose_ok": true,
+     "chosen": true
+    }
+   ]
+  },
+  {
+   "seed": 10,
+   "kind": "cyl",
+   "mass": 0.802,
+   "depth": 0.093,
+   "y": 0.29,
+   "yaw_deg": -31.6,
+   "success": true,
+   "fail": null,
+   "fail_stage": null,
+   "goal_err_mm": 5.1,
+   "tilt_deg": 0.0,
+   "t_total": 24.66,
+   "align_err_mm": 2.48,
+   "grip_width_mm": 55.5,
+   "lift_rise_mm": 98.3,
+   "backoff": 0.3,
+   "table_contacts": [],
+   "path_checks": [
+    [
+     "APPROACH",
+     []
+    ],
+    [
+     "MOVE",
+     []
+    ],
+    [
+     "RETURN",
+     []
+    ]
+   ],
+   "plan_grasp": [
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": true,
+     "pre_h": 0.1,
+     "pos_err_mm": 0.89,
+     "rot_err_deg": 0.0,
+     "base_yaw_deg": -89.9,
+     "table_hits": [],
+     "pose_ok": true,
+     "chosen": true
+    }
+   ]
+  },
+  {
+   "seed": 11,
+   "kind": "box",
+   "mass": 0.299,
+   "depth": 0.14,
+   "y": 0.211,
+   "yaw_deg": -42.4,
+   "success": true,
+   "fail": null,
+   "fail_stage": null,
+   "goal_err_mm": 6.1,
+   "tilt_deg": 0.0,
+   "t_total": 24.44,
+   "align_err_mm": 2.06,
+   "grip_width_mm": 59.7,
+   "lift_rise_mm": 99.6,
+   "backoff": 0.3,
+   "table_contacts": [],
+   "path_checks": [
+    [
+     "APPROACH",
+     []
+    ],
+    [
+     "MOVE",
+     []
+    ],
+    [
+     "RETURN",
+     []
+    ]
+   ],
+   "plan_grasp": [
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": true,
+     "pre_h": 0.1,
+     "pos_err_mm": 0.5,
+     "rot_err_deg": 0.75,
+     "base_yaw_deg": -90.1,
+     "table_hits": [],
+     "pose_ok": true,
+     "chosen": true
+    }
+   ]
+  },
+  {
+   "seed": 12,
+   "kind": "cyl",
+   "mass": 0.516,
+   "depth": 0.211,
+   "y": 0.066,
+   "yaw_deg": -28.9,
+   "success": true,
+   "fail": null,
+   "fail_stage": null,
+   "goal_err_mm": 13.5,
+   "tilt_deg": 0.0,
+   "t_total": 24.34,
+   "align_err_mm": 1.47,
+   "grip_width_mm": 55.5,
+   "lift_rise_mm": 99.7,
+   "backoff": 0.45,
+   "table_contacts": [],
+   "path_checks": [
+    [
+     "APPROACH",
+     []
+    ],
+    [
+     "MOVE",
+     []
+    ],
+    [
+     "RETURN",
+     []
+    ]
+   ],
+   "plan_grasp": [
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": false,
+     "pre_h": 0.05,
+     "pos_err_mm": 0.82,
+     "rot_err_deg": 0.14,
+     "base_yaw_deg": -90.0,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": false,
+     "pre_h": 0.05,
+     "pos_err_mm": 0.81,
+     "rot_err_deg": 0.14,
+     "base_yaw_deg": -90.0,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": false,
+     "pre_h": 0.05,
+     "pos_err_mm": 0.81,
+     "rot_err_deg": 0.14,
+     "base_yaw_deg": -90.0,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": false,
+     "pre_h": 0.05,
+     "pos_err_mm": 0.8,
+     "rot_err_deg": 0.13,
+     "base_yaw_deg": -90.0,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": false,
+     "pre_h": 0.05,
+     "pos_err_mm": 0.8,
+     "rot_err_deg": 0.13,
+     "base_yaw_deg": -90.0,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": false,
+     "pre_h": 0.05,
+     "pos_err_mm": 0.79,
+     "rot_err_deg": 0.11,
+     "base_yaw_deg": -90.0,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": true,
+     "pre_h": 0.1,
+     "pos_err_mm": 0.64,
+     "rot_err_deg": 0.0,
+     "base_yaw_deg": -90.1,
+     "table_hits": [],
+     "pose_ok": true,
+     "chosen": true
+    }
+   ]
+  },
+  {
+   "seed": 13,
+   "kind": "cyl",
+   "mass": 0.247,
+   "depth": 0.197,
+   "y": 0.284,
+   "yaw_deg": -21.5,
+   "success": true,
+   "fail": null,
+   "fail_stage": null,
+   "goal_err_mm": 5.8,
+   "tilt_deg": 0.0,
+   "t_total": 25.04,
+   "align_err_mm": 1.58,
+   "grip_width_mm": 55.5,
+   "lift_rise_mm": 99.8,
+   "backoff": 0.45,
+   "table_contacts": [],
+   "path_checks": [
+    [
+     "APPROACH",
+     []
+    ],
+    [
+     "MOVE",
+     []
+    ],
+    [
+     "RETURN",
+     []
+    ]
+   ],
+   "plan_grasp": [
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": true,
+     "pre_h": 0.1,
+     "pos_err_mm": 0.96,
+     "rot_err_deg": 0.01,
+     "base_yaw_deg": -90.1,
+     "table_hits": [],
+     "pose_ok": true,
+     "chosen": true
+    }
+   ]
+  },
+  {
+   "seed": 14,
+   "kind": "box",
+   "mass": 1.136,
+   "depth": 0.118,
+   "y": 0.246,
+   "yaw_deg": 32.4,
+   "success": true,
+   "fail": null,
+   "fail_stage": null,
+   "goal_err_mm": 2.4,
+   "tilt_deg": 0.0,
+   "t_total": 24.44,
+   "align_err_mm": 2.29,
+   "grip_width_mm": 59.7,
+   "lift_rise_mm": 98.1,
+   "backoff": 0.3,
+   "table_contacts": [],
+   "path_checks": [
+    [
+     "APPROACH",
+     []
+    ],
+    [
+     "MOVE",
+     []
+    ],
+    [
+     "RETURN",
+     []
+    ]
+   ],
+   "plan_grasp": [
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": true,
+     "pre_h": 0.1,
+     "pos_err_mm": 0.69,
+     "rot_err_deg": 0.3,
+     "base_yaw_deg": -90.0,
+     "table_hits": [],
+     "pose_ok": true,
+     "chosen": true
+    }
+   ]
+  },
+  {
+   "seed": 15,
+   "kind": "cyl",
+   "mass": 0.94,
+   "depth": 0.191,
+   "y": 0.121,
+   "yaw_deg": -41.0,
+   "success": true,
+   "fail": null,
+   "fail_stage": null,
+   "goal_err_mm": 7.3,
+   "tilt_deg": 0.0,
+   "t_total": 24.22,
+   "align_err_mm": 1.85,
+   "grip_width_mm": 55.5,
+   "lift_rise_mm": 99.0,
+   "backoff": 0.3,
+   "table_contacts": [],
+   "path_checks": [
+    [
+     "APPROACH",
+     []
+    ],
+    [
+     "MOVE",
+     []
+    ],
+    [
+     "RETURN",
+     []
+    ]
+   ],
+   "plan_grasp": [
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": true,
+     "pre_h": 0.1,
+     "pos_err_mm": 0.91,
+     "rot_err_deg": 0.0,
+     "base_yaw_deg": -90.0,
+     "table_hits": [],
+     "pose_ok": true,
+     "chosen": true
+    }
+   ]
+  },
+  {
+   "seed": 16,
+   "kind": "cyl",
+   "mass": 1.076,
+   "depth": 0.129,
+   "y": 0.033,
+   "yaw_deg": -13.7,
+   "success": true,
+   "fail": null,
+   "fail_stage": null,
+   "goal_err_mm": 3.0,
+   "tilt_deg": 0.0,
+   "t_total": 24.02,
+   "align_err_mm": 2.34,
+   "grip_width_mm": 55.5,
+   "lift_rise_mm": 98.0,
+   "backoff": 0.3,
+   "table_contacts": [],
+   "path_checks": [
+    [
+     "APPROACH",
+     []
+    ],
+    [
+     "MOVE",
+     []
+    ],
+    [
+     "RETURN",
+     []
+    ]
+   ],
+   "plan_grasp": [
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": true,
+     "pre_h": 0.1,
+     "pos_err_mm": 0.94,
+     "rot_err_deg": 0.0,
+     "base_yaw_deg": -90.0,
+     "table_hits": [],
+     "pose_ok": true,
+     "chosen": true
+    }
+   ]
+  },
+  {
+   "seed": 17,
+   "kind": "cyl",
+   "mass": 0.358,
+   "depth": 0.086,
+   "y": 0.195,
+   "yaw_deg": -11.9,
+   "success": true,
+   "fail": null,
+   "fail_stage": null,
+   "goal_err_mm": 5.7,
+   "tilt_deg": 0.0,
+   "t_total": 24.48,
+   "align_err_mm": 2.49,
+   "grip_width_mm": 55.5,
+   "lift_rise_mm": 99.2,
+   "backoff": 0.3,
+   "table_contacts": [],
+   "path_checks": [
+    [
+     "APPROACH",
+     []
+    ],
+    [
+     "MOVE",
+     []
+    ],
+    [
+     "RETURN",
+     []
+    ]
+   ],
+   "plan_grasp": [
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": true,
+     "pre_h": 0.1,
+     "pos_err_mm": 0.68,
+     "rot_err_deg": 0.0,
+     "base_yaw_deg": -90.0,
+     "table_hits": [],
+     "pose_ok": true,
+     "chosen": true
+    }
+   ]
+  },
+  {
+   "seed": 18,
+   "kind": "cyl",
+   "mass": 2.764,
+   "depth": 0.175,
+   "y": 0.098,
+   "yaw_deg": -37.6,
+   "success": true,
+   "fail": null,
+   "fail_stage": null,
+   "goal_err_mm": 2.8,
+   "tilt_deg": 0.0,
+   "t_total": 24.32,
+   "align_err_mm": 2.0,
+   "grip_width_mm": 55.5,
+   "lift_rise_mm": 96.5,
+   "backoff": 0.3,
+   "table_contacts": [],
+   "path_checks": [
+    [
+     "APPROACH",
+     []
+    ],
+    [
+     "MOVE",
+     []
+    ],
+    [
+     "RETURN",
+     []
+    ]
+   ],
+   "plan_grasp": [
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": true,
+     "pre_h": 0.1,
+     "pos_err_mm": 0.77,
+     "rot_err_deg": 0.0,
+     "base_yaw_deg": -90.0,
+     "table_hits": [],
+     "pose_ok": true,
+     "chosen": true
+    }
+   ]
+  },
+  {
+   "seed": 19,
+   "kind": "cyl",
+   "mass": 0.464,
+   "depth": 0.208,
+   "y": 0.096,
+   "yaw_deg": -39.6,
+   "success": true,
+   "fail": null,
+   "fail_stage": null,
+   "goal_err_mm": 9.9,
+   "tilt_deg": 0.0,
+   "t_total": 24.72,
+   "align_err_mm": 1.37,
+   "grip_width_mm": 55.5,
+   "lift_rise_mm": 99.8,
+   "backoff": 0.45,
+   "table_contacts": [],
+   "path_checks": [
+    [
+     "APPROACH",
+     []
+    ],
+    [
+     "MOVE",
+     []
+    ],
+    [
+     "RETURN",
+     []
+    ]
+   ],
+   "plan_grasp": [
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": false,
+     "pre_h": 0.05,
+     "pos_err_mm": 0.98,
+     "rot_err_deg": 0.21,
+     "base_yaw_deg": -90.8,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": false,
+     "pre_h": 0.05,
+     "pos_err_mm": 0.99,
+     "rot_err_deg": 0.21,
+     "base_yaw_deg": -90.8,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": false,
+     "pre_h": 0.05,
+     "pos_err_mm": 0.97,
+     "rot_err_deg": 0.2,
+     "base_yaw_deg": -89.2,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": false,
+     "pre_h": 0.05,
+     "pos_err_mm": 0.99,
+     "rot_err_deg": 0.21,
+     "base_yaw_deg": -89.2,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": false,
+     "pre_h": 0.05,
+     "pos_err_mm": 0.99,
+     "rot_err_deg": 0.21,
+     "base_yaw_deg": -90.8,
+     "table_hits": [],
+     "pose_ok": false
+    },
+    {
+     "start": "lib",
+     "base_seed_deg": -90,
+     "wb_status": "library",
+     "grasp_ok": true,
+     "pre_ok": true,
+     "pre_h": 0.1,
+     "pos_err_mm": 0.94,
+     "rot_err_deg": 0.01,
+     "base_yaw_deg": -90.1,
+     "table_hits": [],
+     "pose_ok": true,
+     "chosen": true
+    }
+   ]
+  }
+ ],
+ "depth_sweep": [
+  {
+   "depth": 0.06,
+   "plan_ok": 7,
+   "n": 7
+  },
+  {
+   "depth": 0.1,
+   "plan_ok": 7,
+   "n": 7
+  },
+  {
+   "depth": 0.14,
+   "plan_ok": 7,
+   "n": 7
+  },
+  {
+   "depth": 0.18,
+   "plan_ok": 7,
+   "n": 7
+  },
+  {
+   "depth": 0.2,
+   "plan_ok": 7,
+   "n": 7
+  },
+  {
+   "depth": 0.21,
+   "plan_ok": 7,
+   "n": 7
+  },
+  {
+   "depth": 0.22,
+   "plan_ok": 7,
+   "n": 7
+  },
+  {
+   "depth": 0.23,
+   "plan_ok": 7,
+   "n": 7
+  },
+  {
+   "depth": 0.24,
+   "plan_ok": 7,
+   "n": 7
+  },
+  {
+   "depth": 0.26,
+   "plan_ok": 0,
+   "n": 7
+  }
+ ],
+ "setup": {
+  "spawn": {
+   "depth": [
+    0.06,
+    0.22
+   ],
+   "y": [
+    0.0,
+    0.35
+   ],
+   "yaw_deg": [
+    -45,
+    45
+   ]
+  },
+  "goal": {
+   "depth": 0.15,
+   "y": -0.3,
+   "tol": 0.04
+  },
+  "table": {
+   "edge_x": 0.45,
+   "depth": 0.6,
+   "y": [
+    -0.9,
+    0.9
+   ],
+   "top": 0.7
+  },
+  "gripper": {
+   "stroke": 0.055,
+   "finger_half": [
+    0.008,
+    0.015,
+    0.03
+   ],
+   "finger_mass": 0.2,
+   "grip_force": 40.0,
+   "kp": 3000.0,
+   "damping": 8.0,
+   "grasp_off": 0.045
+  },
+  "contact": {
+   "pad_friction": [
+    1.0,
+    0.005,
+    0.0001
+   ],
+   "obj_friction": [
+    1.0,
+    0.005,
+    0.0001
+   ],
+   "table_friction": [
+    0.8,
+    0.005,
+    0.0001
+   ],
+   "condim": 4,
+   "solref": [
+    0.01,
+    1.0
+   ],
+   "solimp": [
+    0.95,
+    0.99,
+    0.001
+   ]
+  },
+  "option": "timestep=\"0.001\" cone=\"elliptic\" impratio=\"10\"",
+  "obj": {
+   "box_half": 0.03,
+   "cyl_r": 0.028,
+   "cyl_half": 0.0325,
+   "mass": [
+    0.2,
+    3.0
+   ]
+  }
+ }
+}
