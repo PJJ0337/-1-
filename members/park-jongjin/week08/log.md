@@ -61,6 +61,13 @@ MUJOCO_GL=egl python scenarios/render_pick_gif.py 6 # Windows는 그냥 python
 - (함태훈에게 11/12) ① week08 그리퍼 · 접촉 scene과 `docs/dataset_spec.md`가 아직 없어 B1 임시본(pick_env.GRIPPER · CONTACT, dataset_spec_draft.md)으로 수집 — 형식 · 필드 이름 맞춰 줄 것, 받으면 `save()`만 바꿔 재수집(2분) ② 실패 사례 분석 요청: seed 1080(원기둥 2.98 kg 들기 순간 발산), 파지력 · 손가락 질량 · dt 민감도 → solref · solimp 원인 표 ③ 파지 중 토크 예산: 3 kg + 그리퍼 0.9 kg, 옆면 접근 자세 roll ④ action = 관절 목표(재생 정확) vs 끝점 목표 — 함태훈 구술 ② 주제와 연결
 - (팀장) 어깨 구동기 TQ ↔ RI85 확정 · (평가) 5 ~ 7주차 평가표 — 대기
 
+- **(함태훈 11/12 회신 · 태그 week08 = 7f434ae, 반영은 제출 후 → week09 태그)**
+  ① 그리퍼 · 접촉 = 임시값 그대로 채택, **OPTION timestep 1 → 0.5 ms · NSUB 20 → 40**(제어 50 Hz 유지) → seed 1000 ~ 1099 100/100(1080 포함), 계산 1.9배
+  ② 명세 `docs/dataset_spec.md` v1.0(`b1-dataset-1.0`): 초안 필드 유지 + 로봇 좌표 파생 4개(obs/base_pose · ee_pos_base · obj_pos_base, action_base_body) · 속성 5개 · 성공 시 fail = "" — `b1_dataset.upgrade()`/`check()` → `datasets/`에 사본, collect.py가 초안으로 쓴 뒤 upgrade · check
+  ③ seed 1080 원인: 미끄러짐이 아니라 **수치 발산**(들기 10.86 s부터 물체 각속도 0.1 → 17 rad/s 지수 증가). solref · solimp 딱딱 → 발산 증가(0.005: 11건), 부드럽게 → 관통 · 낙하 증가, impratio ↓ → 발산 증가, condim 무관. **dt 0.5 ms만 해결**(3 kg 고정 20회 9 → 19/20, 원기둥 2/12 → 12/12). 손가락 0.2 kg · 닫기 속도 · dt 2 → 1 ms 조치는 같은 원인을 줄이는 쪽이라 유지
+  ④ 파지 토크: 3 kg @ 파지 중심 + 손가락 0.4 kg 정적 최악 pitch 46.53 · roll 42.52, + 베이스 가속 → **필요 48.69 · 46.71 N·m**, 옆면 집기 실행 최대 roll 8.7 N·m. TQ 144 % · RI85 49 % 통과, **PDR 52 pitch 여유 6.8 %(× 1.2 미달)** → `torque_budget_b1.md` 갱신(+ A팀 추가 문안 초안)
+  ⑤ action = **관절 목표 확정**(재생 차 0). 끝점 목표 + IK는 직전 해 시작이면 10/10 · 관절 차 ≤ 2.84°지만 이력 없이 풀면 상자 시연 62 ~ 64 %가 다른 해 → 9주차 BC에서 두 출력 비교
+
 ## 6. 구술 질문 준비 (커리큘럼 8주차)
 
 - Q1 상태기계 전환 조건 · 실패 분류 / Q2 4-DOF 그리퍼 축 문제와 우회(접근 방향 · 베이스 yaw) → [notes/mujoco-urdf/07-contact-grasp.md](../notes/mujoco-urdf/07-contact-grasp.md)
@@ -71,3 +78,14 @@ MUJOCO_GL=egl python scenarios/render_pick_gif.py 6 # Windows는 그냥 python
 2. Isaac Lab 환경 명세 `docs/isaaclab_env_spec.md` — 상태기계 · 판정 · 실패 분류 → Observation · Action · Termination · Event 대응, 함태훈 Event 매핑 통합
 3. 손목 2축 예측 1쪽 — 이번 주 경계(깊이 0.24 m · 상자 방향) 기준으로 수렴률 · 성공률이 어떻게 달라질지
 4. 함태훈 명세 · 접촉 분석 받으면 형식 맞춰 재수집 · sim_unstable 원인 반영
+
+## 8. 제출 후 반영 (11/12 저녁, 함태훈 7f434ae 회신 — week09 태그에 포함, week08 태그 da55741은 그대로)
+
+| 항목 | 변경 | 결과 | 근거 |
+|---|---|---|---|
+| 시뮬 dt | `pick_env.OPTION` timestep 0.001 → 0.0005, `expert` NSUB 20 → 40 | 무작위 20회 · 그리퍼 점검 · 수집 재실행(아래) | scenarios/results/*.md |
+| 데이터 형식 | 함태훈 v1.0 명세 · 도구 사본(`datasets/dataset_spec.md` · `b1_dataset.py`), collect.save = 초안 → upgrade → check | 100개 재수집 · v1.0 검사 · 재생 | results/collect.md |
+| 토크 예산 | `inputs/torque_budget_w08_taehoon.csv` 추가, 8주차 필요 = max(7주차, 정적 + 베이스 가속, 집기 실행) | pitch 48.69 · roll 46.71 N·m, PDR 52 pitch 6.8 % · roll 11.3 % NG | b1/models/v1/results/torque_budget_b1.md |
+| action | 관절 목표 유지(합의) | — | 함태훈 sim/w08/results/action_format.md |
+
+- 재실행 결과(dt 0.5 ms): 무작위 20회 **19/20** 그대로(실패 seed 1 상자 ik_fail — 계획 단계라 dt 무관), 목표 오차 평균 6.0 · 최대 13.6 mm / 그리퍼 54조합 이론 일치 54/54 그대로 / **수집 100/100 성공**(seed 1080 포함), 123,040 스텝 · 160 s(1 ms 103 s의 1.6배) / **v1.0 check 100/100 통과 · 재생 qpos 차 0 100/100**, 모델 지문 7016330767f5 → 4d070b18a640 / 샘플 3개 v1.0으로 다시 생성

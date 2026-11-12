@@ -477,7 +477,16 @@
    "ok12": true,
    "pdr52": 17.85,
    "step": 65.006,
-   "step_margin": 82.8
+   "step_margin": 82.8,
+   "static_w08": 46.53,
+   "base_add": 2.16,
+   "scenario_3kg": 9.83,
+   "need_w08": 48.69,
+   "margin_w08": 144.0,
+   "ok12_w08": true,
+   "pdr52_w08": 6.8,
+   "pdr52_ok12_w08": false,
+   "taehoon_need_w08": 48.69
   },
   {
    "case": "a2_doc",
@@ -495,7 +504,16 @@
    "ok12": true,
    "pdr52": 25.09,
    "step": 80.236,
-   "step_margin": 48.1
+   "step_margin": 48.1,
+   "static_w08": 42.52,
+   "base_add": 4.19,
+   "scenario_3kg": 8.69,
+   "need_w08": 46.71,
+   "margin_w08": 154.3,
+   "ok12_w08": true,
+   "pdr52_w08": 11.33,
+   "pdr52_ok12_w08": false,
+   "taehoon_need_w08": 46.71
   },
   {
    "case": "a2_doc",
@@ -513,7 +531,16 @@
    "ok12": true,
    "pdr52": 322.66,
    "step": 23.408,
-   "step_margin": 407.5
+   "step_margin": 407.5,
+   "static_w08": 14.42,
+   "base_add": 0.85,
+   "scenario_3kg": 2.19,
+   "need_w08": 15.27,
+   "margin_w08": 678.0,
+   "ok12_w08": true,
+   "pdr52_w08": 240.54,
+   "pdr52_ok12_w08": true,
+   "taehoon_need_w08": 15.27
   },
   {
    "case": "a2_doc",
@@ -531,7 +558,16 @@
    "ok12": true,
    "pdr52": 317.8,
    "step": 26.293,
-   "step_margin": 176.1
+   "step_margin": 176.1,
+   "static_w08": 14.39,
+   "base_add": 1.21,
+   "scenario_3kg": 2.35,
+   "need_w08": 15.6,
+   "margin_w08": 365.4,
+   "ok12_w08": true,
+   "pdr52_w08": 233.33,
+   "pdr52_ok12_w08": true,
+   "taehoon_need_w08": 15.6
   },
   {
    "case": "cad_ri85",
@@ -549,7 +585,16 @@
    "ok12": true,
    "pdr52": 17.85,
    "step": 65.006,
-   "step_margin": 11.7
+   "step_margin": 11.7,
+   "static_w08": 46.53,
+   "base_add": 2.16,
+   "scenario_3kg": 9.83,
+   "need_w08": 48.69,
+   "margin_w08": 49.1,
+   "ok12_w08": true,
+   "pdr52_w08": 6.8,
+   "pdr52_ok12_w08": false,
+   "taehoon_need_w08": 48.69
   },
   {
    "case": "cad_ri85",
@@ -567,7 +612,16 @@
    "ok12": true,
    "pdr52": 25.09,
    "step": 80.236,
-   "step_margin": -9.5
+   "step_margin": -9.5,
+   "static_w08": 42.52,
+   "base_add": 4.19,
+   "scenario_3kg": 8.69,
+   "need_w08": 46.71,
+   "margin_w08": 55.4,
+   "ok12_w08": true,
+   "pdr52_w08": 11.33,
+   "pdr52_ok12_w08": false,
+   "taehoon_need_w08": 46.71
   },
   {
    "case": "cad_ri85",
@@ -585,7 +639,16 @@
    "ok12": true,
    "pdr52": 322.66,
    "step": 23.408,
-   "step_margin": 210.2
+   "step_margin": 210.2,
+   "static_w08": 14.42,
+   "base_add": 0.85,
+   "scenario_3kg": 2.19,
+   "need_w08": 15.27,
+   "margin_w08": 375.4,
+   "ok12_w08": true,
+   "pdr52_w08": 240.54,
+   "pdr52_ok12_w08": true,
+   "taehoon_need_w08": 15.27
   },
   {
    "case": "cad_ri85",
@@ -603,7 +666,16 @@
    "ok12": true,
    "pdr52": 317.8,
    "step": 26.293,
-   "step_margin": 176.1
+   "step_margin": 176.1,
+   "static_w08": 14.39,
+   "base_add": 1.21,
+   "scenario_3kg": 2.35,
+   "need_w08": 15.6,
+   "margin_w08": 365.4,
+   "ok12_w08": true,
+   "pdr52_w08": 233.33,
+   "pdr52_ok12_w08": true,
+   "taehoon_need_w08": 15.6
   }
  ],
  "a_team_condition": "구동기 사이징(역동역학) 기준 3 kg, 관절 속도 3 rad/s 이하에서 필요 토크 42.9 N·m, 52 기준 여유 21 %. 현재 B1 서보 게인으로는 2.0 s 이상 동작에서 20 %, 제어 튜닝 후 갱신 (함태훈 · 박종진 10/29 합의)"
