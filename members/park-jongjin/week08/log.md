@@ -6,7 +6,7 @@
 | 커리큘럼 | 노션 「B1 7·8·9주차 학습 커리큘럼」 §2 — 접촉이 있는 집기 시나리오 + 시연 데이터 수집 파이프라인 (박종진 = 상태기계 · 성공 판정 · 무작위화 · 수집 스크립트 · 실패 분류) |
 | 저장소 태그 | `week08` (제출 시) |
 | 주간 보고서 | [학부생_주간활동보고서_8주차_박종진_22212289_20261112.docx](../reports/학부생_주간활동보고서_8주차_박종진_22212289_20261112.docx) |
-| 함태훈 대응 | taehoonham0118-cell/-1- — 11/12 기준 week07 `59a5d80`까지(week08 그리퍼 · 접촉 scene · `docs/dataset_spec.md` 미게시) → 그리퍼 · 데이터 형식은 **B1 임시본**으로 진행, 받으면 교체 |
+| 함태훈 대응 | taehoonham0118-cell/-1- `week08` = `7f434ae` (11/12) — 박종진 da55741 기준 접촉 스윕 · seed 1080 원인(dt 0.5 ms) · 데이터 명세 v1.0 · action 형식 · 파지 토크 예산 → §8에서 반영 |
 
 ## 1. 계획 대비 수행
 
@@ -14,7 +14,7 @@
 |---|---|---|---|---|
 | 1 | 시나리오 상태기계 + 성공 판정 + 무작위 20회 성공률 · 실패 분류 (전문가 = wb_ik + resolved-rate, 옆면 · 수직 하강) | 10단계 상태기계(측정값 전환 · timeout), 전신 자세 IK(위치 3 + 자세 3, 7-DOF) + 전신 resolved-rate 직선 구간, 실패 10분류. **무작위 20회 19 성공(95 %)**, 실패 1 = ik_fail(상자 · 깊이 0.212 m · yaw 40°). 깊이별 계획 성공(원기둥 0.24 m까지 7/7, 0.26 m 0/7) | 100 % | scenarios/{pick_env,expert,run_pick20}.py, results/pick20.{md,json} |
 | 2 | wb_ik 팔 링크 ↔ 테이블 충돌 확인 | `Ref.table_hits`(mj_geomDistance, 로봇 geom 16개 ↔ 테이블): 정지 자세 20 mm(손가락 파지 자세 5 mm · 베이스 20 mm), 관절공간 이동 경로 30점 50 mm(서보 지연으로 실제 손이 기준보다 낮게 지나감) → 경유점 거리 0.30 · 0.45 · 0.60 · 0.75 m 중 첫 무충돌. **실행 중 테이블 접촉 0회**(20회 · 100회) | 100 % (함태훈과 결과 공유 예정) | expert.py `table_hits` · `path_hits` |
-| 3 | 데이터 수집(함태훈 dataset_spec) 100 에피소드 · 재생 검증 · 샘플 3개 | 함태훈 명세 미게시 → B1 초안 v0.1(HDF5, obs · action 8 · ctrl · meta). **100개 99 성공**, 12.2만 스텝, 44.6 MB(커밋 안 함). **재생 100/100 qpos 최대 차 0**. 샘플 3개(카메라 96 × 96) 커밋 | 100 % (형식은 함태훈 명세로 맞출 예정) | scenarios/collect.py, datasets/dataset_spec_draft.md · samples/, results/collect.{md,json} |
+| 3 | 데이터 수집(함태훈 dataset_spec) 100 에피소드 · 재생 검증 · 샘플 3개 | B1 초안 v0.1로 먼저 수집 → 함태훈 명세 v1.0(`b1-dataset-1.0`, 초안 필드 + 로봇 좌표 파생 4 · 속성 5)으로 저장(upgrade · check). dt 0.5 ms로 **100/100 성공**, 123,040 스텝, 50.5 MB(커밋 안 함). **명세 검사 100/100 · 재생 100/100 qpos 최대 차 0**. 샘플 3개(1개 카메라 96 × 96) 커밋 | 100 % | scenarios/collect.py, datasets/dataset_spec.md · b1_dataset.py · samples/, results/collect.{md,json} |
 | 4 | (커리큘럼 월 · 함태훈 몫 임시) 그리퍼 · 접촉 scene, 마찰 × 파지력 × 질량 미끄러짐 표 | 평행 2지(slide 2 + equality, 손가락당 힘 상한 40 N, 가정값) + 테이블 · 상자 · 원기둥. 54조합 이론(F ≥ m g / 2μ)과 **54/54 일치**(elliptic + impratio 10), MuJoCo 기본 pyramidal 38/54(크리프), condim 3 · 4 · 6 비교 | 100 % (임시) | scenarios/gripper_slip.py, results/gripper_slip.md |
 | 5 | 집기 GIF 1개 | 상자 2.90 kg seed 6 — 접근 · 하강 · 파지 · 이동 · 놓기 · 복귀(24.8 s) | 100 % | scenarios/img/pick_seed6.gif |
 | 6 | 어깨 확정 · 평가표 반영 | 팀장 회신 · 5 ~ 7주차 평가표 미수령 → a2_doc 유지 | 0 % (외부 대기) | — |
@@ -27,8 +27,8 @@
 | 실패 분류 | ik_fail 1(상자 면 방향 + 깊이 경계), 나머지 9분류 0 | results/pick20.md |
 | 도달 한계 (수직 하강 · 옆면 · 베이스 여유 40 mm) | 원기둥 테이블 안쪽 0.24 m까지 7/7, 0.26 m 0/7 (7주차 끝점 기준 0.306 m) | results/pick20.md |
 | 그리퍼 파지 유지 | 이론과 54/54 일치, F ≥ 1.5 F_min 최대 미끄러짐 0.97 mm / 기본 원뿔 38/54 · 24 mm | results/gripper_slip.md |
-| 수집 | 100 에피소드 · 99 성공 · 122,400 스텝(50 Hz) · 44.6 MB · 103 s | results/collect.md |
-| 재생 일치 | 100/100 qpos 최대 차 **0.0**(비트 일치), 성공 판정 일치 100/100, 모델 지문 일치 100/100 | results/collect.md |
+| 수집 | 100 에피소드 · **100 성공** · 123,040 스텝(50 Hz) · 50.5 MB · 160 s (dt 0.5 ms; 1 ms일 때 99/100) | results/collect.md |
+| 재생 일치 · 명세 | 100/100 qpos 최대 차 **0.0**(비트 일치), 성공 판정 · 모델 지문 100/100, 함태훈 check 100/100 | results/collect.md |
 | 테이블 충돌 | 계획 단계 점검 후 실행 중 로봇 ↔ 테이블 접촉 0회 | results/pick20.md |
 
 가정값: 그리퍼(스트로크 55 mm/손가락, 손가락 0.2 kg, 힘 상한 40 N, 파지 중심 = 손바닥 아래 45 mm), 마찰 1.0(손가락 · 물체) · 0.8(테이블), 테이블 0.70 m, 물체 0.2 ~ 3 kg, 어깨 구동기 a2_doc case
@@ -53,7 +53,7 @@ MUJOCO_GL=egl python scenarios/render_pick_gif.py 6 # Windows는 그냥 python
 - (11/12) MOVE에서 팔이 거울 가지로 뒤집혀(pitch −1.48 → +1.47) 물체 낙하 → 놓기 계획 시작값 = 지금 자세 평행이동, 라이브러리도 지금 팔과 가까운 가지 우선
 - (11/12) 그리퍼 유지 시험 전부 낙하 → mocap 손바닥은 속도 0이라 마찰이 안 걸림 → slide 서보. 그다음 F ≫ F_min에도 크리프 → elliptic + impratio 10
 - (11/12) **pick_env의 option 덧붙이기 정규식이 scene.xml과 안 맞아 elliptic이 실제로는 안 들어가 있었음**(impratio 1 출력으로 발견) → `<option …/>` 일반 치환 + assert
-- (11/12) 2 ~ 3 kg 물체 들기 · 놓기에서 MuJoCo 발산(BADQACC) → 손가락 0.05 → 0.2 kg, 그리퍼 명령 변화율 0.06 m/s, dt 2 → 1 ms. 남은 1/100은 `sim_unstable` 분류(table_collision으로 잘못 세던 것 수정)
+- (11/12) 2 ~ 3 kg 물체 들기 · 놓기에서 MuJoCo 발산(BADQACC) → 손가락 0.05 → 0.2 kg, 그리퍼 명령 변화율 0.06 m/s, dt 2 → 1 ms. 남은 1/100은 `sim_unstable` 분류(table_collision으로 잘못 세던 것 수정) → 함태훈 분석으로 dt 0.5 ms(§8)
 - (11/12) 데이터 모델 지문이 재생 때 달라짐 → reset이 물체 질량을 모델에 써서 → 지문은 build 직후 1회
 
 ## 5. 막힌 점 · 요청 (공유한 날짜)
@@ -79,7 +79,7 @@ MUJOCO_GL=egl python scenarios/render_pick_gif.py 6 # Windows는 그냥 python
 3. 손목 2축 예측 1쪽 — 이번 주 경계(깊이 0.24 m · 상자 방향) 기준으로 수렴률 · 성공률이 어떻게 달라질지
 4. 함태훈 명세 · 접촉 분석 받으면 형식 맞춰 재수집 · sim_unstable 원인 반영
 
-## 8. 제출 후 반영 (11/12 저녁, 함태훈 7f434ae 회신 — week09 태그에 포함, week08 태그 da55741은 그대로)
+## 8. 함태훈 회신 반영 (11/12 저녁, 함태훈 week08 7f434ae — 제출 전이라 week08 태그를 40a345e 이후 커밋으로 다시 찍음)
 
 | 항목 | 변경 | 결과 | 근거 |
 |---|---|---|---|

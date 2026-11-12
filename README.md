@@ -59,7 +59,7 @@ B1 서브팀은 **모델링 · 시뮬레이션**(URDF/MJCF/USD 모델 구축, Is
 | 5주 | – | `week05` | [log](members/park-jongjin/week05/log.md) | – | v1 양팔 + 홀로노믹 베이스 MJCF · 검증 5종 |
 | 6주 | **PDR (×2)** | `week06` | [log](members/park-jongjin/week06/log.md) | – | 작업공간 · DLS IK · Isaac 임포트 패키지 · 토크 예산 |
 | 7주 | – | `week07` | [log](members/park-jongjin/week07/log.md) | – | 전신 IK `wb_ik` · 작업공간 확장 · 토크 예산 B1 통합 |
-| 8주 | – | `week08` | [log](members/park-jongjin/week08/log.md) | – | [접촉 집기 시나리오 · 시연 데이터](scenarios/README.md) (성공 19/20, 수집 100 · 재생 일치) |
+| 8주 | – | `week08` | [log](members/park-jongjin/week08/log.md) | – | [접촉 집기 시나리오 · 시연 데이터](scenarios/README.md) (성공 19/20, 수집 100/100 · 재생 일치 · 데이터 명세 v1.0) |
 | 12주 | **CDR (×2)** | | | | |
 | 16주 | **모듈검증 (×2)** | | | | |
 
