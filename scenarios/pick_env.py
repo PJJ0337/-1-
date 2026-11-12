@@ -9,7 +9,7 @@ HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.dirname(HERE)
 V1=os.path.join(ROOT,"b1","models","v1"); sys.path.insert(0,os.path.join(V1,"scripts"))
 from v1_mjio import _assets
 
-# ---- 가정값 (assumptions: 그리퍼 사양 미수령 · A팀 회신 시 교체) ----
+# ---- 가정값 (assumptions: 그리퍼 사양 미수령 · A팀 회신 시 교체) — 가정값 표 b1/models/assumptions-v0.md S15 · S16 · S17 ----
 GRIPPER=dict(stroke=0.055,          # 손가락 1개 이동 [m] (안쪽 면 0 ~ 0.055 → 최대 벌림 0.11 m)
              finger_half=(0.008,0.015,0.03),   # 손가락 box 반치수 x(두께) · y(폭) · z(길이) [m] → 길이 0.06 m
              finger_mass=0.2, grip_force=40.0,  # 손가락 0.05 kg이면 3 kg 물체와 질량비 60 → 들기 시작에서 수치 발산(8주차 발견) → 0.2 kg # 손가락당 수직력 상한 [N] (position 액추에이터 forcerange)
