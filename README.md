@@ -55,7 +55,11 @@ B1 서브팀은 **모델링 · 시뮬레이션**(URDF/MJCF/USD 모델 구축, Is
 | 1주 | – | – | [log](members/park-jongjin/week01/log.md) | – | 저장소 개설 전 (노션을 기여 로그로 인정) |
 | 2주 | **SRR (×2)** | [`week02`](../../tree/week02) (10/1 제출) | [log](members/park-jongjin/week02/log.md) | – | 저장소 개설 · MuJoCo · G1 분석 · 2링크 URDF · ICD v0 요청 초안 |
 | 3주 | – | `week03` | [log](members/park-jongjin/week03/log.md) | – | MuJoCo 심화(MJCF 구성 · 구동 · URDF 로딩, 10/6 변경) · [MuJoCo 로딩 체크리스트](b1/docs/procedures/mujoco-urdf-loading-checklist.md) |
-| 6주 | **PDR (×2)** | | | | |
+| 4주 | – | `week04` | [log](members/park-jongjin/week04/log.md) | – | CAD → v0 URDF · 링크 분할 · 가정값 표 |
+| 5주 | – | `week05` | [log](members/park-jongjin/week05/log.md) | – | v1 양팔 + 홀로노믹 베이스 MJCF · 검증 5종 |
+| 6주 | **PDR (×2)** | `week06` | [log](members/park-jongjin/week06/log.md) | – | 작업공간 · DLS IK · Isaac 임포트 패키지 · 토크 예산 |
+| 7주 | – | `week07` | [log](members/park-jongjin/week07/log.md) | – | 전신 IK `wb_ik` · 작업공간 확장 · 토크 예산 B1 통합 |
+| 8주 | – | `week08` | [log](members/park-jongjin/week08/log.md) | – | [접촉 집기 시나리오 · 시연 데이터](scenarios/README.md) (성공 19/20, 수집 100 · 재생 일치) |
 | 12주 | **CDR (×2)** | | | | |
 | 16주 | **모듈검증 (×2)** | | | | |
 
