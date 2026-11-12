@@ -60,6 +60,7 @@ MUJOCO_GL=egl python scenarios/render_pick_gif.py 6 # Windows는 그냥 python
 
 - (함태훈에게 11/12 오후 — 아래 회신으로 ① ~ ④ 모두 해결, §8) ① week08 그리퍼 · 접촉 scene과 `docs/dataset_spec.md`가 아직 없어 B1 임시본(pick_env.GRIPPER · CONTACT, dataset_spec_draft.md)으로 수집 — 형식 · 필드 이름 맞춰 줄 것, 받으면 `save()`만 바꿔 재수집(2분) ② 실패 사례 분석 요청: seed 1080(원기둥 2.98 kg 들기 순간 발산), 파지력 · 손가락 질량 · dt 민감도 → solref · solimp 원인 표 ③ 파지 중 토크 예산: 3 kg + 그리퍼 0.9 kg, 옆면 접근 자세 roll ④ action = 관절 목표(재생 정확) vs 끝점 목표 — 함태훈 구술 ② 주제와 연결
 - (팀장) 어깨 구동기 TQ ↔ RI85 확정 · (평가) 5 ~ 7주차 평가표 — 대기
+- (팀장, 8주차 보고서 3번 칸에서 재요청) A팀 회신안 — 7주차에 여쭌 뒤 회신 없음. A팀 발송은 팀장이 함 → 7주차 문안 + 8주차 추가 문안(파지 중 PDR 52 미달, 짐 2 kg 제한 / 최악 자세 금지 선택)을 torque_budget_b1.md 끝에 합쳐 검토 · 전달 요청
 
 - **(함태훈 11/12 회신 · 함태훈 태그 week08 = 7f434ae → 제출 전에 반영, §8)**
   ① 그리퍼 · 접촉 = 임시값 그대로 채택, **OPTION timestep 1 → 0.5 ms · NSUB 20 → 40**(제어 50 Hz 유지) → seed 1000 ~ 1099 100/100(1080 포함), 계산 1.6배(함태훈 측정 1.9배는 CPU 2개 동시 실행 때문 — 1.6배로 통일)
