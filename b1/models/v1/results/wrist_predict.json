@@ -1,0 +1,81 @@
+{
+ "assume": {
+  "wrist": "pitch(tool0 x) ±90° → roll(그리퍼 축) ±180°",
+  "H_EE": 0.1,
+  "L_w": [
+   0.0,
+   0.06
+  ],
+  "z_grasp": 0.777,
+  "band": 0.015,
+  "N": 20000,
+  "wrist_mass_kg": 0.8,
+  "r_wrist": 0.475,
+  "torque_now_pitch": 48.69
+ },
+ "rows": [
+  {
+   "case": "4-DOF 지금",
+   "n_pose": 9916,
+   "z_range": [
+    0.605,
+    0.992
+   ],
+   "n_at_grasp_h": 352,
+   "area_at_grasp_h_cm2": 260.0,
+   "depth_front": -0.014,
+   "depth_side": 0.302
+  },
+  {
+   "case": "손목 2축 (L_w 0)",
+   "n_pose": 9579,
+   "z_range": [
+    0.605,
+    1.391
+   ],
+   "n_at_grasp_h": 766,
+   "area_at_grasp_h_cm2": 1744.0,
+   "depth_front": 0.095,
+   "depth_side": 0.413
+  },
+  {
+   "case": "손목 2축 (L_w 0.06 m)",
+   "n_pose": 9579,
+   "z_range": [
+    0.545,
+    1.331
+   ],
+   "n_at_grasp_h": 438,
+   "area_at_grasp_h_cm2": 1188.0,
+   "depth_front": 0.134,
+   "depth_side": 0.452
+  }
+ ],
+ "reach_arm_only_pct": {
+  "4-DOF 지금": 0.0,
+  "손목 2축 (L_w 0)": 6.7,
+  "손목 2축 (L_w 0.06 m)": 8.7
+ },
+ "reach_wholebody_upper_pct": {
+  "4-DOF 지금": 78.7,
+  "손목 2축 (L_w 0)": 100.0,
+  "손목 2축 (L_w 0.06 m)": 100.0
+ },
+ "torque": [
+  {
+   "lw": 0.0,
+   "add_wrist": 3.73,
+   "add_payload": 0.0,
+   "need": 52.42,
+   "pdr52_margin_pct": -0.8
+  },
+  {
+   "lw": 0.06,
+   "add_wrist": 3.73,
+   "add_payload": 1.77,
+   "need": 54.18,
+   "pdr52_margin_pct": -4.0
+  }
+ ],
+ "seconds": 185.5
+}
