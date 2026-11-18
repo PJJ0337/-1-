@@ -34,3 +34,7 @@ BOM*
 datasets/raw/
 MUJOCO_LOG.TXT
 scenarios/results/down_poses.npz
+
+# week09 DART 노이즈 시연 원본 · 데이터 폴더 링크
+datasets/raw
+datasets/raw_dart
