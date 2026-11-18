@@ -1,10 +1,10 @@
-# B1 Isaac Lab 환경 명세 v0.1 — 접촉 집기 과제 (Manager-Based) · MuJoCo 코드 1:1 대응
+# B1 Isaac Lab 환경 명세 v0.2 — 접촉 집기 과제 (Manager-Based) · MuJoCo 코드 1:1 대응
 
 - 작성: 박종진 (week09, 2026-11-18) · 기준 버전: Isaac Sim 5.1 · Isaac Lab 2.3.2 (노션 개발환경, [import_settings.md](../models/v1/docs/import_settings.md)와 같음)
 - 목적: 실습 PC 배정 전에 **MuJoCo 집기 시나리오(week08 `scenarios/`) · 데이터(week08 `b1-dataset-1.0`) · BC 평가(week09 `policies/`)** 의 각 요소를 Isaac Lab Manager-Based 환경의 어떤 term으로 옮길지 정해 둔다. 배정 주 수요일 과제 = 이 표대로 `ManagerBasedRLEnvCfg` 코드 작성.
 - 같이 쓰는 파일: 로봇 [`b1_v1_cfg.py`](../models/v1/isaac/b1_v1_cfg.py)(week06) + **[`b1_pick_cfg.py`](../models/v1/isaac/b1_pick_cfg.py)(week09 신규: 손가락 URDF 사본 · 그리퍼 액추에이터 · 테이블 · 물체 · 접촉 센서)** ← 생성 `scripts/export_isaac_pick.py`
 - ⚠ = Isaac 쪽 함수 · 인자 이름을 실습 PC 버전에서 확인할 항목. 이 문서의 이름은 Isaac Lab 2.x `isaaclab.envs.mdp` 기준
-- **함태훈 담당 칸(대기)**: §6 Event 매핑의 「함태훈 randomize.py」 열 — push 받으면 이 표에 통합(v0.2)
+- **v0.2(11/18)**: §6 「함태훈 randomize.py」 열 통합 — 원본 = 함태훈 `docs/isaaclab_event_mapping.md`(taehoonham0118-cell/-1- week09 = `ed160f2`) 끝 절, 민감도 = 함태훈 `sim/w09/results/randomize.md`. 함태훈 제안 행 2개(테이블 높이 · 손가락 질량) 추가, 마찰 결합 규칙(§2) 보강
 
 ## 1. 파일 · 개념 대응
 
@@ -27,7 +27,7 @@
 | 손가락 | slide 2개 + equality 대칭 + position kp 3000 · ±40 N | prismatic 2개, **같은 목표를 두 관절에** (액션 항에서 1값 → 2관절), stiffness 3000 · effort 40 | mimic 미사용 ⚠ |
 | 테이블 | box 0.6 × 1.8 × 0.70 m, 앞 가장자리 x 0.45 | `CuboidCfg` kinematic, 중심 (0.75, 0, 0.35) | |
 | 물체 | 상자 60 mm · 원기둥 Ø56 × 65 mm, 0.2 ~ 3 kg | `CuboidCfg` · `CylinderCfg` (env마다 둘 다 생성, 과제 아닌 쪽은 바닥 멀리) | 물체 종류를 env마다 바꾸는 대안: `MultiAssetSpawnerCfg` ⚠ |
-| 마찰 | 손가락 · 물체 1.0, 테이블 0.8, condim 4, 결합 = max | `RigidBodyMaterialCfg(static = dynamic = μ, combine "max")` | condim · solref · solimp 대응 없음 → 미끄러짐 표 재현으로 확인 |
+| 마찰 | 손가락 · 물체 1.0, 테이블 0.8, condim 4, **결합 = 두 geom 중 큰 값(max)** → 물체 ↔ 테이블 접촉도 실제로는 1.0(테이블 0.8은 안 쓰임, 함태훈 week09 지적) | `RigidBodyMaterialCfg(static = dynamic = μ, friction_combine_mode="max")` — **PhysX 기본은 average**라 꼭 max로 | condim · solref · solimp 대응 없음 → 미끄러짐 표 재현으로 확인 |
 | 시간 | dt 0.5 ms × 40 = 제어 50 Hz | `sim.dt = 0.002`, `decimation = 10` (50 Hz) 시작값 | 0.5 ms는 MuJoCo soft contact 발산 대책. PhysX는 그리퍼 미끄러짐 54조합(`gripper_slip.md`) 재현으로 dt 결정 ⚠ |
 | 에피소드 | 전문가 23.9 ~ 28.6 s, BC 평가 34 s | `episode_length_s = 34.0` | |
 | 카메라 | `overview` 96 × 96 (선택 관측) | `TiledCameraCfg` 같은 위치 · 자세 | 상태 기반 BC에는 안 씀 |
@@ -71,22 +71,27 @@
 
 ## 6. Event (리셋 · 랜덤화)
 
-| MuJoCo | 모드 | Isaac Lab term | 범위 · 근거 | 함태훈 randomize.py (대기) |
-|---|---|---|---|---|
-| `mj_resetData` + 팔 영점 · 그리퍼 벌림 | reset | `mdp.reset_scene_to_default` | — | |
-| 과제 물체 종류 (상자 / 원기둥 ½) | reset | `b1.choose_object` (과제 아닌 물체는 (−1.5, ±1.5) 바닥으로) | — | |
-| 물체 위치 · yaw | reset | `mdp.reset_root_state_uniform(pose_range={x: (0.51, 0.67), y: (0.0, 0.35), yaw: ±45°})` | SPAWN (S17) | |
-| 물체 질량 0.2 ~ 3 kg 로그 균등 | reset | `mdp.randomize_rigid_body_mass(operation="abs", distribution="log_uniform", mass_distribution_params=(0.2, 3.0))` ⚠ | S17 · 토크 예산 3 kg | |
-| 물체 관성(균일 밀도 비례) | reset | `recompute_inertia=True` ⚠ (없으면 사용자 정의) | | |
-| 마찰 ×0.7 ~ 1.3 (손가락 · 물체 · 테이블 각각) | startup | `mdp.randomize_rigid_body_material(static/dynamic_friction_range, asset_cfg=…)` ×3 | S16 가정, 실측 전 ±30 % | 범위 · 민감도 |
-| 파지력 30 ~ 50 N | reset | `mdp.randomize_actuator_gains`로는 안 됨 → `b1.randomize_effort_limit(actuator="gripper")` 사용자 정의 ⚠ | S15 ±25 % | |
-| 팔 armature ×0.8 ~ 1.2, damping ×0.5 ~ 2 | startup | `mdp.randomize_joint_parameters(armature_distribution_params, operation="scale")` + damping은 `randomize_actuator_gains(damping_…)`로 근사 | S3 · S4 | |
-| 팔 kp ×0.9 ~ 1.1 | startup | `mdp.randomize_actuator_gains(stiffness_distribution_params=(0.9, 1.1), operation="scale")` | S12 | |
-| 베이스 하체 질량 ×0.85 ~ 1.15 | startup | `mdp.randomize_rigid_body_mass(body_names="base_link", operation="scale")` | S10 역산값 | |
-| 베이스 kv ×0.8 ~ 1.2 | startup | `mdp.randomize_actuator_gains(actuator "base", damping_distribution_params=(0.8, 1.2))` | S12 · 함태훈 week05 τ | |
-| (센서 노이즈 · 제어 지연) | — | obs `noise=` · `ActionTerm` 지연 버퍼 | **함태훈 범위** | 대기 |
+- 「범위 · 근거」 열 = 박종진 BC 평가 임시판 `policies/rand_dyn.py`(v0.1). **「함태훈 randomize.py」 열 = 이후 기준**(가정값 표 근거 ×1, 전문가 민감도 순위 · 함수 이름은 함태훈 Isaac Lab 소스 확인). 굵은 순위 = 전문가 민감도 Top 3
 
-- 위 범위 = week09 BC 평가용 임시판 `policies/rand_dyn.py`(seed → 같은 표본). 함태훈 `randomize.py` · 민감도 Top 3가 오면 같은 표로 교체하고 BC 「랜덤화 있음」을 다시 돌린다.
+| MuJoCo | 모드 | Isaac Lab term | 범위 · 근거 (rand_dyn, v0.1) | 함태훈 randomize.py (v0.2 기준) |
+|---|---|---|---|---|
+| `mj_resetData` + 팔 영점 · 그리퍼 벌림 | reset | `mdp.reset_scene_to_default` | — | — (공칭 그대로) |
+| 과제 물체 종류 (상자 / 원기둥 ½) | reset | `b1.choose_object` (과제 아닌 물체는 (−1.5, ±1.5) 바닥으로) | — | — |
+| 물체 위치 · yaw | reset | `mdp.reset_root_state_uniform(pose_range={x: (0.51, 0.67), y: (0.0, 0.35), yaw: ±45°})` | SPAWN (S17) | — (S17 그대로). **물체 위치 측정 편향 0 ~ 10 mm**는 Event가 아니라 관측 노이즈 → `NoiseModelWithAdditiveBiasCfg` (**Top 3**, 전문가 25 mm에서 31/40 — 그리퍼 한쪽 여유 25 mm) |
+| 물체 질량 0.2 ~ 3 kg 로그 균등 | reset | `mdp.randomize_rigid_body_mass(operation="abs", distribution="log_uniform", mass_distribution_params=(0.2, 3.0))` ⚠ | S17 · 토크 예산 3 kg | 과제 질량 × **0.8 ~ 1.2** (`obj_mass_x`). MuJoCo에선 `reset()`이 질량을 덮어써서 `sample_task` 감싸기로 적용 |
+| 물체 관성(균일 밀도 비례) | reset | `recompute_inertia=True` ⚠ (없으면 사용자 정의) | | 질량 비례(균일 밀도) 그대로 |
+| 마찰 (손가락 · 물체 · 테이블) | startup | `mdp.randomize_rigid_body_material(static/dynamic_friction_range, asset_cfg=…)` | 각각 ×0.7 ~ 1.3 | 손가락 · 물체 **같이 μ 0.5 ~ 1.2** (`mu_pad_obj`, **Top 2**, 경계 m ≤ 2μF/g 이론 일치 261/262). MuJoCo 결합 = max라 테이블 μ는 물체 μ보다 작으면 안 쓰임 → PhysX `friction_combine_mode="max"`(§2, `b1_pick_cfg._mat`) |
+| 파지력 | reset | `mdp.randomize_actuator_gains`로는 안 됨 → `b1.randomize_effort_limit(actuator="gripper")` 사용자 정의 ⚠ | 30 ~ 50 N | **28 ~ 48 N** (`grip_force`) |
+| 팔 armature · damping · 쿨롱 마찰 | startup | `mdp.randomize_joint_parameters(armature_distribution_params, operation="scale")` + `randomize_joint_parameters(friction_distribution_params=(0, 2), operation="abs")`(한 항에 operation 하나 → 둘로) | armature ×0.8 ~ 1.2, damping ×0.5 ~ 2 | armature **×0.8 ~ 1.5**(기어열 미포함 → 위쪽 넓게), damping ×0.5 ~ 2, **쿨롱 마찰 0 ~ 2 N·m** 추가 |
+| 팔 kp (· kv) | startup | `mdp.randomize_actuator_gains(stiffness_distribution_params, damping_distribution_params, operation="scale")` | kp ×0.9 ~ 1.1 | kp · **kv 같이** ×0.9 ~ 1.1 (토크 상수 오차) |
+| 베이스 · 팔 링크 질량 | startup | `mdp.randomize_rigid_body_mass(body_names=…, operation="scale", recompute_inertia=True)` | 하체 ×0.85 ~ 1.15 | **하체 · 상판 · 몸통 ×0.8 ~ 1.2** (`base_mass_x`) + **팔 링크 ×0.9 ~ 1.1** 추가(중력보상은 공칭 질량 기준) |
+| 베이스 kv | startup | `mdp.randomize_actuator_gains(actuator "base", damping_distribution_params=(0.8, 1.2))` | ×0.8 ~ 1.2 | 같음 |
+| 제어 지연 | — | **`DelayedPDActuatorCfg(min_delay=0, max_delay=…)`** (지연 단위 = 물리 스텝: MuJoCo dt 0.5 ms면 40, Isaac 시작값 dt 2 ms면 10) ⚠ | — | **0 ~ 20 ms** (= 제어 1주기). 전문가는 40 ms도 40/40, **BC는 20 ms 0/25**(BC 민감 1 · 2위) |
+| **(추가) 테이블 높이** | reset | `mdp.reset_root_state_uniform`(테이블) + 물체 z 같이 → 사용자 정의 `b1.reset_table_and_object_z` | — | **±10 mm** (`table_dz`, **Top 1**: +12 mm 15/40 · +14 mm 0/40 = 손끝 여유 16 mm − 점검 5 mm · 원기둥 손바닥 여유 11 mm와 일치) |
+| **(추가) 손가락 질량** | startup | `mdp.randomize_rigid_body_mass(body_names="left_finger_.*", operation="abs")` | — | 0.1 ~ 0.3 kg |
+
+- MuJoCo 쪽 같은 표본: 함태훈 `sim/w09/randomize.py` `apply(m, seed)`(= `rand_dyn.apply`와 같은 모양, 모델 값만) + 테이블 높이 · 측정 편향 · 지연 · 물체 질량은 `sim/w09/bc_eval_pjj.py`가 `sample_task` · `live_features` · `mj_step`을 감싸서 적용
+- 결과(함태훈 week09): 전문가 동시 ×1 98/100 · ×2 72/100(seed 1000 ~ 1099). **박종진 BC(청킹 25) 동시 ×1 4/50 · ×2 0/50**(seed 2000 ~ 2049, 랜덤화 없음 18/50) — BC 민감 = 지연 · 테이블 낮음 · 팔 질량 / 베이스 kv (전문가 Top 3와 테이블만 겹침) → `policies/results/eval_taehoon.md`
 
 ## 7. Termination
 
@@ -126,4 +131,4 @@
 | 판 | 날짜 | 내용 |
 |---|---|---|
 | 0.1 | 11/18 | 박종진 초안: 1:1 대응표 · 관측 39 · 행동 3종 · 이벤트(임시 rand_dyn) · 종료 · 보상 초안, 집기 scene cfg 생성(`export_isaac_pick.py`) |
-| 0.2 | (예정) | 함태훈 randomize.py EventTerm 매핑 통합, 센서 노이즈 · 지연 |
+| **0.2** | 11/18 | §6 함태훈 randomize.py 열 통합(함태훈 ed160f2 `isaaclab_event_mapping.md`): 마찰 범위 · 쿨롱 마찰 · 팔 질량 · 측정 편향(관측 노이즈) · 지연(`DelayedPDActuatorCfg`) · 테이블 높이 · 손가락 질량 행, 마찰 결합 max 보강 |

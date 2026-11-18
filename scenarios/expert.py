@@ -16,7 +16,7 @@ from wb_ik import (wb_jacobian,wb_weights,wdls,null_proj,limit_avoid,qadr,_clip_
 
 DT_SIM=0.0005; NSUB=40; DT=DT_SIM*NSUB         # 제어 50 Hz, 시뮬 2 kHz (함태훈 week08 권장 dt 0.5 ms)
 GRIP_RATE=0.06                                   # 그리퍼 명령 변화율 [m/s] — 한 번에 닫으면 손가락 1.5 m/s로 물체를 쳐서 관통 · 발산(8주차 발견)
-GRASP_Z=TABLE["top"]+0.032                      # 파지 중심 높이(물체 아래 1/2 지점 근처, 손가락 끝 테이블 위 12 mm)
+GRASP_Z=TABLE["top"]+0.032                      # 파지 중심 높이(물체 아래 1/2 지점 근처). 파지 순간 실측: 손끝 ↔ 테이블 ≈ 16 mm, 손바닥 ↔ 물체 윗면 상자 ≈ 16 · 원기둥 ≈ 11 mm (함태훈 week09 w09_clearance.py, 처음 주석 12 mm는 오기)
 PRE_H=0.10                                      # 접근 · 들기 높이 [m]
 CLEAR,CLEAR_PAD,CLEAR_PATH=0.02,0.005,0.05      # 테이블 여유 거리(계획 점검): 정지 자세 20 mm(손가락 파지 자세 5 mm), 관절공간 이동 경로 50 mm
 CLEAR_BASE=0.02                                 # 베이스 상판 · 하체는 일부러 테이블에 붙임(TABLE_X 여유 40 mm) → 20 mm
@@ -66,7 +66,7 @@ class Ref:
 
     def table_hits(s,x,I,clear=CLEAR,pad_clear=CLEAR_PAD):
         """기준 자세 x에서 로봇 geom ↔ 테이블 최소 거리 < 여유(clear)인 geom 목록 (계획 단계 점검, mj_geomDistance).
-           여유: 손가락 5 mm(파지 자세에서 손끝이 테이블 위 12 mm라서), 나머지(팔 링크 · 손바닥 · 베이스) 20 mm — 실제 추종 오차 흡수"""
+           여유: 손가락 5 mm(파지 자세에서 손끝이 테이블 위 ≈ 16 mm라서 — 함태훈 w09_clearance 실측), 나머지(팔 링크 · 손바닥 · 베이스) 20 mm — 실제 추종 오차 흡수"""
         s.d.qpos[s.QA]=x; mujoco.mj_kinematics(s.m,s.d)
         out=[]
         for g in I.robot:

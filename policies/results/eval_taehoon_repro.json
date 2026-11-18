@@ -1,0 +1,2046 @@
+{
+ "taehoon_commit": "ed160f2",
+ "summary": {
+  "expert|없음": {
+   "success": 49,
+   "n": 50,
+   "fails": {
+    "ik_fail": 1
+   }
+  },
+  "expert|동시 ×1": {
+   "success": 46,
+   "n": 50,
+   "fails": {
+    "ik_fail": 1,
+    "sim_unstable": 3
+   }
+  },
+  "joint_dart_c25|없음": {
+   "success": 18,
+   "n": 50,
+   "fails": {
+    "place_miss": 4,
+    "timeout_holding": 6,
+    "drop": 3,
+    "grasp_miss": 4,
+    "table_collision": 7,
+    "sim_unstable": 7,
+    "tipped": 1
+   }
+  },
+  "joint_dart_c25|동시 ×1": {
+   "success": 4,
+   "n": 50,
+   "fails": {
+    "timeout_holding": 2,
+    "grasp_miss": 31,
+    "table_collision": 10,
+    "drop": 1,
+    "place_miss": 2
+   }
+  }
+ },
+ "rows": [
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2000,
+   "kind": "box",
+   "mass": 1.154,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 4.7
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2001,
+   "kind": "box",
+   "mass": 0.644,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 3.7
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2002,
+   "kind": "cyl",
+   "mass": 1.305,
+   "success": false,
+   "fail": "ik_fail",
+   "goal_err_mm": 534.2
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2003,
+   "kind": "cyl",
+   "mass": 2.858,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 5.1
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2004,
+   "kind": "cyl",
+   "mass": 0.885,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 5.0
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2005,
+   "kind": "box",
+   "mass": 0.209,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 4.3
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2006,
+   "kind": "box",
+   "mass": 0.445,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 4.9
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2007,
+   "kind": "box",
+   "mass": 0.441,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 18.0
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2008,
+   "kind": "cyl",
+   "mass": 0.399,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 6.2
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2009,
+   "kind": "cyl",
+   "mass": 0.496,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 4.0
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2010,
+   "kind": "cyl",
+   "mass": 2.038,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 3.3
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2011,
+   "kind": "cyl",
+   "mass": 1.177,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 4.5
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2012,
+   "kind": "cyl",
+   "mass": 1.947,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 2.0
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2013,
+   "kind": "box",
+   "mass": 1.935,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 1.7
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2014,
+   "kind": "box",
+   "mass": 1.71,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 4.7
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2015,
+   "kind": "cyl",
+   "mass": 0.311,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 4.0
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2016,
+   "kind": "box",
+   "mass": 1.328,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 5.7
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2017,
+   "kind": "box",
+   "mass": 0.225,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 5.9
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2018,
+   "kind": "box",
+   "mass": 0.291,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 4.2
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2019,
+   "kind": "box",
+   "mass": 0.344,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 4.4
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2020,
+   "kind": "box",
+   "mass": 0.493,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 6.4
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2021,
+   "kind": "cyl",
+   "mass": 1.09,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 10.3
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2022,
+   "kind": "cyl",
+   "mass": 1.198,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 2.9
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2023,
+   "kind": "box",
+   "mass": 1.322,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 3.5
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2024,
+   "kind": "box",
+   "mass": 2.966,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 5.0
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2025,
+   "kind": "box",
+   "mass": 2.81,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 1.1
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2026,
+   "kind": "cyl",
+   "mass": 0.523,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 5.9
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2027,
+   "kind": "cyl",
+   "mass": 0.674,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 4.9
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2028,
+   "kind": "cyl",
+   "mass": 1.957,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 3.7
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2029,
+   "kind": "box",
+   "mass": 0.813,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 6.0
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2030,
+   "kind": "box",
+   "mass": 0.301,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 5.0
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2031,
+   "kind": "cyl",
+   "mass": 0.776,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 5.0
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2032,
+   "kind": "box",
+   "mass": 0.282,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 6.2
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2033,
+   "kind": "cyl",
+   "mass": 2.411,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 1.5
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2034,
+   "kind": "box",
+   "mass": 0.235,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 9.0
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2035,
+   "kind": "box",
+   "mass": 1.258,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 3.9
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2036,
+   "kind": "box",
+   "mass": 0.724,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 4.6
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2037,
+   "kind": "cyl",
+   "mass": 1.326,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 2.5
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2038,
+   "kind": "cyl",
+   "mass": 2.151,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 10.6
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2039,
+   "kind": "cyl",
+   "mass": 0.464,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 9.1
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2040,
+   "kind": "cyl",
+   "mass": 2.882,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 1.0
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2041,
+   "kind": "cyl",
+   "mass": 1.053,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 6.1
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2042,
+   "kind": "cyl",
+   "mass": 0.402,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 5.7
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2043,
+   "kind": "box",
+   "mass": 0.532,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 5.2
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2044,
+   "kind": "box",
+   "mass": 2.279,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 1.4
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2045,
+   "kind": "box",
+   "mass": 2.537,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 3.3
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2046,
+   "kind": "box",
+   "mass": 2.799,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 3.7
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2047,
+   "kind": "box",
+   "mass": 0.755,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 4.5
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2048,
+   "kind": "cyl",
+   "mass": 2.771,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 5.4
+  },
+  {
+   "who": "expert",
+   "tag": "없음",
+   "seed": 2049,
+   "kind": "box",
+   "mass": 1.526,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 2.7
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2000,
+   "kind": "box",
+   "mass": 1.173,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 2.9
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2001,
+   "kind": "box",
+   "mass": 0.484,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 5.7
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2002,
+   "kind": "cyl",
+   "mass": 1.625,
+   "success": false,
+   "fail": "ik_fail",
+   "goal_err_mm": 534.2
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2003,
+   "kind": "cyl",
+   "mass": 2.106,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 4.0
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2004,
+   "kind": "cyl",
+   "mass": 0.779,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 2.8
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2005,
+   "kind": "box",
+   "mass": 0.297,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 11.6
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2006,
+   "kind": "box",
+   "mass": 0.316,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 2.4
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2007,
+   "kind": "box",
+   "mass": 0.526,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 18.1
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2008,
+   "kind": "cyl",
+   "mass": 0.32,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 5.2
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2009,
+   "kind": "cyl",
+   "mass": 0.535,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 3.8
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2010,
+   "kind": "cyl",
+   "mass": 1.476,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 4.2
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2011,
+   "kind": "cyl",
+   "mass": 1.391,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 4.7
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2012,
+   "kind": "cyl",
+   "mass": 2.641,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 4.8
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2013,
+   "kind": "box",
+   "mass": 2.533,
+   "success": false,
+   "fail": "sim_unstable",
+   "goal_err_mm": 2692.6
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2014,
+   "kind": "box",
+   "mass": 2.282,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 7.4
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2015,
+   "kind": "cyl",
+   "mass": 0.226,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 1.2
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2016,
+   "kind": "box",
+   "mass": 0.894,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 4.5
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2017,
+   "kind": "box",
+   "mass": 0.162,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 2.8
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2018,
+   "kind": "box",
+   "mass": 0.371,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 6.4
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2019,
+   "kind": "box",
+   "mass": 0.419,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 2.7
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2020,
+   "kind": "box",
+   "mass": 0.375,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 6.5
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2021,
+   "kind": "cyl",
+   "mass": 0.72,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 14.2
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2022,
+   "kind": "cyl",
+   "mass": 1.237,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 10.5
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2023,
+   "kind": "box",
+   "mass": 1.502,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 6.1
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2024,
+   "kind": "box",
+   "mass": 2.236,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 3.5
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2025,
+   "kind": "box",
+   "mass": 3.193,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 3.4
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2026,
+   "kind": "cyl",
+   "mass": 0.669,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 7.9
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2027,
+   "kind": "cyl",
+   "mass": 0.759,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 2.6
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2028,
+   "kind": "cyl",
+   "mass": 2.551,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 6.0
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2029,
+   "kind": "box",
+   "mass": 0.942,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 10.3
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2030,
+   "kind": "box",
+   "mass": 0.338,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 8.1
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2031,
+   "kind": "cyl",
+   "mass": 0.989,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 4.4
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2032,
+   "kind": "box",
+   "mass": 0.206,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 4.8
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2033,
+   "kind": "cyl",
+   "mass": 2.234,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 4.5
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2034,
+   "kind": "box",
+   "mass": 0.262,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 3.5
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2035,
+   "kind": "box",
+   "mass": 1.692,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 6.1
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2036,
+   "kind": "box",
+   "mass": 0.469,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 13.5
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2037,
+   "kind": "cyl",
+   "mass": 1.082,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 8.8
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2038,
+   "kind": "cyl",
+   "mass": 1.633,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 16.1
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2039,
+   "kind": "cyl",
+   "mass": 0.483,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 14.4
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2040,
+   "kind": "cyl",
+   "mass": 3.825,
+   "success": false,
+   "fail": "sim_unstable",
+   "goal_err_mm": 2801.8
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2041,
+   "kind": "cyl",
+   "mass": 0.892,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 2.7
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2042,
+   "kind": "cyl",
+   "mass": 0.417,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 3.7
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2043,
+   "kind": "box",
+   "mass": 0.757,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 8.0
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2044,
+   "kind": "box",
+   "mass": 2.548,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 15.0
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2045,
+   "kind": "box",
+   "mass": 3.073,
+   "success": false,
+   "fail": "sim_unstable",
+   "goal_err_mm": 2692.6
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2046,
+   "kind": "box",
+   "mass": 2.881,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 3.4
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2047,
+   "kind": "box",
+   "mass": 0.926,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 7.1
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2048,
+   "kind": "cyl",
+   "mass": 3.26,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 5.6
+  },
+  {
+   "who": "expert",
+   "tag": "동시 ×1",
+   "seed": 2049,
+   "kind": "box",
+   "mass": 1.588,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 6.3
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2000,
+   "kind": "box",
+   "mass": 1.154,
+   "success": false,
+   "fail": "place_miss",
+   "goal_err_mm": 120.8
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2001,
+   "kind": "box",
+   "mass": 0.644,
+   "success": false,
+   "fail": "timeout_holding",
+   "goal_err_mm": 163.5
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2002,
+   "kind": "cyl",
+   "mass": 1.305,
+   "success": false,
+   "fail": "drop",
+   "goal_err_mm": 204189.3
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2003,
+   "kind": "cyl",
+   "mass": 2.858,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 10095.4
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2004,
+   "kind": "cyl",
+   "mass": 0.885,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 2.7
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2005,
+   "kind": "box",
+   "mass": 0.209,
+   "success": false,
+   "fail": "timeout_holding",
+   "goal_err_mm": 114.9
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2006,
+   "kind": "box",
+   "mass": 0.445,
+   "success": false,
+   "fail": "place_miss",
+   "goal_err_mm": 119.3
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2007,
+   "kind": "box",
+   "mass": 0.441,
+   "success": false,
+   "fail": "table_collision",
+   "goal_err_mm": 376.1
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2008,
+   "kind": "cyl",
+   "mass": 0.399,
+   "success": false,
+   "fail": "sim_unstable",
+   "goal_err_mm": 2801.8
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2009,
+   "kind": "cyl",
+   "mass": 0.496,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 3.0
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2010,
+   "kind": "cyl",
+   "mass": 2.038,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 3.7
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2011,
+   "kind": "cyl",
+   "mass": 1.177,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 1.2
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2012,
+   "kind": "cyl",
+   "mass": 1.947,
+   "success": false,
+   "fail": "sim_unstable",
+   "goal_err_mm": 2801.8
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2013,
+   "kind": "box",
+   "mass": 1.935,
+   "success": false,
+   "fail": "sim_unstable",
+   "goal_err_mm": 2692.6
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2014,
+   "kind": "box",
+   "mass": 1.71,
+   "success": false,
+   "fail": "table_collision",
+   "goal_err_mm": 17.3
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2015,
+   "kind": "cyl",
+   "mass": 0.311,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 3.7
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2016,
+   "kind": "box",
+   "mass": 1.328,
+   "success": false,
+   "fail": "tipped",
+   "goal_err_mm": 51.8
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2017,
+   "kind": "box",
+   "mass": 0.225,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 12.2
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2018,
+   "kind": "box",
+   "mass": 0.291,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 3.5
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2019,
+   "kind": "box",
+   "mass": 0.344,
+   "success": false,
+   "fail": "table_collision",
+   "goal_err_mm": 151.9
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2020,
+   "kind": "box",
+   "mass": 0.493,
+   "success": false,
+   "fail": "place_miss",
+   "goal_err_mm": 113.6
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2021,
+   "kind": "cyl",
+   "mass": 1.09,
+   "success": false,
+   "fail": "table_collision",
+   "goal_err_mm": 436.8
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2022,
+   "kind": "cyl",
+   "mass": 1.198,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 0.6
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2023,
+   "kind": "box",
+   "mass": 1.322,
+   "success": false,
+   "fail": "timeout_holding",
+   "goal_err_mm": 145.7
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2024,
+   "kind": "box",
+   "mass": 2.966,
+   "success": false,
+   "fail": "sim_unstable",
+   "goal_err_mm": 2692.6
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2025,
+   "kind": "box",
+   "mass": 2.81,
+   "success": false,
+   "fail": "drop",
+   "goal_err_mm": 555.1
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2026,
+   "kind": "cyl",
+   "mass": 0.523,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 0.4
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2027,
+   "kind": "cyl",
+   "mass": 0.674,
+   "success": false,
+   "fail": "table_collision",
+   "goal_err_mm": 237.4
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2028,
+   "kind": "cyl",
+   "mass": 1.957,
+   "success": false,
+   "fail": "timeout_holding",
+   "goal_err_mm": 58.7
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2029,
+   "kind": "box",
+   "mass": 0.813,
+   "success": false,
+   "fail": "drop",
+   "goal_err_mm": 316.6
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2030,
+   "kind": "box",
+   "mass": 0.301,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 8.3
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2031,
+   "kind": "cyl",
+   "mass": 0.776,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 2.9
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2032,
+   "kind": "box",
+   "mass": 0.282,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 6.4
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2033,
+   "kind": "cyl",
+   "mass": 2.411,
+   "success": false,
+   "fail": "sim_unstable",
+   "goal_err_mm": 2801.8
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2034,
+   "kind": "box",
+   "mass": 0.235,
+   "success": false,
+   "fail": "timeout_holding",
+   "goal_err_mm": 107.0
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2035,
+   "kind": "box",
+   "mass": 1.258,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 5.0
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2036,
+   "kind": "box",
+   "mass": 0.724,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 11.7
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2037,
+   "kind": "cyl",
+   "mass": 1.326,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 1.5
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2038,
+   "kind": "cyl",
+   "mass": 2.151,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 12.8
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2039,
+   "kind": "cyl",
+   "mass": 0.464,
+   "success": false,
+   "fail": "table_collision",
+   "goal_err_mm": 1027724216.5
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2040,
+   "kind": "cyl",
+   "mass": 2.882,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 1374.6
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2041,
+   "kind": "cyl",
+   "mass": 1.053,
+   "success": false,
+   "fail": "table_collision",
+   "goal_err_mm": 403.4
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2042,
+   "kind": "cyl",
+   "mass": 0.402,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 3.4
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2043,
+   "kind": "box",
+   "mass": 0.532,
+   "success": false,
+   "fail": "timeout_holding",
+   "goal_err_mm": 415.6
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2044,
+   "kind": "box",
+   "mass": 2.279,
+   "success": false,
+   "fail": "sim_unstable",
+   "goal_err_mm": 2692.6
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2045,
+   "kind": "box",
+   "mass": 2.537,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 510.1
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2046,
+   "kind": "box",
+   "mass": 2.799,
+   "success": false,
+   "fail": "sim_unstable",
+   "goal_err_mm": 2692.6
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2047,
+   "kind": "box",
+   "mass": 0.755,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 12.5
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2048,
+   "kind": "cyl",
+   "mass": 2.771,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 682.8
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "없음",
+   "seed": 2049,
+   "kind": "box",
+   "mass": 1.526,
+   "success": false,
+   "fail": "place_miss",
+   "goal_err_mm": 142.5
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2000,
+   "kind": "box",
+   "mass": 1.163,
+   "success": false,
+   "fail": "timeout_holding",
+   "goal_err_mm": 29.5
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2001,
+   "kind": "box",
+   "mass": 0.558,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 469.8
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2002,
+   "kind": "cyl",
+   "mass": 1.456,
+   "success": false,
+   "fail": "table_collision",
+   "goal_err_mm": 534.2
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2003,
+   "kind": "cyl",
+   "mass": 2.454,
+   "success": false,
+   "fail": "drop",
+   "goal_err_mm": 735.3
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2004,
+   "kind": "cyl",
+   "mass": 0.83,
+   "success": false,
+   "fail": "table_collision",
+   "goal_err_mm": 622.2
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2005,
+   "kind": "box",
+   "mass": 0.249,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 581.9
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2006,
+   "kind": "box",
+   "mass": 0.375,
+   "success": false,
+   "fail": "place_miss",
+   "goal_err_mm": 46.2
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2007,
+   "kind": "box",
+   "mass": 0.481,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 376.1
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2008,
+   "kind": "cyl",
+   "mass": 0.357,
+   "success": false,
+   "fail": "table_collision",
+   "goal_err_mm": 596.7
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2009,
+   "kind": "cyl",
+   "mass": 0.515,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 645.1
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2010,
+   "kind": "cyl",
+   "mass": 1.734,
+   "success": false,
+   "fail": "table_collision",
+   "goal_err_mm": 412.4
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2011,
+   "kind": "cyl",
+   "mass": 1.28,
+   "success": false,
+   "fail": "table_collision",
+   "goal_err_mm": 541.3
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2012,
+   "kind": "cyl",
+   "mass": 2.268,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 432.2
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2013,
+   "kind": "box",
+   "mass": 2.214,
+   "success": false,
+   "fail": "table_collision",
+   "goal_err_mm": 371.9
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2014,
+   "kind": "box",
+   "mass": 1.975,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 393.7
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2015,
+   "kind": "cyl",
+   "mass": 0.265,
+   "success": false,
+   "fail": "table_collision",
+   "goal_err_mm": 572.6
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2016,
+   "kind": "box",
+   "mass": 1.09,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 391.1
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2017,
+   "kind": "box",
+   "mass": 0.191,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 17.3
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2018,
+   "kind": "box",
+   "mass": 0.329,
+   "success": false,
+   "fail": "table_collision",
+   "goal_err_mm": 621.7
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2019,
+   "kind": "box",
+   "mass": 0.38,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 419.5
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2020,
+   "kind": "box",
+   "mass": 0.43,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 602.4
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2021,
+   "kind": "cyl",
+   "mass": 0.886,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 511.0
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2022,
+   "kind": "cyl",
+   "mass": 1.217,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 519.6
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2023,
+   "kind": "box",
+   "mass": 1.409,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 344.2
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2024,
+   "kind": "box",
+   "mass": 2.575,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 412.1
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2025,
+   "kind": "box",
+   "mass": 2.995,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 590.2
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2026,
+   "kind": "cyl",
+   "mass": 0.591,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 463.7
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2027,
+   "kind": "cyl",
+   "mass": 0.715,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 330.1
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2028,
+   "kind": "cyl",
+   "mass": 2.235,
+   "success": false,
+   "fail": "table_collision",
+   "goal_err_mm": 558.1
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2029,
+   "kind": "box",
+   "mass": 0.875,
+   "success": false,
+   "fail": "place_miss",
+   "goal_err_mm": 118.9
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2030,
+   "kind": "box",
+   "mass": 0.319,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 25.7
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2031,
+   "kind": "cyl",
+   "mass": 0.876,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 14.6
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2032,
+   "kind": "box",
+   "mass": 0.241,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 445.3
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2033,
+   "kind": "cyl",
+   "mass": 2.32,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 521.9
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2034,
+   "kind": "box",
+   "mass": 0.249,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 573.6
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2035,
+   "kind": "box",
+   "mass": 1.459,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 544.6
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2036,
+   "kind": "box",
+   "mass": 0.583,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 479.0
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2037,
+   "kind": "cyl",
+   "mass": 1.198,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 622.4
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2038,
+   "kind": "cyl",
+   "mass": 1.874,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 385.6
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2039,
+   "kind": "cyl",
+   "mass": 0.474,
+   "success": false,
+   "fail": "table_collision",
+   "goal_err_mm": 595.2
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2040,
+   "kind": "cyl",
+   "mass": 3.32,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 315.9
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2041,
+   "kind": "cyl",
+   "mass": 0.969,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 341.7
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2042,
+   "kind": "cyl",
+   "mass": 0.409,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 579.0
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2043,
+   "kind": "box",
+   "mass": 0.635,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 410.8
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2044,
+   "kind": "box",
+   "mass": 2.41,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 365.9
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2045,
+   "kind": "box",
+   "mass": 2.792,
+   "success": false,
+   "fail": "timeout_holding",
+   "goal_err_mm": 25.4
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2046,
+   "kind": "box",
+   "mass": 2.84,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 485.2
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2047,
+   "kind": "box",
+   "mass": 0.837,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 601.6
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2048,
+   "kind": "cyl",
+   "mass": 3.005,
+   "success": false,
+   "fail": "grasp_miss",
+   "goal_err_mm": 569.1
+  },
+  {
+   "who": "joint_dart_c25",
+   "tag": "동시 ×1",
+   "seed": 2049,
+   "kind": "box",
+   "mass": 1.557,
+   "success": true,
+   "fail": null,
+   "goal_err_mm": 13.3
+  }
+ ]
+}

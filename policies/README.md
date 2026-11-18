@@ -7,7 +7,8 @@
 | `bc_common.py` | 관측 특징 39(로봇 좌표) · 행동 목표(관절 8 / 끝점 10 / 청킹 K×8), HDF5 로더, 롤아웃용 `live_features`, 팔 FK · IK(`Kin`) |
 | `train_bc.py` | PyTorch CPU 학습: MLP 3 × 256, 정규화, 에피소드 단위 검증 분리(seed 1090 ~ 1099), 옵션 `--data a,b`(DART 추가) · `--chunk K` · `--hist prev,time` · `--noise` |
 | `collect_dart.py` | DART 노이즈 시연: 실제 명령 = 전문가 + OU 노이즈, 라벨 = 전문가 명령(`action_label` 확장 필드) → `datasets/raw_dart/`(커밋 안 함) |
-| `rand_dyn.py` | 동역학 랜덤화 임시판 7종(범위 근거 = 가정값 표) — **함태훈 randomize.py로 교체 예정** |
+| `rand_dyn.py` | 동역학 랜덤화 임시판 7종(1차 결과 재현용). **기준 랜덤화 = 함태훈 week09 `randomize.py` + `bc_eval_pjj.py`** |
+| `eval_taehoon_repro.py` | 함태훈 랜덤화로 BC · 전문가 평가 B1 재현(「없음 · 동시 ×1」) → results/eval_taehoon_repro.json, 요약 [results/eval_taehoon.md](results/eval_taehoon.md) |
 | `eval_bc.py` | 롤아웃 평가: 전문가 · BC × 랜덤화 없음/있음, seed 2000 ~ 2049, 공통 판정 · 실패 분류, 청킹 시간 앙상블 |
 | `offline_compare.py` | 관절 vs 끝점 출력: 검증 시연 open-loop 오차를 끝점 공간 같은 단위로 |
 | `plot_week09.py` · `collect_dart_report.py` · `render_bc_gif.py` | 그림 · 표 · GIF |
@@ -37,5 +38,6 @@ MUJOCO_GL=egl python policies/render_bc_gif.py joint_dart_c25 2004   # Windows�
 
 - 전문가 98 % · BC(시연 100개 그대로) 0 % — 검증 손실은 아주 작음(끝점 목표 오차 평균 0.24 mm)인데 닫힌 루프에서 실패 = **공변량 이동**
 - DART(노이즈 시연 148개 추가) → 테이블 충돌은 사라지지만 구간 사이 「멈춤」에서 못 벗어남(0 %)
-- DART + **액션 청킹 25(0.5 s)** → 36 % (랜덤화 있음 24 %)
+- DART + **액션 청킹 25(0.5 s)** → 36 % (B1 임시 랜덤화 24 %)
+- **함태훈 랜덤화(근거 범위 동시) → 4/50 = 8 %**, 전문가 46/50. BC 민감 = 명령 지연 20 ms(0/25) · 테이블 −10 mm(0/25) · 팔 질량 −10 % — [eval_taehoon.md](results/eval_taehoon.md). B1 재현 200/200 일치
 - 학습 · 평가 seed는 모두 분리(학습 1000 ~ 1099 · DART 3000 ~ 3299 · 평가 2000 ~ 2049)

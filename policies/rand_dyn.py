@@ -3,6 +3,9 @@
 #     함태훈 randomize.py가 push되면 apply()만 그쪽 함수로 바꿔 eval_bc.py를 다시 돌린다(seed → 같은 표본 규칙 유지)
 #   범위 근거 = 가정값 표(b1/models/assumptions-v0.md) — 실측이 없는 값은 넓게, A2 사양이 있는 값은 좁게
 #   seed가 같으면 같은 표본(전문가 · BC가 같은 랜덤 환경에서 비교됨)
+#   (11/18 함태훈 week09 ed160f2 이후) 기준 랜덤화 = 함태훈 sim/w09/randomize.py + bc_eval_pjj.py(테이블 높이 · 측정 편향 · 지연 · 물체 질량 감싸기)
+#     → 결과 policies/results/eval_taehoon.md. 이 파일은 week09 1차 결과(eval.md 「랜덤화 있음」) 재현용으로만 남김
+#   주의: MuJoCo 마찰 결합 = 두 geom 중 큰 값 → 아래 테이블 마찰 배율은 테이블 μ가 물체 μ보다 클 때만 효과(함태훈 지적)
 import numpy as np,mujoco
 
 RANGES={   # 이름: (범위, 근거)
