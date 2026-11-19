@@ -63,38 +63,71 @@
  },
  "torque": [
   {
-   "lw": "지금(손목 없음)",
+   "case": "지금",
+   "lw": 0.0,
    "add_wrist": 0.0,
    "add_payload": 0.0,
-   "need": 48.69,
-   "req_rated": 58.4,
-   "ok_RI85": true,
-   "ok_TQ": true,
-   "margin_RI85_pct": 49.1,
-   "margin_TQ_pct": 144.0
+   "pitch": {
+    "need": 48.69,
+    "req_rated": 58.4,
+    "ok_TQ": true,
+    "ok_RI85": true,
+    "margin_TQ_pct": 144.0,
+    "margin_RI85_pct": 49.1
+   },
+   "roll": {
+    "need": 46.71,
+    "req_rated": 56.1,
+    "ok_TQ": true,
+    "ok_RI85": true,
+    "margin_TQ_pct": 154.3,
+    "margin_RI85_pct": 55.4
+   }
   },
   {
+   "case": "손목",
    "lw": 0.0,
    "add_wrist": 3.73,
    "add_payload": 0.0,
-   "need": 52.42,
-   "req_rated": 62.9,
-   "ok_RI85": true,
-   "ok_TQ": true,
-   "margin_RI85_pct": 38.5,
-   "margin_TQ_pct": 126.6
+   "pitch": {
+    "need": 52.42,
+    "req_rated": 62.9,
+    "ok_TQ": true,
+    "ok_RI85": true,
+    "margin_TQ_pct": 126.6,
+    "margin_RI85_pct": 38.5
+   },
+   "roll": {
+    "need": 50.44,
+    "req_rated": 60.5,
+    "ok_TQ": true,
+    "ok_RI85": true,
+    "margin_TQ_pct": 135.5,
+    "margin_RI85_pct": 43.9
+   }
   },
   {
+   "case": "손목",
    "lw": 0.06,
    "add_wrist": 3.73,
    "add_payload": 1.77,
-   "need": 54.18,
-   "req_rated": 65.0,
-   "ok_RI85": true,
-   "ok_TQ": true,
-   "margin_RI85_pct": 34.0,
-   "margin_TQ_pct": 119.3
+   "pitch": {
+    "need": 54.18,
+    "req_rated": 65.0,
+    "ok_TQ": true,
+    "ok_RI85": true,
+    "margin_TQ_pct": 119.3,
+    "margin_RI85_pct": 34.0
+   },
+   "roll": {
+    "need": 52.2,
+    "req_rated": 62.6,
+    "ok_TQ": true,
+    "ok_RI85": true,
+    "margin_TQ_pct": 127.6,
+    "margin_RI85_pct": 39.1
+   }
   }
  ],
- "seconds": 138.8
+ "seconds": 147.0
 }

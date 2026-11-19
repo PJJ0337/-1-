@@ -98,14 +98,18 @@ reach={name:round(100*float(np.mean([ik_topdown(t,mode,lw,rng=np.random.default_
 reach_wb={name:round(100*float(np.mean([(ee_pts(mode,lw)[:,2].min()<=t[2]<=ee_pts(mode,lw)[:,2].max()) for t in T])),1) for name,mode,lw in cases}
 
 # 질량 · 토크 영향(가정): 손목 모듈 0.8 kg(소형 서보 2개 + 브래킷 가정)을 어깨에서 0.475 m(상완 0.276 + 전완 0.199), 3 kg 짐 팔 길이 +L_w
-TQ_NOW=48.69; g=9.81; MW=0.8; R_W=0.475
-RATED={"RI85":72.6,"TQ":118.8}   # 어깨 후보 실제 정격(A2 회신). 판정 = 실제 정격 ≥ 필요 정격(필요 토크 × 1.2) — 팀장 7 · 8주차 회신(「PDR 52 여유 %」 표현 쓰지 않음)
-def _tq(lw):
-    need=TQ_NOW+MW*g*R_W+3.0*g*lw
-    return dict(lw=lw,add_wrist=round(MW*g*R_W,2),add_payload=round(3.0*g*lw,2),need=round(need,2),req_rated=round(1.2*need,1),
-                **{f"ok_{k}":v>=1.2*need for k,v in RATED.items()},**{f"margin_{k}_pct":round(100*(v/need-1),1) for k,v in RATED.items()})
-tq=[_tq(0.0)|dict(lw="지금(손목 없음)",add_wrist=0.0)]+[_tq(lw) for lw in LW]
-tq[0].update(need=TQ_NOW,req_rated=round(1.2*TQ_NOW,1),**{f"margin_{k}_pct":round(100*(v/TQ_NOW-1),1) for k,v in RATED.items()})
+# (week10 갱신, 팀장 11/19) 어깨 pitch · roll 둘 다, 판정 = 실제 정격 ≥ 요구 정격(필요 토크 × 1.2), 여유 % = 실제 정격 / 필요 토크 − 1 (TQ · RI85 각각)
+#   지금 필요 토크 = torque_budget_b1 8주차 파지 중(3 kg @ 파지 중심 + 그리퍼 0.9 kg + 베이스 가속), 최악 자세 = 팔 수평(pitch 앞 · roll 옆)
+#   손목 추가분(근사): 손목 0.8 kg × g × 0.475 m(상완 + 전완, 수평 최악 자세 팔 길이) + 3 kg × g × L_w — pitch · roll 같은 팔 길이
+NEED_NOW={"pitch":48.69,"roll":46.71}; g=9.81; MW=0.8; R_W=0.475; TQ_NOW=NEED_NOW["pitch"]
+RATED={"TQ":118.8,"RI85":72.6}   # 어깨 후보 실제 정격(A2 회신)
+def _tq(case,lw):
+    add_w=0.0 if case=="지금" else MW*g*R_W; add_p=0.0 if case=="지금" else 3.0*g*lw; out=dict(case=case,lw=lw,add_wrist=round(add_w,2),add_payload=round(add_p,2))
+    for j,n0 in NEED_NOW.items():
+        need=n0+add_w+add_p
+        out[j]=dict(need=round(need,2),req_rated=round(1.2*need,1),**{f"ok_{k}":v>=1.2*need for k,v in RATED.items()},**{f"margin_{k}_pct":round(100*(v/need-1),1) for k,v in RATED.items()})
+    return out
+tq=[_tq("지금",0.0)]+[_tq("손목",lw) for lw in LW]
 
 res=dict(assume=dict(wrist="pitch(tool0 x) ±90° → roll(그리퍼 축) ±180°",H_EE=H_EE,L_w=LW,z_grasp=Z_GRASP,band=band,N=N,wrist_mass_kg=MW,r_wrist=R_W,
                      torque_now_pitch=TQ_NOW),rows=rows,reach_arm_only_pct=reach,reach_wholebody_upper_pct=reach_wb,torque=tq,seconds=round(time.time()-t0,1))
@@ -127,6 +131,18 @@ for r in rows: L.append(f"| {r['case']} | {r['n_pose']:,} | {r['z_range'][0]} ~ 
 L+=["","| 7주차 「위치 + 아래로 접근」 무작위 150목표 | "+" | ".join(f"{k}" for k in reach)+" |","|---|"+"---|"*len(reach),
     "| 팔만 IK 수렴률 (재시작 12, 1 mm · 0.01 rad, 자기 충돌 없음) | "+" | ".join(f"{v} %" for v in reach.values())+" |",
     "| 전신 상한 (높이만 대역 안, 테이블 · 충돌 미고려) | "+" | ".join(f"{v} %" for v in reach_wb.values())+" |","",
-    "| 토크(가정: 손목 0.8 kg · 어깨에서 0.475 m, 3 kg 짐 팔 길이 +L_w) | 손목 추가 | 짐 팔 길이 추가 | 필요 pitch [N·m] | 필요 정격 (× 1.2) | RI85 72.6 판정 · 정격 여유 | TQ 118.8 판정 · 정격 여유 |","|---|---|---|---|---|---|---|"]
-for t in tq: L.append(f"| {t['lw'] if isinstance(t['lw'],str) else 'L_w '+str(t['lw'])+' m'} | +{t['add_wrist']} | +{t['add_payload']} | {t['need']} | {t['req_rated']} | {'OK' if t['ok_RI85'] else 'NG'} · {t['margin_RI85_pct']} % | {'OK' if t['ok_TQ'] else 'NG'} · {t['margin_TQ_pct']} % |")
+    "## 토크 — 어깨 (판정: 실제 정격 ≥ 요구 정격 = 필요 토크 × 1.2, 여유 % = 실제 정격 / 필요 토크 − 1)","",
+    "| 경우 | 손목 추가 · 짐 팔 길이 추가 [N·m] | pitch 필요 → 요구 정격 | roll 필요 → 요구 정격 | TQ 118.8 여유 pitch · roll | RI85 72.6 여유 pitch · roll | 판정 |","|---|---|---|---|---|---|---|"]
+for t in tq:
+    p,r=t["pitch"],t["roll"]; nm="지금(4-DOF)" if t["case"]=="지금" else f"손목 2축 (L_w {t['lw']} m)"
+    ok=all(t[j][f"ok_{k}"] for j in ("pitch","roll") for k in RATED)
+    L.append(f"| {nm} | +{t['add_wrist']} · +{t['add_payload']} | {p['need']} → {p['req_rated']} | {r['need']} → {r['req_rated']} | {p['margin_TQ_pct']} · {r['margin_TQ_pct']} % | {p['margin_RI85_pct']} · {r['margin_RI85_pct']} % | {'TQ · RI85 둘 다 통과' if ok else 'NG 있음'} |")
+# CDR 한 표: 집기 영역 + 어깨 여유
+L+=["","## CDR 설계 제안용 한 표 — 손목을 달면 집기 영역은 얼마나 넓어지고, 어깨 여유는 TQ · RI85에서 몇 %가 되나","",
+    "| 경우 | 파지 높이 수직 하강 면적 | 테이블 깊이 정면 · 옆면 | 전신 「위치 + 아래로」 상한 | 어깨 요구 정격 (pitch) | 어깨 여유 TQ (pitch · roll) | 어깨 여유 RI85 (pitch · roll) |","|---|---|---|---|---|---|---|"]
+for (name,mode,lw),t in zip(cases,tq):   # cases와 tq 순서 같음: 지금 · 손목 L_w 0 · 손목 L_w 0.06
+    r_=next(x for x in rows if x["case"]==name); base=rows[0]["area_at_grasp_h_cm2"]
+    L.append(f"| {name} | {r_['area_at_grasp_h_cm2']:.0f} cm² (×{r_['area_at_grasp_h_cm2']/base:.1f}) | {r_['depth_front']} · {r_['depth_side']} m | {reach_wb[name]:.0f} % | {t['pitch']['req_rated']} N·m | {t['pitch']['margin_TQ_pct']} · {t['roll']['margin_TQ_pct']} % | {t['pitch']['margin_RI85_pct']} · {t['roll']['margin_RI85_pct']} % |")
+L+=["","- 판정 기준(× 1.2 = 여유 20 % 이상): 모든 경우 TQ · RI85 둘 다 통과. 손목이 가장 크게 줄이는 곳 = RI85 pitch 여유 49 → 34 ~ 38 %",
+    "- 가정: 손목 0.8 kg · 길이 L_w 0 / 0.06 m(근거 없는 가정 — A팀 후보 부품 오면 교체), 토크 추가분은 수평 최악 자세 팔 길이 0.475 m 근사(pitch · roll 같음), 영역 · 깊이는 끝점 기준(테이블 · 링크 충돌 미검사 상한)"]
 open(os.path.join(V1,"results","wrist_predict.md"),"w",encoding="utf-8").write("\n".join(L)+"\n"); print("\n".join(L))
