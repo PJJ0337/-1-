@@ -63,19 +63,38 @@
  },
  "torque": [
   {
+   "lw": "지금(손목 없음)",
+   "add_wrist": 0.0,
+   "add_payload": 0.0,
+   "need": 48.69,
+   "req_rated": 58.4,
+   "ok_RI85": true,
+   "ok_TQ": true,
+   "margin_RI85_pct": 49.1,
+   "margin_TQ_pct": 144.0
+  },
+  {
    "lw": 0.0,
    "add_wrist": 3.73,
    "add_payload": 0.0,
    "need": 52.42,
-   "pdr52_margin_pct": -0.8
+   "req_rated": 62.9,
+   "ok_RI85": true,
+   "ok_TQ": true,
+   "margin_RI85_pct": 38.5,
+   "margin_TQ_pct": 126.6
   },
   {
    "lw": 0.06,
    "add_wrist": 3.73,
    "add_payload": 1.77,
    "need": 54.18,
-   "pdr52_margin_pct": -4.0
+   "req_rated": 65.0,
+   "ok_RI85": true,
+   "ok_TQ": true,
+   "margin_RI85_pct": 34.0,
+   "margin_TQ_pct": 119.3
   }
  ],
- "seconds": 185.5
+ "seconds": 138.8
 }

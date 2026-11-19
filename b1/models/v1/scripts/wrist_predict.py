@@ -99,8 +99,13 @@ reach_wb={name:round(100*float(np.mean([(ee_pts(mode,lw)[:,2].min()<=t[2]<=ee_pt
 
 # 질량 · 토크 영향(가정): 손목 모듈 0.8 kg(소형 서보 2개 + 브래킷 가정)을 어깨에서 0.475 m(상완 0.276 + 전완 0.199), 3 kg 짐 팔 길이 +L_w
 TQ_NOW=48.69; g=9.81; MW=0.8; R_W=0.475
-tq=[dict(lw=lw,add_wrist=round(MW*g*R_W,2),add_payload=round(3.0*g*lw,2),need=round(TQ_NOW+MW*g*R_W+3.0*g*lw,2),
-         pdr52_margin_pct=round(100*(52/(TQ_NOW+MW*g*R_W+3.0*g*lw)-1),1)) for lw in LW]
+RATED={"RI85":72.6,"TQ":118.8}   # 어깨 후보 실제 정격(A2 회신). 판정 = 실제 정격 ≥ 필요 정격(필요 토크 × 1.2) — 팀장 7 · 8주차 회신(「PDR 52 여유 %」 표현 쓰지 않음)
+def _tq(lw):
+    need=TQ_NOW+MW*g*R_W+3.0*g*lw
+    return dict(lw=lw,add_wrist=round(MW*g*R_W,2),add_payload=round(3.0*g*lw,2),need=round(need,2),req_rated=round(1.2*need,1),
+                **{f"ok_{k}":v>=1.2*need for k,v in RATED.items()},**{f"margin_{k}_pct":round(100*(v/need-1),1) for k,v in RATED.items()})
+tq=[_tq(0.0)|dict(lw="지금(손목 없음)",add_wrist=0.0)]+[_tq(lw) for lw in LW]
+tq[0].update(need=TQ_NOW,req_rated=round(1.2*TQ_NOW,1),**{f"margin_{k}_pct":round(100*(v/TQ_NOW-1),1) for k,v in RATED.items()})
 
 res=dict(assume=dict(wrist="pitch(tool0 x) ±90° → roll(그리퍼 축) ±180°",H_EE=H_EE,L_w=LW,z_grasp=Z_GRASP,band=band,N=N,wrist_mass_kg=MW,r_wrist=R_W,
                      torque_now_pitch=TQ_NOW),rows=rows,reach_arm_only_pct=reach,reach_wholebody_upper_pct=reach_wb,torque=tq,seconds=round(time.time()-t0,1))
@@ -122,6 +127,6 @@ for r in rows: L.append(f"| {r['case']} | {r['n_pose']:,} | {r['z_range'][0]} ~ 
 L+=["","| 7주차 「위치 + 아래로 접근」 무작위 150목표 | "+" | ".join(f"{k}" for k in reach)+" |","|---|"+"---|"*len(reach),
     "| 팔만 IK 수렴률 (재시작 12, 1 mm · 0.01 rad, 자기 충돌 없음) | "+" | ".join(f"{v} %" for v in reach.values())+" |",
     "| 전신 상한 (높이만 대역 안, 테이블 · 충돌 미고려) | "+" | ".join(f"{v} %" for v in reach_wb.values())+" |","",
-    "| 토크(가정: 손목 0.8 kg · 어깨에서 0.475 m, 3 kg 짐 팔 길이 +L_w) | 손목 추가 | 짐 팔 길이 추가 | 필요 pitch [N·m] | PDR 52 여유 (기준 ≥ 20 %, 지금 6.8 %) |","|---|---|---|---|---|"]
-for t in tq: L.append(f"| L_w {t['lw']} m | +{t['add_wrist']} | +{t['add_payload']} | {t['need']} (지금 {TQ_NOW}) | {t['pdr52_margin_pct']} % |")
+    "| 토크(가정: 손목 0.8 kg · 어깨에서 0.475 m, 3 kg 짐 팔 길이 +L_w) | 손목 추가 | 짐 팔 길이 추가 | 필요 pitch [N·m] | 필요 정격 (× 1.2) | RI85 72.6 판정 · 정격 여유 | TQ 118.8 판정 · 정격 여유 |","|---|---|---|---|---|---|---|"]
+for t in tq: L.append(f"| {t['lw'] if isinstance(t['lw'],str) else 'L_w '+str(t['lw'])+' m'} | +{t['add_wrist']} | +{t['add_payload']} | {t['need']} | {t['req_rated']} | {'OK' if t['ok_RI85'] else 'NG'} · {t['margin_RI85_pct']} % | {'OK' if t['ok_TQ'] else 'NG'} · {t['margin_TQ_pct']} % |")
 open(os.path.join(V1,"results","wrist_predict.md"),"w",encoding="utf-8").write("\n".join(L)+"\n"); print("\n".join(L))
