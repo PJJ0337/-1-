@@ -9,6 +9,7 @@ import os,sys,glob,json
 import numpy as np,mujoco,h5py
 HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.dirname(HERE); sys.path.insert(0,os.path.join(ROOT,"scenarios"))
 import pick_env as P
+sys.path.insert(0,os.path.join(ROOT,"datasets")); import b1_dataset   # 함태훈 명세 v1.1 도구(train_label: DART면 action_label, 아니면 action)
 
 ARM=["shoulder_pitch","shoulder_roll","shoulder_yaw","elbow"]
 GOAL_W=np.array([P.TABLE["edge_x"]+P.GOAL["depth"],P.GOAL["y"],P.TABLE["top"]])   # 목표 원 중심(world, 테이블 윗면)
@@ -94,7 +95,7 @@ def load_dir(path,out,m=None,only_success=True,chunk=1):
             assert h.attrs["spec"]=="b1-dataset-1.0",(f,h.attrs["spec"])
             if only_success and not bool(h.attrs["success"]): continue
             o=h["obs"]; Q=o["qpos"][:]; V=o["qvel"][:]; EP=o["ee_pos"][:]; EQ=o["ee_quat"][:]; OP=o["obj_pos"][:]; OQ=o["obj_quat"][:]; G=o["gripper_width"][:]
-            A=h["action_label"][:] if "action_label" in h else h["action"][:]; kind=str(h.attrs["kind"]); seed=int(h.attrs["seed"])
+            A=b1_dataset.train_label(h); kind=str(h.attrs["kind"]); seed=int(h.attrs["seed"])
         X=np.stack([features(Q[t],V[t],EP[t],EQ[t],OP[t],OQ[t],G[t],kind) for t in range(len(A))])
         Y=chunk_targets(Q,A,chunk) if chunk>1 else np.stack([targets(out,Q[t],EP[t],A[t],kin) for t in range(len(A))])
         eps.append((X,Y,seed))
