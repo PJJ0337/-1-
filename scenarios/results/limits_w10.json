@@ -1,0 +1,3178 @@
+{
+ "summary": [
+  {
+   "cfg": "none",
+   "desc": "제한 없음",
+   "reach": null,
+   "payload": null,
+   "mass": 3.0,
+   "n": 20,
+   "success": 19,
+   "fails": {
+    "ik_fail": 1
+   },
+   "t_cycle_mean": 24.53,
+   "base_path_mean": 2.059,
+   "base_turn_mean": 194.0,
+   "reach_carry_max": 0.385,
+   "design": {
+    "a2_doc": {
+     "need": [
+      48.69,
+      46.71
+     ],
+     "margin": [
+      144.0,
+      154.4
+     ],
+     "min": 144.0
+    },
+    "cad_ri85": {
+     "need": [
+      48.69,
+      46.71
+     ],
+     "margin": [
+      49.1,
+      55.4
+     ],
+     "min": 49.1
+    }
+   },
+   "scenario": {
+    "a2_doc": {
+     "tau": [
+      9.6,
+      8.38
+     ],
+     "margin": [
+      1137.5,
+      1317.7
+     ],
+     "min": 1137.5
+    },
+    "cad_ri85": {
+     "tau": [
+      9.6,
+      8.38
+     ],
+     "margin": [
+      656.2,
+      766.3
+     ],
+     "min": 656.2
+    }
+   }
+  },
+  {
+   "cfg": "payload_auto",
+   "desc": "① 짐 제한 auto (a2_doc m_max 11.04 kg)",
+   "reach": null,
+   "payload": 11.04,
+   "mass": 3.0,
+   "n": 20,
+   "success": 19,
+   "fails": {
+    "ik_fail": 1
+   },
+   "t_cycle_mean": 24.53,
+   "base_path_mean": 2.059,
+   "base_turn_mean": 194.0,
+   "reach_carry_max": 0.385,
+   "design": {
+    "a2_doc": {
+     "need": [
+      48.69,
+      46.71
+     ],
+     "margin": [
+      144.0,
+      154.4
+     ],
+     "min": 144.0
+    },
+    "cad_ri85": {
+     "need": [
+      48.69,
+      46.71
+     ],
+     "margin": [
+      49.1,
+      55.4
+     ],
+     "min": 49.1
+    }
+   },
+   "scenario": {
+    "a2_doc": {
+     "tau": [
+      9.6,
+      8.38
+     ],
+     "margin": [
+      1137.5,
+      1317.7
+     ],
+     "min": 1137.5
+    },
+    "cad_ri85": {
+     "tau": [
+      9.6,
+      8.38
+     ],
+     "margin": [
+      656.2,
+      766.3
+     ],
+     "min": 656.2
+    }
+   }
+  },
+  {
+   "cfg": "reach_auto",
+   "desc": "② 도달 제한 auto (a2_doc 3 kg r_max 0.729 m = 최대 도달)",
+   "reach": 0.729,
+   "payload": null,
+   "mass": 3.0,
+   "n": 20,
+   "success": 19,
+   "fails": {
+    "ik_fail": 1
+   },
+   "t_cycle_mean": 24.53,
+   "base_path_mean": 2.059,
+   "base_turn_mean": 194.0,
+   "reach_carry_max": 0.385,
+   "design": {
+    "a2_doc": {
+     "need": [
+      48.69,
+      46.71
+     ],
+     "margin": [
+      144.0,
+      154.4
+     ],
+     "min": 144.0
+    },
+    "cad_ri85": {
+     "need": [
+      48.69,
+      46.71
+     ],
+     "margin": [
+      49.1,
+      55.4
+     ],
+     "min": 49.1
+    }
+   },
+   "scenario": {
+    "a2_doc": {
+     "tau": [
+      9.6,
+      8.38
+     ],
+     "margin": [
+      1137.5,
+      1317.7
+     ],
+     "min": 1137.5
+    },
+    "cad_ri85": {
+     "tau": [
+      9.6,
+      8.38
+     ],
+     "margin": [
+      656.2,
+      766.3
+     ],
+     "min": 656.2
+    }
+   }
+  },
+  {
+   "cfg": "payload_2kg",
+   "desc": "① 짐 제한 2 kg (강제 — 커리큘럼 예시)",
+   "reach": null,
+   "payload": 2.0,
+   "mass": 2.0,
+   "n": 20,
+   "success": 19,
+   "fails": {
+    "ik_fail": 1
+   },
+   "t_cycle_mean": 24.52,
+   "base_path_mean": 2.058,
+   "base_turn_mean": 193.9,
+   "reach_carry_max": 0.385,
+   "design": {
+    "a2_doc": {
+     "need": [
+      42.43,
+      40.79
+     ],
+     "margin": [
+      180.0,
+      191.2
+     ],
+     "min": 180.0
+    },
+    "cad_ri85": {
+     "need": [
+      42.43,
+      40.79
+     ],
+     "margin": [
+      71.1,
+      78.0
+     ],
+     "min": 71.1
+    }
+   },
+   "scenario": {
+    "a2_doc": {
+     "tau": [
+      7.07,
+      6.07
+     ],
+     "margin": [
+      1580.3,
+      1857.2
+     ],
+     "min": 1580.3
+    },
+    "cad_ri85": {
+     "tau": [
+      7.07,
+      6.07
+     ],
+     "margin": [
+      926.9,
+      1096.0
+     ],
+     "min": 926.9
+    }
+   }
+  },
+  {
+   "cfg": "reach_0.37",
+   "desc": "② 도달 제한 0.37 m (강제)",
+   "reach": 0.37,
+   "payload": null,
+   "mass": 3.0,
+   "n": 20,
+   "success": 17,
+   "fails": {
+    "ik_fail": 2,
+    "drop": 1
+   },
+   "t_cycle_mean": 24.36,
+   "base_path_mean": 1.993,
+   "base_turn_mean": 189.7,
+   "reach_carry_max": 0.368,
+   "design": {
+    "a2_doc": {
+     "need": [
+      35.45,
+      28.86
+     ],
+     "margin": [
+      235.1,
+      311.6
+     ],
+     "min": 235.1
+    },
+    "cad_ri85": {
+     "need": [
+      35.45,
+      28.86
+     ],
+     "margin": [
+      104.8,
+      151.5
+     ],
+     "min": 104.8
+    }
+   },
+   "scenario": {
+    "a2_doc": {
+     "tau": [
+      9.6,
+      4.72
+     ],
+     "margin": [
+      1137.5,
+      2416.9
+     ],
+     "min": 1137.5
+    },
+    "cad_ri85": {
+     "tau": [
+      9.6,
+      4.72
+     ],
+     "margin": [
+      656.2,
+      1438.1
+     ],
+     "min": 656.2
+    }
+   }
+  },
+  {
+   "cfg": "reach_0.35",
+   "desc": "② 도달 제한 0.35 m (강제)",
+   "reach": 0.35,
+   "payload": null,
+   "mass": 3.0,
+   "n": 20,
+   "success": 0,
+   "fails": {
+    "ik_fail": 20
+   },
+   "t_cycle_mean": null,
+   "base_path_mean": null,
+   "base_turn_mean": null,
+   "reach_carry_max": null,
+   "design": {
+    "a2_doc": {
+     "need": [
+      35.45,
+      28.86
+     ],
+     "margin": [
+      235.1,
+      311.6
+     ],
+     "min": 235.1
+    },
+    "cad_ri85": {
+     "need": [
+      35.45,
+      28.86
+     ],
+     "margin": [
+      104.8,
+      151.5
+     ],
+     "min": 104.8
+    }
+   },
+   "scenario": {
+    "a2_doc": {
+     "tau": [
+      9.11,
+      2.41
+     ],
+     "margin": [
+      1204.1,
+      4829.5
+     ],
+     "min": 1204.1
+    },
+    "cad_ri85": {
+     "tau": [
+      9.11,
+      2.41
+     ],
+     "margin": [
+      696.9,
+      2912.4
+     ],
+     "min": 696.9
+    }
+   }
+  }
+ ],
+ "rows": [
+  {
+   "cfg": "none",
+   "seed": 0,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.3,
+   "base_path_m": 1.911,
+   "base_turn_deg": 189.3,
+   "reach_max": 0.391,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    8.8,
+    3.23
+   ],
+   "tau_all": [
+    8.8,
+    3.23
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.5
+  },
+  {
+   "cfg": "none",
+   "seed": 1,
+   "kind": "box",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 0.4,
+   "base_path_m": 0.0,
+   "base_turn_deg": 0.0,
+   "reach_max": 0.117,
+   "reach_carry": 0.0,
+   "tau_carry": [
+    0.0,
+    0.0
+   ],
+   "tau_all": [
+    0.0,
+    0.04
+   ],
+   "base_yaw_grasp": null,
+   "wall_s": 6.0
+  },
+  {
+   "cfg": "none",
+   "seed": 2,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.5,
+   "base_path_m": 2.129,
+   "base_turn_deg": 190.5,
+   "reach_max": 0.388,
+   "reach_carry": 0.364,
+   "tau_carry": [
+    9.36,
+    3.08
+   ],
+   "tau_all": [
+    9.36,
+    3.08
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.5
+  },
+  {
+   "cfg": "none",
+   "seed": 3,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.5,
+   "base_path_m": 2.133,
+   "base_turn_deg": 190.4,
+   "reach_max": 0.388,
+   "reach_carry": 0.364,
+   "tau_carry": [
+    9.6,
+    3.08
+   ],
+   "tau_all": [
+    9.6,
+    3.08
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.5
+  },
+  {
+   "cfg": "none",
+   "seed": 4,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.84,
+   "base_path_m": 2.149,
+   "base_turn_deg": 188.4,
+   "reach_max": 0.391,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    8.59,
+    3.22
+   ],
+   "tau_all": [
+    8.59,
+    3.22
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.5
+  },
+  {
+   "cfg": "none",
+   "seed": 5,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.48,
+   "base_path_m": 1.969,
+   "base_turn_deg": 186.3,
+   "reach_max": 0.41,
+   "reach_carry": 0.374,
+   "tau_carry": [
+    7.73,
+    4.32
+   ],
+   "tau_all": [
+    7.73,
+    4.32
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.2
+  },
+  {
+   "cfg": "none",
+   "seed": 6,
+   "kind": "box",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.78,
+   "base_path_m": 2.471,
+   "base_turn_deg": 237.5,
+   "reach_max": 0.456,
+   "reach_carry": 0.385,
+   "tau_carry": [
+    4.56,
+    8.38
+   ],
+   "tau_all": [
+    4.56,
+    8.38
+   ],
+   "base_yaw_grasp": -105.8,
+   "wall_s": 1.7
+  },
+  {
+   "cfg": "none",
+   "seed": 7,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.82,
+   "base_path_m": 2.3,
+   "base_turn_deg": 198.9,
+   "reach_max": 0.423,
+   "reach_carry": 0.378,
+   "tau_carry": [
+    7.17,
+    5.04
+   ],
+   "tau_all": [
+    7.17,
+    5.04
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 2.6
+  },
+  {
+   "cfg": "none",
+   "seed": 8,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.6,
+   "base_path_m": 2.037,
+   "base_turn_deg": 205.7,
+   "reach_max": 0.439,
+   "reach_carry": 0.382,
+   "tau_carry": [
+    6.28,
+    6.09
+   ],
+   "tau_all": [
+    6.28,
+    6.09
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.2
+  },
+  {
+   "cfg": "none",
+   "seed": 9,
+   "kind": "box",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.36,
+   "base_path_m": 1.986,
+   "base_turn_deg": 190.4,
+   "reach_max": 0.388,
+   "reach_carry": 0.364,
+   "tau_carry": [
+    9.41,
+    3.08
+   ],
+   "tau_all": [
+    9.41,
+    3.08
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.4
+  },
+  {
+   "cfg": "none",
+   "seed": 10,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.8,
+   "base_path_m": 2.035,
+   "base_turn_deg": 189.6,
+   "reach_max": 0.391,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    8.95,
+    3.23
+   ],
+   "tau_all": [
+    8.95,
+    3.23
+   ],
+   "base_yaw_grasp": -89.9,
+   "wall_s": 1.5
+  },
+  {
+   "cfg": "none",
+   "seed": 11,
+   "kind": "box",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.6,
+   "base_path_m": 2.034,
+   "base_turn_deg": 187.7,
+   "reach_max": 0.396,
+   "reach_carry": 0.369,
+   "tau_carry": [
+    8.34,
+    3.57
+   ],
+   "tau_all": [
+    8.34,
+    3.57
+   ],
+   "base_yaw_grasp": -90.1,
+   "wall_s": 1.1
+  },
+  {
+   "cfg": "none",
+   "seed": 12,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.42,
+   "base_path_m": 2.174,
+   "base_turn_deg": 185.3,
+   "reach_max": 0.431,
+   "reach_carry": 0.38,
+   "tau_carry": [
+    6.72,
+    5.57
+   ],
+   "tau_all": [
+    6.72,
+    5.57
+   ],
+   "base_yaw_grasp": -90.1,
+   "wall_s": 4.9
+  },
+  {
+   "cfg": "none",
+   "seed": 13,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.86,
+   "base_path_m": 2.327,
+   "base_turn_deg": 199.1,
+   "reach_max": 0.423,
+   "reach_carry": 0.378,
+   "tau_carry": [
+    7.08,
+    5.02
+   ],
+   "tau_all": [
+    7.08,
+    5.02
+   ],
+   "base_yaw_grasp": -90.1,
+   "wall_s": 1.2
+  },
+  {
+   "cfg": "none",
+   "seed": 14,
+   "kind": "box",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.4,
+   "base_path_m": 2.028,
+   "base_turn_deg": 190.6,
+   "reach_max": 0.388,
+   "reach_carry": 0.364,
+   "tau_carry": [
+    8.82,
+    3.07
+   ],
+   "tau_all": [
+    8.82,
+    3.07
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.3
+  },
+  {
+   "cfg": "none",
+   "seed": 15,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.32,
+   "base_path_m": 1.929,
+   "base_turn_deg": 186.0,
+   "reach_max": 0.412,
+   "reach_carry": 0.375,
+   "tau_carry": [
+    7.65,
+    4.36
+   ],
+   "tau_all": [
+    7.65,
+    4.36
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.2
+  },
+  {
+   "cfg": "none",
+   "seed": 16,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 23.98,
+   "base_path_m": 1.617,
+   "base_turn_deg": 190.2,
+   "reach_max": 0.388,
+   "reach_carry": 0.364,
+   "tau_carry": [
+    9.03,
+    3.08
+   ],
+   "tau_all": [
+    9.03,
+    3.08
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.4
+  },
+  {
+   "cfg": "none",
+   "seed": 17,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.66,
+   "base_path_m": 1.959,
+   "base_turn_deg": 189.9,
+   "reach_max": 0.391,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    9.11,
+    3.23
+   ],
+   "tau_all": [
+    9.11,
+    3.23
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.5
+  },
+  {
+   "cfg": "none",
+   "seed": 18,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.34,
+   "base_path_m": 1.932,
+   "base_turn_deg": 186.4,
+   "reach_max": 0.402,
+   "reach_carry": 0.371,
+   "tau_carry": [
+    8.09,
+    3.87
+   ],
+   "tau_all": [
+    8.09,
+    3.87
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.2
+  },
+  {
+   "cfg": "none",
+   "seed": 19,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.54,
+   "base_path_m": 2.007,
+   "base_turn_deg": 204.7,
+   "reach_max": 0.436,
+   "reach_carry": 0.382,
+   "tau_carry": [
+    6.44,
+    5.81
+   ],
+   "tau_all": [
+    6.44,
+    5.81
+   ],
+   "base_yaw_grasp": -90.1,
+   "wall_s": 4.3
+  },
+  {
+   "cfg": "payload_auto",
+   "seed": 0,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.3,
+   "base_path_m": 1.911,
+   "base_turn_deg": 189.3,
+   "reach_max": 0.391,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    8.8,
+    3.23
+   ],
+   "tau_all": [
+    8.8,
+    3.23
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.4
+  },
+  {
+   "cfg": "payload_auto",
+   "seed": 1,
+   "kind": "box",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 0.4,
+   "base_path_m": 0.0,
+   "base_turn_deg": 0.0,
+   "reach_max": 0.117,
+   "reach_carry": 0.0,
+   "tau_carry": [
+    0.0,
+    0.0
+   ],
+   "tau_all": [
+    0.0,
+    0.04
+   ],
+   "base_yaw_grasp": null,
+   "wall_s": 5.8
+  },
+  {
+   "cfg": "payload_auto",
+   "seed": 2,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.5,
+   "base_path_m": 2.129,
+   "base_turn_deg": 190.5,
+   "reach_max": 0.388,
+   "reach_carry": 0.364,
+   "tau_carry": [
+    9.36,
+    3.08
+   ],
+   "tau_all": [
+    9.36,
+    3.08
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.4
+  },
+  {
+   "cfg": "payload_auto",
+   "seed": 3,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.5,
+   "base_path_m": 2.133,
+   "base_turn_deg": 190.4,
+   "reach_max": 0.388,
+   "reach_carry": 0.364,
+   "tau_carry": [
+    9.6,
+    3.08
+   ],
+   "tau_all": [
+    9.6,
+    3.08
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.3
+  },
+  {
+   "cfg": "payload_auto",
+   "seed": 4,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.84,
+   "base_path_m": 2.149,
+   "base_turn_deg": 188.4,
+   "reach_max": 0.391,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    8.59,
+    3.22
+   ],
+   "tau_all": [
+    8.59,
+    3.22
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.4
+  },
+  {
+   "cfg": "payload_auto",
+   "seed": 5,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.48,
+   "base_path_m": 1.969,
+   "base_turn_deg": 186.3,
+   "reach_max": 0.41,
+   "reach_carry": 0.374,
+   "tau_carry": [
+    7.73,
+    4.32
+   ],
+   "tau_all": [
+    7.73,
+    4.32
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.2
+  },
+  {
+   "cfg": "payload_auto",
+   "seed": 6,
+   "kind": "box",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.78,
+   "base_path_m": 2.471,
+   "base_turn_deg": 237.5,
+   "reach_max": 0.456,
+   "reach_carry": 0.385,
+   "tau_carry": [
+    4.56,
+    8.38
+   ],
+   "tau_all": [
+    4.56,
+    8.38
+   ],
+   "base_yaw_grasp": -105.8,
+   "wall_s": 1.7
+  },
+  {
+   "cfg": "payload_auto",
+   "seed": 7,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.82,
+   "base_path_m": 2.3,
+   "base_turn_deg": 198.9,
+   "reach_max": 0.423,
+   "reach_carry": 0.378,
+   "tau_carry": [
+    7.17,
+    5.04
+   ],
+   "tau_all": [
+    7.17,
+    5.04
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 2.5
+  },
+  {
+   "cfg": "payload_auto",
+   "seed": 8,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.6,
+   "base_path_m": 2.037,
+   "base_turn_deg": 205.7,
+   "reach_max": 0.439,
+   "reach_carry": 0.382,
+   "tau_carry": [
+    6.28,
+    6.09
+   ],
+   "tau_all": [
+    6.28,
+    6.09
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.3
+  },
+  {
+   "cfg": "payload_auto",
+   "seed": 9,
+   "kind": "box",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.36,
+   "base_path_m": 1.986,
+   "base_turn_deg": 190.4,
+   "reach_max": 0.388,
+   "reach_carry": 0.364,
+   "tau_carry": [
+    9.41,
+    3.08
+   ],
+   "tau_all": [
+    9.41,
+    3.08
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.3
+  },
+  {
+   "cfg": "payload_auto",
+   "seed": 10,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.8,
+   "base_path_m": 2.035,
+   "base_turn_deg": 189.6,
+   "reach_max": 0.391,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    8.95,
+    3.23
+   ],
+   "tau_all": [
+    8.95,
+    3.23
+   ],
+   "base_yaw_grasp": -89.9,
+   "wall_s": 1.4
+  },
+  {
+   "cfg": "payload_auto",
+   "seed": 11,
+   "kind": "box",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.6,
+   "base_path_m": 2.034,
+   "base_turn_deg": 187.7,
+   "reach_max": 0.396,
+   "reach_carry": 0.369,
+   "tau_carry": [
+    8.34,
+    3.57
+   ],
+   "tau_all": [
+    8.34,
+    3.57
+   ],
+   "base_yaw_grasp": -90.1,
+   "wall_s": 1.1
+  },
+  {
+   "cfg": "payload_auto",
+   "seed": 12,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.42,
+   "base_path_m": 2.174,
+   "base_turn_deg": 185.3,
+   "reach_max": 0.431,
+   "reach_carry": 0.38,
+   "tau_carry": [
+    6.72,
+    5.57
+   ],
+   "tau_all": [
+    6.72,
+    5.57
+   ],
+   "base_yaw_grasp": -90.1,
+   "wall_s": 4.8
+  },
+  {
+   "cfg": "payload_auto",
+   "seed": 13,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.86,
+   "base_path_m": 2.327,
+   "base_turn_deg": 199.1,
+   "reach_max": 0.423,
+   "reach_carry": 0.378,
+   "tau_carry": [
+    7.08,
+    5.02
+   ],
+   "tau_all": [
+    7.08,
+    5.02
+   ],
+   "base_yaw_grasp": -90.1,
+   "wall_s": 1.3
+  },
+  {
+   "cfg": "payload_auto",
+   "seed": 14,
+   "kind": "box",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.4,
+   "base_path_m": 2.028,
+   "base_turn_deg": 190.6,
+   "reach_max": 0.388,
+   "reach_carry": 0.364,
+   "tau_carry": [
+    8.82,
+    3.07
+   ],
+   "tau_all": [
+    8.82,
+    3.07
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.3
+  },
+  {
+   "cfg": "payload_auto",
+   "seed": 15,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.32,
+   "base_path_m": 1.929,
+   "base_turn_deg": 186.0,
+   "reach_max": 0.412,
+   "reach_carry": 0.375,
+   "tau_carry": [
+    7.65,
+    4.36
+   ],
+   "tau_all": [
+    7.65,
+    4.36
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.2
+  },
+  {
+   "cfg": "payload_auto",
+   "seed": 16,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 23.98,
+   "base_path_m": 1.617,
+   "base_turn_deg": 190.2,
+   "reach_max": 0.388,
+   "reach_carry": 0.364,
+   "tau_carry": [
+    9.03,
+    3.08
+   ],
+   "tau_all": [
+    9.03,
+    3.08
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.3
+  },
+  {
+   "cfg": "payload_auto",
+   "seed": 17,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.66,
+   "base_path_m": 1.959,
+   "base_turn_deg": 189.9,
+   "reach_max": 0.391,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    9.11,
+    3.23
+   ],
+   "tau_all": [
+    9.11,
+    3.23
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.4
+  },
+  {
+   "cfg": "payload_auto",
+   "seed": 18,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.34,
+   "base_path_m": 1.932,
+   "base_turn_deg": 186.4,
+   "reach_max": 0.402,
+   "reach_carry": 0.371,
+   "tau_carry": [
+    8.09,
+    3.87
+   ],
+   "tau_all": [
+    8.09,
+    3.87
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.2
+  },
+  {
+   "cfg": "payload_auto",
+   "seed": 19,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.54,
+   "base_path_m": 2.007,
+   "base_turn_deg": 204.7,
+   "reach_max": 0.436,
+   "reach_carry": 0.382,
+   "tau_carry": [
+    6.44,
+    5.81
+   ],
+   "tau_all": [
+    6.44,
+    5.81
+   ],
+   "base_yaw_grasp": -90.1,
+   "wall_s": 4.4
+  },
+  {
+   "cfg": "reach_auto",
+   "seed": 0,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.3,
+   "base_path_m": 1.911,
+   "base_turn_deg": 189.3,
+   "reach_max": 0.391,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    8.8,
+    3.23
+   ],
+   "tau_all": [
+    8.8,
+    3.23
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.6
+  },
+  {
+   "cfg": "reach_auto",
+   "seed": 1,
+   "kind": "box",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 0.4,
+   "base_path_m": 0.0,
+   "base_turn_deg": 0.0,
+   "reach_max": 0.117,
+   "reach_carry": 0.0,
+   "tau_carry": [
+    0.0,
+    0.0
+   ],
+   "tau_all": [
+    0.0,
+    0.04
+   ],
+   "base_yaw_grasp": null,
+   "wall_s": 6.6
+  },
+  {
+   "cfg": "reach_auto",
+   "seed": 2,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.5,
+   "base_path_m": 2.129,
+   "base_turn_deg": 190.5,
+   "reach_max": 0.388,
+   "reach_carry": 0.364,
+   "tau_carry": [
+    9.36,
+    3.08
+   ],
+   "tau_all": [
+    9.36,
+    3.08
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.6
+  },
+  {
+   "cfg": "reach_auto",
+   "seed": 3,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.5,
+   "base_path_m": 2.133,
+   "base_turn_deg": 190.4,
+   "reach_max": 0.388,
+   "reach_carry": 0.364,
+   "tau_carry": [
+    9.6,
+    3.08
+   ],
+   "tau_all": [
+    9.6,
+    3.08
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.6
+  },
+  {
+   "cfg": "reach_auto",
+   "seed": 4,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.84,
+   "base_path_m": 2.149,
+   "base_turn_deg": 188.4,
+   "reach_max": 0.391,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    8.59,
+    3.22
+   ],
+   "tau_all": [
+    8.59,
+    3.22
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.6
+  },
+  {
+   "cfg": "reach_auto",
+   "seed": 5,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.48,
+   "base_path_m": 1.969,
+   "base_turn_deg": 186.3,
+   "reach_max": 0.41,
+   "reach_carry": 0.374,
+   "tau_carry": [
+    7.73,
+    4.32
+   ],
+   "tau_all": [
+    7.73,
+    4.32
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.3
+  },
+  {
+   "cfg": "reach_auto",
+   "seed": 6,
+   "kind": "box",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.78,
+   "base_path_m": 2.471,
+   "base_turn_deg": 237.5,
+   "reach_max": 0.456,
+   "reach_carry": 0.385,
+   "tau_carry": [
+    4.56,
+    8.38
+   ],
+   "tau_all": [
+    4.56,
+    8.38
+   ],
+   "base_yaw_grasp": -105.8,
+   "wall_s": 1.8
+  },
+  {
+   "cfg": "reach_auto",
+   "seed": 7,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.82,
+   "base_path_m": 2.3,
+   "base_turn_deg": 198.9,
+   "reach_max": 0.423,
+   "reach_carry": 0.378,
+   "tau_carry": [
+    7.17,
+    5.04
+   ],
+   "tau_all": [
+    7.17,
+    5.04
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 2.9
+  },
+  {
+   "cfg": "reach_auto",
+   "seed": 8,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.6,
+   "base_path_m": 2.037,
+   "base_turn_deg": 205.7,
+   "reach_max": 0.439,
+   "reach_carry": 0.382,
+   "tau_carry": [
+    6.28,
+    6.09
+   ],
+   "tau_all": [
+    6.28,
+    6.09
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.4
+  },
+  {
+   "cfg": "reach_auto",
+   "seed": 9,
+   "kind": "box",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.36,
+   "base_path_m": 1.986,
+   "base_turn_deg": 190.4,
+   "reach_max": 0.388,
+   "reach_carry": 0.364,
+   "tau_carry": [
+    9.41,
+    3.08
+   ],
+   "tau_all": [
+    9.41,
+    3.08
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.5
+  },
+  {
+   "cfg": "reach_auto",
+   "seed": 10,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.8,
+   "base_path_m": 2.035,
+   "base_turn_deg": 189.6,
+   "reach_max": 0.391,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    8.95,
+    3.23
+   ],
+   "tau_all": [
+    8.95,
+    3.23
+   ],
+   "base_yaw_grasp": -89.9,
+   "wall_s": 1.6
+  },
+  {
+   "cfg": "reach_auto",
+   "seed": 11,
+   "kind": "box",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.6,
+   "base_path_m": 2.034,
+   "base_turn_deg": 187.7,
+   "reach_max": 0.396,
+   "reach_carry": 0.369,
+   "tau_carry": [
+    8.34,
+    3.57
+   ],
+   "tau_all": [
+    8.34,
+    3.57
+   ],
+   "base_yaw_grasp": -90.1,
+   "wall_s": 1.3
+  },
+  {
+   "cfg": "reach_auto",
+   "seed": 12,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.42,
+   "base_path_m": 2.174,
+   "base_turn_deg": 185.3,
+   "reach_max": 0.431,
+   "reach_carry": 0.38,
+   "tau_carry": [
+    6.72,
+    5.57
+   ],
+   "tau_all": [
+    6.72,
+    5.57
+   ],
+   "base_yaw_grasp": -90.1,
+   "wall_s": 5.5
+  },
+  {
+   "cfg": "reach_auto",
+   "seed": 13,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.86,
+   "base_path_m": 2.327,
+   "base_turn_deg": 199.1,
+   "reach_max": 0.423,
+   "reach_carry": 0.378,
+   "tau_carry": [
+    7.08,
+    5.02
+   ],
+   "tau_all": [
+    7.08,
+    5.02
+   ],
+   "base_yaw_grasp": -90.1,
+   "wall_s": 1.3
+  },
+  {
+   "cfg": "reach_auto",
+   "seed": 14,
+   "kind": "box",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.4,
+   "base_path_m": 2.028,
+   "base_turn_deg": 190.6,
+   "reach_max": 0.388,
+   "reach_carry": 0.364,
+   "tau_carry": [
+    8.82,
+    3.07
+   ],
+   "tau_all": [
+    8.82,
+    3.07
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.5
+  },
+  {
+   "cfg": "reach_auto",
+   "seed": 15,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.32,
+   "base_path_m": 1.929,
+   "base_turn_deg": 186.0,
+   "reach_max": 0.412,
+   "reach_carry": 0.375,
+   "tau_carry": [
+    7.65,
+    4.36
+   ],
+   "tau_all": [
+    7.65,
+    4.36
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.3
+  },
+  {
+   "cfg": "reach_auto",
+   "seed": 16,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 23.98,
+   "base_path_m": 1.617,
+   "base_turn_deg": 190.2,
+   "reach_max": 0.388,
+   "reach_carry": 0.364,
+   "tau_carry": [
+    9.03,
+    3.08
+   ],
+   "tau_all": [
+    9.03,
+    3.08
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.5
+  },
+  {
+   "cfg": "reach_auto",
+   "seed": 17,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.66,
+   "base_path_m": 1.959,
+   "base_turn_deg": 189.9,
+   "reach_max": 0.391,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    9.11,
+    3.23
+   ],
+   "tau_all": [
+    9.11,
+    3.23
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.6
+  },
+  {
+   "cfg": "reach_auto",
+   "seed": 18,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.34,
+   "base_path_m": 1.932,
+   "base_turn_deg": 186.4,
+   "reach_max": 0.402,
+   "reach_carry": 0.371,
+   "tau_carry": [
+    8.09,
+    3.87
+   ],
+   "tau_all": [
+    8.09,
+    3.87
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.4
+  },
+  {
+   "cfg": "reach_auto",
+   "seed": 19,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.54,
+   "base_path_m": 2.007,
+   "base_turn_deg": 204.7,
+   "reach_max": 0.436,
+   "reach_carry": 0.382,
+   "tau_carry": [
+    6.44,
+    5.81
+   ],
+   "tau_all": [
+    6.44,
+    5.81
+   ],
+   "base_yaw_grasp": -90.1,
+   "wall_s": 4.9
+  },
+  {
+   "cfg": "payload_2kg",
+   "seed": 0,
+   "kind": "cyl",
+   "mass": 2.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.18,
+   "base_path_m": 1.91,
+   "base_turn_deg": 189.1,
+   "reach_max": 0.391,
+   "reach_carry": 0.367,
+   "tau_carry": [
+    6.51,
+    2.39
+   ],
+   "tau_all": [
+    6.51,
+    2.39
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.4
+  },
+  {
+   "cfg": "payload_2kg",
+   "seed": 1,
+   "kind": "box",
+   "mass": 2.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 0.4,
+   "base_path_m": 0.0,
+   "base_turn_deg": 0.0,
+   "reach_max": 0.117,
+   "reach_carry": 0.0,
+   "tau_carry": [
+    0.0,
+    0.0
+   ],
+   "tau_all": [
+    0.0,
+    0.04
+   ],
+   "base_yaw_grasp": null,
+   "wall_s": 5.8
+  },
+  {
+   "cfg": "payload_2kg",
+   "seed": 2,
+   "kind": "cyl",
+   "mass": 2.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.52,
+   "base_path_m": 2.129,
+   "base_turn_deg": 190.4,
+   "reach_max": 0.388,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    6.9,
+    2.27
+   ],
+   "tau_all": [
+    6.9,
+    2.27
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.5
+  },
+  {
+   "cfg": "payload_2kg",
+   "seed": 3,
+   "kind": "cyl",
+   "mass": 2.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.52,
+   "base_path_m": 2.133,
+   "base_turn_deg": 190.3,
+   "reach_max": 0.388,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    7.07,
+    2.27
+   ],
+   "tau_all": [
+    7.07,
+    2.27
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.4
+  },
+  {
+   "cfg": "payload_2kg",
+   "seed": 4,
+   "kind": "cyl",
+   "mass": 2.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.76,
+   "base_path_m": 2.148,
+   "base_turn_deg": 188.3,
+   "reach_max": 0.391,
+   "reach_carry": 0.367,
+   "tau_carry": [
+    6.51,
+    2.38
+   ],
+   "tau_all": [
+    6.51,
+    2.38
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.4
+  },
+  {
+   "cfg": "payload_2kg",
+   "seed": 5,
+   "kind": "cyl",
+   "mass": 2.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.44,
+   "base_path_m": 1.967,
+   "base_turn_deg": 186.2,
+   "reach_max": 0.41,
+   "reach_carry": 0.375,
+   "tau_carry": [
+    5.92,
+    3.1
+   ],
+   "tau_all": [
+    5.92,
+    3.1
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.2
+  },
+  {
+   "cfg": "payload_2kg",
+   "seed": 6,
+   "kind": "box",
+   "mass": 2.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.82,
+   "base_path_m": 2.47,
+   "base_turn_deg": 237.5,
+   "reach_max": 0.455,
+   "reach_carry": 0.385,
+   "tau_carry": [
+    3.73,
+    6.07
+   ],
+   "tau_all": [
+    3.73,
+    6.07
+   ],
+   "base_yaw_grasp": -105.8,
+   "wall_s": 1.6
+  },
+  {
+   "cfg": "payload_2kg",
+   "seed": 7,
+   "kind": "cyl",
+   "mass": 2.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.88,
+   "base_path_m": 2.299,
+   "base_turn_deg": 198.8,
+   "reach_max": 0.423,
+   "reach_carry": 0.379,
+   "tau_carry": [
+    5.55,
+    3.62
+   ],
+   "tau_all": [
+    5.55,
+    3.62
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 2.4
+  },
+  {
+   "cfg": "payload_2kg",
+   "seed": 8,
+   "kind": "cyl",
+   "mass": 2.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.66,
+   "base_path_m": 2.035,
+   "base_turn_deg": 205.6,
+   "reach_max": 0.438,
+   "reach_carry": 0.383,
+   "tau_carry": [
+    4.95,
+    4.44
+   ],
+   "tau_all": [
+    4.95,
+    4.44
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.2
+  },
+  {
+   "cfg": "payload_2kg",
+   "seed": 9,
+   "kind": "box",
+   "mass": 2.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.38,
+   "base_path_m": 1.985,
+   "base_turn_deg": 190.2,
+   "reach_max": 0.387,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    6.93,
+    2.27
+   ],
+   "tau_all": [
+    6.93,
+    2.27
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.3
+  },
+  {
+   "cfg": "payload_2kg",
+   "seed": 10,
+   "kind": "cyl",
+   "mass": 2.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.74,
+   "base_path_m": 2.034,
+   "base_turn_deg": 189.5,
+   "reach_max": 0.391,
+   "reach_carry": 0.367,
+   "tau_carry": [
+    6.51,
+    2.39
+   ],
+   "tau_all": [
+    6.51,
+    2.39
+   ],
+   "base_yaw_grasp": -89.9,
+   "wall_s": 1.4
+  },
+  {
+   "cfg": "payload_2kg",
+   "seed": 11,
+   "kind": "box",
+   "mass": 2.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.52,
+   "base_path_m": 2.031,
+   "base_turn_deg": 187.6,
+   "reach_max": 0.396,
+   "reach_carry": 0.37,
+   "tau_carry": [
+    6.34,
+    2.58
+   ],
+   "tau_all": [
+    6.34,
+    2.58
+   ],
+   "base_yaw_grasp": -90.1,
+   "wall_s": 1.1
+  },
+  {
+   "cfg": "payload_2kg",
+   "seed": 12,
+   "kind": "cyl",
+   "mass": 2.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.4,
+   "base_path_m": 2.173,
+   "base_turn_deg": 185.2,
+   "reach_max": 0.43,
+   "reach_carry": 0.381,
+   "tau_carry": [
+    5.24,
+    4.04
+   ],
+   "tau_all": [
+    5.24,
+    4.04
+   ],
+   "base_yaw_grasp": -90.1,
+   "wall_s": 4.8
+  },
+  {
+   "cfg": "payload_2kg",
+   "seed": 13,
+   "kind": "cyl",
+   "mass": 2.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.94,
+   "base_path_m": 2.327,
+   "base_turn_deg": 199.1,
+   "reach_max": 0.423,
+   "reach_carry": 0.379,
+   "tau_carry": [
+    5.49,
+    3.61
+   ],
+   "tau_all": [
+    5.49,
+    3.61
+   ],
+   "base_yaw_grasp": -90.1,
+   "wall_s": 1.2
+  },
+  {
+   "cfg": "payload_2kg",
+   "seed": 14,
+   "kind": "box",
+   "mass": 2.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.42,
+   "base_path_m": 2.027,
+   "base_turn_deg": 190.5,
+   "reach_max": 0.387,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    6.64,
+    2.27
+   ],
+   "tau_all": [
+    6.64,
+    2.27
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.3
+  },
+  {
+   "cfg": "payload_2kg",
+   "seed": 15,
+   "kind": "cyl",
+   "mass": 2.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.28,
+   "base_path_m": 1.927,
+   "base_turn_deg": 185.9,
+   "reach_max": 0.411,
+   "reach_carry": 0.376,
+   "tau_carry": [
+    5.87,
+    3.15
+   ],
+   "tau_all": [
+    5.87,
+    3.15
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.1
+  },
+  {
+   "cfg": "payload_2kg",
+   "seed": 16,
+   "kind": "cyl",
+   "mass": 2.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.0,
+   "base_path_m": 1.617,
+   "base_turn_deg": 190.1,
+   "reach_max": 0.388,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    6.66,
+    2.27
+   ],
+   "tau_all": [
+    6.66,
+    2.27
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.4
+  },
+  {
+   "cfg": "payload_2kg",
+   "seed": 17,
+   "kind": "cyl",
+   "mass": 2.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.58,
+   "base_path_m": 1.958,
+   "base_turn_deg": 189.7,
+   "reach_max": 0.391,
+   "reach_carry": 0.367,
+   "tau_carry": [
+    6.51,
+    2.39
+   ],
+   "tau_all": [
+    6.51,
+    2.39
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.4
+  },
+  {
+   "cfg": "payload_2kg",
+   "seed": 18,
+   "kind": "cyl",
+   "mass": 2.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.28,
+   "base_path_m": 1.93,
+   "base_turn_deg": 186.3,
+   "reach_max": 0.401,
+   "reach_carry": 0.372,
+   "tau_carry": [
+    6.17,
+    2.77
+   ],
+   "tau_all": [
+    6.17,
+    2.77
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.2
+  },
+  {
+   "cfg": "payload_2kg",
+   "seed": 19,
+   "kind": "cyl",
+   "mass": 2.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.6,
+   "base_path_m": 2.006,
+   "base_turn_deg": 204.7,
+   "reach_max": 0.435,
+   "reach_carry": 0.382,
+   "tau_carry": [
+    5.06,
+    4.22
+   ],
+   "tau_all": [
+    5.06,
+    4.22
+   ],
+   "base_yaw_grasp": -90.1,
+   "wall_s": 4.2
+  },
+  {
+   "cfg": "reach_0.37",
+   "seed": 0,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.3,
+   "base_path_m": 1.911,
+   "base_turn_deg": 189.3,
+   "reach_max": 0.391,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    8.8,
+    3.23
+   ],
+   "tau_all": [
+    8.8,
+    3.23
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.5
+  },
+  {
+   "cfg": "reach_0.37",
+   "seed": 1,
+   "kind": "box",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 0.4,
+   "base_path_m": 0.0,
+   "base_turn_deg": 0.0,
+   "reach_max": 0.117,
+   "reach_carry": 0.0,
+   "tau_carry": [
+    0.0,
+    0.0
+   ],
+   "tau_all": [
+    0.0,
+    0.04
+   ],
+   "base_yaw_grasp": null,
+   "wall_s": 6.0
+  },
+  {
+   "cfg": "reach_0.37",
+   "seed": 2,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.5,
+   "base_path_m": 2.129,
+   "base_turn_deg": 190.5,
+   "reach_max": 0.388,
+   "reach_carry": 0.364,
+   "tau_carry": [
+    9.36,
+    3.08
+   ],
+   "tau_all": [
+    9.36,
+    3.08
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.6
+  },
+  {
+   "cfg": "reach_0.37",
+   "seed": 3,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.5,
+   "base_path_m": 2.133,
+   "base_turn_deg": 190.4,
+   "reach_max": 0.388,
+   "reach_carry": 0.364,
+   "tau_carry": [
+    9.6,
+    3.08
+   ],
+   "tau_all": [
+    9.6,
+    3.08
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.6
+  },
+  {
+   "cfg": "reach_0.37",
+   "seed": 4,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.84,
+   "base_path_m": 2.149,
+   "base_turn_deg": 188.4,
+   "reach_max": 0.391,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    8.59,
+    3.22
+   ],
+   "tau_all": [
+    8.59,
+    3.22
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.5
+  },
+  {
+   "cfg": "reach_0.37",
+   "seed": 5,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.32,
+   "base_path_m": 1.935,
+   "base_turn_deg": 191.6,
+   "reach_max": 0.403,
+   "reach_carry": 0.367,
+   "tau_carry": [
+    7.49,
+    3.92
+   ],
+   "tau_all": [
+    7.49,
+    3.92
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.6
+  },
+  {
+   "cfg": "reach_0.37",
+   "seed": 6,
+   "kind": "box",
+   "mass": 3.0,
+   "success": false,
+   "fail": "drop",
+   "t_total": 13.04,
+   "base_path_m": 0.78,
+   "base_turn_deg": 94.6,
+   "reach_max": 0.371,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    7.74,
+    4.06
+   ],
+   "tau_all": [
+    13.64,
+    9.28
+   ],
+   "base_yaw_grasp": -85.4,
+   "wall_s": 2.7
+  },
+  {
+   "cfg": "reach_0.37",
+   "seed": 7,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.04,
+   "base_path_m": 2.053,
+   "base_turn_deg": 191.1,
+   "reach_max": 0.416,
+   "reach_carry": 0.367,
+   "tau_carry": [
+    6.72,
+    4.57
+   ],
+   "tau_all": [
+    6.72,
+    4.57
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 3.3
+  },
+  {
+   "cfg": "reach_0.37",
+   "seed": 8,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 0.4,
+   "base_path_m": 0.0,
+   "base_turn_deg": 0.0,
+   "reach_max": 0.117,
+   "reach_carry": 0.0,
+   "tau_carry": [
+    0.0,
+    0.0
+   ],
+   "tau_all": [
+    0.0,
+    0.04
+   ],
+   "base_yaw_grasp": null,
+   "wall_s": 7.8
+  },
+  {
+   "cfg": "reach_0.37",
+   "seed": 9,
+   "kind": "box",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.36,
+   "base_path_m": 1.986,
+   "base_turn_deg": 190.4,
+   "reach_max": 0.388,
+   "reach_carry": 0.364,
+   "tau_carry": [
+    9.41,
+    3.08
+   ],
+   "tau_all": [
+    9.41,
+    3.08
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.4
+  },
+  {
+   "cfg": "reach_0.37",
+   "seed": 10,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.8,
+   "base_path_m": 2.035,
+   "base_turn_deg": 189.6,
+   "reach_max": 0.391,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    8.95,
+    3.23
+   ],
+   "tau_all": [
+    8.95,
+    3.23
+   ],
+   "base_yaw_grasp": -89.9,
+   "wall_s": 1.6
+  },
+  {
+   "cfg": "reach_0.37",
+   "seed": 11,
+   "kind": "box",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.64,
+   "base_path_m": 2.029,
+   "base_turn_deg": 189.7,
+   "reach_max": 0.394,
+   "reach_carry": 0.368,
+   "tau_carry": [
+    8.44,
+    3.47
+   ],
+   "tau_all": [
+    8.44,
+    3.47
+   ],
+   "base_yaw_grasp": -90.1,
+   "wall_s": 1.2
+  },
+  {
+   "cfg": "reach_0.37",
+   "seed": 12,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.24,
+   "base_path_m": 2.087,
+   "base_turn_deg": 197.2,
+   "reach_max": 0.416,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    6.93,
+    4.66
+   ],
+   "tau_all": [
+    6.93,
+    4.66
+   ],
+   "base_yaw_grasp": -90.1,
+   "wall_s": 6.4
+  },
+  {
+   "cfg": "reach_0.37",
+   "seed": 13,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 23.98,
+   "base_path_m": 2.074,
+   "base_turn_deg": 178.5,
+   "reach_max": 0.404,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    7.69,
+    4.15
+   ],
+   "tau_all": [
+    7.69,
+    4.15
+   ],
+   "base_yaw_grasp": -90.1,
+   "wall_s": 1.6
+  },
+  {
+   "cfg": "reach_0.37",
+   "seed": 14,
+   "kind": "box",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.4,
+   "base_path_m": 2.028,
+   "base_turn_deg": 190.6,
+   "reach_max": 0.388,
+   "reach_carry": 0.364,
+   "tau_carry": [
+    8.82,
+    3.07
+   ],
+   "tau_all": [
+    8.82,
+    3.07
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.5
+  },
+  {
+   "cfg": "reach_0.37",
+   "seed": 15,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.22,
+   "base_path_m": 1.884,
+   "base_turn_deg": 192.9,
+   "reach_max": 0.403,
+   "reach_carry": 0.367,
+   "tau_carry": [
+    7.52,
+    3.98
+   ],
+   "tau_all": [
+    7.52,
+    3.98
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.6
+  },
+  {
+   "cfg": "reach_0.37",
+   "seed": 16,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 23.98,
+   "base_path_m": 1.617,
+   "base_turn_deg": 190.2,
+   "reach_max": 0.388,
+   "reach_carry": 0.364,
+   "tau_carry": [
+    9.03,
+    3.08
+   ],
+   "tau_all": [
+    9.03,
+    3.08
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.6
+  },
+  {
+   "cfg": "reach_0.37",
+   "seed": 17,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.66,
+   "base_path_m": 1.959,
+   "base_turn_deg": 189.9,
+   "reach_max": 0.391,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    9.11,
+    3.23
+   ],
+   "tau_all": [
+    9.11,
+    3.23
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.6
+  },
+  {
+   "cfg": "reach_0.37",
+   "seed": 18,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 24.48,
+   "base_path_m": 1.905,
+   "base_turn_deg": 193.4,
+   "reach_max": 0.394,
+   "reach_carry": 0.368,
+   "tau_carry": [
+    8.46,
+    3.52
+   ],
+   "tau_all": [
+    8.46,
+    3.52
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 1.4
+  },
+  {
+   "cfg": "reach_0.37",
+   "seed": 19,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": true,
+   "fail": null,
+   "t_total": 23.82,
+   "base_path_m": 1.97,
+   "base_turn_deg": 181.3,
+   "reach_max": 0.416,
+   "reach_carry": 0.366,
+   "tau_carry": [
+    6.88,
+    4.72
+   ],
+   "tau_all": [
+    6.88,
+    4.72
+   ],
+   "base_yaw_grasp": -90.1,
+   "wall_s": 5.6
+  },
+  {
+   "cfg": "reach_0.35",
+   "seed": 0,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 12.3,
+   "base_path_m": 0.666,
+   "base_turn_deg": 95.3,
+   "reach_max": 0.351,
+   "reach_carry": 0.344,
+   "tau_carry": [
+    8.86,
+    1.95
+   ],
+   "tau_all": [
+    8.86,
+    1.95
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 10.1
+  },
+  {
+   "cfg": "reach_0.35",
+   "seed": 1,
+   "kind": "box",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 0.4,
+   "base_path_m": 0.0,
+   "base_turn_deg": 0.0,
+   "reach_max": 0.117,
+   "reach_carry": 0.0,
+   "tau_carry": [
+    0.0,
+    0.0
+   ],
+   "tau_all": [
+    0.0,
+    0.04
+   ],
+   "base_yaw_grasp": null,
+   "wall_s": 2.4
+  },
+  {
+   "cfg": "reach_0.35",
+   "seed": 2,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 12.24,
+   "base_path_m": 0.938,
+   "base_turn_deg": 91.5,
+   "reach_max": 0.351,
+   "reach_carry": 0.344,
+   "tau_carry": [
+    8.86,
+    1.95
+   ],
+   "tau_all": [
+    8.86,
+    1.95
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 9.9
+  },
+  {
+   "cfg": "reach_0.35",
+   "seed": 3,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 12.28,
+   "base_path_m": 0.951,
+   "base_turn_deg": 94.4,
+   "reach_max": 0.35,
+   "reach_carry": 0.343,
+   "tau_carry": [
+    8.89,
+    1.89
+   ],
+   "tau_all": [
+    8.89,
+    1.89
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 10.1
+  },
+  {
+   "cfg": "reach_0.35",
+   "seed": 4,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 0.4,
+   "base_path_m": 0.0,
+   "base_turn_deg": 0.0,
+   "reach_max": 0.117,
+   "reach_carry": 0.0,
+   "tau_carry": [
+    0.0,
+    0.0
+   ],
+   "tau_all": [
+    0.0,
+    0.04
+   ],
+   "base_yaw_grasp": null,
+   "wall_s": 9.5
+  },
+  {
+   "cfg": "reach_0.35",
+   "seed": 5,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 0.4,
+   "base_path_m": 0.0,
+   "base_turn_deg": 0.0,
+   "reach_max": 0.117,
+   "reach_carry": 0.0,
+   "tau_carry": [
+    0.0,
+    0.0
+   ],
+   "tau_all": [
+    0.0,
+    0.04
+   ],
+   "base_yaw_grasp": null,
+   "wall_s": 1.8
+  },
+  {
+   "cfg": "reach_0.35",
+   "seed": 6,
+   "kind": "box",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 0.4,
+   "base_path_m": 0.0,
+   "base_turn_deg": 0.0,
+   "reach_max": 0.117,
+   "reach_carry": 0.0,
+   "tau_carry": [
+    0.0,
+    0.0
+   ],
+   "tau_all": [
+    0.0,
+    0.04
+   ],
+   "base_yaw_grasp": null,
+   "wall_s": 5.7
+  },
+  {
+   "cfg": "reach_0.35",
+   "seed": 7,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 0.4,
+   "base_path_m": 0.0,
+   "base_turn_deg": 0.0,
+   "reach_max": 0.117,
+   "reach_carry": 0.0,
+   "tau_carry": [
+    0.0,
+    0.0
+   ],
+   "tau_all": [
+    0.0,
+    0.04
+   ],
+   "base_yaw_grasp": null,
+   "wall_s": 1.8
+  },
+  {
+   "cfg": "reach_0.35",
+   "seed": 8,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 0.4,
+   "base_path_m": 0.0,
+   "base_turn_deg": 0.0,
+   "reach_max": 0.117,
+   "reach_carry": 0.0,
+   "tau_carry": [
+    0.0,
+    0.0
+   ],
+   "tau_all": [
+    0.0,
+    0.04
+   ],
+   "base_yaw_grasp": null,
+   "wall_s": 1.9
+  },
+  {
+   "cfg": "reach_0.35",
+   "seed": 9,
+   "kind": "box",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 12.24,
+   "base_path_m": 0.87,
+   "base_turn_deg": 92.2,
+   "reach_max": 0.351,
+   "reach_carry": 0.344,
+   "tau_carry": [
+    8.86,
+    1.95
+   ],
+   "tau_all": [
+    8.86,
+    1.95
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 10.1
+  },
+  {
+   "cfg": "reach_0.35",
+   "seed": 10,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 12.28,
+   "base_path_m": 0.52,
+   "base_turn_deg": 94.4,
+   "reach_max": 0.349,
+   "reach_carry": 0.342,
+   "tau_carry": [
+    8.95,
+    1.8
+   ],
+   "tau_all": [
+    8.95,
+    1.8
+   ],
+   "base_yaw_grasp": -89.9,
+   "wall_s": 10.1
+  },
+  {
+   "cfg": "reach_0.35",
+   "seed": 11,
+   "kind": "box",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 0.4,
+   "base_path_m": 0.0,
+   "base_turn_deg": 0.0,
+   "reach_max": 0.117,
+   "reach_carry": 0.0,
+   "tau_carry": [
+    0.0,
+    0.0
+   ],
+   "tau_all": [
+    0.0,
+    0.04
+   ],
+   "base_yaw_grasp": null,
+   "wall_s": 11.8
+  },
+  {
+   "cfg": "reach_0.35",
+   "seed": 12,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 0.4,
+   "base_path_m": 0.0,
+   "base_turn_deg": 0.0,
+   "reach_max": 0.117,
+   "reach_carry": 0.0,
+   "tau_carry": [
+    0.0,
+    0.0
+   ],
+   "tau_all": [
+    0.0,
+    0.04
+   ],
+   "base_yaw_grasp": null,
+   "wall_s": 1.7
+  },
+  {
+   "cfg": "reach_0.35",
+   "seed": 13,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 0.4,
+   "base_path_m": 0.0,
+   "base_turn_deg": 0.0,
+   "reach_max": 0.117,
+   "reach_carry": 0.0,
+   "tau_carry": [
+    0.0,
+    0.0
+   ],
+   "tau_all": [
+    0.0,
+    0.04
+   ],
+   "base_yaw_grasp": null,
+   "wall_s": 1.8
+  },
+  {
+   "cfg": "reach_0.35",
+   "seed": 14,
+   "kind": "box",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 12.0,
+   "base_path_m": 0.86,
+   "base_turn_deg": 87.6,
+   "reach_max": 0.351,
+   "reach_carry": 0.344,
+   "tau_carry": [
+    8.52,
+    2.14
+   ],
+   "tau_all": [
+    8.52,
+    2.14
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 10.4
+  },
+  {
+   "cfg": "reach_0.35",
+   "seed": 15,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 0.4,
+   "base_path_m": 0.0,
+   "base_turn_deg": 0.0,
+   "reach_max": 0.117,
+   "reach_carry": 0.0,
+   "tau_carry": [
+    0.0,
+    0.0
+   ],
+   "tau_all": [
+    0.0,
+    0.04
+   ],
+   "base_yaw_grasp": null,
+   "wall_s": 1.9
+  },
+  {
+   "cfg": "reach_0.35",
+   "seed": 16,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 11.96,
+   "base_path_m": 0.672,
+   "base_turn_deg": 93.7,
+   "reach_max": 0.35,
+   "reach_carry": 0.344,
+   "tau_carry": [
+    8.15,
+    2.41
+   ],
+   "tau_all": [
+    8.15,
+    2.41
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 10.6
+  },
+  {
+   "cfg": "reach_0.35",
+   "seed": 17,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 12.28,
+   "base_path_m": 0.541,
+   "base_turn_deg": 94.6,
+   "reach_max": 0.347,
+   "reach_carry": 0.34,
+   "tau_carry": [
+    9.11,
+    1.72
+   ],
+   "tau_all": [
+    9.11,
+    1.72
+   ],
+   "base_yaw_grasp": -90.0,
+   "wall_s": 10.2
+  },
+  {
+   "cfg": "reach_0.35",
+   "seed": 18,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 0.4,
+   "base_path_m": 0.0,
+   "base_turn_deg": 0.0,
+   "reach_max": 0.117,
+   "reach_carry": 0.0,
+   "tau_carry": [
+    0.0,
+    0.0
+   ],
+   "tau_all": [
+    0.0,
+    0.04
+   ],
+   "base_yaw_grasp": null,
+   "wall_s": 4.0
+  },
+  {
+   "cfg": "reach_0.35",
+   "seed": 19,
+   "kind": "cyl",
+   "mass": 3.0,
+   "success": false,
+   "fail": "ik_fail",
+   "t_total": 0.4,
+   "base_path_m": 0.0,
+   "base_turn_deg": 0.0,
+   "reach_max": 0.117,
+   "reach_carry": 0.0,
+   "tau_carry": [
+    0.0,
+    0.0
+   ],
+   "tau_all": [
+    0.0,
+    0.04
+   ],
+   "base_yaw_grasp": null,
+   "wall_s": 1.8
+  }
+ ],
+ "mass": 3.0,
+ "seeds": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19
+ ],
+ "r_auto": null,
+ "r_full": 0.729,
+ "m_auto": 11.04,
+ "run_s": 172.0
+}

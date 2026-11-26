@@ -12,7 +12,16 @@ import os,sys
 import numpy as np,mujoco
 HERE=os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0,HERE)
 from pick_env import (build,reset,sample_task,contacts,Ids,TABLE,GOAL,GRIPPER,OBJ,obj_half_h)
-from wb_ik import (wb_jacobian,wb_weights,wdls,null_proj,limit_avoid,qadr,_clip_base,solve_wb_ik,ARM)
+from wb_ik import (wb_jacobian,wb_weights,wdls,null_proj,limit_avoid,qadr,_clip_base,solve_wb_ik,ARM,reach_of,reach_project)
+
+# ---- week10 제한 플래그 (config/params.yaml limits 와 같은 뜻, 기본 꺼짐 = 9주차와 비트 단위 같은 동작) ----
+#   LIMITS["reach"] = r_max [m]: 어깨 pitch 관절점 → 파지 중심 수평 거리 상한(도달 제한). 계획(라이브러리 시작값 · 자세 IK)과
+#                     직선 구간 resolved-rate 모두 r ≤ r_max 로 투영 — 베이스를 목표 쪽으로 먼저 붙여서 지킴(베이스 사전 배치)
+#   LIMITS["payload"] = m_max [kg]: 짐 제한. run_episode 에서 물체 질량 = min(질량, m_max) (사양 밖 짐은 들지 않는다는 뜻)
+LIMITS=dict(reach=None,payload=None)
+def set_limits(reach=None,payload=None):
+    LIMITS["reach"]=None if reach is None else float(reach); LIMITS["payload"]=None if payload is None else float(payload)
+    global _LIB_R; _LIB_R=None
 
 DT_SIM=0.0005; NSUB=40; DT=DT_SIM*NSUB         # 제어 50 Hz, 시뮬 2 kHz (함태훈 week08 권장 dt 0.5 ms)
 GRIP_RATE=0.06                                   # 그리퍼 명령 변화율 [m/s] — 한 번에 닫으면 손가락 1.5 m/s로 물체를 쳐서 관통 · 발산(8주차 발견)
@@ -53,16 +62,21 @@ class Ref:
         qd=wdls(J,s.W,lam)@xd+null_proj(J,s.W)@q0
         qd[:2]=np.clip(qd[:2],-0.6,0.6); qd[2]=np.clip(qd[2],-1.0,1.0); qd[3:]=np.clip(qd[3:],-2.0,2.0)
         xn=x+qd*DT; xn[3:]=np.clip(xn[3:],s.lo,s.hi); xn[:3]=_clip_base(xn[:3],BASE_BOX,None,TABLE_X)
+        if LIMITS["reach"] is not None: xn=reach_project(s.m,s.d,"left",xn,LIMITS["reach"],True,box=BASE_BOX,table_x=TABLE_X)
         return xn,(xn-x)/DT        # 클리핑 후 실제 기준 속도(베이스 앞먹임이 한계 밖으로 밀지 않게)
+
+    def reach(s,x):
+        s.fk(x); return reach_of(s.m,s.d,"left")
+    def reach_ok(s,x): return LIMITS["reach"] is None or s.reach(x)<=LIMITS["reach"]+1e-3
 
     def pose_ik(s,x0,p_des,Rd,iters=1500,tol_p=1e-3,tol_r=np.deg2rad(1.0)):
         """전신 자세 IK(위치 3 + 자세 3 = 6조건, 7자유도) — rr_step을 수렴까지 반복(가상 시간)"""
         x=x0.copy()
         for k in range(iters):
             p,R=s.fk(x); ep=np.linalg.norm(p_des-p); er=np.linalg.norm(rot_err(R,Rd))
-            if ep<tol_p and er<tol_r: return x,True,ep,er
+            if ep<tol_p and er<tol_r and s.reach_ok(x): return x,True,ep,er
             x,_=s.rr_step(x,p_des,np.zeros(3),Rd,kp=1/DT*0.5,kr=1/DT*0.5,lam=0.03)
-        p,R=s.fk(x); return x,False,float(np.linalg.norm(p_des-p)),float(np.linalg.norm(rot_err(R,Rd)))
+        p,R=s.fk(x); return x,False,float(np.linalg.norm(p_des-p)),float(np.linalg.norm(rot_err(R,Rd)))   # 위치 · 자세는 맞아도 r > r_max(베이스가 테이블에 막힘)면 실패
 
     def table_hits(s,x,I,clear=CLEAR,pad_clear=CLEAR_PAD):
         """기준 자세 x에서 로봇 geom ↔ 테이블 최소 거리 < 여유(clear)인 geom 목록 (계획 단계 점검, mj_geomDistance).
@@ -95,10 +109,22 @@ def down_library(m):
         if np.linalg.norm(e)<1e-3 and zc@zt>0: Q.append(q.copy()); P.append(dd.site_xpos[sid].copy())
     os.makedirs(os.path.dirname(f),exist_ok=True); np.savez_compressed(f,q=np.array(Q),p=np.array(P)); _LIB=(np.array(Q),np.array(P)); return _LIB
 
+_LIB_R=None
+def library_reach(m):
+    """라이브러리 팔 자세별 r(어깨 → 파지 중심 수평 거리) — 베이스 위치와 무관(팔 자세만의 함수)"""
+    global _LIB_R
+    if _LIB_R is None:
+        Q,_=down_library(m); dd=mujoco.MjData(m); QA=qadr(m,"left",True); r=np.zeros(len(Q))
+        for i,q in enumerate(Q): dd.qpos[:]=0; dd.qpos[QA[3:]]=q; mujoco.mj_kinematics(m,dd); r[i]=reach_of(m,dd,"left")
+        _LIB_R=r
+    return _LIB_R
+
 def library_seeds(m,target,n=3,q_ref=None):
     """옆면(yaw −90°) 붙이기 기준 시작값: 베이스 x = 한계, 필요한 옆 도달 y_l = tx − x_b, 높이 맞는 자세 중 y_l이 필요값 이상에서 가장 작은 것"""
     Q,P=down_library(m); psi=-np.pi/2; xb=TABLE_X-0.236-0.005
-    need=target[0]-xb; s=np.where((np.abs(P[:,2]-target[2])<0.015)&(P[:,1]>=need+0.003))[0]
+    need=target[0]-xb; ok=(np.abs(P[:,2]-target[2])<0.015)&(P[:,1]>=need+0.003)
+    if LIMITS["reach"] is not None: ok&=library_reach(m)<=LIMITS["reach"]-0.005   # 베이스 사전 배치: r ≤ r_max 인 팔 자세만 → 베이스가 그만큼 붙음
+    s=np.where(ok)[0]
     s=s[np.argsort(P[s,1])][:n] if q_ref is None else s[np.argsort(np.linalg.norm(Q[s]-q_ref,axis=1))][:n]   # 놓기: 지금 팔 자세와 가까운 가지
     return [np.concatenate([[xb,target[1]+P[i,0],psi],Q[i]]) for i in s]
 
@@ -114,7 +140,7 @@ def plan_grasp_pose(ref,m,x_now,pos_g,obj_yaw,kind,I,seed=0,q_ref=None):
         if kind_s=="lib": x=b_seed; st="library"; b_seed=x[2]
         else:
             base0=np.array([min(x_now[0],TABLE_X-0.25),pos_g[1],b_seed])
-            r=solve_wb_ik(m,dd,"left",eg,[0,0,-1],base_init=base0,w_xy=1.0,w_yaw=1.0,table_x=TABLE_X,base_box=BASE_BOX,restarts=6,seed=seed)
+            r=solve_wb_ik(m,dd,"left",eg,[0,0,-1],base_init=base0,w_xy=1.0,w_yaw=1.0,table_x=TABLE_X,base_box=BASE_BOX,restarts=6,seed=seed,reach_limit=LIMITS["reach"])
             x=np.concatenate([r.base,r.q]); st=r.status
         _,R=ref.fk(x); xc=R[:,0]
         if kind=="box":   # 상자 면 법선 4방향(대칭) — IK 자연 방향에 가까운 순서로 시도
@@ -349,9 +375,13 @@ def apply_action(m,d,act,A=None):
     for k,a in enumerate(ARM): d.ctrl[A[f"left_{a}"]]=act[3+k]; d.ctrl[A[f"right_{a}"]]=0.0
     d.ctrl[A["left_finger_l"]]=d.ctrl[A["left_finger_r"]]=act[7]
 
-def run_episode(m,seed,max_t=40.0,on_step=None):
-    """한 에피소드: seed → reset → 상태기계 → result. on_step(d, act, expert)로 기록 · 렌더"""
-    d=mujoco.MjData(m); task=sample_task(seed); I=reset(m,d,task); ex=Expert(m,d,task,I)
+def run_episode(m,seed,max_t=40.0,on_step=None,mass=None):
+    """한 에피소드: seed → reset → 상태기계 → result. on_step(d, act, expert)로 기록 · 렌더
+       mass = 물체 질량 고정(week10 방안 비교, None = seed 그대로). LIMITS["payload"] 가 있으면 min(질량, m_max)"""
+    d=mujoco.MjData(m); task=sample_task(seed)
+    if mass is not None: task["mass"]=float(mass)
+    if LIMITS["payload"] is not None: task["mass"]=min(task["mass"],LIMITS["payload"])
+    I=reset(m,d,task); ex=Expert(m,d,task,I)
     n=0
     while not ex.done and n*DT<max_t:
         act=ex.step(d)

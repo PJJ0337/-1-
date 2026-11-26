@@ -86,3 +86,17 @@ res = solve_ik(m, d, side, target_pos, approach_quat([0, 0, -1]), include_base=T
 - 영공간 차원(위치만): 팔 4 − 3 = **1**, 전신 7 − 3 = **4**. 위치 + 그리퍼 축(5조건): 팔 −1(부족 → orientation_limit) · 전신 2
 - 결과: [../results/wb_ik_compare.md](../results/wb_ik_compare.md)(13목표 · 무작위 도달률 · W 비교 · 영공간), [../results/workspace_wb.md](../results/workspace_wb.md)(작업공간 확장)
 - 한계: 끝점 위치 · 축만 — 팔 링크 ↔ 테이블 · 몸통 충돌은 IK에서 안 봄(결과 `ncon`으로 자기 충돌만 확인). 8주차 테이블 scene에서 충돌 확인 추가 예정
+
+## v2.1 (week10, 11/26) — 도달 제한 `reach_limit` (토크 「자세 제한」 방안, 기본 꺼짐)
+
+```python
+from wb_ik import solve_wb_ik, reach_of, load_reach_limit
+r_max = load_reach_limit()                  # config/params.yaml limits.reach_limit — 꺼짐이면 None, auto = config/reach_limit_w10.json(함태훈 표)
+res = solve_wb_ik(m, d, "left", p, [0, 0, -1], table_x=0.41, reach_limit=r_max)   # None = v2 와 비트 단위 같은 결과
+res.reach                                   # 해의 r [m] = 어깨 pitch 관절점 → 파지 중심(ee − 45 mm) 수평 거리 (함태훈 rho 와 같은 정의)
+res.status == "reach_limit"                 # 위치 · 축은 맞지만 r > r_max + 1 mm (베이스가 테이블 · 주행 범위에 막힘)
+```
+
+- 방식 = **베이스 사전 배치**: ① 시작 베이스를 어깨 → 목표 수평 거리 ≤ 0.8 r_max 가 되게 목표 쪽으로 옮김 ② 반복마다 r > r_max 면 베이스 xy 를 파지 중심 쪽으로 (r − r_max) 평행이동(`reach_project`) ③ 수렴 판정에 r ≤ r_max 포함
+- 집기 정책(`scenarios/expert.py`)은 `set_limits(reach=…, payload=…)` — 라이브러리 시작값을 r ≤ r_max 자세로 거르고, 직선 구간 resolved-rate 에도 같은 투영
+- 결과: [../../../../scenarios/results/limits_w10.md](../../../../scenarios/results/limits_w10.md)(세 방안 비교), 회귀 테스트 `tests/test_ik.py` ⑤ ⑥

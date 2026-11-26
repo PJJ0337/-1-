@@ -38,3 +38,7 @@ scenarios/results/down_poses.npz
 # week09 DART 노이즈 시연 원본 · 데이터 폴더 링크
 datasets/raw
 datasets/raw_dart
+
+# week10 재빌드 사본 · pytest 캐시 (tools/rebuild_and_test.py)
+build/
+.pytest_cache/

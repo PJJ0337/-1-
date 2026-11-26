@@ -61,6 +61,7 @@ B1 서브팀은 **모델링 · 시뮬레이션**(URDF/MJCF/USD 모델 구축, Is
 | 7주 | – | `week07` | [log](members/park-jongjin/week07/log.md) | – | 전신 IK `wb_ik` · 작업공간 확장 · 토크 예산 B1 통합 |
 | 8주 | – | `week08` | [log](members/park-jongjin/week08/log.md) | – | [접촉 집기 시나리오 · 시연 데이터](scenarios/README.md) (성공 19/20, 수집 100/100 · 재생 일치 · 데이터 명세 v1.0) |
 | 9주 | – | `week09` | [log](members/park-jongjin/week09/log.md) | – | [BC 학습 · 평가](policies/README.md)(전문가 98 % · BC 0 → 36 %, DART + 청킹) · [Isaac Lab 환경 명세](b1/docs/isaaclab_env_spec.md) · [손목 2축 예측](members/park-jongjin/week09/wrist_prediction.md) |
+| 10주 | – | `week10` | [log](members/park-jongjin/week10/log.md) | – | [도달 제한 · 세 방안 비교](scenarios/results/limits_w10.md)(3 kg = 제한 불필요, 19/20) · [회귀 테스트 26/26](docs/regression_report.md)(`tools/rebuild_and_test.py`) · `config/params.yaml`(함태훈) |
 | 12주 | **CDR (×2)** | | | | |
 | 16주 | **모듈검증 (×2)** | | | | |
 

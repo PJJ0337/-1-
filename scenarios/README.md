@@ -8,6 +8,7 @@ B1 v1 모델(`b1/models/v1`, 생성된 MJCF는 손대지 않음)에 테이블 ·
 | `expert.py` | 상태기계 + 전문가 정책(전신 IK `wb_ik` + resolved-rate), 성공 판정 · 실패 분류, `apply_action`(action 8 → ctrl 13), `run_episode` |
 | `gripper_slip.py` | 그리퍼 파지 유지 점검: 마찰 × 파지력 × 질량 54조합 + 마찰 원뿔 · condim 비교 → `results/gripper_slip.md` |
 | `run_pick20.py` | 무작위 20회 성공률 · 실패 분류 + 깊이별 계획 성공(도달 한계) → `results/pick20.md` |
+| `run_limits_w10.py` | (week10) 제한 없음 / ① 짐 제한 / ② 도달 제한 같은 20 seed · 3 kg 비교 — 성공률 · 사이클 · 베이스 이동 · 최소 여유율 → `results/limits_w10.md` |
 | `collect.py` | 시연 데이터 수집(HDF5) · 재생 검증 → `results/collect.md`, 형식 = [`../datasets/dataset_spec.md`](../datasets/dataset_spec.md) v1.0(함태훈) — 초안으로 쓴 뒤 `datasets/b1_dataset.py` upgrade · check |
 | `render_pick_gif.py` | 집기 GIF → `img/pick_seed6.gif` |
 
@@ -17,6 +18,7 @@ B1 v1 모델(`b1/models/v1`, 생성된 MJCF는 손대지 않음)에 테이블 ·
 pip install mujoco==3.15.0 numpy scipy h5py pillow
 python scenarios/gripper_slip.py                       # ~5 s
 python scenarios/run_pick20.py                         # ~90 s (20회 + 깊이 점검)
+python scenarios/run_limits_w10.py --procs 2           # ~3 분 (6설정 × 20회)
 python scenarios/collect.py --n 100 --start 1000       # ~3.5 분 → datasets/raw/ (커밋 안 함)
 python scenarios/collect.py --replay datasets/raw      # ~2 분, 재생 일치 + v1.0 check
 python scenarios/collect.py --n 1 --start 1000 --cam --out datasets/samples   # 샘플(카메라 포함)
